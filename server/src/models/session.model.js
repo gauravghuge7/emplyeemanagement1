@@ -2,11 +2,26 @@ const {Schema, model} = require('mongoose');
 
 const sessionSchema = new Schema (
     {
-        userID:String,
-        startedAt:Date,
-        endedAt:Date,
-        totalTime:String,
-        isActive:Boolean
+        userID:{
+            type:String,
+            required:true
+        },
+        startedAt:{
+            type:Date,
+            required:true
+        },
+        endedAt:{
+            type:Date,
+            required:true
+        },
+        totalTime:{
+            type:String,
+            required:true
+        },
+        isActive:{
+            type:Boolean,
+            required:true
+        }
     }
 )
 
