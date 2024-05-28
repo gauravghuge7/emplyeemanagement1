@@ -1,30 +1,117 @@
-import Employee from "./employee/Employee"
-import { BrowserRouter,Routes,Route } from "react-router-dom"
-import ForgotPass from "./employee/ForgotPass"
-import Signup from "./components/signup/Signup"
-import Task, { AddTask } from "./components/task/Task"
+
+// // import { BrowserRouter,Routes,Route } from "react-router-dom"
+// // import ForgotPass from "./employee/ForgotPass"
+// // import Home from "./views/Home/Home"
+// // import { AdminSignUp } from "./views/SignUp/SignUp"
+// // import { EmployeeDashboard } from "./views/Dashboard/Dashboard"
 
 
-function App() {
+
+// // function App() {
   
 
-  return (
-    <>
-    <BrowserRouter>
+// //   return (
+// //     <>
+// //     <BrowserRouter>
     
-      <Routes>
-        <Route path="/emp-login" element={<Employee/>} />
+// //       <Routes>
+// //       <Route path="/" element={<Home/>} />
+// //      <Route path="/forgot-password" element={<ForgotPass/>} />
+// //      <Route path="/admin-sign-up" element={<AdminSignUp/>} />
+// //      <Route path="/emp-dashboard" element={<EmployeeDashboard/>} />
 
-        <Route path="/" element={<Signup/>} />
 
-        <Route path="/task" element={<Task/>} />
-        <Route path="/AddTask" element={<AddTask/>} />
-        
-        <Route path="/forgot-password" element={<ForgotPass/>} />
-      </Routes>
+// //       </Routes>
+// //     </BrowserRouter>
+
+// //     </>
+// //   )
+// // }
+
+// // export default App
+
+
+
+// import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+// import ForgotPass from './employee/ForgotPass';
+// import Home from './views/Home/Home';
+// import { AdminSignUp } from './views/SignUp/SignUp';
+// import { EmployeeDashboard } from './views/Dashboard/Dashboard';
+// import Navbar from './components/Navbar/Navbar'; // Import the Navbar component
+// import { useState } from 'react';
+
+// function App() {
+//   const [userType, setUserType] = useState(null); // Track user type ('employee' or 'admin')
+
+//   const location = useLocation();
+//   const isLoginRoute = location.pathname === '/';
+
+//   return (
+//     <>
+//       <BrowserRouter>
+//         {!isLoginRoute && <Navbar userType={userType} />} {/* Conditionally render Navbar */}
+//         <Routes>
+//           <Route path="/" element={<Home setUserType={setUserType} />} />
+//           <Route path="/forgot-password" element={<ForgotPass />} />
+//           <Route path="/admin-sign-up" element={<AdminSignUp />} />
+//           <Route path="/emp-dashboard" element={<EmployeeDashboard />} />
+//           <Route path="/admin-dashboard" element={<AdminDashboard />} /> {/* Add Admin Dashboard route */}
+//         </Routes>
+//       </BrowserRouter>
+//     </>
+//   );
+// }
+
+// export default App;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import React, { useState } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import ForgotPass from './employee/ForgotPass';
+import Home from './views/Home/Home';
+import { AdminSignUp } from './views/SignUp/SignUp';
+import { EmployeeDashboard } from './views/Dashboard/Dashboard';
+import Navbar from './components/Navbar/Navbar';
+import { AdminDashboard } from './views/Dashboard/Dashboard'; // Assuming you have an AdminDashboard component
+
+function App() {
+  const [userType, setUserType] = useState(null); // Track user type ('employee' or 'admin')
+
+  return (
+    <BrowserRouter>
+      <RoutesWrapper userType={userType} setUserType={setUserType} />
     </BrowserRouter>
-    </>
-  )
+  );
 }
 
-export default App
+const RoutesWrapper = ({ userType, setUserType }) => {
+  return (
+    <>
+      <Navbar userType={userType} /> {/* Conditionally render Navbar */}
+      <Routes>
+        <Route path="/" element={<Home setUserType={setUserType} />} />
+        <Route path="/forgot-password" element={<ForgotPass />} />
+        <Route path="/admin-sign-up" element={<AdminSignUp />} />
+        <Route path="/emp-dashboard" element={<EmployeeDashboard />} />
+        <Route path="/admin-dashboard" element={<AdminDashboard />} /> {/* Add Admin Dashboard route */}
+      </Routes>
+    </>
+  );
+};
+
+export default App;
