@@ -1,50 +1,61 @@
-const {Schema, model} = require('mongoose');
+import {Schema, model} from 'mongoose';
 
 const userSchema = new Schema (
+    
     {
         FirstName:{
             type:String,
             required:true,
             minlength: 3 
         },
+
         LastName:{
             type:String,
             required:true
         },
+
         Email:{
             type:String,
             required:true,
             unique: true, // Ensure email is unique
             match: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/
         },
+
         Password:{
             type:String,
             required:true
         },
+
         Avatar:{
             type:String,
             required:true
         },
+
         isActive:{
             type:Boolean,
             required:true
         },
+
         Role:{
             type:String,
             required:true
         },
+        
         createdAt:{
             type:Date,
+            default:Date.now,
             required:true
         },
         PhoneNumber:{
             type:Number,
             required:true
         },
+
         ClockingHours: {
             type:Number,
             required:true
         },
+
         sessions: [{
             type: Schema.Types.ObjectId,
             ref: 'Session'
@@ -80,6 +91,5 @@ const userSchema = new Schema (
     }
 )
 
-const UserModel = model('User',userSchema)
+export const UserModel = model('User',userSchema)
 
-module.exports = UserModel

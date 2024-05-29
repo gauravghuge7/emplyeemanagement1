@@ -1,19 +1,23 @@
 import { Link } from "react-router-dom"
-
+import Navbar from "../Navbar/Navbar";
 
 function Task() {
   return (
-    <div className="md-flex md-flex-column md-align-items-center shadow-lg rounded-lg p-8 shadow-gray-400">
-      
-      <div className=" text-lg rounded border border-black p-3 text-center"
-      > 
-      <Link to="/AddTask">
+    <div>
+      <Navbar />
 
-        Add Task
-      </Link>
+      <div className="md-flex md-flex-column md-align-items-center shadow-lg rounded-lg p-8 shadow-gray-400">
+        
+        <div className=" text-lg rounded border border-black p-3 text-center"> 
+          <Link to="/AddTask">
+
+            Add Task
+          </Link>
+        </div>
+
       </div>
-
     </div>
+    
   )
 }
 
