@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 
 function Task() {
   return (
-    <div className="md-flex md-flex-column md-align-items-center">
+    <div className="md-flex md-flex-column md-align-items-center shadow-lg rounded-lg p-8 shadow-gray-400">
       
       <div className=" text-lg rounded border border-black p-3 text-center"
       > 
@@ -55,7 +55,7 @@ export const AddTask = () => {
       </div>
 
 
-      {/* Email input field */ }
+      {/* department input field */ }
       <div className="mt-4">
         <label className="block font-semibold" htmlFor="email">
           Department
@@ -63,14 +63,14 @@ export const AddTask = () => {
         <input
           className="w-full shadow-inner bg-gray-100 rounded-lg placeholder-black text-2xl p-4 border-none block mt-1 "
           id="email"
-          type="email"
+          type="text"
           name="email"
           required
 
         />
       </div>
 
-      {/* Phone number input field */ }
+      {/* project description input field */ }
       <div className="mt-4">
         <label className="block font-semibold" htmlFor="phoneNumber">
           Description
@@ -78,7 +78,7 @@ export const AddTask = () => {
         <textarea cols="30" rows="10"
           className="w-full shadow-inner bg-gray-100 rounded-lg placeholder-black text-2xl p-4 border-none block mt-1 "
           id="phoneNumber"
-          type="tel"
+          type="text"
           name="Description"
           required
         >
