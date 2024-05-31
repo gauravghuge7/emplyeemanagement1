@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import EmpProfile from '../EmployeeProfile/EmpProfile';
 import EmpLeaveApplication from '../EmployeeProfile/EmpLeaveApplicatio';
 import EmpDailyReport from '../EmployeeProfile/EmpDailyReport';

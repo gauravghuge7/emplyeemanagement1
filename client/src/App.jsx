@@ -1,20 +1,6 @@
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import ForgotPass from './employee/ForgotPass';
 import Home from './views/Home/Home';

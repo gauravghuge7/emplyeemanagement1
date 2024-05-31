@@ -9,6 +9,8 @@ function Navbar({ userType }) {
   };
 
   return (
+    <div>
+    
     <nav className="bg-white shadow-md">
       <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
         <div className="relative flex items-center justify-between h-16">
@@ -56,6 +58,30 @@ function Navbar({ userType }) {
         </div>
       </div>
     </nav>
+    
+    <div>
+            
+            <nav className="bg-blue-500 p-4 flex items-center justify-between">
+            <div>
+                <h1 className="text-white text-xl font-semibold">Dashboard</h1>
+            </div>
+            <div className="flex justify-around gap-5">
+                <h1 className="text-white text-xl font-semibold">About</h1>
+                <h1 className="text-white text-xl font-semibold">Logout</h1>
+
+            </div>
+           
+            <div className="flex items-center space-x-4">
+                <span className="text-white"></span>
+                <i className="fas fa-user-circle text-white text-2xl" />
+            </div>
+            </nav>
+            
+        </div>
+
+
+    </div>
+    
   );
 }
 
