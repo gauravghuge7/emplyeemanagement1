@@ -74,7 +74,7 @@ function AdminSignUp() {
             Sign Up
           </button>
           <div className="mt-4 text-center">
-            <p className="text-gray-700">Already have an account? <a href="/" className="text-blue-500 hover:underline">Login here</a></p>
+            <p className="text-gray-700">Already have an account? <a href="/home" className="text-blue-500 hover:underline">Login here</a></p>
           </div>
         </form>
       </div>
