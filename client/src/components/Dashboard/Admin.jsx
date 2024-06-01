@@ -1,18 +1,18 @@
-import React from 'react'
 import Footer from '../Footer/Footer'
 import Navbar from '../Navbar/Navbar'
 import Sidebar from '../Sidebar/Sidebar'
 
 
 
-function Dashboard() {
+function Admin() {
   return (
-    <div><div className="min-h-screen bg-gray-50/50">
+    <div> 
+      <div className="min-h-screen bg-gray-50/50">
 
-      <Navbar />
-
+      
+      
     
-    <div className="p-4 xl:ml-80">
+      <div className="p-4 xl:ml-80">
       <nav className="block w-full max-w-full bg-transparent text-white shadow-none rounded-xl transition-all px-0 py-1">
         <div className="flex flex-col-reverse justify-between gap-6 md:flex-row md:items-center">
           <div className="capitalize">
@@ -508,4 +508,4 @@ function Dashboard() {
   )
 }
 
-export default Dashboard
+export default Admin

@@ -3,8 +3,9 @@ import EmpProfile from '../EmployeeProfile/EmpProfile';
 import EmpLeaveApplication from '../EmployeeProfile/EmpLeaveApplicatio';
 import EmpDailyReport from '../EmployeeProfile/EmpDailyReport';
 import Calendar from '../EmployeeProfile/Calender';
+import Admin from '../../components/Dashboard/Admin';
 
-function EmployeeDashboard() {
+export function EmployeeDashboard() {
   const [activeTab, setActiveTab] = useState('profile');
 
   return (
@@ -50,21 +51,16 @@ function EmployeeDashboard() {
   );
 }
 
-export  {EmployeeDashboard};
 
 
 
-
-
-
-function AdminDashboard() {
+export function AdminDashboard() {
   return (
     <div className="p-6">
-      <h1 className="text-3xl font-bold">Admin Dashboard</h1>
-      <p>Welcome, Admin! Here you can manage your employees and view system statistics.</p>
-      {/* Add your admin dashboard content here */}
+
+      <Admin />
     </div>
   );
 }
 
-export  {AdminDashboard};
+
