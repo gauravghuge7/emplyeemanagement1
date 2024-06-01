@@ -32,7 +32,7 @@ function Footer() {
                   Get the latest news !
                 </h2>
                 <p className="mt-4 text-gray-500">
-                  reseved the company policy and services 
+                  reserved the company policy and services 
                 </p>
               </div>
             </div>
@@ -130,6 +130,8 @@ function Footer() {
                 </li>
               </ul>
             </div>
+
+
             <div className="col-span-2 sm:col-span-1">
               <p className="font-medium text-gray-900">Helpful Links</p>
               <ul className="mt-6 space-y-4 text-sm">
@@ -162,6 +164,7 @@ function Footer() {
                 </li>
               </ul>
             </div>
+
             <div className="col-span-2 sm:col-span-1">
               <p className="font-medium text-gray-900">Legal</p>
               <ul className="mt-6 space-y-4 text-sm">
@@ -203,6 +206,8 @@ function Footer() {
                 </li>
               </ul>
             </div>
+
+
             <div className="col-span-2 sm:col-span-1">
               <p className="font-medium text-gray-900">Downloads</p>
               <ul className="mt-6 space-y-4 text-sm">
@@ -226,6 +231,9 @@ function Footer() {
                 </li>
               </ul>
             </div>
+
+
+            {/* social logos like instagram facebook*/ }
             <ul className="col-span-2 flex justify-start gap-6 lg:col-span-5 lg:justify-end">
               <li>
                 <a
@@ -334,6 +342,7 @@ function Footer() {
                 </a>
               </li>
             </ul>
+
           </div>
         </div>
 

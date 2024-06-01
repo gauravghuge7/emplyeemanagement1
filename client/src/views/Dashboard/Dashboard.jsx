@@ -57,9 +57,6 @@ export function EmployeeDashboard() {
 export function AdminDashboard() {
   return (
     <div className="p-6">
-      <h1 className="text-3xl font-bold">Admin Dashboard</h1>
-      <p>Welcome, Admin! Here you can manage your employees and view system statistics.</p>
-      {/* Add your admin dashboard content here */}
 
       <Admin />
     </div>

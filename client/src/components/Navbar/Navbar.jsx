@@ -59,7 +59,6 @@ function Navbar({ userType }) {
       </div>
     </nav>
     
-  
 
     </div>
     
