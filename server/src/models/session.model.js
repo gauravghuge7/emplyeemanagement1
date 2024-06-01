@@ -1,4 +1,4 @@
-const {Schema, model} = require('mongoose');
+import {Schema, model} from 'mongoose'
 
 const sessionSchema = new Schema (
     {
@@ -25,6 +25,5 @@ const sessionSchema = new Schema (
     }
 )
 
-const SessionModel = model('Session',sessionSchema)
+export const SessionModel = model('Session',sessionSchema)
 
-module.exports = SessionModel
