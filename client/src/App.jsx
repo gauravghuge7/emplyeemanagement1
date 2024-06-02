@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import ForgotPass from './employee/ForgotPass';
 import Home from './views/Home/Home';
-import { AdminSignUp } from './views/SignUp/SignUp';
+import {  SignUp } from './views/SignUp/SignUp';
 import { EmployeeDashboard } from './views/Dashboard/Dashboard';
 import Navbar from './components/Navbar/Navbar';
 import { AdminDashboard } from './views/Dashboard/Dashboard'; // Assuming you have an AdminDashboard component
@@ -27,9 +27,8 @@ const RoutesWrapper = ({ userType, setUserType }) => {
     <>
       <Navbar userType={userType} /> {/* Conditionally render Navbar */}
       <Routes>
-        <Route path="/signup" element={<Home setUserType={setUserType} />} />
+        <Route path="/login" element={<Home setUserType={setUserType} />} />
         <Route path="/forgot-password" element={<ForgotPass />} />
-        <Route path="/admin-sign-up" element={<AdminSignUp />} />
         <Route path="/emp-dashboard" element={<EmployeeDashboard />} />
         <Route path="/admin-dashboard" element={<AdminDashboard/>} /> {/* Add Admin Dashboard route */}
       
@@ -41,6 +40,8 @@ const RoutesWrapper = ({ userType, setUserType }) => {
 
 
         <Route path="/emp-profile" element={<AdminProfile />} />
+        <Route path="/signup" element={<SignUp />} />
+
 
       
       

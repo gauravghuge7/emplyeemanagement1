@@ -4,7 +4,7 @@
 
 import  { useState } from 'react';
 
-function AdminSignUp() {
+function SignUp() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -82,4 +82,4 @@ function AdminSignUp() {
   );
 }
 
-export  {AdminSignUp};
+export  {SignUp};
