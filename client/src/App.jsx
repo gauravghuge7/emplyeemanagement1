@@ -12,6 +12,7 @@ import Landing from './views/Landing/Landing';
 import Leave from './views/Leave/Leave';
 import Task, { AddTask } from './components/task/Task';
 import AdminProfile from './views/AdminProfile/AdminProfile';
+import AdminContextProvider from './Context/AdminContextProvider';
 
 function App() {
   const [userType, setUserType] = useState(null); // Track user type ('employee' or 'admin')
@@ -25,7 +26,7 @@ function App() {
 
 const RoutesWrapper = ({ userType, setUserType }) => {
   return (
-    <>
+    <AdminContextProvider>
       <Navbar userType={userType} /> {/* Conditionally render Navbar */}
       <Routes>
       <Route path='/' element={<Landing/> } />
@@ -48,7 +49,7 @@ const RoutesWrapper = ({ userType, setUserType }) => {
       
       
         </Routes>
-    </>
+    </AdminContextProvider>
   );
 };
 
