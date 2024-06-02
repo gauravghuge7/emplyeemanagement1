@@ -24,7 +24,7 @@ function Home({setUserType}) {
         <div className="flex flex-col md:flex-row space-y-6 md:space-y-0 md:space-x-6">
           
           <EmpLogin />
-          
+          <AdmLogin />
           {login === "employee" && <EmpLogin />}
           {login === "admin" && <AdmLogin />}
          
