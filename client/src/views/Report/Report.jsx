@@ -1,62 +1,89 @@
-let data = [{
-    name: "sharad",
-    email: "sajdfk",
-    id: "ajd;f",
-    status:"pending",
-    date:"2 may 2024"
-}, {
-    name: "nikhil",
-    email: "nikhil@gmail.oc",
-    id: "32",
-    status:"done",
-    date:"4 april 2023"
-}]
+import React, { useState, useEffect } from 'react';
+import './Report.css'; // Import CSS for styling
 
-function Report() {
+const DailyReport = () => {
+  const [reports, setReports] = useState([]);
+  const [newReport, setNewReport] = useState({ employeeName: '', reportContent: '' });
+
+  useEffect(() => {
+    // Fetch daily reports from an API (placeholder function)
+    fetchReports();
+  }, []);
+
+  const fetchReports = () => {
+    // Placeholder data, replace with API call
+    const data = [
+      { id: 1, date: '2024-06-01', employeeName: 'John Doe', reportContent: 'Completed task A', status: 'Pending' },
+      { id: 2, date: '2024-06-01', employeeName: 'Jane Smith', reportContent: 'Worked on project B', status: 'Pending' },
+      // Add more reports as needed
+    ];
+    setReports(data);
+  };
+
+  const markAsReviewed = (id) => {
+    setReports(reports.map(report =>
+      report.id === id ? { ...report, status: 'Reviewed' } : report
+    ));
+  };
+
+  const deleteReport = (id) => {
+    setReports(reports.filter(report => report.id !== id));
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setNewReport({ ...newReport, [name]: value });
+  };
+
+  const addReport = (e) => {
+    e.preventDefault();
+    const report = {
+      id: reports.length + 1,
+      date: new Date().toISOString().split('T')[0],
+      employeeName: newReport.employeeName,
+      reportContent: newReport.reportContent,
+      status: 'Pending'
+    };
+    setReports([...reports, report]);
+    setNewReport({ employeeName: '', reportContent: '' });
+  };
+
   return (
-    <div>
-
-          <h1 className="text-xl font-bold my-3 ml-1">Report</h1>
-        <ShowTable/>
+    <div className="report-container">
+      <h2>Daily Reports</h2>
+      <form onSubmit={addReport}>
+        <input
+          type="text"
+          name="employeeName"
+          value={newReport.employeeName}
+          onChange={handleInputChange}
+          placeholder="Employee Name"
+          required
+        />
+        <textarea
+          name="reportContent"
+          value={newReport.reportContent}
+          onChange={handleInputChange}
+          placeholder="Report Content"
+          required
+        ></textarea>
+        <button type="submit">Add Report</button>
+      </form>
+      <ul>
+        {reports.map(report => (
+          <li key={report.id} className={report.status.toLowerCase()}>
+            <h3>{report.employeeName}</h3>
+            <p>{report.reportContent}</p>
+            <span>{report.date}</span>
+            <div>
+              {report.status === 'Pending' && <button onClick={() => markAsReviewed(report.id)}>Mark as Reviewed</button>}
+              <button onClick={() => deleteReport(report.id)}>Delete</button>
+            </div>
+          </li>
+        ))}
+      </ul>
     </div>
+  );
+};
 
-    
-  )
-}
-
-function ShowTable() {
-  return <div className="w-full border p-6 text-lg rounded-lg">
-    <div className="grid font-bold  grid-cols-5">
-      <h1>Name</h1>
-      <h1>Id</h1>
-      <h1>Email</h1>
-      <h1>Status</h1>
-      <h1>Date</h1>
-
-    </div>
-    <div>
-
-      <ShowTabeData DataObject={data} />
-    </div>
-  </div>
-}
-
-
-function ShowTabeData({ DataObject }) {
-  console.log(DataObject)
-  return <div>
-    {DataObject.map((data, i) => {
-      return <div className="grid grid-cols-5 py-2 -mx-3 px-3 rounded-lg border my-3" key={i}>
-        <h2>{data.name}</h2>
-        <h2>{data.id}</h2>
-        <h2>{data.email}</h2>
-        <h2 className={`capitalize ${data.status === 'done'?'text-green-700':'text-red-700'}`}>{data.status }</h2>
-        <h2>{data.date}</h2>
-      </div>
-
-    })}
-  </div>
-
-}
-
-export default Report
+export default DailyReport;

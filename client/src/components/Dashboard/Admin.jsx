@@ -6,6 +6,7 @@ import AdminProfile from '../../views/AdminProfile/AdminProfile';
 import Manage from '../../views/Manage/Manage';
 import Report from '../../views/Report/Report';
 import Notifications from '../../views/Notifications/Notifications';
+import AdminProfiles from '../../views/AdminProfile/AdminProfiles';
 
 
 
@@ -162,7 +163,7 @@ function Admin() {
 
           <div> 
 
-            { activeBox === "profile" && <AdminProfile />}
+            { activeBox === "profile" && <AdminProfiles />}
 
             {activeBox === "manage" && <Manage />}
             {activeBox === "notifications" && <Notifications/>}

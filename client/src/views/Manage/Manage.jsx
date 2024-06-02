@@ -5,11 +5,13 @@ import { useRef, useState } from "react"
 let data = [{
   name: "sharad",
   email: "sajdfk",
-  id: "ajd;f"
+  id: "ajd;f",
+  status:"active"
 }, {
   name: "nikhil",
   email: "nikhil@gmail.oc",
-  id: "32"
+  id: "32",
+  status:"active"
 }]
 
 function Manage() {
@@ -67,10 +69,11 @@ function Manage() {
 
 function ShowTable() {
   return <div className="w-full border p-6 text-lg rounded-lg">
-    <div className="grid font-bold  grid-cols-4">
+    <div className="grid font-bold text-gray-500  grid-cols-5 mb-3">
       <h1>Name</h1>
       <h1>Id</h1>
       <h1>Email</h1>
+      <h1>Status</h1>
 
     </div>
     <div>
@@ -84,11 +87,12 @@ function ShowTable() {
 function ShowTabeData({ DataObject }) {
   return <div>
     {DataObject.map((data, i) => {
-      return <div className="grid grid-cols-4 py-2 -mx-3 px-3 rounded-lg border my-3" key={i}>
+      return <div className="grid items-center grid-cols-5 py-5 -mx-3 px-3 border border-r-0 border-l-0 border-b-0  my-0" key={i}>
         <h2>{data.name}</h2>
         <h2>{data.id}</h2>
         <h2>{data.id}</h2>
-        <button>delete</button>
+        <h2>{data.status}</h2>
+        <button className="hover:bg-red-600 w-24 p-2  rounded-3xl">delete</button>
       </div>
 
     })}
