@@ -2,7 +2,7 @@
 function Manage() {
   return (
     <div>
-        <ul>
+        <ul className="flex">
             <li>Add Employee</li>
             <li>Remove Employee</li>
         </ul>
