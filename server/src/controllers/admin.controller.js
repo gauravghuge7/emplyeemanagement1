@@ -79,12 +79,16 @@ const registerAdmin = asyncHandler(async (req, res) => {
 })
 
 
+const updatePassword = asyncHandler(async (req, res) => { 
+    
+})
+
 
 const AdminLogin = asyncHandler(async (req, res) => {
 
-    const {Email, Password} = req.body;
+    const {Email, Password, adminId} = req.body;
 
-    if(!Email || !Password){
+    if(!Email || !Password || !adminId){
         throw new ApiError("Missing required fields", 400);
     }
 
@@ -96,8 +100,8 @@ const AdminLogin = asyncHandler(async (req, res) => {
 
         const user = await AdminModel.findOne({Email});
 
-        if(!user){
-            throw new ApiError("User not registered", 404);
+        if(user){
+            throw new ApiError("User is already registered", 404);
         }
 
         const comparePassword = await bcrypt.compare(Password, user.Password);
@@ -125,9 +129,11 @@ const AdminLogin = asyncHandler(async (req, res) => {
 });
 
 
+
 const AdminLogout = asyncHandler(async (req, res) => {
 
     const {adminToken} = req.cookies;
+    
     try {
 
         
@@ -276,6 +282,17 @@ const getUsers = asyncHandler(async (req, res) => {
     }
 
 })
+
+
+const getAdminDashboard = asyncHandler(async (req, res) => { 
+
+})
+
+const getAdminProfile = asyncHandler(async (req, res) => { 
+
+})
+
+
 
 
 

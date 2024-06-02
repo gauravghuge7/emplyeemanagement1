@@ -4,12 +4,10 @@ import AdminContext from "./context.js";
 
 function AdminContextProvider ({ children })  {
 
-    const [admin, setAdmin] = useState("");
-    const {email, setEmail} = useState("");
-    const [phone, setPhone] = useState("");
+    const [login, setLogin] = useState("");
 
     return (
-        <AdminContext.Provider value={{admin, setAdmin, email, setEmail, phone, setPhone}}>
+        <AdminContext.Provider value={{login, setLogin}}>
         
 
             {children}
