@@ -27,9 +27,11 @@ const userSchema = new Schema (
         },
 
         Avatar:{
-            type:String,
-            required:true
+
+            Email:String,
+            public_url:String
         },
+
 
         isActive:{
             type:Boolean,
@@ -56,6 +58,12 @@ const userSchema = new Schema (
             required:true
         },
 
+        dailyReports: [{
+            type: String,
+            enum: ['Daily', 'Weekly', 'Monthly'],
+            required: true
+        }],
+
         sessions: [{
             type: Schema.Types.ObjectId,
             ref: 'Session'
@@ -64,7 +72,30 @@ const userSchema = new Schema (
             type: Boolean,
             default: false,
             required:true
-          },
+        },
+
+        LeaveApplication: {
+
+
+
+
+            department: {
+                type: String,
+                required: true
+            },
+            reason: {
+                type: String,
+                required: true
+            },
+            date: {
+                type: Date,
+                required: true
+            },
+        },
+
+
+
+
         Attendance:{
             Date:{
                 type:Date,

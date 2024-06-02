@@ -13,6 +13,8 @@ import Leave from './views/Leave/Leave';
 import Task, { AddTask } from './components/task/Task';
 import AdminProfile from './views/AdminProfile/AdminProfile';
 import AdminContextProvider from './Context/AdminContextProvider';
+import AdminForm from './views/Admin/AdminForm';
+import Register from './views/Register/Register';
 
 function App() {
   const [userType, setUserType] = useState(null); // Track user type ('employee' or 'admin')
@@ -29,8 +31,8 @@ const RoutesWrapper = ({ userType, setUserType }) => {
     <AdminContextProvider>
       <Navbar userType={userType} /> {/* Conditionally render Navbar */}
       <Routes>
-      <Route path='/' element={<Landing/> } />
-        <Route path="/home" element={<Home setUserType={setUserType} />} />
+      <Route path='/' element={<Landing setUserType={setUserType}/> } />
+        <Route path="/home" element={<Home userType={userType} />} />
         <Route path="/forgot-password" element={<ForgotPass />} />
         <Route path="/emp-dashboard" element={<EmployeeDashboard />} />
         <Route path="/admin-dashboard" element={<AdminDashboard/>} /> {/* Add Admin Dashboard route */}
@@ -43,7 +45,15 @@ const RoutesWrapper = ({ userType, setUserType }) => {
 
 
         <Route path="/emp-profile" element={<AdminProfile />} />
-        <Route path="/signup" element={<SignUp />} />
+        <Route path="/sign-up" element={<SignUp />} />
+        <Route path="/form" element={<AdminForm />} />
+
+
+        <Route path="/register" element={<Register />} />
+
+
+
+
 
 
       

@@ -1,5 +1,5 @@
 
-function Admin() {
+function AdminForm() {
   return (
      <div className="md-flex md-flex-column md-align-items-center m-8 p-8">
       
@@ -87,4 +87,4 @@ function Admin() {
   )
 }
 
-export default Admin
+export default AdminForm

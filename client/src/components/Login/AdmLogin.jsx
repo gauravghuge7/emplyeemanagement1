@@ -61,7 +61,7 @@ function AdmLogin({setUserType}) {
             </button>
             <h4 className='text-center mt-2 font-medium text-xl '>Or</h4>
             <div className="mt-4 text-center">
-              <Link to="/admin-sign-up" className="text-blue-500 hover:underline">Sign Up</Link>
+              <Link to="/sign-up" className="text-blue-500 hover:underline">Sign Up</Link>
             </div>
           </form>
         </div>

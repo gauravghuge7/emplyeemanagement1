@@ -1,13 +1,9 @@
 
-import { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import AdminContext from '../../Context/context';
 
-function Landing() {
+
+function Landing({setUserType}) {
   
- 
-
-  const {setLogin} = useContext(AdminContext);
 
   
 
@@ -20,8 +16,8 @@ function Landing() {
 
       <Link to={"/home"}>
         <div  
-          onClick={() => setLogin("employee")}
-          onPointerEnter={() => setLogin("employee")}
+          onClick={() => setUserType("employee")}
+          
         className="cursor-pointer max-w-sm p-6 bg-white rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-300">
           <img src="4782112.jpg" alt="Employee" className="w-full h-48 object-cover mb-4 rounded" />
           <h2 className="text-2xl font-bold mb-2 text-gray-800">Employee</h2>
@@ -32,7 +28,7 @@ function Landing() {
 
       <Link to={"/home"}>
         <div  
-          onClick={() => setLogin("admin")}
+          onClick={() => setUserType("admin")}
   
 
           className="max-w-sm p-6 bg-white rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-300">

@@ -5,7 +5,7 @@ import EmpLogin from '../../components/Login/EmpLogin';
 import AdmLogin from '../../components/Login/AdmLogin';
 import AdminContext from '../../Context/context';
 
-function Home({setUserType}) {
+function Home({userType}) {
 
   
   const login = useContext(AdminContext);
@@ -21,12 +21,10 @@ function Home({setUserType}) {
         </p>
         
 
-        <div className="flex flex-col md:flex-row space-y-6 md:space-y-0 md:space-x-6">
+        <div className="flex flex-col md:flex-row justify-center align-center space-y-6 md:space-y-0 md:space-x-6">
           
-          <EmpLogin />
-          <AdmLogin />
-          {login === "employee" && <EmpLogin />}
-          {login === "admin" && <AdmLogin />}
+          {userType === "employee" && <EmpLogin />}
+          {userType === "admin" && <AdmLogin />}
          
           
           
