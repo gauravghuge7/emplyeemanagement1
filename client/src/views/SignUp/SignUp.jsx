@@ -3,12 +3,14 @@
 
 
 import  { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function SignUp() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const navigate = useNavigate()
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -19,6 +21,7 @@ function SignUp() {
     console.log("Admin Name:", name);
     console.log("Admin Email:", email);
     console.log("Admin Password:", password);
+    navigate("/admin-dashboard")
     
   };
 
@@ -74,7 +77,7 @@ function SignUp() {
             Sign Up
           </button>
           <div className="mt-4 text-center">
-            <p className="text-gray-700">Already have an account? <a href="/" className="text-blue-500 hover:underline">Login here</a></p>
+            <p className="text-gray-700">Already have an account? <a href="/home" className="text-blue-500 hover:underline">Login here</a></p>
           </div>
         </form>
       </div>

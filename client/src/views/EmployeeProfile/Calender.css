@@ -1,0 +1,48 @@
+/* Calendar.css */
+.rbc-calendar {
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .rbc-toolbar {
+    background-color: #4a90e2;
+    color: white;
+    padding: 10px;
+    border-radius: 8px 8px 0 0;
+  }
+  
+  .rbc-toolbar button {
+    color: white;
+  }
+  
+  .rbc-event {
+    border: none;
+    border-radius: 4px;
+    padding: 4px;
+    font-size: 0.85rem;
+  }
+  
+  .rbc-day-bg {
+    transition: background-color 0.2s ease;
+  }
+  
+  .rbc-day-bg:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .rbc-off-range-bg {
+    background-color: #f9f9f9;
+  }
+  
+  .rbc-today {
+    background-color: #e6f7ff;
+  }
+  
+  .rbc-day-bg[style*="background-color: rgb(255, 228, 225)"] {
+    background-color: #ffe4e1;
+  }
+  
+  .rbc-day-bg[style*="background-color: rgb(255, 255, 255)"] {
+    background-color: white;
+  }
+  
