@@ -28,6 +28,7 @@ const RoutesWrapper = ({ userType, setUserType }) => {
     <>
       <Navbar userType={userType} /> {/* Conditionally render Navbar */}
       <Routes>
+      <Route path='/' element={<Landing/> } />
         <Route path="/home" element={<Home setUserType={setUserType} />} />
         <Route path="/forgot-password" element={<ForgotPass />} />
         <Route path="/admin-sign-up" element={<AdminSignUp />} />

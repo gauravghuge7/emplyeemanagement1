@@ -58,7 +58,7 @@ function Navbar({ userType }) {
         </div>
       </div>
 
-      <div className="flex flex-col-reverse justify-between gap-6 md:flex-row md:items-center">
+      {/* <div className="flex flex-col-reverse justify-between gap-6 md:flex-row md:items-center">
           <div className="capitalize">
             <nav aria-label="breadcrumb" className="w-max">
               <ol className="flex flex-wrap items-center w-full bg-opacity-60 rounded-md bg-transparent p-0 transition-all">
@@ -201,7 +201,7 @@ function Navbar({ userType }) {
               </span>
             </button>
           </div>
-      </div>
+      </div> */}
 
     </nav>
 
