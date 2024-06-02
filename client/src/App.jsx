@@ -9,6 +9,9 @@ import { EmployeeDashboard } from './views/Dashboard/Dashboard';
 import Navbar from './components/Navbar/Navbar';
 import { AdminDashboard } from './views/Dashboard/Dashboard'; // Assuming you have an AdminDashboard component
 import Landing from './views/Landing/Landing';
+import Leave from './views/Leave/Leave';
+import Task, { AddTask } from './components/task/Task';
+import AdminProfile from './views/AdminProfile/AdminProfile';
 
 function App() {
   const [userType, setUserType] = useState(null); // Track user type ('employee' or 'admin')
@@ -30,8 +33,19 @@ const RoutesWrapper = ({ userType, setUserType }) => {
         <Route path="/admin-sign-up" element={<AdminSignUp />} />
         <Route path="/emp-dashboard" element={<EmployeeDashboard />} />
         <Route path="/admin-dashboard" element={<AdminDashboard/>} /> {/* Add Admin Dashboard route */}
-        <Route  path='/'  element={<Landing/>} />
-      </Routes>
+      
+      
+        <Route path="/leave" element={<Leave />} />
+
+        <Route path="/task" element={<Task />} />
+        <Route path="/addtask" element={<AddTask />} />
+
+
+        <Route path="/emp-profile" element={<AdminProfile />} />
+
+      
+      
+        </Routes>
     </>
   );
 };
