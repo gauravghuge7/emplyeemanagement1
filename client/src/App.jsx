@@ -17,6 +17,7 @@ import AdminForm from './views/Admin/AdminForm';
 import Register from './views/Register/Register';
 
 function App() {
+
   const [userType, setUserType] = useState(null); // Track user type ('employee' or 'admin')
 
   return (
@@ -46,6 +47,8 @@ const RoutesWrapper = ({ userType, setUserType }) => {
 
         <Route path="/emp-profile" element={<AdminProfile />} />
         <Route path="/sign-up" element={<SignUp />} />
+
+        
         <Route path="/form" element={<AdminForm />} />
 
 
