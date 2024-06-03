@@ -49,11 +49,11 @@ function Landing() {
   const navigate = useNavigate();
 
   const navigateToEmployeeLogin = () => {
-    navigate('/');
+    navigate('/home');
   };
 
   const navigateToAdminLogin = () => {
-    navigate('/');
+    navigate('/home');
   };
 
   return (

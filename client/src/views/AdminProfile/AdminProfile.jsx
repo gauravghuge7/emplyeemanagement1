@@ -180,7 +180,10 @@ function AdminProfile() {
       </div>
       {/* Card end */}
     </div>
+    </div>
+    </div>
+    
   );
 }
 
-export default AdminProfile;
+export default AdminProfile
