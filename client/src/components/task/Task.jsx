@@ -1,111 +1,145 @@
+import { useState } from "react"
 import { Link } from "react-router-dom"
 
 function Task() {
   return (
     <div>
-    
-      <div className="md-flex md-flex-column md-align-items-center shadow-lg rounded-lg p-8 shadow-gray-400">
-        
-        
-          <Link to="/AddTask">
-            <div className=" text-lg rounded border hover:bg-gray-100 border-black p-3 text-center"> 
-              Add Task
-            </div>
 
-          </Link>
+      <div className="md-flex md-flex-column md-align-items-center shadow-lg rounded-lg p-8 shadow-gray-400">
+
+
+        <Link to="/AddTask">
+          <div className=" text-lg rounded border hover:bg-gray-100 border-black p-3 text-center">
+            Add Task
+          </div>
+
+        </Link>
 
       </div>
     </div>
-    
+
   )
 }
 
 
-export const AddTask = () => {
+export const AddTask = ({ setTasks, tasks, dialogRef } ) => {
+
+  const [task, setTask] = useState({
+    projectname: "",
+    tasktitle: "",
+    departement: "",
+    description: "",
+    date:""
+  })
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    setTasks(prevTasks => {
+      console.log(prevTasks)
+      task.date = `${new Date()}`
+      return [...prevTasks, task];
+    })
+    setTask({
+      projectname: "",
+      tasktitle: "",
+      departement: "",
+      description: "",
+      date:""
+    })
+    dialogRef.current.close();
+  }
   return (
     <div className="md-flex md-flex-column md-align-items-center m-8 p-8">
-      
-      <form>
 
-      {/* project name input field */ }
-      <div>
-        <label className="block font-semibold" htmlFor="FirstName">
-          Project Name
-        </label>
-        <input
-          className="w-full shadow-inner bg-gray-100 rounded-lg placeholder-black text-2xl p-4 border-none block mt-1"
-          id="FirstName"
-          type="text"
-          name="ProjectName"
-          required
-        
-        />
-      </div>
+      <form onSubmit={handleSubmit}>
 
-      {/* task name input field */ }
-      <div>
-        <label className="block font-semibold" htmlFor="lastName">
-          Task Title
-        </label>
-        <input
-          className="w-full shadow-inner bg-gray-100 rounded-lg placeholder-black text-2xl p-4 border-none block mt-1"
-          id="lastName"
-          type="text"
-          name="lastName"
-          required="required"
-        
-        />
-      </div>
+        {/* project name input field */}
+        <div>
+          <label className="block font-semibold" htmlFor="FirstName">
+            Project Name
+          </label>
+          <input
+            className="w-full shadow-inner bg-gray-100 rounded-lg placeholder-black text-2xl p-4 border-none block mt-1"
+            
+            id="FirstName"
+            type="text"
+            onChange={(e) => setTask({ ...task, projectname: e.target.value })}
+            value={task.projectname}
+            name="ProjectName"
+            required
+
+          />
+        </div>
+
+        {/* task name input field */}
+        <div>
+          <label className="block font-semibold" htmlFor="lastName">
+            Task Title
+          </label>
+          <input
+            className="w-full shadow-inner bg-gray-100 rounded-lg placeholder-black text-2xl p-4 border-none block mt-1"
+            onChange={(e) => setTask({ ...task, tasktitle: e.target.value })}
+            value={task.tasktitle}
+            id="lastName"
+            type="text"
+            name="lastName"
+            required
+
+          />
+        </div>
 
 
-      {/* department input field */ }
-      <div className="mt-4">
-        <label className="block font-semibold" htmlFor="email">
-          Department
-        </label>
-        <input
-          className="w-full shadow-inner bg-gray-100 rounded-lg placeholder-black text-2xl p-4 border-none block mt-1 "
-          id="email"
-          type="text"
-          name="email"
-          required
+        {/* department input field */}
+        <div className="mt-4">
+          <label className="block font-semibold" htmlFor="email">
+            Department
+          </label>
+          <input
+            className="w-full shadow-inner bg-gray-100 rounded-lg placeholder-black text-2xl p-4 border-none block mt-1 "
+            onChange={(e) => setTask({ ...task, departement: e.target.value })}
+            value={task.departement}
+            id="email"
+            type="text"
+            name="email"
+            required
 
-        />
-      </div>
+          />
+        </div>
 
-      {/* project description input field */ }
-      <div className="mt-4">
-        <label className="block font-semibold" htmlFor="phoneNumber">
-          Description
-        </label>
-        <textarea cols="30" rows="10"
-          className="w-full shadow-inner bg-gray-100 rounded-lg placeholder-black text-2xl p-4 border-none block mt-1 "
-          id="phoneNumber"
-          type="text"
-          name="Description"
-          required
-        >
+        {/* project description input field */}
+        <div className="mt-4">
+          <label className="block font-semibold" htmlFor="phoneNumber">
+            Description
+          </label>
+          <textarea cols="30" rows="10"
+            onChange={(e) => setTask({ ...task, description: e.target.value })}
+            className="w-full shadow-inner bg-gray-100 rounded-lg placeholder-black text-2xl p-4 border-none block mt-1 "
+            value={task.description}
+            id="phoneNumber"
+            type="text"
+            name="Description"
+            required
+          >
 
-        </textarea>
-      </div>
+          </textarea>
+        </div>
 
-    
 
-      {/* Submit button */ }
-    <div className="flex items-center justify-between mt-8">
-      <button
-        type="submit"
-        className="flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10"
 
-      >
-        Submit
-      </button>
+        {/* Submit button */}
+        <div className="flex items-center justify-between mt-8">
+          <button
+            className="flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10"
+            onSubmit={handleSubmit}
+          >
+            Submit
+          </button>
+
+        </div>
+
+      </form>
 
     </div>
-
-  </form>
-
-    </div> 
   )
 }
 
