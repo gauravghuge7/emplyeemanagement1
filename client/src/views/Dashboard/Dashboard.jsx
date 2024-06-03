@@ -195,7 +195,7 @@ export function EmployeeDashboard() {
           </li>
         </ul>
       </div> */}
-      <div className=" lg:w-[50vw] w-full mx-auto mt-16  border  p-6">
+      <div className=" lg:w-[70vw] w-full mx-auto mt-16 absolute right-0  ">
 
         {activeTab === 'profile' && <EmpProfile />}
         {activeTab === 'leave' && <Leave />}
