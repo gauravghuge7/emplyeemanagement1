@@ -1,8 +1,13 @@
 import dotenv from "dotenv";
-dotenv.config();
+
 import { app } from "./src/app.js";
 import connectDB from "./src/db/db.js";
 import UserRouter from "./src/routes/user.route.js";
+
+dotenv.config({
+  path: "./.env",
+});
+
 
 app.use('/user',UserRouter)
 
