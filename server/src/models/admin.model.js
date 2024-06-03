@@ -1,14 +1,14 @@
 import { Schema, model } from 'mongoose';
 import jwt from 'jsonwebtoken';
 
-const adminSchema = new Schema(
-    {
+const adminSchema = new Schema({
+        //  FIXME: Snake Casing For Field Name in Table
         FirstName: {
             type: String,
             trim: true,
             required: [true, 'First name is required'],
             minlength: [3, 'First name must be at least 3 characters long'],
-            maxlength: [50, 'First name cannot exceed 50 characters'], 
+            maxlength: [50, 'First name cannot exceed 50 characters'],
         },
 
         LastName: {
@@ -32,7 +32,7 @@ const adminSchema = new Schema(
             required: [true, 'Email address is required'],
             unique: true,
             match: [
-                /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/, 
+                /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
                 'Please enter a valid email address',
             ],
         },
@@ -65,8 +65,8 @@ const adminSchema = new Schema(
             type: Number,
             required: [true, 'Phone number is required'],
             validate: {
-                validator: function (value) {
-                    return /^\d{10}$/.test(value); 
+                validator: function(value) {
+                    return /^\d{10}$/.test(value);
                 },
                 message: 'Please enter a valid 10-digit phone number',
             },
@@ -79,12 +79,10 @@ const adminSchema = new Schema(
             trim: true,
         },
 
-        users: [
-            {
-                type: Schema.Types.ObjectId,
-                ref: 'User',
-            },
-        ],
+        users: [{
+            type: Schema.Types.ObjectId,
+            ref: 'User',
+        }, ],
 
         totalEmployee: {
             type: Schema.Types.ObjectId,
@@ -106,18 +104,17 @@ const adminSchema = new Schema(
 
 adminSchema.methods = {
     generateLoginToken: function async() {
-        const token = jwt.sign({ 
-            id: this._id,
-            role: this.Role,
-            email: this.Email,
-            firstName: this.FirstName,
-            lastName: this.LastName,
-        }, 
-        
-        process.env.JWT_SECRET, 
-        {
-            expiresIn: '48h',
-        });
+        const token = jwt.sign({
+                id: this._id,
+                role: this.Role,
+                email: this.Email,
+                firstName: this.FirstName,
+                lastName: this.LastName,
+            },
+
+            process.env.JWT_SECRET, {
+                expiresIn: '48h',
+            });
 
         return token;
     }
@@ -127,4 +124,3 @@ adminSchema.methods = {
 
 
 export const AdminModel = model('Admin', adminSchema);
-
