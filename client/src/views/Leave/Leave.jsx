@@ -2,18 +2,18 @@
 function Leave() {
   return (
     
-    <div className="md-flex md-flex-column rounded-lg md-align-items-center shadow-lg shadow-gray-400 m-8 p-8">
+    <div className="md-flex md-flex-column rounded-lg md-align-items-center shadow-lg shadow-blue-100 m-8 p-8">
       
-      <form>
+      <form className="space-y-12">
 
-        <p> please provide all information to relate the leave</p>
+        <p className="font-semibold tracking-wide"> Please provide all information to relate the leave</p>
         {/* project name input field */ }
         <div>
           <label className="block font-semibold" htmlFor="FirstName">
             your full Name
           </label>
           <input
-            className="w-full shadow-inner bg-gray-100 rounded-lg placeholder-black text-2xl p-4 border-none block mt-1"
+            className="w-full border border-gray-500 outline-none shadow-inner bg-gray-100 rounded-lg placeholder-black text-2xl p-4  block mt-1"
             id="FirstName"
             type="text"
             name="ProjectName"
@@ -28,7 +28,7 @@ function Leave() {
             Employee Id
           </label>
           <input
-            className="w-full shadow-inner bg-gray-100 rounded-lg placeholder-black text-2xl p-4 border-none block mt-1"
+            className="w-full border border-gray-500 outline-none shadow-inner bg-gray-100 rounded-lg placeholder-black text-2xl p-4  block mt-1"
             id="lastName"
             type="text"
             name="lastName"
@@ -40,11 +40,11 @@ function Leave() {
 
         {/* department input field */ }
         <div className="mt-4">
-          <label className="block font-semibold" htmlFor="email">
+          <label className=" block font-semibold" htmlFor="email">
             Reason of Leave
           </label>
           <input
-            className="w-full shadow-inner bg-gray-100 rounded-lg placeholder-black text-2xl p-4 border-none block mt-1 "
+            className="w-full shadow-inner border border-gray-500 outline-none bg-gray-100 rounded-lg placeholder-black text-2xl p-4  block mt-1 "
             id="email"
             type="text"
             name="email"
@@ -59,7 +59,7 @@ function Leave() {
             Explain About Leave Reason
           </label>
           <textarea cols="30" rows="10"
-            className="w-full shadow-inner bg-gray-100 rounded-lg placeholder-black text-2xl p-4 border-none block mt-1 "
+            className="w-full border border-gray-500 outline-none shadow-inner bg-gray-100 rounded-lg placeholder-black text-2xl p-4  block mt-1 "
             id="phoneNumber"
             type="text"
             name="Description"
