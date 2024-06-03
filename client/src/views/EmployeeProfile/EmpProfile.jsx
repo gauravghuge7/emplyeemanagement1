@@ -57,7 +57,7 @@ function EmpProfile() {
             </div>
             <label className='flex items-center gap-2'>
               Name:
-              <input type="text" name="name" className='p-2 outline-none rounded-lg' value={employee.name} onChange={handleInputChange} />
+              <input readOnly={true} type="text" name="name" className='p-2 outline-none rounded-lg' value={employee.name} onChange={handleInputChange} />
             </label>
             <label className='flex items-center gap-2'>
               Phone:
@@ -81,7 +81,7 @@ function EmpProfile() {
       
             ><img
               className="rounded-full h-28 w-28 border-2 border-orange-600"
-              src="https://images.pexels.com/photos/3763188/pexels-photo-3763188.jpeg?auto=compress&cs=tinysrgb&w=600" width={'120'} alt="Profile Image"/></p>
+              src={employee.avatar} width={'120'} alt="Profile Image"/></p>
             <p><strong>Name: </strong> {employee.name}</p>
             <p><strong>Phone: </strong> {employee.phone}</p>
             <p><strong>Email: </strong> {employee.email}</p>

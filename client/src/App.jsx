@@ -30,7 +30,7 @@ function App() {
 const RoutesWrapper = ({ userType, setUserType }) => {
   return (
     <AdminContextProvider>
-      <Navbar userType={userType} /> {/* Conditionally render Navbar */}
+      <Navbar userType={userType} setUserType={setUserType} /> {/* Conditionally render Navbar */}
       <Routes>
       <Route path='/' element={<Landing setUserType={setUserType}/> } />
         <Route path="/home" element={<Home userType={userType} />} />

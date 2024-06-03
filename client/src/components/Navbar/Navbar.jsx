@@ -1,8 +1,15 @@
 import { Link, useLocation } from 'react-router-dom';
 
-function Navbar({ userType }) {
+function Navbar({ userType ,setUserType}) {
   const location = useLocation();
-
+ if(location.pathname.includes('emp-dashboard')){
+  setUserType('employee')
+ }else if(location.pathname.includes('admin-dashboard')){
+  setUserType("admin")
+ }else{
+  setUserType(null)
+ }
+ 
   const handleLogout = () => {
     // Logic for logout (e.g., clearing tokens, redirecting to login, etc.)
     console.log('User logged out');
