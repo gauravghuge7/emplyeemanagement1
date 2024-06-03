@@ -48,11 +48,11 @@ function Landing({setUserType}) {
 
 
   const navigateToEmployeeLogin = () => {
-    navigate('/');
+    navigate('/home');
   };
 
   const navigateToAdminLogin = () => {
-    navigate('/');
+    navigate('/home');
   };
   
 

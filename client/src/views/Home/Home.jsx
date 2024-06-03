@@ -21,10 +21,12 @@ function Home({userType}) {
         </p>
         
 
-        <div className="flex flex-col md:flex-row justify-center align-center space-y-6 md:space-y-0 md:space-x-6">
+        <div className="flex flex-col md:flex-row justify-center align-center space-y-6 md:space-y-0 md:space-x-6  ">
           
+          <div className='flex align-center justify-center '  >
           {userType === "employee" && <EmpLogin />}
           {userType === "admin" && <AdmLogin />}
+          </div>
          
           
           

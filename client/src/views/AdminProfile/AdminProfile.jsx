@@ -148,4 +148,4 @@ function AdminProfile() {
   )
 }
 
-export default AdminProfile;
+export default AdminProfile
