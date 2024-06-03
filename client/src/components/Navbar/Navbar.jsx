@@ -42,9 +42,9 @@ function Navbar({ userType ,setUserType}) {
                       Dashboard
                     </Link>
                     <Link
-                      to="/about"
+                      to="/"
                       className={`px-3 py-2 rounded-md text-sm font-medium ${
-                        location.pathname === '/about'
+                        location.pathname === '/'
                           ? 'bg-blue-500 text-white'
                           : 'text-gray-700 hover:bg-gray-200'
                       }`}

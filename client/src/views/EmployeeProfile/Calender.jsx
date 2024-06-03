@@ -134,7 +134,7 @@ function Calendar() {
   };
 
   return (
-    <div className="p-4 bg-gray-100 rounded-lg shadow-md">
+    <div className="p-4 bg-gray-100 rounded-lg shadow-md bg-gradient-to-r from-blue-400 to-purple-400">
       <h2 className="text-3xl font-bold mb-4 text-center">Employee Management Calendar</h2>
       <div className="h-96">
         <ReactCalendar

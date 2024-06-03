@@ -6,6 +6,8 @@ import './index.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <App />
+     <div className="min-h-screen bg-gradient-to-r from-blue-400 to-purple-400">
+      <App />
+    </div>
   </React.StrictMode>
 )

@@ -40,7 +40,7 @@ function EmpProfile() {
 
   return (
     <div>
-      <div className="max-w-4xl mx-auto p-6 sm:p-8 lg:p-10 shadow-md shadow-gray-400">
+      <div className="max-w-4xl mx-auto p-6 sm:p-8 lg:p-10 shadow-md shadow-gray-400 bg-gradient-to-r from-blue-400 to-purple-400">
 
         <br className="my-8" />
         {isEditing ? (
