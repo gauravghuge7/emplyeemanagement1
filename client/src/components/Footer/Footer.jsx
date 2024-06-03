@@ -2,8 +2,8 @@
 function Footer() {
   return (
 
-    <footer className="bg-white">
-      <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
+    <footer className="bg-white lg" >
+      <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 lg:px-8">
 
         <div className="lg:flex lg:items-start lg:gap-8">
 
@@ -58,7 +58,7 @@ function Footer() {
             </div>
 
             {/*  Services  footer list*/ }
-            <div className="col-span-2 sm:col-span-1">
+            <div className="col-span-2 sm:col-span-1 ">
 
               <p className="font-medium text-gray-900">Services</p>
 
@@ -349,7 +349,7 @@ function Footer() {
         <div className="mt-8 border-t border-gray-100 pt-8">
           <div className="sm:flex sm:justify-between">
             <p className="text-xs text-gray-500">
-              © 2022. Company Name. All rights reserved.
+              © 2024. Company ArohiSoftware. All rights reserved.
             </p>
             <ul className="mt-8 flex flex-wrap justify-start gap-4 text-xs sm:mt-0 lg:justify-end">
               <li>

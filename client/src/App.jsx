@@ -8,7 +8,7 @@ import { AdminSignUp } from './views/SignUp/SignUp';
 import { EmployeeDashboard } from './views/Dashboard/Dashboard';
 import Navbar from './components/Navbar/Navbar';
 import { AdminDashboard } from './views/Dashboard/Dashboard'; // Assuming you have an AdminDashboard component
-import Landing from './views/Landing/Landing';
+import {Landing} from './views/Landing/Landing';
 import Leave from './views/Leave/Leave';
 import Task, { AddTask } from './components/task/Task';
 import AdminProfile from './views/AdminProfile/AdminProfile';
