@@ -85,6 +85,23 @@ function Register() {
           />
         </div>
 
+          {/* Department input field */ }
+
+        <div>
+          <label className="block font-semibold" htmlFor="department">
+             Department
+          </label>
+          <input
+            className="w-full shadow-inner bg-gray-100 rounded-lg placeholder-black text-2xl p-4 border-none block mt-1"
+            id="department"
+            type="text"
+            name="department"
+            required="required"
+            value={lastName}
+            
+          />
+        </div>
+
 
           {/* Email input field */ }
         <div className="mt-4">

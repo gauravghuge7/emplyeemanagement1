@@ -40,7 +40,7 @@ function EmpProfile() {
 
   return (
     <div>
-      <div className="max-w-4xl mx-auto p-6 sm:p-8 lg:p-10">
+      <div className="max-w-4xl mx-auto p-6 sm:p-8 lg:p-10 shadow-md shadow-gray-400">
 
         <br className="my-8" />
         {isEditing ? (
@@ -75,8 +75,13 @@ function EmpProfile() {
             <button type="button" onClick={toggleEditMode} className='bg-black p-2 w-24 rounded-lg text-white' >Cancel</button>
           </form>
         ) : (
-          <div className="employee-details text-lg  space-y-6">
-            <p><img src={employee.avatar} width={'120'}/></p>
+          <div className="employee-details text-lg flex flex-col justify-center align-center space-y-6">
+
+            <p
+      
+            ><img
+              className="rounded-full h-28 w-28 border-2 border-orange-600"
+              src="https://images.pexels.com/photos/3763188/pexels-photo-3763188.jpeg?auto=compress&cs=tinysrgb&w=600" width={'120'} alt="Profile Image"/></p>
             <p><strong>Name: </strong> {employee.name}</p>
             <p><strong>Phone: </strong> {employee.phone}</p>
             <p><strong>Email: </strong> {employee.email}</p>

@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import EmpProfile from '../EmployeeProfile/EmpProfile';
-import EmpLeaveApplication from '../EmployeeProfile/EmpLeaveApplicatio';
+
 import EmpDailyReport from '../EmployeeProfile/EmpDailyReport';
 import Calendar from '../EmployeeProfile/Calender';
 import Admin from '../../components/Dashboard/Admin';
+import Leave from '../Leave/Leave';
 
 export function EmployeeDashboard() {
   const [activeTab, setActiveTab] = useState('profile');
@@ -195,8 +196,9 @@ export function EmployeeDashboard() {
         </ul>
       </div> */}
       <div className=" lg:w-[50vw] w-full mx-auto mt-16  border  p-6">
+
         {activeTab === 'profile' && <EmpProfile />}
-        {activeTab === 'leave' && <EmpLeaveApplication />}
+        {activeTab === 'leave' && <Leave />}
         {activeTab === 'report' && <EmpDailyReport />}
         {activeTab === 'calendar' && <Calendar />}
       </div>
