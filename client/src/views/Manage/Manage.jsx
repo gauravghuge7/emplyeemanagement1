@@ -23,6 +23,10 @@ function Manage() {
   const [email, setEmail] = useState("")
 
 
+
+  
+
+
   const handleSubmit = (e) => {
     e.preventDefault();
     toast.success('Add Employee')
@@ -73,14 +77,15 @@ function ShowTable() {
 
 
 function ShowTabeData({ DataObject }) {
+  
   return <div>
     {DataObject.map((data, i) => {
       return <div className="grid items-center grid-cols-5 py-5 -mx-3 px-3 border border-r-0 border-l-0 border-b-0  my-0" key={i}>
         <h2>{data.name}</h2>
         <h2>{data.id}</h2>
-        <h2>{data.id}</h2>
+        <h2>{data.email}</h2>
         <h2>{data.status}</h2>
-        <button className="hover:bg-red-600 w-24 p-2  rounded-3xl">delete</button>
+        <button  className="hover:bg-red-600 w-24 p-2  rounded-3xl">delete</button>
       </div>
 
     })}

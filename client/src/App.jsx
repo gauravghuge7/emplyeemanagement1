@@ -15,6 +15,7 @@ import AdminProfile from './views/AdminProfile/AdminProfile';
 import AdminContextProvider from './Context/AdminContextProvider';
 import AdminForm from './views/Admin/AdminForm';
 import Register from './views/Register/Register';
+import { HelpAndSupport } from './components/HelpAndSupport/HelpAndSupport';
 
 function App() {
   const [userType, setUserType] = useState(null); // Track user type ('employee' or 'admin')
@@ -37,8 +38,9 @@ const RoutesWrapper = ({ userType, setUserType }) => {
         <Route path="/emp-dashboard" element={<EmployeeDashboard />} />
         <Route path="/admin-dashboard" element={<AdminDashboard/>} /> {/* Add Admin Dashboard route */}
       
-      
+        <Route path='/support' element={<HelpAndSupport/>} />
         <Route path="/leave" element={<Leave />} />
+
 
         <Route path="/task" element={<Task />} />
         <Route path="/addtask" element={<AddTask />} />
