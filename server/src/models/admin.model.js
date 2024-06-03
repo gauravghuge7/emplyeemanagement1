@@ -18,6 +18,13 @@ const adminSchema = new Schema(
             minlength: [3, 'Last name must be at least 3 characters long'],
             maxlength: [50, 'Last name cannot exceed 50 characters'],
         },
+        AdminId: {
+            type: String,
+            trim: true,
+            required: [true, 'Last name is required'],
+            minlength: [3, 'Last name must be at least 3 characters long'],
+            maxlength: [50, 'Last name cannot exceed 50 characters'],
+        },
 
         Email: {
             type: String,
@@ -78,6 +85,18 @@ const adminSchema = new Schema(
                 ref: 'User',
             },
         ],
+
+        totalEmployee: {
+            type: Schema.Types.ObjectId,
+            ref: 'User'
+        },
+
+        LeaveEmployee: {
+            type: Schema.Types.ObjectId,
+            ref: 'User'
+        }
+
+
 
     },
 

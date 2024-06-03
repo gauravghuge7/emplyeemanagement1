@@ -5,7 +5,7 @@
 import  { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-function AdminSignUp() {
+function SignUp() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -85,4 +85,4 @@ function AdminSignUp() {
   );
 }
 
-export  {AdminSignUp};
+export  {SignUp};
