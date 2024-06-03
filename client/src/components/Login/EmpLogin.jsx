@@ -18,6 +18,8 @@ function EmpLogin({setUserType}) {
     console.log("Employee Password:", employeePassword);
     setUserType('employee');
     navigate('/emp-dashboard');
+    // window.location.replace("http://localhost:5173/emp-dashboard")
+    
   };
 
 
