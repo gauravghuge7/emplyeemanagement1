@@ -3,6 +3,7 @@ import './Notification.css'; // Import CSS for styling
 
 const Notifications = () => {
   const [notifications, setNotifications] = useState([]);
+  const [count,setCount] = useState(0);
 
   useEffect(() => {
     // Fetch notifications from an API (placeholder function)
@@ -16,6 +17,7 @@ const Notifications = () => {
       { id: 2, title: 'Policy Update', message: 'The leave policy has been updated.', date: '2024-05-25', isRead: false },
       // Add more notifications as needed
     ];
+    setCount(data.length);
     setNotifications(data);
   };
 

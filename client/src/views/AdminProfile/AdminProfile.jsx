@@ -1,46 +1,11 @@
 function AdminProfile() {
 
-  return (
-    <div className="h-screen dark:bg-gray-700 bg-gray-200 pt-12" >
-      {/* Card start */}
-      <div className="max-w-sm mx-auto bg-white dark:bg-gray-900 rounded-lg overflow-hidden shadow-lg">
-        <div className="border-b px-4 pb-6">
-          <div className="text-center my-4">
-            <img
-              className="h-32 w-32 rounded-full border-4 border-white dark:border-gray-800 mx-auto my-4"
-              src="https://randomuser.me/api/portraits/women/21.jpg"
-              alt=""
-            />
-            <div className="py-2">
-              <label
-                htmlFor="name"
-                className="font-bold text-2xl bg-gray-900 dark:text-white mb-1  p-4"
-              >
-                Name
-              </label>
-              <input
-                className="font-bold text-2xl bg-gray-900 dark:text-white mb-1 border border-white rounded p-4"
-                value="Gaurav Ghuge"
-                type="text"
-                id="name"
-              />
-
-              <label
-                htmlFor="name"
-                className="font-bold text-2xl bg-gray-900 dark:text-white mb-1 m-5  "
-              >
-                Admin Id
-              </label>
-              <h3 className="font-bold text-2xl bg-gray-900 dark:text-white mb-1 border border-white rounded p-4">
-                {" "}
-                Admin Id{" "}
-              </h3>
 
 
+  return ( 
 
-
-
-    return (
+    <div>
+      <div>
         <div className="h-screen dark:bg-gray-700 bg-gray-200 pt-12 rounded-xl">
 
             {/* Card start */}
@@ -177,13 +142,10 @@ function AdminProfile() {
             </span>
           </div>
         </div>
+
       </div>
-      {/* Card end */}
-    </div>
-    </div>
-    </div>
     
-  );
+  )
 }
 
 export default AdminProfile
