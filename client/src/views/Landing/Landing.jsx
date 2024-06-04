@@ -76,12 +76,18 @@ function Landing({ setUserType }) {
           <Link to={"/home"}>
             <button onClick={() => setUserType("admin")} className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors duration-300">Admin Login</button>
           </Link>
+
         </div>
         <div className="max-w-sm p-6 bg-white/50 backdrop-blur-lg rounded-lg shadow-xl hover:shadow-2xl  duration-300 transform hover:-translate-y-1 cursor-pointer">
           <img src="20945868.jpg" alt="Tracking" className="w-full h-60 object-cover mb-4 rounded" />
+
+          </div>
+        {/* <div className="max-w-sm p-6 bg-white rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-300 transform hover:-translate-y-1 cursor-pointer">
+          <img src="20945868.jpg" alt="Tracking" className="w-full h-48 object-cover mb-4 rounded" />
+
           <h2 className="text-2xl font-bold mb-2 text-gray-800">Progress Tracking</h2>
           <p className="text-gray-700">Monitor employee progress and track performance metrics.</p>
-        </div>
+        </div> */}
       </div>
       <div className="max-w-4xl  space-y-24  my-20 ">
         <div className='flex flex-wrap p-6 rounded-2xl bg-white/30 backdrop-blur-3xl lg:flex-nowrap justify-center  mx-20 lg:mx-0  '>

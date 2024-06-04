@@ -31,6 +31,7 @@ function Navbar({ userType, setUserType }) {
                         className={`px-3 py-2 rounded-md text-sm font-medium ${location.pathname.includes('dashboard')
                           ? 'bg-blue-500 text-white'
                           : 'text-gray-700 hover:bg-gray-200'
+
                           }`}
                       >
                         Dashboard
@@ -38,6 +39,16 @@ function Navbar({ userType, setUserType }) {
                       <Link
                         to="/about"
                         className={`px-3 py-2 rounded-md text-sm font-medium ${location.pathname === '/about'
+
+                      }`}
+                    >
+                      Dashboard
+                    </Link>
+                    <Link
+                      to="/"
+                      className={`px-3 py-2 rounded-md text-sm font-medium ${
+                        location.pathname === '/'
+
                           ? 'bg-blue-500 text-white'
                           : 'text-gray-700 hover:bg-gray-200'
                           }`}

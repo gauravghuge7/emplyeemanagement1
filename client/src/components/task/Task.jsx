@@ -3,13 +3,13 @@ import { Link } from "react-router-dom"
 
 function Task() {
   return (
-    <div>
+    <div >
 
-      <div className="md-flex md-flex-column md-align-items-center shadow-lg rounded-lg p-8 shadow-gray-400">
+      <div className="md-flex md-flex-column md-align-items-center shadow-lg rounded-lg p-8 shadow-gray-400  ">
 
 
         <Link to="/AddTask">
-          <div className=" text-lg rounded border hover:bg-gray-100 border-black p-3 text-center">
+          <div className=" text-lg rounded border hover:bg-gray-100 border-black p-3 text-center ">
             Add Task
           </div>
 
@@ -49,12 +49,12 @@ export const AddTask = ({ setTasks, tasks, dialogRef } ) => {
     dialogRef.current.close();
   }
   return (
-    <div className="md-flex md-flex-column md-align-items-center m-8 p-8">
+    <div className="md-flex md-flex-column md-align-items-center m-8 p-8 ">
 
       <form onSubmit={handleSubmit}>
 
         {/* project name input field */}
-        <div>
+        <div >
           <label className="block font-semibold" htmlFor="FirstName">
             Project Name
           </label>

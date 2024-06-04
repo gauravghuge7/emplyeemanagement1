@@ -49,7 +49,7 @@ const DailyReport = () => {
   };
 
   return (
-    <div className="report-container">
+    <div className="report-container ">
       <h2>Daily Reports</h2>
       <form onSubmit={addReport}>
         <input
