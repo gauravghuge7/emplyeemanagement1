@@ -27,10 +27,10 @@ const registerAdmin = asyncHandler(async(req, res) => {
 
         const existingUser = await AdminModel.findOne({ Email });
         if (existingUser) {
-            // FIXME: Use Conflict Status Code
+            // FIXME: Use Conflict Status Code  409
             throw new ApiError("User already exists", 400);
         }
-        // FIXME: Use Constant Salt Round Number
+        // FIXME: Use Constant Salt Round Number (Secret)
         const encryptedPassword = await bcrypt.hash(Password, 10);
 
         // remain the avatar uploading work
@@ -159,11 +159,6 @@ const AdminLogout = asyncHandler(async(req, res) => {
 /**
  * Description: Change Password For the Admin User.
  * Body:-
- *  1.Email
- *  2.Role
- *  3.CurrentPassword
- *  4.NewPassword
- *  5.ConfirmPassword
  */
 const AdminUpdate = asyncHandler(async(req, res) => {
     // TODO: Complete This Code
@@ -267,6 +262,16 @@ const getUsers = asyncHandler(async(req, res) => {
 
 const getAdminDashboard = asyncHandler(async(req, res) => {
     // TODO: Complete This Code
+
+    const { AdminId } = req.cookies;
+
+    // Array of Employees
+    const employees = await UserModel.find({ PhoneNumber: AdminId });
+
+    return res.json(
+        new ApiResponse(200, "", employees)
+    )
+
 });
 
 const getAdminProfile = asyncHandler(async(req, res) => {
@@ -285,4 +290,4 @@ export {
     getUsers,
     registerUser,
     deleteUser,
-};
+}

@@ -4,7 +4,6 @@ import { app } from "./src/app.js";
 import connectDB from "./src/db/db.js";
 
 export const PORT = +process.env.PORT || 8080;
-
 const main = async(port) => {
     try {
         await connectDB();
