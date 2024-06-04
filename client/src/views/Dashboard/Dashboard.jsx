@@ -10,7 +10,7 @@ export function EmployeeDashboard() {
   const [activeTab, setActiveTab] = useState('profile');
 
   return (
-    <div className="flex flex-col min-h-screen bg-gray-100">
+    <div className="flex flex-col min-h-screen bg-gray-100 bg-gradient-to-r from-blue-400 to-purple-400">
 
       <aside className=" bg-gradient-to-br from-gray-800 to-gray-900 -translate-x-80 fixed inset-0 z-50 my-4 ml-4  h-[calc(90vh-32px)] w-72 rounded-xl transition-transform duration-300 xl:translate-x-0" style={{ marginTop: "10rem" }}>
 
@@ -210,7 +210,7 @@ export function AdminDashboard() {
 
 
   return (
-    <div className="p-6">
+    <div className="p-6 bg-gradient-to-r from-blue-400 to-purple-400">
 
       <Admin />
     </div>

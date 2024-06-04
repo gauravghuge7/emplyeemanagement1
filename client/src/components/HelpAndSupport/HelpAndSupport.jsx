@@ -3,8 +3,8 @@ import { FaQuestionCircle, FaLifeRing, FaInfoCircle } from 'react-icons/fa';
 
 function HelpAndSupport() {
   return (
-    <div className="bg-white text-gray-800 py-12 px-6 lg:px-8">
-      <h2 className="text-3xl font-bold text-center text-teal-600">Help & Support</h2>
+    <div className="bg-white text-gray-800 py-12 px-6 lg:px-8 bg-gradient-to-r from-blue-400 to-purple-400">
+      <h2 className="text-3xl font-bold text-center text-gray-600">Help & Support</h2>
       <div className="mt-8 flex flex-col lg:flex-row lg:justify-center lg:items-start lg:gap-8">
         <div className="flex flex-col items-center p-6 bg-gray-100 rounded-lg shadow-lg transition-transform transform hover:scale-105 hover:shadow-xl">
           <FaQuestionCircle className="text-teal-600 h-12 w-12 mb-4" />
