@@ -13,7 +13,7 @@ function Navbar({ userType, setUserType }) {
   return (
     <div className=''>
 
-      <nav className="bg-white/50 backdrop-blur-lg shadow-md fixed right-0 left-0 top-0 z-10 ">
+      <nav className="bg-violet-100/50 backdrop-blur-lg shadow-md fixed right-0 left-0 top-0 z-10 ">
         <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
           <div className="relative flex items-center justify-between h-16">
             <div className="absolute inset-y-0 left-0 flex items-center">
@@ -24,7 +24,7 @@ function Navbar({ userType, setUserType }) {
             <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-end">
               <div className="hidden sm:block">
                 <div className="flex space-x-4">
-                  {(location.pathname.includes('admin') || location.pathname.includes('emp')) && (
+                  {(location.pathname.includes('admin') || location.pathname.includes('emp'))  && (
                     <>
                       <Link
                         to={`/${isAdminUrl ? 'admin' : 'emp'}-dashboard`}
@@ -36,16 +36,9 @@ function Navbar({ userType, setUserType }) {
                       >
                         Dashboard
                       </Link>
-                      <Link
-                        to="/about"
-                        className={`px-3 py-2 rounded-md text-sm font-medium ${location.pathname === '/about'
-
-                      }`}
-                    >
-                      Dashboard
-                    </Link>
+                      
                     <Link
-                      to="/"
+                      to="/about"
                       className={`px-3 py-2 rounded-md text-sm font-medium ${
                         location.pathname === '/'
 

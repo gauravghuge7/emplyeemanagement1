@@ -37,7 +37,7 @@
 import { useNavigate } from 'react-router-dom';
 import Footer from '../../components/Footer/Footer';
 
-
+import heroImage from '../../../public/hero.png'
 import { Link } from 'react-router-dom';
 
 
@@ -49,6 +49,24 @@ function Landing({ setLoginType }) {
 
 
   return (
+
+    <div className="min-h-screen   mx-auto   bg-gradient-to-r from-blue-400 to-purple-400">
+      <div className='mb-32 h-screen relative bg-white pt-48 px-2    mx-auto  '>
+        {/* <h1 className="lg:text-5xl text-4xl  mb-24 text-white text-center font-semibold">Welcome to Employee Management System</h1> */}
+        <div className="hero-content flex flex-col items-center text-center">
+          <h1 className='text-5xl font-bold   font-playfair'>Streamline Your Workforce Management</h1>
+          <p className='text-2xl my-8 w-96'>Effortlessly manage your employees with our all-in-one platform.</p>
+          <Link to="/" className=' bg-gradient-to-br p-[3px] mt-11 z-10 border-none from-violet-500 to-pink-500 rounded-full'><button className='w-36 bg-black  text-white p-3 rounded-full'>Get Started</button></Link>
+
+          <div className='w-full flex justify-center mt-10'>        <img src={heroImage} className='absolute bottom-0 '/></div>
+        </div>
+      </div>
+      <div className="flex flex-wrap items-start justify-center gap-12  mb-12 transition-all">
+        
+
+        <div className="max-w-sm p-6  bg-white/50 backdrop-blur-lg rounded-lg shadow-xl hover:shadow-2xl duration-300 transform hover:-translate-y-1 cursor-pointer">
+          <img src="4782112.jpg" alt="Employee" className="-z-10 w-full h-48 object-cover mb-4 rounded" />
+
     <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-r from-blue-400 to-purple-400">
       <h1 className="text-4xl font-bold mb-8 text-white">Welcome to Employee Management System</h1>
       <div className="flex space-x-12 mb-12">
@@ -57,6 +75,7 @@ function Landing({ setLoginType }) {
           onClick={() => setLoginType("employee")}
           className="max-w-sm p-6 bg-white rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-300 transform hover:-translate-y-1 cursor-pointer">
           <img src="4782112.jpg" alt="Employee" className="w-full h-48 object-cover mb-4 rounded" />
+
           <h2 className="text-2xl font-bold mb-2 text-gray-800">Employee</h2>
           <p className="text-gray-700">Access your dashboard, view tasks, and manage your profile.</p>
           <Link to={"/home"}>
@@ -82,17 +101,24 @@ function Landing({ setLoginType }) {
             className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors duration-300">Admin Login</button>
           </Link>
         </div>
-        
+
+        <div className="max-w-sm p-6 bg-white/50 backdrop-blur-lg rounded-lg shadow-xl hover:shadow-2xl  duration-300 transform hover:-translate-y-1 cursor-pointer">
+          <img src="20945868.jpg" alt="Tracking" className="w-full h-60 object-cover mb-4 rounded" />
+
+        </div>
+        {/* <div className="max-w-sm p-6 bg-white rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-300 transform hover:-translate-y-1 cursor-pointer">
+
         
         <div 
           className="max-w-sm p-6 bg-white rounded-lg shadow-xl hover:shadow-2xl     transition-shadow duration-300 transform hover:-translate-y-1 cursor-pointer">
+
           <img src="20945868.jpg" alt="Tracking" className="w-full h-48 object-cover mb-4 rounded" />
 
           <h2 className="text-2xl font-bold mb-2 text-gray-800">Progress Tracking</h2>
           <p className="text-gray-700">Monitor employee progress and track performance metrics.</p>
         </div> 
       </div>
-      <div className="max-w-4xl  space-y-24  my-20 ">
+      <div className="max-w-4xl mx-auto  space-y-24  my-20 ">
         <div className='flex flex-wrap p-6 rounded-2xl bg-white/30 backdrop-blur-3xl lg:flex-nowrap justify-center  mx-20 lg:mx-0  '>
           <div>
             <h2 className="text-3xl font-bold mb-4  ">How We Track Employee Progress</h2>
