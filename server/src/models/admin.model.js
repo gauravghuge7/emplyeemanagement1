@@ -2,6 +2,9 @@ import { Schema, model } from 'mongoose';
 import jwt from 'jsonwebtoken';
 
 const adminSchema = new Schema({
+
+    // Fields For Registration
+
     //  FIXME: Snake Casing For Field Name in Table
     FirstName: {
         type: String,
@@ -19,6 +22,8 @@ const adminSchema = new Schema({
         maxlength: [50, 'Last name cannot exceed 50 characters'],
     },
 
+    // FIXME: There Is a Automatic Field For Id. So AdminId is Not required 
+    // unless it is EmployeementId
     AdminId: {
         type: String,
         trim: true,
@@ -38,28 +43,20 @@ const adminSchema = new Schema({
         ],
     },
 
+    password: {
+        type: String,
+        minlength: [8, 'Password must be at least 8 characters long'],
+        maxlength: [20, 'Password cannot exceed 20 characters'],
+        trim: true,
+    },
+
+    // Fields For Profile 
+    // FIXME: Not Required
+
     Avatar: {
         type: String,
         trim: true,
         // required: [true, 'Avatar URL is required'],
-    },
-
-    isActive: {
-        type: Boolean,
-        default: true,
-    },
-
-    Role: {
-        type: String,
-        trim: true,
-        default: 'user',
-        enum: ['admin', 'user', 'moderator'],
-        required: [true, 'User role is required'],
-    },
-
-    createdAt: {
-        type: Date,
-        default: Date.now,
     },
 
     PhoneNumber: {
@@ -73,11 +70,14 @@ const adminSchema = new Schema({
         },
     },
 
-    password: {
+    // Internal Fields
+
+    Role: {
         type: String,
-        minlength: [8, 'Password must be at least 8 characters long'],
-        maxlength: [20, 'Password cannot exceed 20 characters'],
         trim: true,
+        default: 'user',
+        enum: ['admin', 'user', 'moderator'],
+        required: [true, 'User role is required'],
     },
 
     users: [{
@@ -85,14 +85,29 @@ const adminSchema = new Schema({
         ref: 'User',
     }, ],
 
+    // FIXME: Total Number Of Employees Should Be A Number
     totalEmployee: {
         type: Schema.Types.ObjectId,
         ref: 'User'
     },
 
+    // FIXME: Can A Admin Only Handle One Employee At Any Specific Time
+    // TODO: Leave Application Should Be handled in another Model As it Many to Many Mapping
+    // Admin Can Aprrove Multiple Leave Application
+    // Employee Can Have Maultiple Leave Application
     LeaveEmployee: {
         type: Schema.Types.ObjectId,
         ref: 'User'
+    },
+
+    isActive: {
+        type: Boolean,
+        default: true,
+    },
+
+    createdAt: {
+        type: Date,
+        default: Date.now,
     }
 }, { timestamps: true });
 
