@@ -26,15 +26,17 @@ function Footer() {
 
 
           <div className="mt-8 grid grid-cols-2 gap-8 lg:mt-0 lg:grid-cols-5 lg:gap-y-16">
+
+          
             <div className="col-span-2">
-              <div>
-                <h2 className="text-2xl font-bold text-gray-900">
-                  Get the latest news !
-                </h2>
-                <p className="mt-4 text-gray-500">
-                  reserved the company policy and services 
-                </p>
-              </div>
+    
+              <h2 className="text-2xl font-bold text-gray-900">
+                Get the latest news !
+              </h2>
+              <p className="mt-4 text-gray-500">
+                reserved the company policy and services 
+              </p>
+           
             </div>
 
             <div className="col-span-2 lg:col-span-3 lg:flex lg:items-end">
@@ -44,12 +46,12 @@ function Footer() {
                   Email{" "}
                 </label>
 
-                <div className="border border-gray-100 p-2 focus-within:ring sm:flex sm:items-center sm:gap-4">
+                <div className="border border-black rounded p-2 focus-within:ring sm:flex sm:items-center sm:gap-4">
                   <input
                     type="email"
                     id="UserEmail"
                     placeholder="arohisoftwares@gmail.com"
-                    className="w-full border-none focus:border-transparent focus:ring-transparent sm:text-sm"
+                    className="w-full border-none bg-gray-200/20 text-gray-500  focus:border-transparent focus:ring-transparent sm:text-sm"
                   />
                   
                 </div>
@@ -234,7 +236,8 @@ function Footer() {
 
 
             {/* social logos like instagram facebook*/ }
-            <ul className="col-span-2 flex justify-start gap-6 lg:col-span-5 lg:justify-end">
+            <ul className="col-span-2 flex justify-center align-center gap-6 lg:col-span-5 lg:justify-end">
+
               <li>
                 <a
                   href="#"
