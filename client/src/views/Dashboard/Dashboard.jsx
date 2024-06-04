@@ -52,7 +52,7 @@ export function EmployeeDashboard() {
             <li>
               <a aria-current="page" className="active" href="#">
                 <button
-                  className={`middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none  disabled:pointer-events-none text-xs py-3 rounded-lg text-white  hover:shadow-lg hover:shadow-blue-500/40 active:opacity-[0.85] w-full flex items-center gap-4 px-4 capitalize  ${activeTab === 'profile' && 'bg-gradient-to-tr from-blue-600 to-blue-400'}`}
+                  className={`middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none  disabled:pointer-events-none text-sm py-3 rounded-lg text-white  hover:shadow-lg hover:shadow-blue-500/40 active:opacity-[0.85] w-full flex items-center px-4 capitalize  ${activeTab === 'profile' && 'bg-gradient-to-tr from-blue-600 to-blue-400'}`}
                   type="button"
                   onClick={() => setActiveTab('profile')}
                 >
@@ -79,7 +79,7 @@ export function EmployeeDashboard() {
             <li>
               <a className="" >
                 <button
-                  className={`middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize  ${activeTab === 'leave' && 'bg-gradient-to-tr from-blue-600 to-blue-400'}`}
+                  className={`middle none font-sans text-sm font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none  py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full flex items-center  px-4 capitalize  ${activeTab === 'leave' && 'bg-gradient-to-tr from-blue-600 to-blue-400'}`}
                   type="button"
                onClick={() => setActiveTab('leave')}
                 >
@@ -110,7 +110,7 @@ export function EmployeeDashboard() {
             <li>
               <a className="" >
                 <button
-                  className={`middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize  ${activeTab === 'report' && 'bg-gradient-to-tr from-blue-600 to-blue-400'}`}
+                  className={`middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-sm py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full flex items-center  px-4 capitalize  ${activeTab === 'report' && 'bg-gradient-to-tr from-blue-600 to-blue-400'}`}
                   type="button"
              onClick={() => setActiveTab('report')}
 
@@ -142,7 +142,7 @@ export function EmployeeDashboard() {
             <li>
               <a className="" href="#" >
                 <button
-                  className={`middle none relative font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize  ${activeTab === 'calendar' && 'bg-gradient-to-tr from-blue-600 to-blue-400'}`}
+                  className={`middle none relative font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-sm py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full flex items-center  px-4 capitalize  ${activeTab === 'calendar' && 'bg-gradient-to-tr from-blue-600 to-blue-400'}`}
                   type="button"
                  onClick={() => setActiveTab('calendar')}
                 >

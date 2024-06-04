@@ -26,7 +26,7 @@ function EmpLogin({setUserType}) {
   return (
     <div>
       {/* Employee Login Card */}
-      <div className="w-full max-w-sm p-6 bg-white rounded-lg shadow-2xl border border-gray-300">
+      <div className="lg:w-[400px] max-w-lg p-9 bg-white rounded-lg shadow-2xl border border-gray-300">
       <h2 className="text-2xl font-bold text-center mb-6">Employee Login</h2>
       <form onSubmit={submitEmployee}>
         <div className="mb-4">
