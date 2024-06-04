@@ -41,10 +41,12 @@ import Footer from '../../components/Footer/Footer';
 import { Link } from 'react-router-dom';
 
 
-function Landing({setUserType}) {
+
+
+function Landing({setLoginType}) {
   
 
-  
+  const navigate = useNavigate();
 
 
   const navigateToEmployeeLogin = () => {
@@ -60,29 +62,46 @@ function Landing({setUserType}) {
     <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-r from-blue-400 to-purple-400">
       <h1 className="text-4xl font-bold mb-8 text-white">Welcome to Employee Management System</h1>
       <div className="flex space-x-12 mb-12">
-        <div className="max-w-sm p-6 bg-white rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-300 transform hover:-translate-y-1 cursor-pointer">
+
+        <div 
+          onClick={() => setLoginType("employee")}
+          className="max-w-sm p-6 bg-white rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-300 transform hover:-translate-y-1 cursor-pointer">
           <img src="4782112.jpg" alt="Employee" className="w-full h-48 object-cover mb-4 rounded" />
           <h2 className="text-2xl font-bold mb-2 text-gray-800">Employee</h2>
           <p className="text-gray-700">Access your dashboard, view tasks, and manage your profile.</p>
           <Link to={"/home"}>
-          <button onClick={() => setUserType("employee")} className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors duration-300">Employee Login</button>
+            <button 
+
+             onClick={() => setLoginType("employee")}
+             onChange={() => setLoginType("employee")}
+
+             className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors duration-300">Employee Login</button>
           </Link>
         </div>
-        <div className="max-w-sm p-6 bg-white rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-300 transform hover:-translate-y-1 cursor-pointer">
+        <div 
+          onClick={() => setLoginType("admin")}
+          className="max-w-sm p-6 bg-white rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-300 transform hover:-translate-y-1 cursor-pointer">
           <img src="50426.jpg" alt="Admin" className="w-full h-48 object-cover mb-4 rounded" />
           <h2 className="text-2xl font-bold mb-2 text-gray-800">Admin</h2>
           <p className="text-gray-700">Manage employees, view reports, and configure system settings.</p>
 
           <Link to={"/home"}>
-          <button onClick={() => setUserType("admin")} className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors duration-300">Admin Login</button>
+          <button 
+            onClick={() => setLoginType("admin")}
+            onChange={() => setLoginType("admin")}
+            className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors duration-300">Admin Login</button>
           </Link>
-          </div>
-        <div className="max-w-sm p-6 bg-white rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-300 transform hover:-translate-y-1 cursor-pointer">
+        </div>
+        
+        
+        <div 
+          className="max-w-sm p-6 bg-white rounded-lg shadow-xl hover:shadow-2xl     transition-shadow duration-300 transform hover:-translate-y-1 cursor-pointer">
           <img src="20945868.jpg" alt="Tracking" className="w-full h-48 object-cover mb-4 rounded" />
           <h2 className="text-2xl font-bold mb-2 text-gray-800">Progress Tracking</h2>
           <p className="text-gray-700">Monitor employee progress and track performance metrics.</p>
         </div>
       </div>
+
       <div className="max-w-4xl text-white text-center">
         <h2 className="text-3xl font-bold mb-4">How We Track Employee Progress</h2>
         <p className="mb-6">Our system provides detailed performance metrics and progress tracking tools to help employees stay on track with their goals. We utilize a variety of key performance indicators (KPIs) to measure productivity, task completion rates, and overall efficiency.</p>

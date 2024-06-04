@@ -1,15 +1,12 @@
 
-import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import EmpLogin from '../../components/Login/EmpLogin';
 import AdmLogin from '../../components/Login/AdmLogin';
-import AdminContext from '../../Context/context';
 
-function Home({userType}) {
+
+function Home({loginType}) {
 
   
-  const login = useContext(AdminContext);
-
   
 
   return (
@@ -21,10 +18,13 @@ function Home({userType}) {
         </p>
         
 
-        <div className="flex flex-col md:flex-row justify-center align-center space-y-6 md:space-y-0 md:space-x-6">
+        <div className="mx-56 justify-center md:flex-row space-y-6 md:space-y-0 md:space-x-6">
           
-          {userType === "employee" && <EmpLogin />}
-          {userType === "admin" && <AdmLogin />}
+          
+          {loginType == "employee" && <EmpLogin />}
+          {loginType == "admin" && <AdmLogin />}
+          {loginType == "" && <EmpLogin />}
+
          
           
           

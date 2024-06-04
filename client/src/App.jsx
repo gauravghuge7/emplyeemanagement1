@@ -1,5 +1,4 @@
 
-
 import { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import ForgotPass from './employee/ForgotPass';
@@ -16,24 +15,29 @@ import AdminContextProvider from './Context/AdminContextProvider';
 import AdminForm from './views/Admin/AdminForm';
 import Register from './views/Register/Register';
 
+
 function App() {
 
-  const [userType, setUserType] = useState(null); // Track user type ('employee' or 'admin')
+  const [userType, setUserType] = useState("employee"); // Track user type ('employee' or 'admin')
+  
+  const [loginType, setLoginType] = useState("employee"); // Track user type ('employee' or 'admin')
 
   return (
     <BrowserRouter>
-      <RoutesWrapper userType={userType} setUserType={setUserType} />
+      <RoutesWrapper userType={userType} setUserType={setUserType} setLoginType={setLoginType} loginType={loginType} />
     </BrowserRouter>
   );
 }
 
-const RoutesWrapper = ({ userType, setUserType }) => {
+const RoutesWrapper = ({ userType, setUserType, setLoginType, loginType }) => {
   return (
     <AdminContextProvider>
+    
       <Navbar userType={userType} setUserType={setUserType} /> {/* Conditionally render Navbar */}
       <Routes>
-      <Route path='/' element={<Landing setUserType={setUserType}/> } />
-        <Route path="/home" element={<Home userType={userType} />} />
+      <Route path='/' element={<Landing setLoginType={setLoginType}/> } />
+
+        <Route path="/home" element={<Home loginType={loginType} />} />
         <Route path="/forgot-password" element={<ForgotPass />} />
         <Route path="/emp-dashboard" element={<EmployeeDashboard />} />
         <Route path="/admin-dashboard" element={<AdminDashboard/>} /> {/* Add Admin Dashboard route */}
