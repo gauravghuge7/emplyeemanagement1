@@ -21,7 +21,7 @@ const registerAdmin = asyncHandler(async (req, res) => {
 
 
     const {FirstName, LastName, Email, PhoneNumber, Role, Password} = req.body;
-//        console.log(req.body)
+    //        console.log(req.body)
         console.log(FirstName, LastName, Email, PhoneNumber, Role, Password)
 
     try{

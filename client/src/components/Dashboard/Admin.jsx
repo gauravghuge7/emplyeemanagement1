@@ -169,15 +169,15 @@ function Admin() {
             {activeBox === "notifications" && <Notifications/>}
             {activeBox === "report" && <Report/>}
 
-            {activeBox === "" && <div></div>}
+            {activeBox === "" && <Manage />}
           
           </div>
           
         </div>
 
-        <div className="text-blue-gray-600">
-          <Footer />
-        </div>
+        
+        <Footer />
+        
 
       </div>
     </div>

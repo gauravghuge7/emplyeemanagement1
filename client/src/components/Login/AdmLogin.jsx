@@ -69,7 +69,7 @@ function AdmLogin({setUserType}) {
             </div>
           </form>
         </div>
-        
+        </div>
         </div>
     )
 }
