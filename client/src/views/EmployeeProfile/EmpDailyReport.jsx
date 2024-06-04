@@ -23,7 +23,7 @@ function EmpDailyReport() {
   };
 
   return (
-    <div className='bg-slate-100'>
+    <div className='bg-slate-100 bg-gradient-to-r from-blue-400 to-purple-400'>
       <Toaster richColors={true} closeButton={true} />
       <h2 className="text-2xl font-bold mb-4">Daily Report</h2>
       <div   >

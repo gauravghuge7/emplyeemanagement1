@@ -17,7 +17,7 @@ function ForgotPass() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+    <div className="flex items-center justify-center min-h-screen bg-gray-100 bg-gradient-to-r from-blue-400 to-purple-400">
       <div className="w-full max-w-md p-6 bg-white rounded-lg shadow-2xl border border-gray-300">
         <h1 className="text-2xl font-bold text-center mb-6">Reset Password</h1>
         <form onSubmit={handleSubmit}>

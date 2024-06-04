@@ -26,7 +26,7 @@
 //       </div>
 //     </div>
 //     <Footer/>
-    
+
 //   </div>
 //   );
 // }
@@ -41,24 +41,32 @@ import Footer from '../../components/Footer/Footer';
 import { Link } from 'react-router-dom';
 
 
+<<<<<<< HEAD
 
 
 function Landing({setLoginType}) {
   
 
   const navigate = useNavigate();
+=======
+function Landing({ setUserType }) {
+
+
+
+>>>>>>> 09c9516a01a29834fc61578e67c919654c8009f6
 
 
   const navigateToEmployeeLogin = () => {
-    navigate('/');
+    navigate('/home');
   };
 
   const navigateToAdminLogin = () => {
-    navigate('/');
+    navigate('/home');
   };
-  
+
 
   return (
+<<<<<<< HEAD
     <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-r from-blue-400 to-purple-400">
       <h1 className="text-4xl font-bold mb-8 text-white">Welcome to Employee Management System</h1>
       <div className="flex space-x-12 mb-12">
@@ -66,10 +74,17 @@ function Landing({setLoginType}) {
         <div 
           onClick={() => setLoginType("employee")}
           className="max-w-sm p-6 bg-white rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-300 transform hover:-translate-y-1 cursor-pointer">
+=======
+    <div className="min-h-screen pt-44  flex flex-col items-center justify-center bg-gradient-to-r from-blue-400 to-purple-400">
+      <h1 className="text-4xl  mb-24 text-white text-center font-semibold">Welcome to Employee Management System</h1>
+      <div className="flex flex-wrap items-start justify-center gap-12  mb-12 transition-all">
+        <div className="max-w-sm p-6  bg-white/50 backdrop-blur-lg rounded-lg shadow-xl hover:shadow-2xl duration-300 transform hover:-translate-y-1 cursor-pointer">
+>>>>>>> 09c9516a01a29834fc61578e67c919654c8009f6
           <img src="4782112.jpg" alt="Employee" className="w-full h-48 object-cover mb-4 rounded" />
           <h2 className="text-2xl font-bold mb-2 text-gray-800">Employee</h2>
           <p className="text-gray-700">Access your dashboard, view tasks, and manage your profile.</p>
           <Link to={"/home"}>
+<<<<<<< HEAD
             <button 
 
              onClick={() => setLoginType("employee")}
@@ -81,11 +96,18 @@ function Landing({setLoginType}) {
         <div 
           onClick={() => setLoginType("admin")}
           className="max-w-sm p-6 bg-white rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-300 transform hover:-translate-y-1 cursor-pointer">
+=======
+            <button onClick={() => setUserType("employee")} className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors duration-300">Employee Login</button>
+          </Link>
+        </div>
+        <div className="max-w-sm p-6 bg-white/50 backdrop-blur-lg rounded-lg shadow-xl hover:shadow-2xl  duration-300 transform hover:-translate-y-1 cursor-pointer">
+>>>>>>> 09c9516a01a29834fc61578e67c919654c8009f6
           <img src="50426.jpg" alt="Admin" className="w-full h-48 object-cover mb-4 rounded" />
           <h2 className="text-2xl font-bold mb-2 text-gray-800">Admin</h2>
           <p className="text-gray-700">Manage employees, view reports, and configure system settings.</p>
 
           <Link to={"/home"}>
+<<<<<<< HEAD
           <button 
             onClick={() => setLoginType("admin")}
             onChange={() => setLoginType("admin")}
@@ -96,12 +118,41 @@ function Landing({setLoginType}) {
         
         <div 
           className="max-w-sm p-6 bg-white rounded-lg shadow-xl hover:shadow-2xl     transition-shadow duration-300 transform hover:-translate-y-1 cursor-pointer">
+=======
+            <button onClick={() => setUserType("admin")} className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors duration-300">Admin Login</button>
+          </Link>
+
+        </div>
+        <div className="max-w-sm p-6 bg-white/50 backdrop-blur-lg rounded-lg shadow-xl hover:shadow-2xl  duration-300 transform hover:-translate-y-1 cursor-pointer">
+          <img src="20945868.jpg" alt="Tracking" className="w-full h-60 object-cover mb-4 rounded" />
+
+          </div>
+        {/* <div className="max-w-sm p-6 bg-white rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-300 transform hover:-translate-y-1 cursor-pointer">
+>>>>>>> 09c9516a01a29834fc61578e67c919654c8009f6
           <img src="20945868.jpg" alt="Tracking" className="w-full h-48 object-cover mb-4 rounded" />
+
           <h2 className="text-2xl font-bold mb-2 text-gray-800">Progress Tracking</h2>
           <p className="text-gray-700">Monitor employee progress and track performance metrics.</p>
+        </div> */}
+      </div>
+      <div className="max-w-4xl  space-y-24  my-20 ">
+        <div className='flex flex-wrap p-6 rounded-2xl bg-white/30 backdrop-blur-3xl lg:flex-nowrap justify-center  mx-20 lg:mx-0  '>
+          <div>
+            <h2 className="text-3xl font-bold mb-4  ">How We Track Employee Progress</h2>
+            <p className="mb-6 text-balance">Our system provides detailed performance metrics and progress tracking tools to help employees stay on track with their goals. We utilize a variety of key performance indicators (KPIs) to measure productivity, task completion rates, and overall efficiency.</p>
+          </div>
+          <img src="3661720.jpg" alt="Progress Tracking" className="w-80 h-64 object-cover rounded-lg" />
+        </div>
+        <div className='flex flex-wrap lg:flex-nowrap bg-white/30 backdrop-blur-3xl p-6 rounded-2xl justify-center gap-8 mx-20 lg:mx-0 '>
+          <div>
+            <h2 className="text-3xl font-bold mb-4">Admin Features</h2>
+            <p className="mb-6">Admins have access to comprehensive tools for managing employee data, generating reports, and configuring system settings. With real-time data and analytics, admins can make informed decisions to optimize workforce performance.</p>
+          </div>
+          <img src="20616.jpg" alt="Admin Features" className="w-72 h-64 object-cover mb-6 rounded-lg" />
         </div>
       </div>
 
+<<<<<<< HEAD
       <div className="max-w-4xl text-white text-center">
         <h2 className="text-3xl font-bold mb-4">How We Track Employee Progress</h2>
         <p className="mb-6">Our system provides detailed performance metrics and progress tracking tools to help employees stay on track with their goals. We utilize a variety of key performance indicators (KPIs) to measure productivity, task completion rates, and overall efficiency.</p>
@@ -111,6 +162,8 @@ function Landing({setLoginType}) {
         <img src="20616.jpg" alt="Admin Features" className="w-full h-64 object-contain mb-6 rounded" />
       </div>
       
+=======
+>>>>>>> 09c9516a01a29834fc61578e67c919654c8009f6
       <Footer />
     </div>
   );
@@ -160,17 +213,17 @@ export function Foooter() {
           &copy; 2024 Employee Management System. All rights reserved.
         </div>
       </div>
-  
-        <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-r from-blue-400 to-purple-400">
-          <h1 className="text-4xl font-bold mb-8 text-white">Welcome to Employee Management System</h1>
-          <div className="flex space-x-12">
+
+      <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-r from-blue-400 to-purple-400">
+        <h1 className="text-4xl font-bold mb-8 text-white">Welcome to Employee Management System</h1>
+        <div className="flex space-x-12">
 
 
           <Link to={"/home"}>
-            <div  
+            <div
               onClick={() => setUserType("employee")}
-              
-            className="cursor-pointer max-w-sm p-6 bg-white rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-300">
+
+              className="cursor-pointer max-w-sm p-6 bg-white rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-300">
               <img src="4782112.jpg" alt="Employee" className="w-full h-48 object-cover mb-4 rounded" />
               <h2 className="text-2xl font-bold mb-2 text-gray-800">Employee</h2>
               <p className="text-gray-700">Access your dashboard, view tasks, and manage your profile.</p>
@@ -179,9 +232,9 @@ export function Foooter() {
 
 
           <Link to={"/home"}>
-            <div  
+            <div
               onClick={() => setUserType("admin")}
-      
+
 
               className="max-w-sm p-6 bg-white rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-300">
               <img src="50426.jpg" alt="Admin" className="w-full h-48 object-cover mb-4 rounded" />

@@ -2,7 +2,7 @@
 function Footer() {
   return (
 
-    <footer className="bg-white lg" >
+    <footer className="bg-gray-200/20 backdrop-blur-3xl w-full " >
       <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 lg:px-8">
 
         <div className="lg:flex lg:items-start lg:gap-8">
