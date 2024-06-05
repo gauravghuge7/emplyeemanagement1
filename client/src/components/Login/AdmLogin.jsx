@@ -71,7 +71,7 @@ function AdmLogin({setUserType}) {
         </div>
         </div>
         </div>
-        </div>
+      
     )
 }
 
