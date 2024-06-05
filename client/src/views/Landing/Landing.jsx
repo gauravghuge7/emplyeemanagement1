@@ -8,7 +8,7 @@ import heroImage from '../../../public/hero.png'
 import { Link } from 'react-router-dom';
 
 
-function Landing({ setUserType }) {
+function Landing({ setLoginType }) {
 
 
 
@@ -38,21 +38,25 @@ function Landing({ setUserType }) {
       <div className="flex flex-wrap items-start justify-center gap-12  mb-12 transition-all">
         
 
-        <div className="max-w-sm p-6  bg-white/50 backdrop-blur-lg rounded-lg shadow-xl hover:shadow-2xl duration-300 transform hover:-translate-y-1 cursor-pointer">
+        <div 
+          onClick={() => setLoginType("employee")}
+          className="max-w-sm p-6  bg-white/50 backdrop-blur-lg rounded-lg shadow-xl hover:shadow-2xl duration-300 transform hover:-translate-y-1 cursor-pointer">
           <img src="4782112.jpg" alt="Employee" className="-z-10 w-full h-48 object-cover mb-4 rounded" />
           <h2 className="text-2xl font-bold mb-2 text-gray-800">Employee</h2>
           <p className="text-gray-700">Access your dashboard, view tasks, and manage your profile.</p>
           <Link to={"/home"}>
-            <button onClick={() => setUserType("employee")} className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors duration-300">Employee Login</button>
+            <button onClick={() => setLoginType("employee")} className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors duration-300">Employee Login</button>
           </Link>
         </div>
-        <div className="max-w-sm p-6 bg-white/50 backdrop-blur-lg rounded-lg shadow-xl hover:shadow-2xl  duration-300 transform hover:-translate-y-1 cursor-pointer">
+        <div 
+          onClick={() => setLoginType("admin")}
+          className="max-w-sm p-6 bg-white/50 backdrop-blur-lg rounded-lg shadow-xl hover:shadow-2xl  duration-300 transform hover:-translate-y-1 cursor-pointer">
           <img src="50426.jpg" alt="Admin" className="w-full h-48 object-cover mb-4 rounded" />
           <h2 className="text-2xl font-bold mb-2 text-gray-800">Admin</h2>
           <p className="text-gray-700">Manage employees, view reports, and configure system settings.</p>
 
           <Link to={"/home"}>
-            <button onClick={() => setUserType("admin")} className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors duration-300">Admin Login</button>
+            <button onClick={() => setLoginType("admin")} className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors duration-300">Admin Login</button>
           </Link>
 
         </div>

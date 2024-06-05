@@ -30,6 +30,7 @@ AdminRouter.route("/registerAdmin")
 
 AdminRouter.route("/login")
 .post(
+    upload.none(),
     AdminLogin
 );
 

@@ -78,6 +78,12 @@ const adminSchema = new Schema(
             maxlength: [20, 'Password cannot exceed 20 characters'],
             trim: true,
         },
+        confirmPassword: {
+            type: String,
+            minlength: [8, 'Password must be at least 8 characters long'],
+            maxlength: [20, 'Password cannot exceed 20 characters'],
+            trim: true,
+        },
 
         users: [
             {
