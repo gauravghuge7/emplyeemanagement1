@@ -5,8 +5,9 @@ const adminSchema = new Schema({
 
     // Fields For Registration
 
-    //  FIXME: Snake Casing For Field Name in Table
-    FirstName: {
+    //  FIXME: camel Casing For Field Name in Table
+
+    firstName: {
         type: String,
         trim: true,
         required: [true, 'First name is required'],
@@ -14,7 +15,7 @@ const adminSchema = new Schema({
         maxlength: [50, 'First name cannot exceed 50 characters'],
     },
 
-    LastName: {
+    lastName: {
         type: String,
         trim: true,
         required: [true, 'Last name is required'],
@@ -22,17 +23,10 @@ const adminSchema = new Schema({
         maxlength: [50, 'Last name cannot exceed 50 characters'],
     },
 
-    // FIXME: There Is a Automatic Field For Id. So AdminId is Not required 
-    // unless it is EmployeementId
-    AdminId: {
-        type: String,
-        trim: true,
-        required: [true, 'Last name is required'],
-        minlength: [3, 'Last name must be at least 3 characters long'],
-        maxlength: [50, 'Last name cannot exceed 50 characters'],
-    },
 
-    Email: {
+    // Admin id is the same as the database _id 
+    
+    email: {
         type: String,
         trim: true,
         required: [true, 'Email address is required'],
@@ -56,12 +50,11 @@ const adminSchema = new Schema({
     Avatar: {
         type: String,
         trim: true,
-        // required: [true, 'Avatar URL is required'],
+       
     },
 
     PhoneNumber: {
         type: Number,
-        required: [true, 'Phone number is required'],
         validate: {
             validator: function(value) {
                 return /^\d{10}$/.test(value);
@@ -72,10 +65,10 @@ const adminSchema = new Schema({
 
     // Internal Fields
 
-    Role: {
+    role: {
         type: String,
         trim: true,
-        default: 'user',
+        default: 'admin',
         enum: ['admin', 'user', 'moderator'],
         required: [true, 'User role is required'],
     },
@@ -85,20 +78,7 @@ const adminSchema = new Schema({
         ref: 'User',
     }, ],
 
-    // FIXME: Total Number Of Employees Should Be A Number
-    totalEmployee: {
-        type: Schema.Types.ObjectId,
-        ref: 'User'
-    },
-
-    // FIXME: Can A Admin Only Handle One Employee At Any Specific Time
-    // TODO: Leave Application Should Be handled in another Model As it Many to Many Mapping
-    // Admin Can Aprrove Multiple Leave Application
-    // Employee Can Have Maultiple Leave Application
-    LeaveEmployee: {
-        type: Schema.Types.ObjectId,
-        ref: 'User'
-    },
+    
 
     isActive: {
         type: Boolean,
@@ -109,6 +89,7 @@ const adminSchema = new Schema({
         type: Date,
         default: Date.now,
     }
+
 }, { timestamps: true });
 
 

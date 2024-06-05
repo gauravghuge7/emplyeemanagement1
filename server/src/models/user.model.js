@@ -3,30 +3,30 @@ import {Schema, model} from 'mongoose';
 const userSchema = new Schema (
     
     {
-        FirstName:{
+        firstName:{
             type:String,
             required:true,
             minlength: 3 
         },
 
-        LastName:{
+        lastName:{
             type:String,
             required:true
         },
 
-        Email:{
+        email:{
             type:String,
             required:true,
             unique: true, // Ensure email is unique
             match: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/
         },
 
-        Password:{
+        password:{
             type:String,
             required:true
         },
 
-        Avatar:{
+        avatar:{
 
             Email:String,
             public_url:String
@@ -38,7 +38,7 @@ const userSchema = new Schema (
             required:true
         },
 
-        Role:{
+        role:{
             type:String,
             required:true
         },
@@ -48,12 +48,13 @@ const userSchema = new Schema (
             default:Date.now,
             required:true
         },
-        PhoneNumber:{
+
+        phoneNumber:{
             type:Number,
             required:true
         },
 
-        ClockingHours: {
+        clockingHours: {
             type:Number,
             required:true
         },
@@ -68,13 +69,14 @@ const userSchema = new Schema (
             type: Schema.Types.ObjectId,
             ref: 'Session'
           }],
-        hasClockedToday: {
+        
+          hasClockedToday: {
             type: Boolean,
             default: false,
             required:true
         },
 
-        LeaveApplication: {
+        leaveApplication: {
 
 
 
@@ -96,25 +98,29 @@ const userSchema = new Schema (
 
 
 
-        Attendance:{
-            Date:{
+        attendance:{
+            date:{
                 type:Date,
                 required:true
             },
-            Status:{
+
+            status:{
                 type:String,
                 enum:["Absent","Leave","Present","Late"],
                 required:true
             },
-            TotalHours:{
+
+            totalHours:{
                 type:Date,
                 required:true
             },
-            Remarks:{
+
+            remarks:{
                 type:String,
                 required:true
             },
-            Reason:{
+
+            reason:{
                 type:String,
                 required:true
             }
