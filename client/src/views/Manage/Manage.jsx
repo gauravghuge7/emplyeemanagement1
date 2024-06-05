@@ -1,5 +1,6 @@
 import { toast, Toaster } from "sonner"
 import { useRef, useState } from "react"
+import Register from "../Register/Register";
 
 
 let data = [{
@@ -22,6 +23,10 @@ function Manage() {
   const [email, setEmail] = useState("")
 
 
+
+  
+
+
   const handleSubmit = (e) => {
     e.preventDefault();
     toast.success('Add Employee')
@@ -42,22 +47,8 @@ function Manage() {
       </button>
       <dialog ref={dialogRef} autoFocus className="transition-all rounded-lg p-3  w-96 lg:w-[40vw]">
         <button className="absolute right-2 top-1 hover:font-bold" onClick={() => dialogRef.current.close()}>close</button>
-        <form onSubmit={handleSubmit} className="grid grid-cols-5 mt-10 gap-6">
-
-          <div className="flex font-bold flex-col col-span-1 justify-between">
-
-            <label htmlFor="employeeName">Name</label>
-            <label htmlFor="employeeId">Id</label>
-            <label htmlFor="employeeEmail">Email</label>
-          </div>
-          <div htmlFor="" className="flex flex-col col-span-4 gap-5">
-            <input value={name} required onChange={(e) => setName(e.target.value)} type="text" className=" border-gray-500 border rounded-lg p-2" name="" id="employeeName" />
-            <input value={id} required onChange={(e) => setId(e.target.value)} type="text" className=" border-gray-500 border rounded-lg p-2" name="employeeId" id="employeeId" />
-            <input value={email} required onChange={(e) => setEmail(e.target.value)} type="email" className=" border-gray-500 border rounded-lg p-2" name="employeeEmail" id="employeeEmail" />
-          </div>
-
-          <button className="bg-blue-600 hover:scale-[101%]  hover:bg-blue-700 hover:font-bold p-3 rounded-xl mt-5 col-span-6">Add</button>
-        </form>
+        
+        <Register />
 
       </dialog>
       <br />
@@ -86,14 +77,15 @@ function ShowTable() {
 
 
 function ShowTabeData({ DataObject }) {
+  
   return <div>
     {DataObject.map((data, i) => {
       return <div className="grid items-center grid-cols-5 py-5 -mx-3 px-3 border border-r-0 border-l-0 border-b-0  my-0" key={i}>
         <h2>{data.name}</h2>
         <h2>{data.id}</h2>
-        <h2>{data.id}</h2>
+        <h2>{data.email}</h2>
         <h2>{data.status}</h2>
-        <button className="hover:bg-red-600 w-24 p-2  rounded-3xl">delete</button>
+        <button  className="hover:bg-red-600 w-24 p-2  rounded-3xl">delete</button>
       </div>
 
     })}

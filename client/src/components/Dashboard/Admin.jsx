@@ -146,7 +146,7 @@ function Admin() {
               </div>
               <div className="p-4 text-right">
                 <p className="block antialiased font-sans text-lg leading-normal font-semibold text-blue-gray-600">
-                  Today Leave Employees
+                  Today Leave 
                 </p>
                 <h4 className="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">
                   5
@@ -154,7 +154,7 @@ function Admin() {
               </div>
               <div className="border-t border-blue-gray-50 p-4">
                 <p className="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
-                  <strong className="text-green-500"> </strong> &nbsp Urgent leaving application
+                  <strong className="text-green-500"> </strong> &nbsp; Urgent leaving applications
                 </p>
               </div>
             </div>
@@ -169,15 +169,15 @@ function Admin() {
             {activeBox === "notifications" && <Notifications/>}
             {activeBox === "report" && <Report/>}
 
-            {activeBox === "" && <div></div>}
+            {activeBox === "" && <Manage />}
           
           </div>
           
         </div>
 
-        <div className="text-blue-gray-600">
-          <Footer />
-        </div>
+        
+        <Footer />
+        
 
       </div>
     </div>

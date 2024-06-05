@@ -1,53 +1,105 @@
 import React, { useState } from 'react';
 
 function EmpProfile() {
-  const [name, setName] = useState("");
-  const [bio, setBio] = useState("");
-  const [password, setPassword] = useState("");
+  const [employee, setEmployee] = useState({
+    name: 'Sharad Bhadait',
+    phone: '123-456-7890',
+    email: 'sharad.bhadait@asia.com',
+    bio: 'A dedicated and hardworking employee.',
+    avatar: null,
+  });
+
+  const [isEditing, setIsEditing] = useState(false);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setEmployee({ ...employee, [name]: value });
+  };
+
+  const toggleEditMode = () => {
+    setIsEditing(!isEditing);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle profile update logic
-    console.log("Profile updated");
+    // Here you can add functionality to save the updated employee details
+    toggleEditMode();
+  };
+
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setEmployee({ ...employee, avatar: reader.result });
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   return (
     <div>
-      <h2 className="text-2xl font-bold mb-4">Profile</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="mb-4">
-          <label className="block text-gray-700">Name:</label>
-          <input 
-            type="text" 
-            value={name} 
-            onChange={(e) => setName(e.target.value)} 
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-700">Bio:</label>
-          <textarea 
-            value={bio} 
-            onChange={(e) => setBio(e.target.value)} 
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          ></textarea>
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-700">Password:</label>
-          <input 
-            type="password" 
-            value={password} 
-            onChange={(e) => setPassword(e.target.value)} 
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-        </div>
-        <button 
-          type="submit" 
-          className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-        >
-          Update Profile
-        </button>
-      </form>
+      <div className="my-20  mx-4 rounded-lg flex relative items-center justify-center    p-6 sm:p-8 lg:p-10 shadow-md bg-white">
+
+        <br className="my-8" />
+        {isEditing ? (
+
+          <form onSubmit={handleSubmit} className="flex  flex-col gap-6 items-start employee-form">
+            <div className="flex  flex-col lg:flex-row items-center lg:items-start  gap-6 lg:gap-10">
+              <div className="flex-shrink-0">
+                <label >
+                  Avatar:
+                  <input type="file" className='mx-2' accept="image/*" onChange={handleImageChange} />
+                  {employee.avatar && <img  width={'120'} height={'120'} src={employee.avatar} alt="Avatar" className="" />}
+                </label>
+              </div>
+            </div>
+            <label className='flex items-center gap-2'>
+              Name:
+              <input readOnly={true} type="text" name="name" className='p-2 outline-none border rounded-lg' value={employee.name} onChange={handleInputChange} />
+            </label>
+            <label className='flex items-center gap-2'>
+              Phone:
+              <input type="text" name="phone" className='p-2 rounded-lg outline-none border' value={employee.phone} onChange={handleInputChange} />
+            </label>
+            <label className='flex items-center gap-2'>
+              Email:
+              <input type="email" name="email" className='p-2 rounded-lg outline-none border' value={employee.email} onChange={handleInputChange} />
+            </label>
+            <label className='flex items-start  gap-2'>
+              Bio:
+              <textarea name="bio" cols={'60'} rows={'4'} value={employee.bio} className='p-2  border outline-none rounded-lg' onChange={handleInputChange} />
+            </label>
+            <button className='bg-blue-600 p-2 rounded-xl w-24' type="submit">Save</button>
+            <button type="button" onClick={toggleEditMode} className='bg-black p-2 w-24 rounded-lg text-white' >Cancel</button>
+          </form>
+        ) : (
+          <div className="employee-details   text-lg flex flex-col justify-center items-center space-y-6">
+
+            
+
+            <div className='grid grid-cols-1 lg:grid-cols-2  '>
+              <div>
+                  <img
+                    className="rounded-full lg:translate-x-10 lg:h-32 lg:w-32 h-28 w-28 border-2"
+                    src={employee.avatar} width={'120'} alt="Profile Image" />
+
+              </div>
+                <div className=' -translate-x-0 lg:-translate-x-10'><p className='text-4xl'> {employee.name}</p>
+                  <div className='flex gap-2 my-6'>
+                    <p className='border border-violet-600 p-1 px-4  rounded-full'>  {employee.phone}</p>
+                    <p className='border border-violet-500 p-1 px-4 rounded-full'> {employee.email}</p>
+                  </div>
+
+                  <p> {employee.bio}</p></div>
+            </div>
+            <button onClick={toggleEditMode} className='absolute top-0 right-0 flex gap-2 items-center  p-2 rounded-xl w-24'>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pencil"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" /><path d="m15 5 4 4" /></svg>Edit
+            </button>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
