@@ -18,6 +18,7 @@ const adminSchema = new Schema(
             minlength: [3, 'Last name must be at least 3 characters long'],
             maxlength: [50, 'Last name cannot exceed 50 characters'],
         },
+        
         AdminId: {
             type: String,
             trim: true,
