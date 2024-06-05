@@ -1,5 +1,7 @@
 import  { useState } from 'react'
 import { Link, Navigate } from 'react-router-dom';
+import axios from "axios";
+
 
 function AdmLogin({setUserType}) {
 
@@ -8,13 +10,40 @@ function AdmLogin({setUserType}) {
     const [adminPassword, setAdminPassword] = useState("");
 
 
-    const submitAdmin = (e) => {
-        e.preventDefault();
-        console.log("Admin Email:", adminEmail);
-        console.log("Admin Password:", adminPassword);
-        setUserType('admin');
-        Navigate('/admin-dashboard');
-      };
+    const submitAdmin = async(e) => {
+      e.preventDefault();
+      console.log("Admin Email:", adminEmail);
+      console.log("Admin Password:", adminPassword);
+
+
+
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+
+      const body = {
+        Email: adminEmail,
+        Password: adminPassword,
+        adminId: adminId
+      }
+
+      const response = await axios.post('http://localhost:8000/admin/login', body, config);
+
+      console.log(response);
+
+      const data = response.data;
+
+      console.log(data);
+
+      
+
+
+
+      setUserType('admin');
+      Navigate('/admin-dashboard');
+    };
 
 
 
@@ -71,7 +100,7 @@ function AdmLogin({setUserType}) {
         </div>
         </div>
         </div>
-        </div>
+      
     )
 }
 

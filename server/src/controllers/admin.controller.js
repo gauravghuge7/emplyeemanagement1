@@ -20,13 +20,15 @@ const cookieOptions = {
 const registerAdmin = asyncHandler(async (req, res) => {
 
 
-    const {FirstName, LastName, Email, PhoneNumber, Role, Password} = req.body;
-    //        console.log(req.body)
-        console.log(FirstName, LastName, Email, PhoneNumber, Role, Password)
+    const {FirstName, LastName, Email, PhoneNumber, Role, Password, confirmPassword} = req.body;
 
+        console.log(req.body)
+
+       
     try{
+
         // validations
-        if(!FirstName || !LastName || !Email || !PhoneNumber || !Password){
+        if(!FirstName || !LastName || !Email || !PhoneNumber || !Password || !confirmPassword){
 
             throw new ApiError("Missing required fields", 400);
         }
@@ -35,6 +37,8 @@ const registerAdmin = asyncHandler(async (req, res) => {
         if(existingUser){
             throw new ApiError("User already exists", 400);
         }
+
+        console.log(existingUser);
 
         const encryptedPassword = await bcrypt.hash(Password, 10);
 
@@ -48,22 +52,15 @@ const registerAdmin = asyncHandler(async (req, res) => {
             Email,
             PhoneNumber,
             Password: encryptedPassword,
+            confirmPassword: encryptedPassword,
             Role
 
         });
 
         console.log(user);
 
-        await user.save();
-
-//        if(!user) {
-//            throw new ApiError("problem in registering user", 404);
-//        }
-
-        console.log(res)
-        
+     
         return res
-        
         .status(200)
         .json(
             new ApiResponse(200, "User created successfully", user),
@@ -79,36 +76,48 @@ const registerAdmin = asyncHandler(async (req, res) => {
 })
 
 
-const updatePassword = asyncHandler(async (req, res) => { 
-    
-})
-
 
 const AdminLogin = asyncHandler(async (req, res) => {
 
-    const {Email, Password, adminId} = req.body;
+    const {Email, Password} = req.body;
 
-    if(!Email || !Password || !adminId){
+    console.log(req.body);
+    
+
+    if(!Email || !Password){
+
         throw new ApiError("Missing required fields", 400);
     }
 
-    if(email.indexOf("@")===-1){
-        throw new ApiError("Invalid email", 400);
-    }
 
     try{
 
         const user = await AdminModel.findOne({Email});
 
         if(user){
-            throw new ApiError("User is already registered", 404);
+            return res
+            .status(400)
+            .json(new ApiError("User is already registered", 404));
+        
         }
 
-        const comparePassword = await bcrypt.compare(Password, user.Password);
-        
-        if(!comparePassword){
+        console.log("user after find", user);
+
+        console.log("user password", user.password);
+
+        if(!user.Password){
+            throw new ApiError("User is not registered", 404);
+        }
+
+        if(user.password !== Password){
             throw new ApiError("Invalid password for this user", 401);
         }
+
+        // const comparePassword = await bcrypt.compare(Password, user.Password);
+        
+        // if(!comparePassword){
+        //     throw new ApiError("Invalid password for this user", 401);
+        // }
 
         const adminToken = await generateToken(user);
 
@@ -123,12 +132,17 @@ const AdminLogin = asyncHandler(async (req, res) => {
     }
 
     catch(err){
+        console.log(err);
         throw new ApiError(401, err.message);
     }   
 
 });
 
 
+
+const updatePassword = asyncHandler(async (req, res) => { 
+    
+})
 
 const AdminLogout = asyncHandler(async (req, res) => {
 
@@ -240,6 +254,7 @@ const registerUser = asyncHandler(async(req,res)=>{
     }
 
 })
+
 
 const deleteUser = asyncHandler(async (req, res) => {
 

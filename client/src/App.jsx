@@ -52,7 +52,9 @@ const RoutesWrapper = ({ userType, setUserType, setLoginType, loginType }) => {
 
 
         <Route path="/emp-profile" element={<AdminProfile />} />
-        <Route path="/sign-up" element={<SignUp />} />
+        <Route path="/admin-profile" element={<AdminProfile />} />
+        
+        <Route path="/sign-up" element={<SignUp setLoginType={setLoginType} />} />
 
         
         <Route path="/form" element={<AdminForm />} />
