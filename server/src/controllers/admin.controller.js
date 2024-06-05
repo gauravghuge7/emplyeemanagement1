@@ -241,6 +241,7 @@ const registerUser = asyncHandler(async(req,res)=>{
 
 })
 
+
 const deleteUser = asyncHandler(async (req, res) => {
 
     const {email} = req.body;  
