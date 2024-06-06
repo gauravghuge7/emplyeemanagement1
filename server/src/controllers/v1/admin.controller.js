@@ -5,289 +5,276 @@ import asyncHandler from "../../utils/asyncHandler.js";
 import ApiError from "../../utils/ApiError.js";
 import ApiResponse from "../../utils/ApiResponse.js";
 import { SALT_ROUND, USER_ROLE } from "../../constant.js";
+import { compareRole } from "../../utils/roleHelper.js";
+import {
+  checkArgsIfExists,
+  checkIfStringArgsIsEmpty,
+} from "../../utils/bodyHelper.js";
 
 const cookieOptions = {
-    maxAge: 1000 * 60 * 60 * 24,
-    httpOnly: true,
-    secure: true,
-    sameSite: "lax",
-    domain: "localhost",
+  maxAge: 1000 * 60 * 60 * 24,
+  httpOnly: true,
+  secure: true,
+  sameSite: "lax",
+  domain: "localhost",
 };
 
-const registerAdmin = asyncHandler(async(req, res) => {
-    const { FirstName, LastName, Email, PhoneNumber, Role, Password } = req.body;
-    //        console.log(req.body)
-    console.log(FirstName, LastName, Email, PhoneNumber, Role, Password);
-
-    try {
-        // validations
-        if (!FirstName || !LastName || !Email || !PhoneNumber || !Password) {
-            throw new ApiError("Missing required fields", 400);
-        }
-
-        const existingUser = await AdminModel.findOne({ Email });
-        if (existingUser) {
-            // FIXME: Use Conflict Status Code  409
-            throw new ApiError("User already exists", 400);
-        }
-        // FIXME: Use Constant Salt Round Number (Secret)
-        const encryptedPassword = await bcrypt.hash(Password, 10);
-
-        // remain the avatar uploading work
-
-        const user = new AdminModel({
-            FirstName,
-            LastName,
-            Email,
-            PhoneNumber,
-            Password: encryptedPassword,
-            Role,
-        });
-        //TODO: Implement Logger Module with File Logger --> Winston and Daily file
-        console.log(user);
-
-        await user.save();
-
-        //        if(!user) {
-        //            throw new ApiError("problem in registering user", 404);
-        //        }
-
-        console.log(res);
-
-        return res
-            .status(200)
-            .json(new ApiResponse(200, "User created successfully", user));
-    } catch (err) {
-        // FIXME: Catching Local Errors Not Using asyncHandler
-        const { Email, Role, Password } = req.body;
-        return res.status(400).json({ message: err.message });
+/**
+ * Description: Registers A Admin
+ *
+ * body:
+ *  firstName:
+ *  lastName:
+ *  email:
+ *  password:
+ *  confirmPassword:
+ *
+ */
+export const registerAdmin = asyncHandler(async (req, res, next) => {
+  try {
+    // Get Data From Req Body
+    const { firstName, lastName, email, password, confirmPassword } = req.body;
+    // Vailidate Data
+    checkArgsIfExists(firstName, lastName, email, password, confirmPassword);
+    checkIfStringArgsIsEmpty(
+      firstName,
+      lastName,
+      email,
+      password,
+      confirmPassword
+    );
+    if (confirmPassword !== password) {
+      throw new ApiError(400, "Password Doesn't Match");
     }
+    // Check For Conflict
+    const existingUser = await AdminModel.findOne({ email });
+    if (existingUser) {
+      throw new ApiError("User already exists", 409);
+    }
+    // EncryptPassword
+    const encryptedPassword = await bcrypt.hash(password, SALT_ROUND);
+    // Admin Model Instance
+    const user = new AdminModel({
+      firstName,
+      lastName,
+      email,
+      password: encryptedPassword,
+      Role: USER_ROLE.Admin,
+    });
+
+    //TODO: Implement Logger Module with File Logger --> Winston and Daily file
+    console.log(user);
+
+    // Save The Instance to Db
+    await user.save();
+    // Return Response
+    return res
+      .status(200)
+      .json(new ApiResponse(200, "User created successfully", user));
+  } catch (err) {
+    // Handle Error At Gobal Level
+    next(err);
+  }
 });
 
 /**
- * Description: Change Password For the Admin User.
- * Body:-
- *  1.Email
- *  2.Role
- *  3.CurrentPassword
- *  4.NewPassword
- *  5.ConfirmPassword
+ * Description: Sign in the User
+ * Body:
+ *  email:
+ *  password:
+ *  confirmPassword:
  */
-const updatePassword = asyncHandler(async(req, res) => {
-    try {
-        const { Email, Role, CurrentPassword, NewPassword, ConfirmPassword } =
-        req.body;
-        if (!Email ||
-            !Role ||
-            !CurrentPassword ||
-            !NewPassword ||
-            !ConfirmPassword
-        ) {
-            throw new ApiError("Missing required fields", 400);
-        }
-        if (Role !== USER_ROLE.Admin) {
-            throw new ApiError("UnAuthorized Action", 401);
-        }
-        if (NewPassword !== ConfirmPassword) {
-            throw new ApiError("Confirm Password is Not Same as New Password", 400);
-        }
-        if (NewPassword !== CurrentPassword) {
-            throw new ApiError("New Password Is Same as Old Password", 400);
-        }
-        const existingUser = await AdminModel.findOne({ Email });
-        // Create A Hash For Password
-        const encryptedPassword = await bcrypt.hash(Password, SALT_ROUND);
-
-        // Update Existing Model
-        existingUser.Password = encryptedPassword;
-
-        await existingUser.save();
-
-        return res.json(new ApiResponse(200, "Password Updated", existingUser));
-    } catch (err) {}
-});
-
-const AdminLogin = asyncHandler(async(req, res) => {
-    const { Email, Password, adminId } = req.body;
-
-    if (!Email || !Password || !adminId) {
-        throw new ApiError("Missing required fields", 400);
-    }
-
-    if (email.indexOf("@") === -1) {
-        throw new ApiError("Invalid email", 400);
-    }
-
-    try {
-        const user = await AdminModel.findOne({ Email });
-
-        if (user) {
-            throw new ApiError("User is already registered", 404);
-        }
-
-        const comparePassword = await bcrypt.compare(Password, user.Password);
-
-        if (!comparePassword) {
-            throw new ApiError("Invalid password for this user", 401);
-        }
-
-        const adminToken = await generateToken(user);
-
-        return res
-            .status(200)
-            .cookie("adminToken", adminToken, cookieOptions)
-            .json(new ApiResponse(200, "User logged in successfully", user));
-    } catch (err) {
-        throw new ApiError(401, err.message);
-    }
-});
-
-const AdminLogout = asyncHandler(async(req, res) => {
-    const { adminToken } = req.cookies;
-
-    try {
-        res.clearCookie("adminToken", adminToken, cookieOptions);
-        return res
-            .status(200)
-            .json(new ApiResponse(200, "User logged out successfully"));
-    } catch (error) {
-        console.log(error);
-        return res.status(400).send(error.message);
-    }
-});
-
-/**
- * Description: Change Password For the Admin User.
- * Body:-
- */
-const AdminUpdate = asyncHandler(async(req, res) => {
-    // TODO: Complete This Code
-});
-
-const AdminDelete = asyncHandler(async(req, res) => {
-    const { adminToken } = req.cookies;
+export const loginAdmin = asyncHandler(async (req, res, next) => {
+  try {
+    // Data from Req Body
     const { email, password } = req.body;
 
-    try {
-        const user = await AdminModel.findOne({ adminToken, email });
+    // Validate data
+    checkArgsIfExists(email, password);
+    checkIfStringArgsIsEmpty(email, password);
 
-        if (!user) {
-            throw new ApiError("User not registered", 404);
-        }
-
-        const comparePassword = await bcrypt.compare(password, user.Password);
-
-        if (!comparePassword) {
-            throw new ApiError("Invalid password for this user", 401);
-        }
-
-        await user.remove();
-        return res
-            .status(200)
-            .json(new ApiResponse(200, "User deleted successfully"));
-    } catch (error) {
-        console.log(error);
-        return res.status(400).send(error.message);
-    }
-});
-
-const registerUser = asyncHandler(async(req, res) => {
-    const { FirstName, LastName, Email, Password, PhoneNumber } = req.body;
-
-    if (!FirstName || !LastName || !Email || !Password || !PhoneNumber) {
-        throw new ApiError("Missing required fields", 400);
+    if (email.indexOf("@") === -1) {
+      throw new ApiError(400, "Invalid email");
     }
 
-    if (!email.indexOf("@") === -1) {
-        throw new ApiError("Invalid email", 400);
+    // Find User
+    const user = await AdminModel.findOne({ email });
+
+    // Handle If no user was
+    if (!user) {
+      throw new ApiError(401, "Email/Password Wrong");
     }
 
-    try {
-        const exists = await UserModel.findOne({ email });
+    // compare password
+    const comparePassword = await bcrypt.compare(password, user.password);
 
-        if (exists) {
-            return res.status(400).send("User already exist");
-        }
-
-        const encryptedPassword = await bcrypt.hash(Password, 10);
-
-        const user = new UserModel({
-            FirstName,
-            LastName,
-            Email,
-            Password: encryptedPassword,
-            PhoneNumber,
-        });
-
-        await user.save();
-
-        if (!user) {
-            throw new ApiError("problem in registering user", 404);
-        }
-
-        return res
-            .status(200)
-            .json(new ApiResponse(200, "User created successfully", user));
-    } catch (err) {
-        console.log(err);
-        return res.status(400).send(err.message);
+    // Handle Mismatch Password
+    if (!comparePassword) {
+      throw new ApiError(401, "Email/Password Wrong");
     }
+
+    const adminToken = await user.generateLoginToken();
+    return res
+      .status(200)
+      .cookie("adminToken", adminToken, cookieOptions)
+      .json(new ApiResponse(200, "User logged in successfully", user));
+  } catch (err) {
+    next(err);
+  }
 });
 
-const deleteUser = asyncHandler(async(req, res) => {
-    const { email } = req.body;
-    try {
-        const user = await UserModel.findOne({ email });
+/**
+ * Description: Change Password For the Admin User.
+ * Body:-
+ *  currentPassword
+ *  newPassword
+ *  confirmPassword
+ */
+export const updatePassword = asyncHandler(async (req, res, next) => {
+  try {
+    // Data from Req Body
+    const { newPassword, confirmPassword } = req.body;
 
-        if (!user) {
-            throw new ApiError("User not registered", 404);
-        }
+    // Validate data
+    checkArgsIfExists(newPassword, confirmPassword);
+    checkIfStringArgsIsEmpty(newPassword, confirmPassword);
 
-        await user.remove();
-        return res
-            .status(200)
-            .json(new ApiResponse(200, "User deleted successfully"));
-    } catch (error) {}
+    if (!compareRole(req.user.role, USER_ROLE.Admin)) {
+      throw new ApiError(401, "UnAuthorized Action");
+    }
+
+    if (newPassword !== confirmPassword) {
+      throw new ApiError(400, "Confirm Password is Not Same as New Password");
+    }
+
+    // Find Admin User
+    const user = await AdminModel.findOne({ email: req.user.email });
+
+    // Handle user not Found
+    if (!user) {
+      throw new ApiError(404, "User Not Found");
+    }
+
+    // Create A Hash For Password
+    const encryptedPassword = await bcrypt.hash(newPassword, SALT_ROUND);
+
+    // Update Existing Model
+    user.password = encryptedPassword;
+
+    await user.save();
+
+    return res.json(new ApiResponse(200, "Password Updated", user));
+  } catch (err) {
+    next(err);
+  }
 });
 
-const getUsers = asyncHandler(async(req, res) => {
-    try {
-        const users = await UserModel.find({});
+/**
+ * Description : Log's out Admin
+ */
+export const logoutAdmin = asyncHandler(async (req, res) => {
+  const { adminToken } = req.cookies;
 
-        return res
-            .status(200)
-            .json(new ApiResponse(200, "User deleted successfully", users));
-    } catch (error) {}
+  try {
+    res.clearCookie("adminToken", adminToken, cookieOptions);
+    return res
+      .status(200)
+      .json(new ApiResponse(200, "User logged out successfully"));
+  } catch (error) {
+    console.log(error);
+    return res.status(400).send(error.message);
+  }
 });
 
-const getAdminDashboard = asyncHandler(async(req, res) => {
-    // TODO: Complete This Code
-
-    const { AdminId } = req.cookies;
-
-    // Array of Employees
-    const employees = await UserModel.find({ PhoneNumber: AdminId });
-
-    return res.json(
-        new ApiResponse(200, "", employees)
-    )
-
+/**
+ * Description: Change Password For the Admin User.
+ * Body:-
+ */
+const AdminUpdate = asyncHandler(async (req, res) => {
+  // TODO: Complete This Code
 });
 
-const getAdminProfile = asyncHandler(async(req, res) => {
-    // TODO: Complete This Code
+const AdminDelete = asyncHandler(async (req, res) => {
+  // TODO:
 });
 
-export {
-    // admin routes
-    registerAdmin,
-    AdminLogin,
-    AdminLogout,
-    AdminUpdate,
-    AdminDelete,
+const getAdminDashboard = asyncHandler(async (req, res) => {
+  // TODO: Complete This Code
+});
 
-    // user routes
-    getUsers,
-    registerUser,
-    deleteUser,
-}
+const getAdminProfile = asyncHandler(async (req, res) => {
+  // TODO: Complete This Code
+});
+
+/**
+ * 
+ * const registerUser = asyncHandler(async (req, res) => {
+  const { FirstName, LastName, Email, Password, PhoneNumber } = req.body;
+
+  if (!FirstName || !LastName || !Email || !Password || !PhoneNumber) {
+    throw new ApiError("Missing required fields", 400);
+  }
+
+  if (!email.indexOf("@") === -1) {
+    throw new ApiError("Invalid email", 400);
+  }
+
+  try {
+    const exists = await UserModel.findOne({ email });
+
+    if (exists) {
+      return res.status(400).send("User already exist");
+    }
+
+    const encryptedPassword = await bcrypt.hash(Password, 10);
+
+    const user = new UserModel({
+      FirstName,
+      LastName,
+      Email,
+      Password: encryptedPassword,
+      PhoneNumber,
+    });
+
+    await user.save();
+
+    if (!user) {
+      throw new ApiError("problem in registering user", 404);
+    }
+
+    return res
+      .status(200)
+      .json(new ApiResponse(200, "User created successfully", user));
+  } catch (err) {
+    console.log(err);
+    return res.status(400).send(err.message);
+  }
+});
+
+const deleteUser = asyncHandler(async (req, res) => {
+  const { email } = req.body;
+  try {
+    const user = await UserModel.findOne({ email });
+
+    if (!user) {
+      throw new ApiError("User not registered", 404);
+    }
+
+    await user.remove();
+    return res
+      .status(200)
+      .json(new ApiResponse(200, "User deleted successfully"));
+  } catch (error) {}
+});
+
+const getUsers = asyncHandler(async (req, res) => {
+  try {
+    const users = await UserModel.find({});
+
+    return res
+      .status(200)
+      .json(new ApiResponse(200, "User deleted successfully", users));
+  } catch (error) {}
+});
+
+ */

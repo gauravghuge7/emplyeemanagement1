@@ -12,11 +12,17 @@ app.use(express.urlencoded({ extended: true }));
 // enable cross origin requests
 app.use(cors());
 
-// for recieving cookies
+// for receiving cookies
 app.use(cookieParser());
 
 app.use("/api", ApiRouter);
 
-// TODO: Create Centralized Error Handler
+app.use((err, req, res, next) => {
+  res.status(err.status || 400).json({
+    error: {
+      message: err.message,
+    },
+  });
+});
 
 export { app };
