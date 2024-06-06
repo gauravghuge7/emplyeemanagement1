@@ -1,14 +1,16 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
 
 function Employee() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate()
 
   const submit = (e) => {
     e.preventDefault();
     console.log("Email:", email);
     console.log("Password:", password);
+    navigate("/home")
     
   };
 

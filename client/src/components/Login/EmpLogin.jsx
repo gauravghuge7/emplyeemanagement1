@@ -16,9 +16,10 @@ function EmpLogin({setUserType}) {
     e.preventDefault();
     console.log("Employee Email:", employeeEmail);
     console.log("Employee Password:", employeePassword);
+    console.log("Employee Id", employeeId)
     setUserType('employee');
     navigate('/emp-dashboard');
-    // window.location.replace("http://localhost:5173/emp-dashboard")
+    
     
   };
 

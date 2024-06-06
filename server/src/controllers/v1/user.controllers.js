@@ -35,7 +35,9 @@ const loginUser = asyncHandler(async(req, res) => {
     }
 });
 
-const logoutUser = asyncHandler(async(req, res) => {});
+const logoutUser = asyncHandler(async(req, res) => {
+    
+});
 
 const updateAvatar = asyncHandler(async(req, res) => {
     const { Email } = req.cookies;

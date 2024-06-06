@@ -57,7 +57,7 @@ function AdmLogin({setUserType}) {
           <div className="w-full max-w-sm p-6 bg-white rounded-lg shadow-2xl border border-gray-300 ">
 
           <h2 className="text-2xl font-bold text-center mb-6">Admin Login</h2>
-          <form onSubmit={submitAdmin}>
+          <form onSubmit={submitAdmin} method='POST'>
             <div className="mb-4">
               <label className="block text-gray-700">Email:</label>
               <input

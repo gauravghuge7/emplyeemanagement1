@@ -25,12 +25,12 @@ function Landing({ setLoginType }) {
 
   return (
     <div className="min-h-screen   mx-auto   bg-gradient-to-r from-blue-400 to-purple-400">
-      <div className='mb-32 h-screen relative bg-white pt-48 px-2    mx-auto  '>
+      <div className='mb-32 h-screen relative bg-white pt-48 px-2    mx-auto bg-gradient-to-r from-blue-400 to-purple-400  '>
         {/* <h1 className="lg:text-5xl text-4xl  mb-24 text-white text-center font-semibold">Welcome to Employee Management System</h1> */}
         <div className="hero-content flex flex-col items-center text-center">
           <h1 className='text-5xl font-bold   font-playfair'>Streamline Your Workforce Management</h1>
           <p className='text-2xl my-8 w-96'>Effortlessly manage your employees with our all-in-one platform.</p>
-          <Link to="/" className=' bg-gradient-to-br p-[3px] mt-11 z-10 border-none from-violet-500 to-pink-500 rounded-full'><button className='w-36 bg-black  text-white p-3 rounded-full'>Get Started</button></Link>
+          <Link to="/home" className=' bg-gradient-to-br p-[3px] mt-11 z-10 border-none from-violet-500 to-pink-500 rounded-full'><button  className='w-36 bg-black  text-white p-3 rounded-full'>Get Started</button></Link>
 
           <div className='w-full flex justify-center mt-10'>        <img src={heroImage} className='absolute bottom-0 '/></div>
         </div>

@@ -36,9 +36,21 @@ function Register() {
       role: "role"
     })
 
-    const response = await axios.post('http://localhost:8000/admin/registerAdmin', body, config);
+     const response = await axios.post('http://localhost:8000/admin/registerAdmin', body, config);
 
     console.log(response);
+    const data = response.data
+    
+    const Id =response.Id
+    
+
+    if (data === true) {
+      alert(`Employee Successfully registered! Please login to continue using Id ${Id}`);
+      setLoginType("employee");
+      navigate("/home")
+
+    }
+    
 
 
   }
@@ -172,6 +184,7 @@ function Register() {
         <div className="flex items-center justify-between mt-8">
           <button
             type="submit"
+            
             className="flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10"
 
           >
