@@ -204,11 +204,11 @@ const AdminDelete = asyncHandler(async (req, res) => {
 
 const registerUser = asyncHandler(async(req,res)=>{
     
-    const {FirstName, LastName, Email, Password, PhoneNumber} = req.body;
+    const {firstName, lastName, email, password, phoneNumber} = req.body;
 
-    if(!FirstName || !LastName || !Email || !Password || !PhoneNumber){
-        throw new ApiError("Missing required fields", 400);
-    }
+   if(!firstName || !lastName || !email || !password || !phoneNumber){
+       throw new ApiError("Missing required fields", 400);
+   }
 
     
     if(!email.indexOf("@")===-1){
@@ -223,15 +223,15 @@ const registerUser = asyncHandler(async(req,res)=>{
             return res.status(400).send("User already exist");
         }
 
-        const encryptedPassword = await bcrypt.hash(Password, 10);
+        const encryptedPassword = await bcrypt.hash(password, 10);
 
 
         const user = new UserModel({
-            FirstName,
-            LastName,
-            Email,
-            Password: encryptedPassword,
-            PhoneNumber
+            firstName,
+            lastName,
+            email,
+            password: encryptedPassword,
+            phoneNumber
         });
 
         await user.save();
