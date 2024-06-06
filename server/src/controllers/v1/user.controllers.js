@@ -1,38 +1,37 @@
 import { UserModel } from "../../models/index.js";
 import asyncHandler from "../../utils/asyncHandler.js";
+
+
 const loginUser = asyncHandler(async(req, res) => {
-    const { email, pass } = req.body;
+
+    const { email, password } = req.body;
     console.log(req.body);
+
+    if (!email || !password) {
+        return res.status(400).json({ message: "Email and password are required" });
+    }
 
     try {
         const user = await UserModel.findOne({ email });
-        if (user) {
-            bcrypt.compare(pass, user.pass, (err, decoded) => {
-                if (decoded) {
-                    const token = jwt.sign({
-                            userID: user._id,
-                            userEmail: email,
-                            userPass: pass,
-                            userAvatar: user.avatar,
-                        },
-                        "token"
-                    );
-                    res.status(200).json({
-                        message: "User Logged In",
-                        token,
-                        name: user.name,
-                        avatar: user.avatar,
-                    });
-                } else {
-                    res.status(400).send("Wrong credentials");
-                }
-            });
-        } else {
-            res.status(400).send("User does not exist");
+        if (!user) {
+            return res.status(400).json({ message: "User not found" });
         }
-    } catch (err) {
-        res.status(400).send("User is not found");
+
+        const comparePassword = await bcrypt.compare(password, user.password);
+        if (!comparePassword) {
+            return res.status(400).json({ message: "Invalid password" });
+        }
+        
+
+        
+    } 
+    
+    catch (error) {
+        
     }
+
+   
+
 });
 
 const logoutUser = asyncHandler(async(req, res) => {
