@@ -21,6 +21,8 @@ const loginUser = asyncHandler(async(req, res) => {
         if (!comparePassword) {
             return res.status(400).json({ message: "Invalid password" });
         }
+
+        
         
 
         
