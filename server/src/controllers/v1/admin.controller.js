@@ -241,14 +241,19 @@ export const registerUser = asyncHandler(async (req, res) => {
 
     await user.save();
 
+    const id = user._id;
+
     if (!user) {
       throw new ApiError("problem in registering user", 404);
     }
 
     return res
       .status(200)
-      .json(new ApiResponse(200, "User created successfully", user));
-  } catch (err) {
+      .json(new ApiResponse(200, "User created successfully", user, id));
+
+  } 
+  
+  catch (err) {
     console.log(err);
     return res.status(400).send(err.message);
   }
