@@ -1,5 +1,14 @@
 import { UserModel } from "../../models/index.js";
 import asyncHandler from "../../utils/asyncHandler.js";
+import ApiResponse from "../../utils/ApiResponse.js";
+
+const cookiesOptions = {
+
+    httpOnly: true,
+    secure: true,
+    maxAge: 1000 * 60 * 60 * 24 * 30,
+
+}
 
 
 const loginUser = asyncHandler(async(req, res) => {
@@ -13,6 +22,7 @@ const loginUser = asyncHandler(async(req, res) => {
 
     try {
         const user = await UserModel.findOne({ email });
+
         if (!user) {
             return res.status(400).json({ message: "User not found" });
         }
@@ -22,7 +32,19 @@ const loginUser = asyncHandler(async(req, res) => {
             return res.status(400).json({ message: "Invalid password" });
         }
 
+
+        const userToken = await generateUserToken(user);
+
         
+
+        return res
+        .status(200)
+        .cookie("userToken", userToken, cookiesOptions)
+        .json(
+            new ApiResponse(200, "User logged in successfully", )
+
+        )
+
         
 
         

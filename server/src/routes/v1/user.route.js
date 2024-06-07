@@ -1,5 +1,7 @@
 import Router from 'express';
-// import { loginUser } from '../../controllers/v1';
+import { loginUser } from '../../controllers/v1/user.controllers.js';
+import {upload} from '../../middlewares/multer.middleware.js';
+
 
 
 const UserRouter = Router();
@@ -7,13 +9,15 @@ const UserRouter = Router();
 
 
 
-// UserRouter.route("/login")
+UserRouter.route("/login")
 
-//     .post (
-//         loginUser
+    .post (
+
+        upload.none(),
+        loginUser
 
 
-//     ) 
+    ) 
 
 
 

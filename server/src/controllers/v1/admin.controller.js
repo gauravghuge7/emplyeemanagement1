@@ -208,19 +208,16 @@ const getAdminProfile = asyncHandler(async (req, res) => {
 });
 
 
-/**
- * 
- * const registerUser = asyncHandler(async (req, res) => {
-  const { FirstName, LastName, Email, Password, PhoneNumber } = req.body;
+export const registerUser = asyncHandler(async (req, res) => {
+  const { firstName, lastName, email, password, phoneNumber } = req.body;
+  console.log(req.body);
 
-  if (!FirstName || !LastName || !Email || !Password || !PhoneNumber) {
+  if(!firstName || !lastName || !email || !password || !phoneNumber) {
     throw new ApiError("Missing required fields", 400);
   }
 
-  if (!email.indexOf("@") === -1) {
-    throw new ApiError("Invalid email", 400);
-  }
-
+  console.log(req.body);
+ 
   try {
     const exists = await UserModel.findOne({ email });
 
@@ -228,14 +225,18 @@ const getAdminProfile = asyncHandler(async (req, res) => {
       return res.status(400).send("User already exist");
     }
 
-    const encryptedPassword = await bcrypt.hash(Password, 10);
+    const encryptedPassword = await bcrypt.hash(password, 10);
 
+    console.log(encryptedPassword);
     const user = new UserModel({
-      FirstName,
-      LastName,
-      Email,
-      Password: encryptedPassword,
-      PhoneNumber,
+      firstName,
+      lastName,
+      email,
+      password: encryptedPassword,
+      phoneNumber,
+      isActive: true
+
+
     });
 
     await user.save();
@@ -252,6 +253,7 @@ const getAdminProfile = asyncHandler(async (req, res) => {
     return res.status(400).send(err.message);
   }
 });
+
 
 const deleteUser = asyncHandler(async (req, res) => {
   const { email } = req.body;
@@ -279,4 +281,4 @@ const getUsers = asyncHandler(async (req, res) => {
   } catch (error) {}
 });
 
- */
+ 
