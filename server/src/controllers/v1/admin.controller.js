@@ -54,7 +54,7 @@ export const registerAdmin = asyncHandler(async (req, res, next) => {
     // EncryptPassword
     const encryptedPassword = await bcrypt.hash(password, SALT_ROUND);
     // Admin Model Instance
-    const user = new AdminModel({
+    const user = await AdminModel.create({
       firstName,
       lastName,
       email,
@@ -102,7 +102,7 @@ export const loginAdmin = asyncHandler(async (req, res, next) => {
 
     // Handle If no user was
     if (!user) {
-      throw new ApiError(401, "Email/Password Wrong");
+      throw new ApiError(401, "Email Wrong");
     }
 
     // compare password
@@ -110,7 +110,7 @@ export const loginAdmin = asyncHandler(async (req, res, next) => {
 
     // Handle Mismatch Password
     if (!comparePassword) {
-      throw new ApiError(401, "Email/Password Wrong");
+      throw new ApiError(401, "Password Wrong");
     }
 
     const adminToken = await user.generateLoginToken();
@@ -130,6 +130,7 @@ export const loginAdmin = asyncHandler(async (req, res, next) => {
  *  newPassword
  *  confirmPassword
  */
+
 export const updatePassword = asyncHandler(async (req, res, next) => {
   try {
     // Data from Req Body
@@ -205,6 +206,7 @@ const getAdminDashboard = asyncHandler(async (req, res) => {
 const getAdminProfile = asyncHandler(async (req, res) => {
   // TODO: Complete This Code
 });
+
 
 /**
  * 

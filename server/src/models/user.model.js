@@ -16,8 +16,8 @@ const userSchema = new Schema (
 
         email:{
             type:String,
-            required:true,
-            unique: true, // Ensure email is unique
+            
+             // Ensure email is unique
             match: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/
         },
 
@@ -28,8 +28,9 @@ const userSchema = new Schema (
 
         avatar:{
 
-            Email:String,
-            public_url:String
+            public_url:String,
+            secure_url:String,
+
         },
 
 
@@ -40,7 +41,8 @@ const userSchema = new Schema (
 
         role:{
             type:String,
-            required:true
+            required:true,
+            default:"user"
         },
         
         createdAt:{

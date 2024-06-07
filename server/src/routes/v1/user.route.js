@@ -1,16 +1,16 @@
-import express from 'express';
-
-const UserRouter = express.Router();
-
+import Router from 'express';
+// import { loginUser } from '../../controllers/v1';
 
 
+const UserRouter = Router();
 
 
 
-// UserRouter.route("/register")
+
+// UserRouter.route("/login")
 
 //     .post (
-//         // upload.single('avatar'),
+//         loginUser
 
 
 //     ) 
@@ -18,9 +18,6 @@ const UserRouter = express.Router();
 
 
 
-// UserRouter.route("/login",)
-//     .post(
 
-//     )
 
 export default UserRouter;
