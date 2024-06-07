@@ -23,11 +23,11 @@ function SignUp({setLoginType}) {
     }
 
     const body = {
-      FirstName: firstName,
-      LastName: lastName,
-      Email: email,
-      PhoneNumber: phoneNumber,
-      Password: password,
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      phoneNumber: phoneNumber,
+      password: password,
       confirmPassword,
       Role: "admin"
     }
@@ -38,7 +38,7 @@ function SignUp({setLoginType}) {
       },
     }
 
-    const response = await axios.post('http://localhost:8000/admin/registerAdmin', body, config);
+    const response = await axios.post('http://localhost:5200/api/v1/admin/registerAdmin', body, config);
 
     console.log(response);
 

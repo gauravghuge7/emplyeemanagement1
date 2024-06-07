@@ -1,16 +1,23 @@
-import { useState } from "react";
-import { Link, Navigate } from "react-router-dom";
+import  { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom';
 import axios from "axios";
 
-function AdmLogin({ setUserType }) {
-  const [adminEmail, setAdminEmail] = useState("");
-  const [adminId, setAdminId] = useState("");
-  const [adminPassword, setAdminPassword] = useState("");
 
-  const submitAdmin = async (e) => {
-    e.preventDefault();
-    console.log("Admin Email:", adminEmail);
-    console.log("Admin Password:", adminPassword);
+function AdmLogin({loginType}) {
+
+    const [adminEmail, setAdminEmail] = useState("");
+    const [adminId, setAdminId] = useState("");
+    const [adminPassword, setAdminPassword] = useState("");
+
+    const navigate = useNavigate();
+
+
+    const submitAdmin = async(e) => {
+      e.preventDefault();
+      console.log("Admin Email:", adminEmail);
+      console.log("Admin Password:", adminPassword);
+
+
 
     const config = {
       headers: {
@@ -18,17 +25,13 @@ function AdmLogin({ setUserType }) {
       },
     };
 
-    const body = {
-      Email: adminEmail,
-      Password: adminPassword,
-      adminId: adminId,
-    };
+      const body = {
+        email: adminEmail,
+        password: adminPassword,
+        adminId: adminId
+      }
 
-    const response = await axios.post(
-      "http://localhost:8000/admin/login",
-      body,
-      config
-    );
+      const response = await axios.post('http://localhost:5200/api/v1/admin/login', body, config);
 
     console.log(response);
 
@@ -36,9 +39,20 @@ function AdmLogin({ setUserType }) {
 
     console.log(data);
 
-    setUserType("admin");
-    Navigate("/admin-dashboard");
-  };
+      
+
+      if(data.success === true){
+
+        alert("Admin Login Successful");
+        
+        navigate('/admin-dashboard');
+      }
+
+      
+    };
+
+
+
 
   return (
     <div>
@@ -62,7 +76,7 @@ function AdmLogin({ setUserType }) {
                 type="text"
                 value={adminId}
                 onChange={(e) => setAdminId(e.target.value)}
-                required
+                
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 hover:ring-blue-700"
               />
             </div>

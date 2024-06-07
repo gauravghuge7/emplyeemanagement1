@@ -54,7 +54,7 @@ export const registerAdmin = asyncHandler(async (req, res, next) => {
     // EncryptPassword
     const encryptedPassword = await bcrypt.hash(password, SALT_ROUND);
     // Admin Model Instance
-    const user = new AdminModel({
+    const user = await AdminModel.create({
       firstName,
       lastName,
       email,
@@ -102,7 +102,7 @@ export const loginAdmin = asyncHandler(async (req, res, next) => {
 
     // Handle If no user was
     if (!user) {
-      throw new ApiError(401, "Email/Password Wrong");
+      throw new ApiError(401, "Email Wrong");
     }
 
     // compare password
@@ -110,7 +110,7 @@ export const loginAdmin = asyncHandler(async (req, res, next) => {
 
     // Handle Mismatch Password
     if (!comparePassword) {
-      throw new ApiError(401, "Email/Password Wrong");
+      throw new ApiError(401, "Password Wrong");
     }
 
     const adminToken = await user.generateLoginToken();
@@ -130,6 +130,7 @@ export const loginAdmin = asyncHandler(async (req, res, next) => {
  *  newPassword
  *  confirmPassword
  */
+
 export const updatePassword = asyncHandler(async (req, res, next) => {
   try {
     // Data from Req Body
@@ -206,19 +207,17 @@ const getAdminProfile = asyncHandler(async (req, res) => {
   // TODO: Complete This Code
 });
 
-/**
- * 
- * const registerUser = asyncHandler(async (req, res) => {
-  const { FirstName, LastName, Email, Password, PhoneNumber } = req.body;
 
-  if (!FirstName || !LastName || !Email || !Password || !PhoneNumber) {
+export const registerUser = asyncHandler(async (req, res) => {
+  const { firstName, lastName, email, password, phoneNumber } = req.body;
+  console.log(req.body);
+
+  if(!firstName || !lastName || !email || !password || !phoneNumber) {
     throw new ApiError("Missing required fields", 400);
   }
 
-  if (!email.indexOf("@") === -1) {
-    throw new ApiError("Invalid email", 400);
-  }
-
+  console.log(req.body);
+ 
   try {
     const exists = await UserModel.findOne({ email });
 
@@ -226,14 +225,18 @@ const getAdminProfile = asyncHandler(async (req, res) => {
       return res.status(400).send("User already exist");
     }
 
-    const encryptedPassword = await bcrypt.hash(Password, 10);
+    const encryptedPassword = await bcrypt.hash(password, 10);
 
+    console.log(encryptedPassword);
     const user = new UserModel({
-      FirstName,
-      LastName,
-      Email,
-      Password: encryptedPassword,
-      PhoneNumber,
+      firstName,
+      lastName,
+      email,
+      password: encryptedPassword,
+      phoneNumber,
+      isActive: true
+
+
     });
 
     await user.save();
@@ -250,6 +253,7 @@ const getAdminProfile = asyncHandler(async (req, res) => {
     return res.status(400).send(err.message);
   }
 });
+
 
 const deleteUser = asyncHandler(async (req, res) => {
   const { email } = req.body;
@@ -277,4 +281,4 @@ const getUsers = asyncHandler(async (req, res) => {
   } catch (error) {}
 });
 
- */
+ 

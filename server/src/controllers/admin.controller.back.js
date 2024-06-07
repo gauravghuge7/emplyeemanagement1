@@ -20,7 +20,7 @@ const cookieOptions = {
 const registerAdmin = asyncHandler(async (req, res) => {
 
 
-    const {FirstName, LastName, Email, PhoneNumber, Role, Password, confirmPassword} = req.body;
+    const {firstName, lastName, email, phoneNumber, role, password, confirmPassword} = req.body;
 
         console.log(req.body)
 
@@ -28,7 +28,7 @@ const registerAdmin = asyncHandler(async (req, res) => {
     try{
 
         // validations
-        if(!FirstName || !LastName || !Email || !PhoneNumber || !Password || !confirmPassword){
+        if(!firstName || !lastName || !email || !phoneNumber || !password || !confirmPassword || !role){
 
             throw new ApiError("Missing required fields", 400);
         }
@@ -79,12 +79,12 @@ const registerAdmin = asyncHandler(async (req, res) => {
 
 const AdminLogin = asyncHandler(async (req, res) => {
 
-    const {Email, Password} = req.body;
+    const {email, password} = req.body;
 
     console.log(req.body);
     
 
-    if(!Email || !Password){
+    if(!email || !password){
 
         throw new ApiError("Missing required fields", 400);
     }
@@ -92,7 +92,7 @@ const AdminLogin = asyncHandler(async (req, res) => {
 
     try{
 
-        const user = await AdminModel.findOne({Email});
+        const user = await AdminModel.findOne({email});
 
         if(user){
             return res
@@ -137,6 +137,7 @@ const AdminLogin = asyncHandler(async (req, res) => {
     }   
 
 });
+
 
 
 
