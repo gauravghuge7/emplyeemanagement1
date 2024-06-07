@@ -27,8 +27,7 @@ const adminSchema = new Schema(
     email: {
       type: String,
       trim: true,
-      required: [true, "Email address is required"],
-      unique: true,
+      // required: [true, "Email address is required"],
       match: [
         /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
         "Please enter a valid email address",

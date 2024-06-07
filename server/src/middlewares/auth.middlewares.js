@@ -5,6 +5,7 @@ import ApiError from "../utils/ApiError.js";
 import { JWT_SECRET } from "../constant.js";
 
 const isLoggedIn = asyncHandler(async (req, res, next) => {
+  
   const adminToken = req.cookies ? req.cookies.adminToken : undefined;
 
   if (!adminToken) {
