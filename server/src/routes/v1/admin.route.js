@@ -1,6 +1,5 @@
 import express from "express";
 import { V1Controllers } from "../../controllers/index.js";
-import { isLoggedIn } from "../../middlewares/auth.middlewares.js";
 import { upload } from "../../middlewares/multer.middleware.js";
 import { registerUser } from "../../controllers/v1/admin.controller.js";
 
@@ -24,10 +23,10 @@ AdminRouter.route("/login").post(
 
 );
 
-AdminRouter.route("/updatePassword").patch(
-  isLoggedIn,
-  V1Controllers.updatePassword
-);
+// AdminRouter.route("/updatePassword").patch(
+//   isLoggedIn,
+//   V1Controllers.updatePassword
+// );
 
 AdminRouter.route("/logout").post(V1Controllers.logoutAdmin);
 

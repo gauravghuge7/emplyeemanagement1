@@ -29,7 +29,7 @@ const userSchema = new Schema (
 
         avatar:{
 
-            public_url:String,
+            public_id:String,
             secure_url:String,
 
         },

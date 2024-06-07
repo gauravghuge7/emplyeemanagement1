@@ -4,23 +4,24 @@ import ApiError from "../utils/ApiError.js";
 
 import { JWT_SECRET } from "../constant.js";
 
-const isLoggedIn = asyncHandler(async (req, res, next) => {
+const isUserLoggedIn = asyncHandler(async (req, res, next) => {
   
-  const adminToken = req.cookies ? req.cookies.adminToken : undefined;
+  const userToken = req.cookies ? req.cookies.userToken : undefined;
 
-  if (!adminToken) {
+  if (!userToken) {
     throw new ApiError(401, "Not logged in");
   }
 
   try {
-    const decoded = jwt.verify(adminToken, JWT_SECRET);
+    const decoded = jwt.verify(userToken, JWT_SECRET);
 
     req.user = decoded;
     next();
+
   } catch (error) {
     console.log(error);
     return res.status(400).send(error.message);
   }
 });
 
-export { isLoggedIn };
+export { isUserLoggedIn };

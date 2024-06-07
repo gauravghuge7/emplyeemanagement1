@@ -1,6 +1,7 @@
 import Router from 'express';
-import { loginUser } from '../../controllers/v1/user.controllers.js';
+import { getUserProfile, loginUser, updateAvatar } from '../../controllers/v1/user.controllers.js';
 import {upload} from '../../middlewares/multer.middleware.js';
+import { isUserLoggedIn } from '../../middlewares/user.auth.middleware.js';
 
 
 
@@ -9,18 +10,31 @@ const UserRouter = Router();
 
 
 
-UserRouter.route("/login")
+UserRouter.route("/login").post (
 
-    .post (
+    upload.none(),
+    loginUser
 
-        upload.none(),
-        loginUser
-
-
-    ) 
+)
 
 
+UserRouter.route("/uploadAvatar").post (
 
+    isUserLoggedIn,
+    upload.single("avatar"),
+    updateAvatar
+
+) 
+
+
+
+
+
+
+UserRouter.route("/getUserProfile").get(
+    isUserLoggedIn,
+    getUserProfile
+)
 
 
 
