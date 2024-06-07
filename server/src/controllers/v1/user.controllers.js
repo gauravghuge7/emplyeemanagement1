@@ -1,6 +1,7 @@
 import { UserModel } from "../../models/index.js";
 import asyncHandler from "../../utils/asyncHandler.js";
 import ApiResponse from "../../utils/ApiResponse.js";
+import bcrypt from "bcrypt";
 
 const cookiesOptions = {
 
@@ -33,7 +34,7 @@ const loginUser = asyncHandler(async(req, res) => {
         }
 
 
-        const userToken = await generateUserToken(user);
+        const userToken = await user.generateUserToken();
 
         
 
@@ -51,16 +52,33 @@ const loginUser = asyncHandler(async(req, res) => {
     } 
     
     catch (error) {
-        
+        return res.status(400).send(error.message);
     }
 
    
 
 });
 
-const logoutUser = asyncHandler(async(req, res) => {});
+
+const logoutUser = asyncHandler(async(req, res) => {
+
+    try {
+    
+        
+        
+        
+        return res.status(200).json({ message: "User logged out successfully" });
+
+        
+    } 
+    catch (error) {
+        
+    }
+});
+
 
 const updateAvatar = asyncHandler(async(req, res) => {
+    
     const { Email } = req.cookies;
 
     try {
