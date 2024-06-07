@@ -40,13 +40,13 @@ function EmpProfile() {
 
   return (
     <div>
-      <div className="my-20  mx-4 rounded-lg flex relative items-center justify-center    p-6 sm:p-8 lg:p-10 shadow-md bg-white">
+      <div className="my-20  mx-4 rounded-lg flex relative items-center justify-center  p-6 sm:p-8 lg:p-10 shadow-md bg-white ">
 
         <br className="my-8" />
         {isEditing ? (
 
           <form onSubmit={handleSubmit} className="flex  flex-col gap-6 items-start employee-form">
-            <div className="flex  flex-col lg:flex-row items-center lg:items-start  gap-6 lg:gap-10">
+            <div className="flex  flex-col lg:flex-row items-center lg:items-start  gap-6 lg:gap-10 ">
               <div className="flex-shrink-0">
                 <label >
                   Avatar:
