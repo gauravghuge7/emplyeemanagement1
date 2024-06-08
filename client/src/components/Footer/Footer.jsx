@@ -45,16 +45,16 @@ function Footer() {
                   {" "}
                   Email{" "}
                 </label>
-
-                <div className="border border-black rounded p-2 focus-within:ring sm:flex sm:items-center sm:gap-4">
+{/* 
+                <div className="border border-black rounded h-10 focus-within:ring sm:flex sm:items-center sm:gap-4"> */}
                   <input
                     type="email"
                     id="UserEmail"
                     placeholder="arohisoftwares@gmail.com"
-                    className="w-full border-none bg-gray-200/20 text-gray-500  focus:border-transparent focus:ring-transparent sm:text-sm"
+                    className="w-full border rounded border-black bg-gray-200/20 text-gray-500  focus:border-transparent focus:ring-transparent sm:text-sm h-8"
                   />
                   
-                </div>
+                {/* </div> */}
 
               </form>
             </div>

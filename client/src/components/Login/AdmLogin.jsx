@@ -19,11 +19,11 @@ function AdmLogin({loginType}) {
 
 
 
-      const config = {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
 
       const body = {
         email: adminEmail,
@@ -31,13 +31,13 @@ function AdmLogin({loginType}) {
         adminId: adminId
       }
 
-      const response = await axios.post('http://localhost:5200/api/v1/admin/login', body, config);
+      const response = await axios.post('http://localhost:8080/api/v1/admin/login', body, config);
 
-      console.log(response);
+    console.log(response);
 
-      const data = response.data;
+    const data = response.data;
 
-      console.log(data);
+    console.log(data);
 
       
 
@@ -54,16 +54,14 @@ function AdmLogin({loginType}) {
 
 
 
-    return (
-        <div>
-            {/* Admin Login Card */}
-      
-       <div className="lg:w-[400px] max-w-sm p-6 bg-white rounded-lg shadow-2xl border border-gray-300">
+  return (
+    <div>
+      {/* Admin Login Card */}
 
-          <div className="w-full max-w-sm p-6 bg-white rounded-lg shadow-2xl border border-gray-300 ">
-
+      <div className="lg:w-[400px] max-w-sm p-6 bg-white rounded-lg shadow-2xl border border-gray-300">
+        <div className="w-full max-w-sm p-6 bg-white rounded-lg shadow-2xl border border-gray-300 ">
           <h2 className="text-2xl font-bold text-center mb-6">Admin Login</h2>
-          <form onSubmit={submitAdmin}>
+          <form onSubmit={submitAdmin} method="POST">
             <div className="mb-4">
               <label className="block text-gray-700">Email:</label>
               <input
@@ -98,16 +96,17 @@ function AdmLogin({loginType}) {
             >
               Login
             </button>
-            <h4 className='text-center mt-2 font-medium text-xl '>Or</h4>
+            <h4 className="text-center mt-2 font-medium text-xl ">Or</h4>
             <div className="mt-4 text-center">
-              <Link to="/sign-up" className="text-blue-500 hover:underline">Sign Up</Link>
+              <Link to="/sign-up" className="text-blue-500 hover:underline">
+                Sign Up
+              </Link>
             </div>
           </form>
         </div>
-        </div>
-        </div>
-      
-    )
+      </div>
+    </div>
+  );
 }
 
-export default AdmLogin
+export default AdmLogin;

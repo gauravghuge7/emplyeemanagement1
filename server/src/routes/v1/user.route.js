@@ -30,6 +30,9 @@ UserRouter.route("/uploadAvatar").post (
 
 
 
+export default UserRouter;
+
+
 
 UserRouter.route("/getUserProfile").get(
     isUserLoggedIn,
@@ -39,3 +42,4 @@ UserRouter.route("/getUserProfile").get(
 
 
 export default UserRouter;
+

@@ -49,7 +49,7 @@ export const AddTask = ({ setTasks, tasks, dialogRef } ) => {
     dialogRef.current.close();
   }
   return (
-    <div className="md-flex md-flex-column md-align-items-center m-8 p-8 ">
+    <div className="md-flex md-flex-column md-align-items-center m-8 p-8 bg-gradient-to-r from-blue-400 to-purple-400 ">
 
       <form onSubmit={handleSubmit}>
 
