@@ -23,7 +23,10 @@ const loginUser = asyncHandler(async(req, res) => {
     }
 
     try {
-        const user = await UserModel.findOne({ email });
+        const user = await UserModel.findOne({ 
+            email:email,
+            id: email 
+        });
 
         if (!user) {
             return res.status(400).json({ message: "User not found" });
@@ -46,9 +49,6 @@ const loginUser = asyncHandler(async(req, res) => {
             new ApiResponse(200, "User logged in successfully", )
 
         )
-
-        
-
         
     } 
     
@@ -120,18 +120,15 @@ const updateAvatar = asyncHandler(async(req, res) => {
     }
 });
 
-const updateEmail = asyncHandler(async(req, res) => {});
 
-const updateBio = asyncHandler(async(req, res) => {
+
+
+const updateProfile = asyncHandler(async(req, res) => {
 
     const { email } = req.user;
 
     try {
-        const { bio } = req.body;
-
-        if(!bio) {
-            return res.status(400).json({ message: "Bio is required" });
-        }
+        const { phoneNumber, bio } = req.body;
 
         const user = await UserModel.findOne({ email });
 
@@ -139,11 +136,19 @@ const updateBio = asyncHandler(async(req, res) => {
             return res.status(400).json({ message: "User not found" });
         }
 
-        user.bio = bio;
+        if(phoneNumber) {
+            user.phoneNumber = phoneNumber;
+        }
+
+        if(bio) {
+            user.bio = bio;
+        }
 
         await user.save();
 
-        return res.json(new ApiResponse(200, "Bio Updated", user));
+        return res
+        .status(200)
+        .json(new ApiResponse(200, "profile updated successfully", user));
         
     } 
     catch (error) {
@@ -153,6 +158,7 @@ const updateBio = asyncHandler(async(req, res) => {
     }
 
 });
+
 
 
 const updatePassword = asyncHandler(async(req, res) => {
@@ -193,10 +199,6 @@ const updatePassword = asyncHandler(async(req, res) => {
 
 });
 
-
-const acceptLeaveApplication = asyncHandler(async(req, res) => {});
-
-const acceptDailyReport = asyncHandler(async(req, res) => {});
 
 const getUserProfile = asyncHandler(async(req, res) => {
 
@@ -240,20 +242,24 @@ const getUserProfile = asyncHandler(async(req, res) => {
 
 });
 
-const getUserDashboard = asyncHandler(async(req, res) => {
-    
-});
+
+
+
+
+const acceptDailyReport = asyncHandler(async(req, res) => {});
+
+
+
 
 
 export { 
-    loginUser 
-    , logoutUser
-    , updateAvatar
-    , updateEmail
-    , updateBio
-    , updatePassword
-    , acceptLeaveApplication
-    , acceptDailyReport
-    , getUserProfile
-    , getUserDashboard
+    loginUser,
+    updateAvatar,
+    updateProfile,
+    updateBio,
+    logoutUser,
+    getUserProfile,
+    acceptDailyReport,
+    updatePassword
+    
 };
