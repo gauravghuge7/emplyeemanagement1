@@ -4,6 +4,18 @@ import jwt from 'jsonwebtoken';
 const userSchema = new Schema (
     
     {
+
+        adminEmail: {
+            type: String,
+            required: true,
+        },
+
+        adminId: {
+            type: String,
+            required: true,
+        },
+
+
         firstName:{
             type:String,
             required:true,
@@ -37,7 +49,7 @@ const userSchema = new Schema (
 
         isActive:{
             type:Boolean,
-            required:true
+            default:true
         },
 
         role:{
@@ -62,6 +74,7 @@ const userSchema = new Schema (
            
         },
 
+
         dailyReports: [{
             type: String,
             enum: ['Daily', 'Weekly', 'Monthly'],
@@ -79,29 +92,12 @@ const userSchema = new Schema (
             required:true
         },
 
-        leaveApplication: {
-
-
-
-
-            department: {
-                type: String,
-                
-            },
-            reason: {
-                type: String,
-                
-            },
-            date: {
-                type: Date,
-               
-            },
-        },
 
 
 
 
         attendance:{
+
             date:{
                 type:Date,
                
@@ -128,7 +124,8 @@ const userSchema = new Schema (
                 
             }
         }
-    }
+    },
+    {timestamps:true}
 )
 
 
@@ -149,6 +146,7 @@ userSchema.methods = {
         )
     }
 }
+
 
 export const UserModel = model('User',userSchema)
 

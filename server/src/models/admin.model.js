@@ -91,7 +91,7 @@ adminSchema.methods.generateLoginToken = async function () {
     {
       id: this._id,
       role: this.role,
-      email: this.email,
+      adminEmail: this.email,
       firstName: this.firstName,
       lastName: this.lastName,
     },

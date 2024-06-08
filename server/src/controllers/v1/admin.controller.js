@@ -209,8 +209,12 @@ const getAdminProfile = asyncHandler(async (req, res) => {
 
 
 export const registerUser = asyncHandler(async (req, res) => {
+  
   const { firstName, lastName, email, password, phoneNumber } = req.body;
   console.log(req.body);
+
+  const {adminEmail, id} = req.user;
+  
 
   if(!firstName || !lastName || !email || !password || !phoneNumber) {
     throw new ApiError("Missing required fields", 400);
@@ -227,14 +231,16 @@ export const registerUser = asyncHandler(async (req, res) => {
 
     const encryptedPassword = await bcrypt.hash(password, 10);
 
-    console.log(encryptedPassword);
+    
     const user = new UserModel({
       firstName,
       lastName,
       email,
       password: encryptedPassword,
       phoneNumber,
-      isActive: true
+      adminId: id,
+      adminEmail
+      
 
 
     });
@@ -261,6 +267,7 @@ export const registerUser = asyncHandler(async (req, res) => {
 
 
 const deleteUser = asyncHandler(async (req, res) => {
+
   const { email } = req.body;
   try {
     const user = await UserModel.findOne({ email });
@@ -276,14 +283,26 @@ const deleteUser = asyncHandler(async (req, res) => {
   } catch (error) {}
 });
 
+
 const getUsers = asyncHandler(async (req, res) => {
+
+    const {id} = req.user;
   try {
-    const users = await UserModel.find({});
+
+    const users = await UserModel.find({id});
+
 
     return res
       .status(200)
       .json(new ApiResponse(200, "User deleted successfully", users));
-  } catch (error) {}
+  } 
+  catch (error) {
+    console.log(error);
+    return res.status(400).send(error.message);
+  }
 });
 
  
+export {
+  getUsers
+}

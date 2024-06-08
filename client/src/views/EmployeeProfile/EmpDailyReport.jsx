@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react';
 import { toast, Toaster } from 'sonner'
-import Task, { AddTask } from '../../components/task/Task';
+import { AddTask } from '../../components/task/Task';
 
 function EmpDailyReport() {
   const [report, setReport] = useState("");
@@ -14,6 +14,7 @@ function EmpDailyReport() {
   }])
 
   const dialogRef = useRef();
+
   const handleSubmit = (e) => {
     e.preventDefault();
     // Handle daily report submission logic
@@ -71,7 +72,7 @@ function EmpDailyReport() {
                 <div className='flex justify-end'>
                   <span className=''>{task.date.slice(0,25)}</span>
                 </div>
-            </div>:""
+              </div>:""
           })}
         </div>
       </div>
