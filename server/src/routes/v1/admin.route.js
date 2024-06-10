@@ -1,7 +1,7 @@
 import express from "express";
 import { V1Controllers } from "../../controllers/index.js";
 import { upload } from "../../middlewares/multer.middleware.js";
-import { getUsers, registerUser } from "../../controllers/v1/admin.controller.js";
+import { getUsers, logoutAdmin, registerUser } from "../../controllers/v1/admin.controller.js";
 import { isAdminLoggedIn } from "../../middlewares/admin.auth.middlewares.js";
 
 ///  Admin Router 
@@ -29,7 +29,10 @@ AdminRouter.route("/login").post(
 //   V1Controllers.updatePassword
 // );
 
-AdminRouter.route("/logout").post(V1Controllers.logoutAdmin);
+AdminRouter.route("/logout").post(
+  isAdminLoggedIn,
+  logoutAdmin
+);
 
 // // FIXME: Update Request Are Patch Request
 // AdminRouter.route("/update").post(V1Controllers.AdminUpdate);
@@ -41,7 +44,6 @@ AdminRouter.route("/logout").post(V1Controllers.logoutAdmin);
 
 
 // User Routes accessing by admin
-
 
 
 AdminRouter.route("/registerUser").post(

@@ -182,11 +182,12 @@ export const logoutAdmin = asyncHandler(async (req, res) => {
   const { adminToken } = req.cookies;
 
   try {
-    res.clearCookie("adminToken", adminToken, cookieOptions);
     return res
       .status(200)
+      .clearCookie("adminToken", adminToken, cookieOptions)
       .json(new ApiResponse(200, "User logged out successfully"));
-  } catch (error) {
+  } 
+  catch (error) {
     console.log(error);
     return res.status(400).send(error.message);
   }

@@ -1,10 +1,10 @@
 import { UserModel } from "../../models/index.js";
 import asyncHandler from "../../utils/asyncHandler.js";
 import ApiResponse from "../../utils/ApiResponse.js";
-import bcrypt from "bcrypt";
-import { uploadOnCloudinary } from "../../utils/cloudinary.js";
+
 
 import { LeaveModel } from "../../models/Leave.model.js";
+import { TaskModel } from "../../models/task.model.js";
 
 const cookiesOptions = {
 
@@ -18,10 +18,10 @@ const cookiesOptions = {
 
 const acceptLeaveApplication = asyncHandler(async(req, res) => {
 
-    const {email, id} = req.user;
+    const {email} = req.user;
 
     try {
-        const {fullName, employeeId, reason, date, department, explainAboutLeave} = req.body;
+        const {fullName, employeeId, department, date, reason,  explainAboutLeave} = req.body;
     
         const user = await UserModel.findOne({email});
     
@@ -31,32 +31,33 @@ const acceptLeaveApplication = asyncHandler(async(req, res) => {
             });
         }
     
-        if (user.employeeId !== employeeId) {
-            return res.status(400).json({
-                message: "Invalid employee id"
-            });
-        }
+        // uncomment this code after the testing is done because the we recommend the use employeeId
+        // if (user.employeeId !== employeeId) {
+        //     return res.status(400).json({
+        //         message: "Invalid employee id"
+        //     });
+        // }
     
         const leave = new LeaveModel({
             fullName,
-            employeeId: id,
+            employeeId,
             email,
             reason,
             date,
             department,
-            explainAboutLeave
+            explainAboutLeave,
+            leaveStatus: "pending"
         });
     
         await leave.save();
     
-        const status = leave.leaveStatus;
     
         return res
-        .status(200)
-        .json(new ApiResponse({
-            message: "Leave application accepted",
-            data: status
-        }));
+        .json(new ApiResponse(
+            200,
+            "Leave application accepted with status pending",
+            leave
+        ));
     
     } 
     catch (error) {
@@ -71,6 +72,54 @@ const acceptLeaveApplication = asyncHandler(async(req, res) => {
 
 
 
+const addTask = asyncHandler(async(req, res) =>{
+
+    const {email} = req.user;
+
+    try {
+    
+        const {project, title, description, department} = req.body;
+
+        const user = await UserModel.findOne({email});
+
+        if (!user) {
+            return res.status(400).json({
+                message: "User not found"
+            });
+        }
+
+        const task = new TaskModel({
+            email,
+            project,
+            title,
+            description,
+            department
+        });
+
+        await task.save();
+
+        return res
+        .json(new ApiResponse(
+            200,
+            "Task added successfully",
+            task
+        ));
+        
+    } 
+    
+    catch (error) {
+        
+        return res
+        .status(500)
+        .json({
+            message: error.message
+        });
+    }
+
+ });
+
+
 export {
-    acceptLeaveApplication
+    acceptLeaveApplication,
+    addTask
 }
