@@ -12,7 +12,7 @@ const userSchema = new Schema (
 
         adminId: {
             type: String,
-            required: true,
+
         },
 
 

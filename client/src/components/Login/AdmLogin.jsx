@@ -31,7 +31,7 @@ function AdmLogin({loginType}) {
         adminId: adminId
       }
 
-      const response = await axios.post('http://localhost:8080/api/v1/admin/login', body, config);
+      const response = await axios.post('http://localhost:5200/api/v1/admin/login', body, config);
 
     console.log(response);
 

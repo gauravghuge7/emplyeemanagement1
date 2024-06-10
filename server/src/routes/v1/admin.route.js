@@ -1,7 +1,8 @@
 import express from "express";
 import { V1Controllers } from "../../controllers/index.js";
 import { upload } from "../../middlewares/multer.middleware.js";
-import { registerUser } from "../../controllers/v1/admin.controller.js";
+import { getUsers, registerUser } from "../../controllers/v1/admin.controller.js";
+import { isAdminLoggedIn } from "../../middlewares/admin.auth.middlewares.js";
 
 ///  Admin Router 
 const AdminRouter = express.Router();
@@ -44,9 +45,16 @@ AdminRouter.route("/logout").post(V1Controllers.logoutAdmin);
 
 
 AdminRouter.route("/registerUser").post(
+
+  isAdminLoggedIn,
   upload.none(),
   registerUser
 )
+
+AdminRouter.route("/getUsers").get(
+  isAdminLoggedIn,
+  getUsers
+);
 
 
 export default AdminRouter;

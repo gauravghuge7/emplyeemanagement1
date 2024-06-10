@@ -7,8 +7,9 @@ import { uploadOnCloudinary } from "../../utils/cloudinary.js";
 const cookiesOptions = {
 
     httpOnly: true,
-    secure: true,
-    maxAge: 1000 * 60 * 60 * 24 * 30,
+    secure: false,
+    maxAge: 1000 * 60 * 60 * 24 * 1,
+    Credentials: true,
 
 }
 
@@ -16,6 +17,7 @@ const cookiesOptions = {
 const loginUser = asyncHandler(async(req, res) => {
 
     const { email, password } = req.body;
+    
     console.log(req.body);
 
     if (!email || !password) {
@@ -25,7 +27,7 @@ const loginUser = asyncHandler(async(req, res) => {
     try {
         const user = await UserModel.findOne({ 
             email:email,
-            id: email 
+        
         });
 
         if (!user) {
@@ -64,11 +66,17 @@ const loginUser = asyncHandler(async(req, res) => {
 const logoutUser = asyncHandler(async(req, res) => {
 
     try {
-    
+        const userToken = req.cookies.userToken;
+
+        if(!userToken) {
+            return res.status(400).json({ message: "User not logged in" });
+        }
+
         
-        
-        
-        return res.status(200).json({ message: "User logged out successfully" });
+        return res
+        .status(200)
+        .clearCookie("userToken", cookiesOptions)
+        .json({ message: "User logged out successfully" });
 
         
     } 
@@ -143,6 +151,25 @@ const updateProfile = asyncHandler(async(req, res) => {
         if(bio) {
             user.bio = bio;
         }
+
+        
+            const path = req.file.path;
+            console.log(path);
+
+            const response = await uploadOnCloudinary(path);
+
+            console.log(response);
+            if(!response) {
+                return res.status(400).json({ message: "Error uploading avatar" });
+            }
+            user.avatar.secure_url = response.secure_url;
+            user.avatar.public_id = response.public_id;
+
+            // await user.save();
+
+
+
+
 
         await user.save();
 
@@ -220,13 +247,8 @@ const getUserProfile = asyncHandler(async(req, res) => {
             phoneNumber: user.phoneNumber,
             bio: user.bio,
             avatar: user.avatar,
-            isActive: user.isActive,
-            role: user.role,
-            createdAt: user.createdAt,
-            sessions: user.sessions,
-            hasClockedToday: user.hasClockedToday,
             leaveApplication: user.leaveApplication,
-            attendance: user.attendance,
+      
 
         };
 
@@ -256,7 +278,6 @@ export {
     loginUser,
     updateAvatar,
     updateProfile,
-    updateBio,
     logoutUser,
     getUserProfile,
     acceptDailyReport,
