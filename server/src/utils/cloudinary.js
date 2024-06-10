@@ -33,15 +33,19 @@ const uploadOnCloudinary = async(localFile) => {
         // file uploaded successfully
 
         // TODO: Remove file from local system
+        if(!result) {
+            return res.status(500).json({ message: "Upload failed" });
+        }
+       
+        fs.unlinkSync(localFile);
 
-        console.log(result);
 
         const response = {
             public_id : result.public_id,
             secure_url: result.secure_url
         }
 
-        console.log(result.url);
+        console.log(response);
 
 
         return response;

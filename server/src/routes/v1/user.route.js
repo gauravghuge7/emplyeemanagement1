@@ -1,5 +1,5 @@
 import Router from 'express';
-import { getUserProfile, loginUser, updateAvatar, updateProfile } from '../../controllers/v1/user.controllers.js';
+import { getUserProfile, loginUser, logoutUser, updateAvatar, updateProfile } from '../../controllers/v1/user.controllers.js';
 import {upload} from '../../middlewares/multer.middleware.js';
 import { isUserLoggedIn } from '../../middlewares/user.auth.middleware.js';
 import { acceptLeaveApplication } from '../../controllers/v1/user.leave.controller.js';
@@ -32,7 +32,7 @@ UserRouter.route("/uploadAvatar").post (
 UserRouter.route("/updateProfile").post (
 
     isUserLoggedIn,
-    upload.none(),
+    upload.single("avatar"),
     updateProfile
 
 )
@@ -49,15 +49,17 @@ UserRouter.route("/leaveApplication").post (
 
 
 
-export default UserRouter;
-
-
 
 UserRouter.route("/getUserProfile").get(
     isUserLoggedIn,
     getUserProfile
 )
 
+
+UserRouter.route("/logout").post(
+    isUserLoggedIn,
+    logoutUser
+)
 
 
 export default UserRouter;

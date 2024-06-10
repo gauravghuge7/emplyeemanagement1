@@ -71,9 +71,11 @@ export const registerAdmin = asyncHandler(async (req, res, next) => {
     return res
       .status(200)
       .json(new ApiResponse(200, "User created successfully", user));
-  } catch (err) {
+  } 
+  catch (err) {
     // Handle Error At Gobal Level
     next(err);
+    return res.status(400).send(err.message);
   }
 });
 
@@ -113,13 +115,16 @@ export const loginAdmin = asyncHandler(async (req, res, next) => {
       throw new ApiError(401, "Password Wrong");
     }
 
-    const adminToken = await user.generateLoginToken();
+    const adminToken = await user.generateAdminToken();
+
     return res
       .status(200)
       .cookie("adminToken", adminToken, cookieOptions)
       .json(new ApiResponse(200, "User logged in successfully", user));
-  } catch (err) {
+  } 
+  catch (err) {
     next(err);
+    return res.status(400).send(err.message);
   }
 });
 
@@ -211,16 +216,14 @@ const getAdminProfile = asyncHandler(async (req, res) => {
 export const registerUser = asyncHandler(async (req, res) => {
   
   const { firstName, lastName, email, password, phoneNumber } = req.body;
-  console.log(req.body);
 
-  const {adminEmail, id} = req.user;
+  const {adminEmail, adminId} = req.user;
   
 
   if(!firstName || !lastName || !email || !password || !phoneNumber) {
     throw new ApiError("Missing required fields", 400);
   }
 
-  console.log(req.body);
  
   try {
     const exists = await UserModel.findOne({ email });
@@ -238,7 +241,7 @@ export const registerUser = asyncHandler(async (req, res) => {
       email,
       password: encryptedPassword,
       phoneNumber,
-      adminId: id,
+      adminId,
       adminEmail
       
 
@@ -247,15 +250,20 @@ export const registerUser = asyncHandler(async (req, res) => {
 
     await user.save();
 
-    const id = user._id;
 
     if (!user) {
       throw new ApiError("problem in registering user", 404);
     }
 
+    const send = {
+      user,
+      employeeId: user._id,
+      
+    }
+
     return res
       .status(200)
-      .json(new ApiResponse(200, "User created successfully", user, id));
+      .json(new ApiResponse(200, "User created successfully", send));
 
   } 
   
@@ -264,6 +272,7 @@ export const registerUser = asyncHandler(async (req, res) => {
     return res.status(400).send(err.message);
   }
 });
+
 
 
 const deleteUser = asyncHandler(async (req, res) => {
@@ -286,15 +295,16 @@ const deleteUser = asyncHandler(async (req, res) => {
 
 const getUsers = asyncHandler(async (req, res) => {
 
-    const {id} = req.user;
+  const {adminEmail} = req.user;
+
   try {
 
-    const users = await UserModel.find({id});
+    const users = await UserModel.find({adminEmail});
 
 
     return res
       .status(200)
-      .json(new ApiResponse(200, "User deleted successfully", users));
+      .json(new ApiResponse(200, "Users fetched successfully", users));
   } 
   catch (error) {
     console.log(error);
