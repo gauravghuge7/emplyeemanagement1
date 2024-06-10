@@ -30,7 +30,7 @@ const cookieOptions = {
  *  confirmPassword:
  *
  */
-export const registerAdmin = asyncHandler(async (req, res, next) => {
+const registerAdmin = asyncHandler(async (req, res, next) => {
   try {
     // Get Data From Req Body
     const { firstName, lastName, email, password, confirmPassword } = req.body;
@@ -86,7 +86,7 @@ export const registerAdmin = asyncHandler(async (req, res, next) => {
  *  password:
  *  confirmPassword:
  */
-export const loginAdmin = asyncHandler(async (req, res, next) => {
+const loginAdmin = asyncHandler(async (req, res, next) => {
   try {
     // Data from Req Body
     const { email, password } = req.body;
@@ -136,7 +136,7 @@ export const loginAdmin = asyncHandler(async (req, res, next) => {
  *  confirmPassword
  */
 
-export const updatePassword = asyncHandler(async (req, res, next) => {
+const updatePassword = asyncHandler(async (req, res, next) => {
   try {
     // Data from Req Body
     const { newPassword, confirmPassword } = req.body;
@@ -178,7 +178,7 @@ export const updatePassword = asyncHandler(async (req, res, next) => {
 /**
  * Description : Log's out Admin
  */
-export const logoutAdmin = asyncHandler(async (req, res) => {
+const logoutAdmin = asyncHandler(async (req, res) => {
   const { adminToken } = req.cookies;
 
   try {
@@ -210,11 +210,30 @@ const getAdminDashboard = asyncHandler(async (req, res) => {
 });
 
 const getAdminProfile = asyncHandler(async (req, res) => {
-  // TODO: Complete This Code
+  
+  const {adminEmail} = req.user;
+  
+  try {
+    const user = await AdminModel.findOne({email: adminEmail});
+
+    if (!user) {
+      throw new ApiError("admin not registered", 404);
+    }
+
+    return res
+      .status(200)
+      .json(new ApiResponse(200, "Admin fetched successfully", user))
+  }
+
+  catch (error) {
+    console.log(error);
+    return res.status(400).send(error.message);
+  }
+
 });
 
 
-export const registerUser = asyncHandler(async (req, res) => {
+const registerUser = asyncHandler(async (req, res) => {
   
   const { firstName, lastName, email, password, phoneNumber } = req.body;
 
@@ -315,5 +334,19 @@ const getUsers = asyncHandler(async (req, res) => {
 
  
 export {
-  getUsers
+  getUsers,
+  getAdminProfile,
+  registerAdmin,
+  deleteUser,
+
+  loginAdmin,
+  logoutAdmin,
+  registerUser,
+  updatePassword,
+  AdminUpdate,
+  AdminDelete,
+  getAdminDashboard,
+  
+
+
 }
