@@ -23,6 +23,14 @@ function EmpProfile() {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Here you can add functionality to save the updated employee details
+    const response = axios.post('http://localhost:5200/api/v1/user/updateProfile+', body);
+
+    console.log(response);
+
+    const data = response.data;
+
+    console.log(data);
+
     toggleEditMode();
   };
 
@@ -51,7 +59,7 @@ function EmpProfile() {
                 <label >
                   Avatar:
                   <input type="file" className='mx-2' accept="image/*" onChange={handleImageChange} />
-                  {employee.avatar && <img  width={'120'} height={'120'} src={employee.avatar} alt="Avatar" className="" />}
+                  {employee.avatar && <img width={'120'} height={'120'} src={employee.avatar} alt="Avatar" className="" />}
                 </label>
               </div>
             </div>
@@ -77,25 +85,25 @@ function EmpProfile() {
         ) : (
           <div className="employee-details   text-lg flex flex-col justify-center items-center space-y-6">
 
-            
+
 
             <div className='grid grid-cols-1 lg:grid-cols-2  '>
               <div>
-                  <img
-                    className="rounded-full lg:translate-x-10 lg:h-32 lg:w-32 h-28 w-28 border-2"
-                    src={employee.avatar} width={'120'} alt="Profile Image" />
+                <img
+                  className="rounded-full lg:translate-x-10 lg:h-32 lg:w-32 h-28 w-28 border-2"
+                  src={employee.avatar} width={'120'} alt="Profile Image" />
 
               </div>
-                <div className=' -translate-x-0 lg:-translate-x-10'><p className='text-4xl'> {employee.name}</p>
-                  <div className='flex gap-2 my-6'>
-                    <p className='border border-violet-600 p-1 px-4  rounded-full'>  {employee.phone}</p>
-                    <p className='border border-violet-500 p-1 px-4 rounded-full'> {employee.email}</p>
-                  </div>
+              <div className=' -translate-x-0 lg:-translate-x-10'><p className='text-4xl'> {employee.name}</p>
+                <div className='flex gap-2 my-6'>
+                  <p className='border border-violet-600 p-1 px-4  rounded-full'>  {employee.phone}</p>
+                  <p className='border border-violet-500 p-1 px-4 rounded-full'> {employee.email}</p>
+                </div>
 
-                  <p> {employee.bio}</p></div>
+                <p> {employee.bio}</p></div>
             </div>
             <button onClick={toggleEditMode} className='absolute top-0 right-0 flex gap-2 items-center  p-2 rounded-xl w-24'>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pencil"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" /><path d="m15 5 4 4" /></svg>Edit
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pencil"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" /><path d="m15 5 4 4" /></svg>Edit
             </button>
           </div>
         )}
