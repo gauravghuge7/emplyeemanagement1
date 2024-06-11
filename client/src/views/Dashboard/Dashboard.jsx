@@ -3,7 +3,8 @@ import EmpProfile from '../EmployeeProfile/EmpProfile';
 
 import EmpDailyReport from '../EmployeeProfile/EmpDailyReport';
 import Calendar from '../EmployeeProfile/Calender';
-import Admin from '../../components/Dashboard/Admin';
+
+import Admin from '../../components/Admin/Dashboard/Admin';
 import Leave from '../Leave/Leave';
 
 export function EmployeeDashboard() {

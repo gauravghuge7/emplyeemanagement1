@@ -129,6 +129,8 @@ function EmpProfile() {
       <div className="my-20  mx-4 rounded-lg flex relative items-center justify-center  p-6 sm:p-8 lg:p-10 shadow-md bg-white ">
 
         <br className="my-8" />
+
+        {/**** this is the edit mode */}
         {isEditing ? (
 
           <form onSubmit={handleSubmit} className="flex  flex-col gap-6 items-start employee-form">
@@ -173,7 +175,9 @@ function EmpProfile() {
           </form>
 
         ) : (
+
           <div className="employee-details   text-lg flex flex-col justify-center items-center space-y-6">
+          {/**** this is the view mode */}
 
             
             {/**** Profile section  */}
