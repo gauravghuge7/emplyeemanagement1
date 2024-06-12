@@ -3,18 +3,19 @@ import { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import ForgotPass from './employee/ForgotPass';
 import Home from './views/Home/Home';
-import {  SignUp } from './views/SignUp/SignUp';
 import { EmployeeDashboard } from './views/Dashboard/Dashboard';
 import Navbar from './components/Navbar/Navbar';
 import { AdminDashboard } from './views/Dashboard/Dashboard'; // Assuming you have an AdminDashboard component
 import {Landing} from './views/Landing/Landing';
 import Leave from './views/Leave/Leave';
 import Task, { AddTask } from './components/task/Task';
-import AdminProfile from './views/AdminProfile/AdminProfile';
+
 import AdminContextProvider from './Context/AdminContextProvider';
-import AdminForm from './views/Admin/AdminForm';
-import Register from './views/Register/Register';
+
 import { HelpAndSupport } from './components/HelpAndSupport/HelpAndSupport';
+import AdminProfile from './components/Admin/AdminProfile/AdminProfile';
+import AdminForm from './components/Admin/AdminForm/AdminForm';
+import Register from './components/Admin/Register/Register';
 
 
 function App() {
@@ -47,27 +48,17 @@ const RoutesWrapper = ({ userType, setUserType, setLoginType, loginType }) => {
         <Route path="/leave" element={<Leave />} />
 
 
+
+
+        {/***  testing routes  */}
         <Route path="/task" element={<Task />} />
         <Route path="/addtask" element={<AddTask />} />
-
-
-        <Route path="/emp-profile" element={<AdminProfile />} />
         <Route path="/admin-profile" element={<AdminProfile />} />
-        
-        <Route path="/sign-up" element={<SignUp setLoginType={setLoginType} />} />
-
-        
         <Route path="/form" element={<AdminForm />} />
-
-
         <Route path="/register" element={<Register />} />
 
 
 
-
-
-
-      
       
         </Routes>
     </AdminContextProvider>

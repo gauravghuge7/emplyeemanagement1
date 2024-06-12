@@ -1,6 +1,6 @@
 import { toast, Toaster } from "sonner"
 import { useEffect, useRef, useState } from "react"
-import Register from "../Register/Register";
+import Register from "../../components/Admin/Register/Register";
 import axios from "axios";
 
 
