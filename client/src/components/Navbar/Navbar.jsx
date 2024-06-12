@@ -55,7 +55,11 @@ function Navbar({ userType, setUserType }) {
                       </Link>
                       <button
                         onClick={handleLogout}
-                        className="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-200"
+                        to="/logout"
+                        className={`px-3 py-2 rounded-md text-sm font-medium ${location.pathname === '/logout'
+                          ? 'bg-blue-500 text-white'
+                          : `text-gray-700 hover:bg-gray-200`
+                          }`}
                       >
                         Logout
                       </button>
