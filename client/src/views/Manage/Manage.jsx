@@ -1,6 +1,7 @@
 import { toast, Toaster } from "sonner"
-import { useRef, useState } from "react"
-import Register from "../Register/Register";
+import { useEffect, useRef, useState } from "react"
+import Register from "../../components/Admin/Register/Register";
+import axios from "axios";
 
 
 let data = [{
@@ -18,31 +19,54 @@ let data = [{
 function Manage() {
 
   const dialogRef = useRef();
-  const [name, setName] = useState("")
-  const [id, setId] = useState("")
-  const [email, setEmail] = useState("")
+  
 
+  const [detail, setDetail] = useState([{
 
+    name: "gaurav",
+    email: "gauravghuge@microsoft.com",
+    id: "gaurav423",
+    status:"active"
+  }])
 
   
 
+  const getData = async () => {
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    toast.success('Add Employee')
-    dialogRef.current.close()
-    data.push({
-      name,
-      id, email
-    })
-    setName("")
-    setId("")
-    setEmail("")
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      withCredentials: true,
+    }
+
+    const response = await axios.get("http://localhost:5200/api/v1/admin/getUsers", config);
+
+   
+    
+
+    const data = response.data.data;
+
+    setDetail(data)
+
   }
+
+
+  useEffect(() => {
+
+    getData()
+
+  },[])
+
+
+
+
+
   return (
     <div>
       <Toaster position="top-right" richColors closeButton expand={true} />
       <button onClick={() => dialogRef.current.showModal()} className="flex-1 rounded-full bg-blue-600 dark:bg-blue-800 text-white dark:text-white antialiased font-bold hover:bg-blue-800 dark:hover:bg-blue-900 px-4 py-2">
+
         Add Employee
       </button>
       <dialog ref={dialogRef} autoFocus className="transition-all rounded-lg p-3  w-96 lg:w-[40vw]">
@@ -54,23 +78,25 @@ function Manage() {
       <br />
       <br />
       
-      <ShowTable />
+      <ShowTable detail={detail} />
     </div>
   )
 }
 
-function ShowTable() {
+function ShowTable({detail}) {
   return <div className="w-full border p-6 text-lg rounded-lg">
-    <div className="grid font-bold text-gray-500  grid-cols-5 mb-3">
-      <h1>Name</h1>
-      <h1>Id</h1>
+    <div className="grid font-bold text-gray-500 justify-center  grid-cols-5 gap-x-36 mb-3 items-center">
+
+      <h1>First Name</h1>
+      <h1>Last Name</h1>
+      <h1>Employee Id</h1>
       <h1>Email</h1>
-      <h1>Status</h1>
+      <h1>Modify / Delete</h1>
 
     </div>
-    <div>
+    <div className="">
 
-      <ShowTabeData DataObject={data} />
+      <ShowTabeData DataObject={detail} />
     </div>
   </div>
 }
@@ -80,11 +106,17 @@ function ShowTabeData({ DataObject }) {
   
   return <div>
     {DataObject.map((data, i) => {
-      return <div className="grid items-center grid-cols-5 py-5 -mx-3 px-3 border border-r-0 border-l-0 border-b-0  my-0" key={i}>
-        <h2>{data.name}</h2>
-        <h2>{data.id}</h2>
+      
+      return <div className="grid items-center justify-center grid-cols-5 gap-x-36 auto-cols-auto py-5 border border-r-0 border-l-0 border-b-0  my-0" key={i}>
+
+        <h2 className="mx-4">{data.firstName}</h2>
+        <h2>{data.lastName}</h2>
+        <h2 className="text-center w-20">{data._id}</h2>
+
         <h2>{data.email}</h2>
-        <h2>{data.status}</h2>
+    
+        
+
         <button  className="hover:bg-red-600 w-24 p-2  rounded-3xl">delete</button>
       </div>
 

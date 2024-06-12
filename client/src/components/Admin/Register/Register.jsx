@@ -30,7 +30,7 @@ function Register() {
     });
 
     const response = await axios.post(
-      "http://localhost:8080/api/v1/admin/registerUser",
+      "http://localhost:5200/api/v1/admin/registerUser",
       body,
       config
     );

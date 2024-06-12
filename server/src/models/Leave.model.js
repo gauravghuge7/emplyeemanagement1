@@ -25,7 +25,7 @@ const leaveSchema = new Schema (
         },
 
         date:{
-            type:Date,
+            type: Date,
             required:true
         },
 

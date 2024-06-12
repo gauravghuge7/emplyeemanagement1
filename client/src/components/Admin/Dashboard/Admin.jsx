@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react'
-import Footer from '../Footer/Footer'
+import Footer from '../Footer/Footer';
+import Sidebar from '../Sidebar/Sidebar';
 
-import Sidebar from '../Sidebar/Sidebar'
-import AdminProfile from '../../views/AdminProfile/AdminProfile';
-import Manage from '../../views/Manage/Manage';
-import Report from '../../views/Report/Report';
-import Notifications from '../../views/Notifications/Notifications';
-import AdminProfiles from '../../views/AdminProfile/AdminProfiles';
+import Manage from '../../../views/Manage/Manage';
+
+import Notifications from '../../../views/Notifications/Notifications';
+import Report from '../../../views/Report/Report';
+
 import axios from 'axios';
+import AdminProfiles from '../AdminProfile/AdminProfiles';
 
 
 
@@ -17,6 +18,9 @@ function Admin() {
 
   const [totalEmployee, setTotalEmployee] = useState(0);
   
+  let count = 0;
+
+  const [activeUsers, setActiveUsers] = useState(0);
 
   const getEmployee = async () => {
     
@@ -34,12 +38,30 @@ function Admin() {
     
     const response = await axios("http://localhost:5200/api/v1/admin/getUsers", config);
 
-    console.log(response);
     const data = response.data;
 
+    // set the total emplyees 
     setTotalEmployee(data.data.length);
 
     console.log(data.data);
+
+
+    const info = data.data;
+
+    
+    
+    info.map((e) =>{
+
+      if(e.isActive) {
+        count++;
+      }
+
+    })
+
+    setActiveUsers(count);
+
+
+    
 
 
   } 
@@ -53,7 +75,7 @@ function Admin() {
   useEffect(() => {
     getEmployee();
 
-  }, [])
+  })
   
 
 
@@ -133,7 +155,7 @@ function Admin() {
                   Active Users
                 </p>
                 <h4 className="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">
-                  15
+                  {activeUsers}
                 </h4>
               </div>
               <div className="border-t border-blue-gray-50 p-4">
