@@ -6,8 +6,9 @@ import Manage from '../../../views/Manage/Manage';
 
 import Notifications from '../../../views/Notifications/Notifications';
 import Report from '../../../views/Report/Report';
-import AdminProfiles from '../../../views/AdminProfile/AdminProfiles';
+
 import axios from 'axios';
+import AdminProfiles from '../AdminProfile/AdminProfiles';
 
 
 
