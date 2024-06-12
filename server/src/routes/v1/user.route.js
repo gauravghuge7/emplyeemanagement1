@@ -1,26 +1,66 @@
-import express from 'express';
-
-const UserRouter = express.Router();
-
-
-
-
+import Router from 'express';
+import { getUserProfile, loginUser, logoutUser, updateAvatar, updateProfile } from '../../controllers/v1/user.controllers.js';
+import {upload} from '../../middlewares/multer.middleware.js';
+import { isUserLoggedIn } from '../../middlewares/user.auth.middleware.js';
+import { acceptLeaveApplication } from '../../controllers/v1/user.leave.controller.js';
 
 
-// UserRouter.route("/register")
 
-//     .post (
-//         // upload.single('avatar'),
-
-
-//     ) 
+const UserRouter = Router();
 
 
 
 
-// UserRouter.route("/login",)
-//     .post(
+UserRouter.route("/login").post (
 
-//     )
+    upload.none(),
+    loginUser
+
+)
+
+
+UserRouter.route("/uploadAvatar").post (
+
+    isUserLoggedIn,
+    upload.single("avatar"),
+    updateAvatar
+
+) 
+
+
+
+UserRouter.route("/updateProfile").post (
+
+    isUserLoggedIn,
+    upload.single("avatar"),
+    updateProfile
+
+)
+
+UserRouter.route("/leaveApplication").post (
+
+    isUserLoggedIn,
+    upload.none(),
+    acceptLeaveApplication
+
+) 
+
+
+
+
+
+
+UserRouter.route("/getUserProfile").get(
+    isUserLoggedIn,
+    getUserProfile
+)
+
+
+UserRouter.route("/logout").post(
+    isUserLoggedIn,
+    logoutUser
+)
+
 
 export default UserRouter;
+

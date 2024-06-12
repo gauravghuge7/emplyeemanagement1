@@ -1,8 +1,21 @@
 import {Schema, model} from 'mongoose';
+import jwt from 'jsonwebtoken';
 
 const userSchema = new Schema (
     
     {
+
+        adminEmail: {
+            type: String,
+            required: true,
+        },
+
+        adminId: {
+            type: String,
+
+        },
+
+
         firstName:{
             type:String,
             required:true,
@@ -16,8 +29,8 @@ const userSchema = new Schema (
 
         email:{
             type:String,
-            required:true,
-            unique: true, // Ensure email is unique
+            
+             // Ensure email is unique
             match: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/
         },
 
@@ -28,19 +41,21 @@ const userSchema = new Schema (
 
         avatar:{
 
-            Email:String,
-            public_url:String
+            public_id:String,
+            secure_url:String,
+
         },
 
 
         isActive:{
             type:Boolean,
-            required:true
+            default:true
         },
 
         role:{
             type:String,
-            required:true
+            required:true,
+            default:"user"
         },
         
         createdAt:{
@@ -56,8 +71,9 @@ const userSchema = new Schema (
 
         clockingHours: {
             type:Number,
-            required:true
+           
         },
+
 
         dailyReports: [{
             type: String,
@@ -76,57 +92,61 @@ const userSchema = new Schema (
             required:true
         },
 
-        leaveApplication: {
-
-
-
-
-            department: {
-                type: String,
-                required: true
-            },
-            reason: {
-                type: String,
-                required: true
-            },
-            date: {
-                type: Date,
-                required: true
-            },
-        },
 
 
 
 
         attendance:{
+
             date:{
                 type:Date,
-                required:true
+               
             },
 
             status:{
                 type:String,
                 enum:["Absent","Leave","Present","Late"],
-                required:true
+                
             },
 
             totalHours:{
                 type:Date,
-                required:true
+                
             },
 
             remarks:{
                 type:String,
-                required:true
+               
             },
 
             reason:{
                 type:String,
-                required:true
+                
             }
         }
-    }
+    },
+    {timestamps:true}
 )
+
+
+userSchema.methods = {
+
+    generateUserToken: function() {
+
+        return jwt.sign(
+            {
+                id: this._id,
+                email: this.email,
+                role: this.role,
+                phoneNumber: this.phoneNumber,
+                
+            },
+            process.env.JWT_SECRET,
+            {expiresIn: "1d"}
+        )
+    }
+}
+
 
 export const UserModel = model('User',userSchema)
 

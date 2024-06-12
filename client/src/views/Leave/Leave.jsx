@@ -2,7 +2,7 @@
 function Leave() {
   return (
     
-    <div className="md-flex md-flex-column rounded-lg md-align-items-center shadow-lg shadow-blue-100 m-8 p-8 bg-gradient-to-r from-blue-400 to-purple-400">
+    <div className="md-flex md-flex-column rounded-lg md-align-items-center shadow-lg shadow-blue-100 m-8 p-8 bg-gradient-to-r from-blue-400 to-purple-400 max-h-screen overflow-auto ">
       
       <form className="space-y-12">
 

@@ -54,7 +54,7 @@ export const registerAdmin = asyncHandler(async (req, res, next) => {
     // EncryptPassword
     const encryptedPassword = await bcrypt.hash(password, SALT_ROUND);
     // Admin Model Instance
-    const user = new AdminModel({
+    const user = await AdminModel.create({
       firstName,
       lastName,
       email,
@@ -71,9 +71,11 @@ export const registerAdmin = asyncHandler(async (req, res, next) => {
     return res
       .status(200)
       .json(new ApiResponse(200, "User created successfully", user));
-  } catch (err) {
+  } 
+  catch (err) {
     // Handle Error At Gobal Level
     next(err);
+    return res.status(400).send(err.message);
   }
 });
 
@@ -102,7 +104,7 @@ export const loginAdmin = asyncHandler(async (req, res, next) => {
 
     // Handle If no user was
     if (!user) {
-      throw new ApiError(401, "Email/Password Wrong");
+      throw new ApiError(401, "Email Wrong");
     }
 
     // compare password
@@ -110,16 +112,19 @@ export const loginAdmin = asyncHandler(async (req, res, next) => {
 
     // Handle Mismatch Password
     if (!comparePassword) {
-      throw new ApiError(401, "Email/Password Wrong");
+      throw new ApiError(401, "Password Wrong");
     }
 
-    const adminToken = await user.generateLoginToken();
+    const adminToken = await user.generateAdminToken();
+
     return res
       .status(200)
       .cookie("adminToken", adminToken, cookieOptions)
       .json(new ApiResponse(200, "User logged in successfully", user));
-  } catch (err) {
+  } 
+  catch (err) {
     next(err);
+    return res.status(400).send(err.message);
   }
 });
 
@@ -130,6 +135,7 @@ export const loginAdmin = asyncHandler(async (req, res, next) => {
  *  newPassword
  *  confirmPassword
  */
+
 export const updatePassword = asyncHandler(async (req, res, next) => {
   try {
     // Data from Req Body
@@ -206,19 +212,19 @@ const getAdminProfile = asyncHandler(async (req, res) => {
   // TODO: Complete This Code
 });
 
-/**
- * 
- * const registerUser = asyncHandler(async (req, res) => {
-  const { FirstName, LastName, Email, Password, PhoneNumber } = req.body;
 
-  if (!FirstName || !LastName || !Email || !Password || !PhoneNumber) {
+export const registerUser = asyncHandler(async (req, res) => {
+  
+  const { firstName, lastName, email, password, phoneNumber } = req.body;
+
+  const {adminEmail, adminId} = req.user;
+  
+
+  if(!firstName || !lastName || !email || !password || !phoneNumber) {
     throw new ApiError("Missing required fields", 400);
   }
 
-  if (!email.indexOf("@") === -1) {
-    throw new ApiError("Invalid email", 400);
-  }
-
+ 
   try {
     const exists = await UserModel.findOne({ email });
 
@@ -226,32 +232,51 @@ const getAdminProfile = asyncHandler(async (req, res) => {
       return res.status(400).send("User already exist");
     }
 
-    const encryptedPassword = await bcrypt.hash(Password, 10);
+    const encryptedPassword = await bcrypt.hash(password, 10);
 
+    
     const user = new UserModel({
-      FirstName,
-      LastName,
-      Email,
-      Password: encryptedPassword,
-      PhoneNumber,
+      firstName,
+      lastName,
+      email,
+      password: encryptedPassword,
+      phoneNumber,
+      adminId,
+      adminEmail
+      
+
+
     });
 
     await user.save();
+
 
     if (!user) {
       throw new ApiError("problem in registering user", 404);
     }
 
+    const send = {
+      user,
+      employeeId: user._id,
+      
+    }
+
     return res
       .status(200)
-      .json(new ApiResponse(200, "User created successfully", user));
-  } catch (err) {
+      .json(new ApiResponse(200, "User created successfully", send));
+
+  } 
+  
+  catch (err) {
     console.log(err);
     return res.status(400).send(err.message);
   }
 });
 
+
+
 const deleteUser = asyncHandler(async (req, res) => {
+
   const { email } = req.body;
   try {
     const user = await UserModel.findOne({ email });
@@ -267,14 +292,27 @@ const deleteUser = asyncHandler(async (req, res) => {
   } catch (error) {}
 });
 
+
 const getUsers = asyncHandler(async (req, res) => {
+
+  const {adminEmail} = req.user;
+
   try {
-    const users = await UserModel.find({});
+
+    const users = await UserModel.find({adminEmail});
+
 
     return res
       .status(200)
-      .json(new ApiResponse(200, "User deleted successfully", users));
-  } catch (error) {}
+      .json(new ApiResponse(200, "Users fetched successfully", users));
+  } 
+  catch (error) {
+    console.log(error);
+    return res.status(400).send(error.message);
+  }
 });
 
- */
+ 
+export {
+  getUsers
+}

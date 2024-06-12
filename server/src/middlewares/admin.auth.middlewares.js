@@ -4,8 +4,13 @@ import ApiError from "../utils/ApiError.js";
 
 import { JWT_SECRET } from "../constant.js";
 
-const isLoggedIn = asyncHandler(async (req, res, next) => {
-  const adminToken = req.cookies ? req.cookies.adminToken : undefined;
+const isAdminLoggedIn = asyncHandler(async (req, res, next) => {
+  
+  // const adminToken = req.cookies ? req.cookies.adminToken : undefined;
+  console.log("frontend cookies => ", req.cookies);
+  
+  const adminToken = req.cookies?.adminToken || req.header("Authorization")?.replace("Bearer ", "")
+
 
   if (!adminToken) {
     throw new ApiError(401, "Not logged in");
@@ -15,11 +20,14 @@ const isLoggedIn = asyncHandler(async (req, res, next) => {
     const decoded = jwt.verify(adminToken, JWT_SECRET);
 
     req.user = decoded;
+
+    console.log(req.user);
     next();
-  } catch (error) {
+  } 
+  catch (error) {
     console.log(error);
     return res.status(400).send(error.message);
   }
 });
 
-export { isLoggedIn };
+export { isAdminLoggedIn };

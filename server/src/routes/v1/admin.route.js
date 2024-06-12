@@ -1,11 +1,14 @@
 import express from "express";
-import multer from "multer";
+import { V1Controllers } from "../../controllers/index.js";
+import { upload } from "../../middlewares/multer.middleware.js";
+import { getUsers, registerUser } from "../../controllers/v1/admin.controller.js";
+import { isAdminLoggedIn } from "../../middlewares/admin.auth.middlewares.js";
+
+///  Admin Router 
 const AdminRouter = express.Router();
 
-const upload = multer();
 
-import { V1Controllers } from "../../controllers/index.js";
-import { isLoggedIn } from "../../middlewares/auth.middlewares.js";
+
 
 // Admin Routes
 
@@ -14,11 +17,17 @@ AdminRouter.route("/registerAdmin").post(
   V1Controllers.registerAdmin
 );
 
-AdminRouter.route("/login").post(V1Controllers.loginAdmin);
-AdminRouter.route("/updatePassword").patch(
-  isLoggedIn,
-  V1Controllers.updatePassword
+AdminRouter.route("/login").post( 
+
+  upload.none(),
+  V1Controllers.loginAdmin
+
 );
+
+// AdminRouter.route("/updatePassword").patch(
+//   isLoggedIn,
+//   V1Controllers.updatePassword
+// );
 
 AdminRouter.route("/logout").post(V1Controllers.logoutAdmin);
 
@@ -28,10 +37,24 @@ AdminRouter.route("/logout").post(V1Controllers.logoutAdmin);
 // // FIXME: Update Request Are Delete Request
 // AdminRouter.route("/delete").post(V1Controllers.AdminDelete);
 
-// // User Routes accessing by admin
 
-// AdminRouter.route("/registerUser").post(V1Controllers.registerUser);
 
-// AdminRouter.route("/getUsers").get(V1Controllers.getUsers);
+
+// User Routes accessing by admin
+
+
+
+AdminRouter.route("/registerUser").post(
+
+  isAdminLoggedIn,
+  upload.none(),
+  registerUser
+)
+
+AdminRouter.route("/getUsers").get(
+  isAdminLoggedIn,
+  getUsers
+);
+
 
 export default AdminRouter;

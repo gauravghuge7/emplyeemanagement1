@@ -27,8 +27,7 @@ const adminSchema = new Schema(
     email: {
       type: String,
       trim: true,
-      required: [true, "Email address is required"],
-      unique: true,
+      // required: [true, "Email address is required"],
       match: [
         /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
         "Please enter a valid email address",
@@ -87,23 +86,29 @@ const adminSchema = new Schema(
   { timestamps: true }
 );
 
-adminSchema.methods.generateLoginToken = async function () {
-  const token = jwt.sign(
-    {
-      id: this._id,
-      role: this.role,
-      email: this.email,
-      firstName: this.firstName,
-      lastName: this.lastName,
-    },
 
-    JWT_SECRET,
-    {
-      expiresIn: "48h",
-    }
-  );
+adminSchema.methods = {
 
-  return token;
+
+  generateAdminToken: function () {
+
+    return jwt.sign(
+      {
+        adminId: this._id,
+        role: this.role,
+        adminEmail: this.email,
+        firstName: this.firstName,
+        lastName: this.lastName,
+      },
+
+      JWT_SECRET,
+      {
+        expiresIn: "48h",
+      }
+    );
+
+  }
+  
 };
 
 export const AdminModel = model("Admin", adminSchema);

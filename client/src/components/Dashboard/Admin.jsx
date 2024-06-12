@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Footer from '../Footer/Footer'
 
 import Sidebar from '../Sidebar/Sidebar'
@@ -7,12 +7,53 @@ import Manage from '../../views/Manage/Manage';
 import Report from '../../views/Report/Report';
 import Notifications from '../../views/Notifications/Notifications';
 import AdminProfiles from '../../views/AdminProfile/AdminProfiles';
+import axios from 'axios';
 
 
 
 function Admin() {
 
   const [activeBox, setActiveBox] = useState("");
+
+  const [totalEmployee, setTotalEmployee] = useState(0);
+  
+
+  const getEmployee = async () => {
+    
+
+    const config = {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+      
+      withCredentials: true
+    };
+    
+      
+  try {
+    
+    const response = await axios("http://localhost:5200/api/v1/admin/getUsers", config);
+
+    console.log(response);
+    const data = response.data;
+
+    setTotalEmployee(data.data.length);
+
+    console.log(data.data);
+
+
+  } 
+  catch (error) {
+    console.log(error);
+  }
+
+  }
+
+
+  useEffect(() => {
+    getEmployee();
+
+  }, [])
   
 
 
@@ -56,7 +97,7 @@ function Admin() {
                   Total Employee 
                 </p>
                 <h4 className="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">
-                  53
+                  {totalEmployee}
                 </h4>
               </div>
 

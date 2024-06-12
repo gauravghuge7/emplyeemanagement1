@@ -10,7 +10,7 @@ export function EmployeeDashboard() {
   const [activeTab, setActiveTab] = useState('profile');
 
   return (
-    <div className="flex flex-col min-h-screen bg-gray-100 bg-gradient-to-r from-blue-400 to-purple-400">
+    <div className="flex flex-col  bg-gray-100 bg-gradient-to-r from-blue-400 to-purple-400  ">
 
       <aside className=" bg-gradient-to-br from-gray-800 to-gray-900 -translate-x-80 fixed inset-0 z-50 my-4 ml-4  h-[calc(90vh-32px)] w-72 rounded-xl transition-transform duration-300 xl:translate-x-0" style={{ marginTop: "5rem" }}>
 
@@ -146,7 +146,7 @@ export function EmployeeDashboard() {
                   type="button"
                  onClick={() => setActiveTab('calendar')}
                 >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-calendar"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-calendar"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
                   <li
             className={`p-4 cursor-pointer ${activeTab === 'calendar' && ''}`}
             
@@ -195,7 +195,7 @@ export function EmployeeDashboard() {
           </li>
         </ul>
       </div> */}
-      <div className=" lg:w-[70vw] w-full mx-auto mt-16 absolute right-0 lg:right-20">
+      <div className=" lg:w-[70vw] w-full  mx-auto mt-16 absolute right-0 lg:right-20 ">
 
         {activeTab === 'profile' && <EmpProfile />}
         {activeTab === 'leave' && <Leave />}
@@ -205,6 +205,8 @@ export function EmployeeDashboard() {
     </div>
   );
 }
+
+
 
 export function AdminDashboard() {
 
