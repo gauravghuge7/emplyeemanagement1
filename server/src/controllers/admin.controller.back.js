@@ -17,24 +17,24 @@ const cookieOptions = {
 
 
 
-const registerAdmin = asyncHandler(async (req, res) => {
+const registerAdmin = asyncHandler(async(req, res) => {
 
 
-    const {firstName, lastName, email, phoneNumber, role, password, confirmPassword} = req.body;
+    const { firstName, lastName, email, phoneNumber, role, password, confirmPassword } = req.body;
 
-        console.log(req.body)
+    console.log(req.body)
 
-       
-    try{
+
+    try {
 
         // validations
-        if(!firstName || !lastName || !email || !phoneNumber || !password || !confirmPassword || !role){
+        if (!firstName || !lastName || !email || !phoneNumber || !password || !confirmPassword || !role) {
 
             throw new ApiError("Missing required fields", 400);
         }
 
-        const existingUser = await AdminModel.findOne({Email});
-        if(existingUser){
+        const existingUser = await AdminModel.findOne({ Email });
+        if (existingUser) {
             throw new ApiError("User already exists", 400);
         }
 
@@ -59,62 +59,61 @@ const registerAdmin = asyncHandler(async (req, res) => {
 
         console.log(user);
 
-     
-        return res
-        .status(200)
-        .json(
-            new ApiResponse(200, "User created successfully", user),
-        );
-      
 
-    }
-    catch(err){
+        return res
+            .status(200)
+            .json(
+                new ApiResponse(200, "User created successfully", user),
+            );
+
+
+    } catch (err) {
 
         return res.status(400)
-        .json({message: err.message})
+            .json({ message: err.message })
     }
 })
 
 
 
-const AdminLogin = asyncHandler(async (req, res) => {
+const AdminLogin = asyncHandler(async(req, res) => {
 
-    const {email, password} = req.body;
+    const { email, password } = req.body;
 
     console.log(req.body);
-    
 
-    if(!email || !password){
+
+    if (!email || !password) {
 
         throw new ApiError("Missing required fields", 400);
     }
 
 
-    try{
+    try {
 
-        const user = await AdminModel.findOne({email});
+        const user = await AdminModel.findOne({ email });
 
-        if(user){
+        if (user) {
             return res
-            .status(400)
-            .json(new ApiError("User is already registered", 404));
-        
+                .status(400)
+                .json(new ApiError("User is already registered", 404));
+
         }
 
         console.log("user after find", user);
 
         console.log("user password", user.password);
 
-        if(!user.Password){
+        if (!user.Password) {
             throw new ApiError("User is not registered", 404);
         }
 
-        if(user.password !== Password){
+        if (user.password !== Password) {
             throw new ApiError("Invalid password for this user", 401);
         }
 
         // const comparePassword = await bcrypt.compare(Password, user.Password);
-        
+
         // if(!comparePassword){
         //     throw new ApiError("Invalid password for this user", 401);
         // }
@@ -122,69 +121,65 @@ const AdminLogin = asyncHandler(async (req, res) => {
         const adminToken = await generateToken(user);
 
 
-       
+
         return res
             .status(200)
-            .cookie("adminToken", adminToken ,cookieOptions)
+            .cookie("adminToken", adminToken, cookieOptions)
             .json(
                 new ApiResponse(200, "User logged in successfully", user),
             );
-    }
-
-    catch(err){
+    } catch (err) {
         console.log(err);
         throw new ApiError(401, err.message);
-    }   
+    }
 
 });
 
 
 
 
-const updatePassword = asyncHandler(async (req, res) => { 
-    
+const updatePassword = asyncHandler(async(req, res) => {
+
 })
 
-const AdminLogout = asyncHandler(async (req, res) => {
+const AdminLogout = asyncHandler(async(req, res) => {
 
-    const {adminToken} = req.cookies;
-    
+    const { adminToken } = req.cookies;
+
     try {
 
-        
+
         res.clearCookie("adminToken", adminToken, cookieOptions);
         return res
             .status(200)
             .json(new ApiResponse(200, "User logged out successfully"));
-    } 
-    
-    catch (error) {
+    } catch (error) {
         console.log(error);
         return res.status(400).send(error.message);
     }
 })
 
 
-const AdminUpdate = asyncHandler(async (req, res) => {
+const AdminUpdate = asyncHandler(async(req, res) => {
 
 })
 
 
-const AdminDelete = asyncHandler(async (req, res) => {
+const AdminDelete = asyncHandler(async(req, res) => {
 
-    const {adminToken} = req.cookies;
-    const {email, password} = req.body; 
+    const { adminToken } = req.cookies;
+    const { email, password } = req.body;
 
     try {
-        const user = await AdminModel.findOne({adminToken, email});
+        const user = await AdminModel.findOne({ adminToken, email });
 
-        if(!user){
+        if (!user) {
             throw new ApiError("User not registered", 404);
         }
 
         const comparePassword = await bcrypt.compare(password, user.Password);
-        
-        if(!comparePassword){
+
+        if (!comparePassword) {
             throw new ApiError("Invalid password for this user", 401);
         }
 
@@ -193,34 +188,32 @@ const AdminDelete = asyncHandler(async (req, res) => {
         return res
             .status(200)
             .json(new ApiResponse(200, "User deleted successfully"));
-            
-    } 
-    
-    catch (error) {
+
+    } catch (error) {
         console.log(error);
         return res.status(400).send(error.message);
     }
 })
 
 
-const registerUser = asyncHandler(async(req,res)=>{
-    
-    const {firstName, lastName, email, password, phoneNumber} = req.body;
+const registerUser = asyncHandler(async(req, res) => {
 
-   if(!firstName || !lastName || !email || !password || !phoneNumber){
-       throw new ApiError("Missing required fields", 400);
-   }
+    const { firstName, lastName, email, password, phoneNumber } = req.body;
 
-    
-    if(!email.indexOf("@")===-1){
+    if (!firstName || !lastName || !email || !password || !phoneNumber) {
+        throw new ApiError("Missing required fields", 400);
+    }
+
+
+    if (!email.indexOf("@") === -1) {
         throw new ApiError("Invalid email", 400);
     }
 
-    try{
+    try {
 
-        const exists = await UserModel.findOne({email});
+        const exists = await UserModel.findOne({ email });
 
-        if(exists){
+        if (exists) {
             return res.status(400).send("User already exist");
         }
 
@@ -237,7 +230,7 @@ const registerUser = asyncHandler(async(req,res)=>{
 
         await user.save();
 
-        if(!user) {
+        if (!user) {
             throw new ApiError("problem in registering user", 404);
         }
 
@@ -247,9 +240,7 @@ const registerUser = asyncHandler(async(req,res)=>{
                 new ApiResponse(200, "User created successfully", user),
             );
 
-    }
-    
-    catch(err){
+    } catch (err) {
         console.log(err);
         return res.status(400).send(err.message)
     }
@@ -257,14 +248,14 @@ const registerUser = asyncHandler(async(req,res)=>{
 })
 
 
-const deleteUser = asyncHandler(async (req, res) => {
+const deleteUser = asyncHandler(async(req, res) => {
 
-    const {email} = req.body;  
+    const { email } = req.body;
     try {
-        
-        const user = await UserModel.findOne({email});
 
-        if(!user){
+        const user = await UserModel.findOne({ email });
+
+        if (!user) {
             throw new ApiError("User not registered", 404);
         }
 
@@ -272,39 +263,36 @@ const deleteUser = asyncHandler(async (req, res) => {
         return res
             .status(200)
             .json(new ApiResponse(200, "User deleted successfully"));
-        
-    } 
-    catch (error) {
-        
+
+    } catch (error) {
+
     }
 
 });
 
-const getUsers = asyncHandler(async (req, res) => {
+const getUsers = asyncHandler(async(req, res) => {
 
 
     try {
-    
+
         const users = await UserModel.find({});
 
         return res
             .status(200)
             .json(new ApiResponse(200, "User deleted successfully", users));
 
-    } 
-    
-    catch (error) {
-        
+    } catch (error) {
+
     }
 
 })
 
 
-const getAdminDashboard = asyncHandler(async (req, res) => { 
+const getAdminDashboard = asyncHandler(async(req, res) => {
 
 })
 
-const getAdminProfile = asyncHandler(async (req, res) => { 
+const getAdminProfile = asyncHandler(async(req, res) => {
 
 })
 
@@ -318,7 +306,7 @@ export {
 
     // admin routes
     registerAdmin,
-    
+
     AdminLogin,
     AdminLogout,
     AdminUpdate,

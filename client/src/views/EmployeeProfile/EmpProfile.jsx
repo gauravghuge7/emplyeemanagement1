@@ -23,27 +23,27 @@ function EmpProfile() {
       headers: {
         "Content-Type": "multipart/form-data",
       },
-      
+
       withCredentials: true
     };
 
     try {
       const response = await axios.get("http://localhost:5200/api/v1/user/getUserProfile", config);
-      
+
       const data = response.data;
-  
+
 
       console.log(data.data);
-      
+
       if (data.success) {
-        
+
         alert(data.message);
-       
-       setEmployee(data.data);
-       setAvatar(data.data.avatar.secure_url);
+
+        setEmployee(data.data);
+        setAvatar(data.data.avatar.secure_url);
       }
-    
-    } 
+
+    }
 
     catch (error) {
       console.log(error);
@@ -59,9 +59,9 @@ function EmpProfile() {
   }, []);
 
 
-  
 
-  
+
+
 
   const [isEditing, setIsEditing] = useState(false);
 
@@ -74,26 +74,26 @@ function EmpProfile() {
     setIsEditing(!isEditing);
   };
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     // Here you can add functionality to save the updated employee details
 
     const config = {
       headers: {
         'Content-Type': 'multipart/form-data'
-      },  
+      },
       withCredentials: true
     };
 
     const formData = new FormData();
     formData.append("avatar", avatar);
-    
+
 
 
     const body = {
       phoneNumber: employee.phoneNumber,
       bio: employee.bio,
-      
+
     }
 
 
@@ -120,7 +120,7 @@ function EmpProfile() {
   const handleImageChange = (e) => {
 
     setAvatar(e.target.file);
-    
+
 
   };
 
@@ -138,8 +138,8 @@ function EmpProfile() {
               <div className="flex-shrink-0">
                 <label >
                   Avatar:
-                  <input type="file" className='mx-2' name={"avatar"} accept="image/*" onChange={handleImageChange}/>
-                  {avatar && <img  width={'120'} height={'120'} src={avatar} alt="Avatar" className="" />}
+                  <input type="file" className='mx-2' name={"avatar"} accept="image/*" onChange={handleImageChange} />
+                  {avatar && <img width={'120'} height={'120'} src={avatar} alt="Avatar" className="" />}
                 </label>
               </div>
             </div>
@@ -148,8 +148,8 @@ function EmpProfile() {
               Name:
               <input readOnly={true} type="text" name="name" className='p-2 outline-none border rounded-lg' value={employee.firstName} onChange={handleInputChange} />
             </label>
-            
-            
+
+
 
             {/******last Name field */}
             <label className='flex items-center gap-2'>
@@ -179,7 +179,7 @@ function EmpProfile() {
           <div className="employee-details   text-lg flex flex-col justify-center items-center space-y-6">
           {/**** this is the view mode */}
 
-            
+
             {/**** Profile section  */}
             <div className='grid grid-cols-1 lg:grid-cols-2  '>
               <div >
@@ -190,29 +190,29 @@ function EmpProfile() {
                   src={avatar} width={'120'} alt="Profile Image" />
 
               </div>
-                  {/**** Name section  */}
-                <div className=' -translate-x-0 lg:-translate-x-10'>
-                
-                  <div className='flex gap-2 my-6'>
-                    <p className='text-4xl'> {employee.firstName}</p>
-                    <p className='text-4xl'> {employee.lastName}</p>
-                  </div>
+              {/**** Name section  */}
+              <div className=' -translate-x-0 lg:-translate-x-10'>
 
-                  <div className='flex gap-2 my-6'>
-                    <p className='border border-violet-600 p-1 px-4  rounded-full'>  {employee.phoneNumber}</p>
-                    <p className='border border-violet-500 p-1 px-4 rounded-full'> {employee.email}</p>
-                  </div>
+                <div className='flex gap-2 my-6'>
+                  <p className='text-4xl'> {employee.firstName}</p>
+                  <p className='text-4xl'> {employee.lastName}</p>
+                </div>
 
-                  <p> {employee.bio}</p></div>
+                <div className='flex gap-2 my-6'>
+                  <p className='border border-violet-600 p-1 px-4  rounded-full'>  {employee.phoneNumber}</p>
+                  <p className='border border-violet-500 p-1 px-4 rounded-full'> {employee.email}</p>
+                </div>
+
+                <p> {employee.bio}</p></div>
             </div>
             <button onClick={toggleEditMode} className='absolute top-0 right-0 flex gap-2 items-center  p-2 rounded-xl w-24'>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-pencil"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" /><path d="m15 5 4 4" /></svg>Edit
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-pencil"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" /><path d="m15 5 4 4" /></svg>Edit
             </button>
           </div>
         )}
       </div>
     </div>
-         
+
   );
 }
 
