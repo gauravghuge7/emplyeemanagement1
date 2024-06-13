@@ -298,6 +298,7 @@ const registerUser = asyncHandler(async (req, res) => {
 const deleteUser = asyncHandler(async (req, res) => {
 
   const { email } = req.body;
+
   try {
     const user = await UserModel.findOne({ email });
 
@@ -306,10 +307,15 @@ const deleteUser = asyncHandler(async (req, res) => {
     }
 
     await user.remove();
+
     return res
       .status(200)
       .json(new ApiResponse(200, "User deleted successfully"));
-  } catch (error) {}
+  } 
+  catch (error) {
+    console.log(error);
+    return res.status(400).send(error.message);
+  }
 });
 
 
@@ -332,12 +338,43 @@ const getUsers = asyncHandler(async (req, res) => {
   }
 });
 
+const getDailyReport = asyncHandler(async (req, res) => {
+  const {adminEmail} = req.user;
+
+  const email = req.body.email;
+
+  try {
+    const user = await UserModel.find({adminEmail});
+
+    if (!user) {
+      throw new ApiError("admin not registered", 404);
+    }
+
+    
+
+    await user.save();
+
+    return res
+      .status(200)
+      .json(new ApiResponse(200, "Daily Report fetched successfully", user))
+
+  } 
+  catch (error) {
+      console.log(error);
+      return res.status(400).send(error.message);
+  }
+
+})
+
+
+
  
 export {
   getUsers,
   getAdminProfile,
   registerAdmin,
   deleteUser,
+  getDailyReport,
 
   loginAdmin,
   logoutAdmin,

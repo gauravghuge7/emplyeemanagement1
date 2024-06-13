@@ -1,5 +1,7 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
+import axios from "axios";
+import { toast } from "sonner";
 
 function Task() {
   return (
@@ -27,7 +29,7 @@ export const AddTask = ({ setTasks, tasks, dialogRef } ) => {
   const [task, setTask] = useState({
     projectname: "",
     tasktitle: "",
-    departement: "",
+    department: "",
     description: "",
     date:""
   })
@@ -45,14 +47,22 @@ export const AddTask = ({ setTasks, tasks, dialogRef } ) => {
     const body = {
       project: task.projectname,
       title: task.tasktitle,
-      departement: task.departement,
+      department: task.department,
       description: task.description,
   
       
     }
 
-    const response = await axios.post("", body, config);
+    const response = await axios.post("http://localhost:5200/api/v1/user/addTask", body, config);
 
+    console.log(response);
+    const data = response.data;
+    console.log(data);
+
+    if(data.success) {
+      alert(data.message);
+      toast.success("Task added successfully");
+    }
 
     
     
@@ -105,8 +115,9 @@ export const AddTask = ({ setTasks, tasks, dialogRef } ) => {
           </label>
           <input
             className="w-full shadow-inner bg-gray-100 rounded-lg placeholder-black text-2xl p-4 border-none block mt-1 "
-            onChange={(e) => setTask({ ...task, departement: e.target.value })}
-            value={task.departement}
+
+            onChange={(e) => setTask({ ...task, department: e.target.value })}
+            value={task.department}
             id="email"
             type="text"
             name="email"

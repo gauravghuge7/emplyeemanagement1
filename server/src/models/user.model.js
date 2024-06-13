@@ -84,9 +84,9 @@ const userSchema = new Schema (
         sessions: [{
             type: Schema.Types.ObjectId,
             ref: 'Session'
-          }],
+        }],
         
-          hasClockedToday: {
+        hasClockedToday: {
             type: Boolean,
             default: false,
             required:true

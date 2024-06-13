@@ -16,6 +16,8 @@ import { HelpAndSupport } from './components/HelpAndSupport/HelpAndSupport';
 import AdminProfile from './components/Admin/AdminProfile/AdminProfile';
 import AdminForm from './components/Admin/AdminForm/AdminForm';
 import Register from './components/Admin/Register/Register';
+import { FaSign } from 'react-icons/fa';
+import { SignUp } from './components/Admin/SignUp/SignUp';
 
 
 function App() {
@@ -46,6 +48,8 @@ const RoutesWrapper = ({ userType, setUserType, setLoginType, loginType }) => {
       
         <Route path='/support' element={<HelpAndSupport/>} />
         <Route path="/leave" element={<Leave />} />
+        <Route path="/sign-up" element={<SignUp />} />
+        
 
 
 

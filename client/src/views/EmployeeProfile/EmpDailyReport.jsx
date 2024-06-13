@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react';
 import { toast, Toaster } from 'sonner'
 import { AddTask } from '../../components/task/Task';
+import axios from 'axios';
 
 function EmpDailyReport() {
   const [report, setReport] = useState("");
@@ -15,12 +16,34 @@ function EmpDailyReport() {
 
   const dialogRef = useRef();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
     // Handle daily report submission logic
-    dialogRef.current.close()
-    toast.success('Add Employee')
-    console.log("Daily report submitted:", report);
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      withCredentials: true,
+    
+    }
+
+
+    const response = await axios.post("http://localhost:5200/api/v1/user/dailyReport", config);
+
+    console.log(response);
+
+    const data = response.data;
+
+    console.log(data);
+
+    if(data.success) {
+      dialogRef.current.close()
+      toast.success(data.message)
+    }
+
+    
+   
   };
 
   return (
@@ -39,6 +62,7 @@ function EmpDailyReport() {
         <div className='space-x-24'>
           <button
             type="submit"
+            onClick={handleSubmit}
             className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
             Submit Report
