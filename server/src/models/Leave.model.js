@@ -8,6 +8,11 @@ const leaveSchema = new Schema (
             type:String,
             // required:true
         },
+
+        adminEmail:{
+            type:String,
+            required:true
+        },
     
         reason:{
             type:String,

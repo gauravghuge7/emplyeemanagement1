@@ -3,6 +3,7 @@ import { V1Controllers } from "../../controllers/index.js";
 import { upload } from "../../middlewares/multer.middleware.js";
 import { getAdminProfile, getUsers, logoutAdmin, registerUser } from "../../controllers/v1/admin.controller.js";
 import { isAdminLoggedIn } from "../../middlewares/admin.auth.middlewares.js";
+import { leaveStatus } from "../../controllers/v1/user.leave.controller.js";
 
 ///  Admin Router 
 const AdminRouter = express.Router();
@@ -51,6 +52,11 @@ AdminRouter.route("/getAdminProfile").get(
   getAdminProfile
 );
 
+
+AdminRouter.route("/getLeaveEmployee").get(
+  isAdminLoggedIn,
+  leaveStatus
+);
 
 
 
