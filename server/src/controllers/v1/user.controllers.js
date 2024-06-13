@@ -268,7 +268,32 @@ const getUserProfile = asyncHandler(async(req, res) => {
 
 
 
-const acceptDailyReport = asyncHandler(async(req, res) => {});
+const acceptDailyReport = asyncHandler(async(req, res) => {
+    const { email } = req.user;
+
+    const { dailyReport } = req.body;
+
+    try {
+    
+        const user = await UserModel.findOne({ email });
+
+        if(!user) {
+            return res.status(400).json({ message: "User not found" });
+        }
+
+        const report = user.dailyReports = dailyReport;
+
+        await user.save();
+
+        return res.json(new ApiResponse(200, "Daily Report accepted", user, report));   
+        
+    } 
+    
+    catch (error) {
+        console.log(error);
+        return res.status(400).send(error.message);
+    }
+});
 
 
 
@@ -281,6 +306,6 @@ export {
     logoutUser,
     getUserProfile,
     acceptDailyReport,
-    updatePassword
+    updatePassword,
     
 };
