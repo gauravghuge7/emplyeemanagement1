@@ -18,7 +18,7 @@ const cookiesOptions = {
 
 const acceptLeaveApplication = asyncHandler(async(req, res) => {
 
-    const {email} = req.user;
+    const {email, adminEmail} = req.user;
 
     try {
         const {fullName, employeeId, department, date, reason,  explainAboutLeave} = req.body;
@@ -43,6 +43,7 @@ const acceptLeaveApplication = asyncHandler(async(req, res) => {
             employeeId,
             email,
             reason,
+            adminEmail,
             date,
             department,
             explainAboutLeave,
@@ -116,10 +117,40 @@ const addTask = asyncHandler(async(req, res) =>{
         });
     }
 
- });
+});
+
+
+const leaveStatus = asyncHandler(async (req,res,) => {
+
+    const {adminEmail} = req.body;
+
+    try {
+        const user = await LeaveModel.find({adminEmail})
+
+        
+        return res
+        .status(200)
+        .json(new ApiResponse(
+            200,
+            "Leave status fetched successfully",
+            user
+        ));
+        
+    } 
+    catch (error) {
+        console.log(error);
+        return res
+        .status(500)
+        .json({
+            message: error.message
+        });
+    }
+
+})
 
 
 export {
     acceptLeaveApplication,
-    addTask
+    addTask,
+    leaveStatus
 }
