@@ -137,6 +137,7 @@ userSchema.methods = {
             {
                 id: this._id,
                 email: this.email,
+                adminEmail: this.adminEmail,
                 role: this.role,
                 phoneNumber: this.phoneNumber,
                 

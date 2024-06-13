@@ -32,21 +32,30 @@ export const AddTask = ({ setTasks, tasks, dialogRef } ) => {
     date:""
   })
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault()
-    setTasks(prevTasks => {
-      console.log(prevTasks)
-      task.date = `${new Date()}`
-      return [...prevTasks, task];
-    })
-    setTask({
-      projectname: "",
-      tasktitle: "",
-      departement: "",
-      description: "",
-      date:""
-    })
-    dialogRef.current.close();
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      withCredentials: true,
+    }
+
+    const body = {
+      project: task.projectname,
+      title: task.tasktitle,
+      departement: task.departement,
+      description: task.description,
+  
+      
+    }
+
+    const response = await axios.post("", body, config);
+
+
+    
+    
   }
   return (
     <div className="md-flex md-flex-column md-align-items-center m-8 p-8 bg-gradient-to-r from-blue-400 to-purple-400 ">
