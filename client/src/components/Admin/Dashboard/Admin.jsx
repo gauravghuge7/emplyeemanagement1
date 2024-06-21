@@ -99,11 +99,11 @@ function Admin() {
         setLeaveRequest(length);
 
         let count = 0;
-        check.map((e) => {
+        await check.map((e) => {
 
-           if(e.leaveStatus === "accepted") {
-             count++;
-           }
+          if(e.leaveStatus === "accepted") {
+            count++;
+          }
         })
 
         setAcceptLeave(count);
@@ -303,5 +303,6 @@ function Admin() {
    
   )
 }
+
 
 export default Admin
