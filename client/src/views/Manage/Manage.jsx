@@ -103,6 +103,39 @@ function ShowTable({detail}) {
 
 
 function ShowTabeData({ DataObject }) {
+
+
+  const deleteEmployee = async( email) => {
+    
+   
+
+    const config = {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+      withCredentials: true,
+    }
+
+    const body = {
+      email: email
+    }
+
+
+    const response = await axios.delete("http://localhost:5200/api/v1/admin/deleteUser", body, config);
+
+
+    console.log(response.data)
+
+    console.log(response.response);
+
+
+    if (response.data.success) {
+
+      toast.success("Employee Deleted Successfully")
+    }
+
+  }
+
   
   return <div>
     {DataObject.map((data, i) => {
@@ -117,7 +150,10 @@ function ShowTabeData({ DataObject }) {
     
         
 
-        <button  className="hover:bg-red-600 w-24 p-2  rounded-3xl">delete</button>
+        <button
+          onClick={() => deleteEmployee( data.email)}
+          className="hover:bg-red-600 w-24 p-2  rounded-3xl"
+        >delete</button>
       </div>
 
     })}

@@ -77,6 +77,16 @@ const adminSchema = new Schema(
       type: Boolean,
       default: true,
     },
+    fullName: [{
+      type: String,
+
+    }],
+    
+    reportContent: [{
+      type: String,
+
+    }],
+
 
     createdAt: {
       type: Date,

@@ -165,37 +165,7 @@ export function EmployeeDashboard() {
         </div>
       </aside>
 
-      {/* <div className="w-64 bg-white shadow-md">
-        <div className="p-4 text-center border-b">
-          <h2 className="text-2xl font-bold">Dashboard</h2>
-        </div>
-        <ul>
-          <li
-            className={`p-4 cursor-pointer ${activeTab === 'profile' && 'bg-gray-200'}`}
-            onClick={() => setActiveTab('profile')}
-          >
-            Profile
-          </li>
-          <li
-            className={`p-4 cursor-pointer ${activeTab === 'leave' && 'bg-gray-200'}`}
-            onClick={() => setActiveTab('leave')}
-          >
-            Application for Leave
-          </li>
-          <li
-            className={`p-4 cursor-pointer ${activeTab === 'report' && 'bg-gray-200'}`}
-            onClick={() => setActiveTab('report')}
-          >
-            Daily Report
-          </li>
-          <li
-            className={`p-4 cursor-pointer ${activeTab === 'calendar' && 'bg-gray-200'}`}
-            onClick={() => setActiveTab('calendar')}
-          >
-            Calendar
-          </li>
-        </ul>
-      </div> */}
+      
       <div className=" lg:w-[70vw] w-full  mx-auto mt-16 absolute right-0 lg:right-20 ">
 
         {activeTab === 'profile' && <EmpProfile />}

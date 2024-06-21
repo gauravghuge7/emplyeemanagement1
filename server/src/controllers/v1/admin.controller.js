@@ -299,14 +299,19 @@ const deleteUser = asyncHandler(async (req, res) => {
 
   const { email } = req.body;
 
+  console.log(req.body);
+  console.log("this is email => "+email);
+
+
   try {
-    const user = await UserModel.findOne({ email });
 
-    if (!user) {
-      throw new ApiError("User not registered", 404);
+    const user = await UserModel.findOneAndDelete({ email });
+
+    console.log("this is User data => "+user);
+
+    if(!user) {
+      return res.status(404).send("User not found");
     }
-
-    await user.remove();
 
     return res
       .status(200)

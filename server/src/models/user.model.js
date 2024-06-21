@@ -31,6 +31,7 @@ const userSchema = new Schema (
             type:String,
             
              // Ensure email is unique
+            unique: true,
             match: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/
         },
 
@@ -149,5 +150,5 @@ userSchema.methods = {
 }
 
 
-export const UserModel = model('User',userSchema)
+export const UserModel = model('UserModel',userSchema)
 
