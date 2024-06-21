@@ -42,10 +42,10 @@ function Manage() {
 
     const response = await axios.get("http://localhost:5200/api/v1/admin/getUsers", config);
 
-   
-    
 
     const data = response.data.data;
+
+    console.log(data);
 
     setDetail(data)
 
@@ -108,8 +108,6 @@ function ShowTabeData({ DataObject }) {
 
   const deleteEmployee = async( email) => {
     
-   
-
     const config = {
       headers: {
         'Content-Type': 'multipart/form-data',
@@ -121,12 +119,9 @@ function ShowTabeData({ DataObject }) {
       email: email
     }
 
-
     const response = await axios.delete("http://localhost:5200/api/v1/admin/deleteUser", body, config);
 
-
     console.log(response.data)
-
     console.log(response.response);
 
 
@@ -139,30 +134,30 @@ function ShowTabeData({ DataObject }) {
 
   console.log(DataObject);
   
-  // return (
-  //     <div>
+  return (
+      <div>
 
-  //     {DataObject.map((data, i) => {
+      {DataObject.map((data, i) => {
         
-  //       return <div className="grid items-center justify-center grid-cols-5 gap-x-36 auto-cols-auto py-5 border border-r-0 border-l-0 border-b-0  my-0" key={i}>
+        return <div className="grid items-center justify-center grid-cols-5 gap-x-36 auto-cols-auto py-5 border border-r-0 border-l-0 border-b-0  my-0" key={i}>
 
-  //         <h2 className="mx-4">{data.firstName}</h2>
-  //         <h2>{data.lastName}</h2>
-  //         <h2 className="text-center w-20">{data._id}</h2>
+          <h2 className="mx-4">{data.firstName}</h2>
+          <h2>{data.lastName}</h2>
+          <h2 className="text-center w-20">{data._id}</h2>
 
-  //         <h2>{data.email}</h2>
+          <h2>{data.email}</h2>
       
           
 
-  //         <button
-  //           onClick={() => deleteEmployee( data.email)}
-  //           className="hover:bg-red-600 w-24 p-2  rounded-3xl"
-  //         >delete</button>
-  //       </div>
+          <button
+            onClick={() => deleteEmployee( data.email)}
+            className="hover:bg-red-600 w-24 p-2  rounded-3xl"
+          >delete</button>
+        </div>
 
-  //   })}
-  // </div>
-  // )
+    })}
+  </div>
+  )
 
 }
 
