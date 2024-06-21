@@ -3,6 +3,7 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 
 import ApiRouter from "./routes/index.js";
+import { healthCheck } from "./controllers/health.controller.js";
 
 // accept json and form data
 const app = express();
@@ -20,8 +21,11 @@ app.use(cors(
 // for receiving cookies
 app.use(cookieParser());
 
+app.use("/", healthCheck);
+
 
 app.use("/api", ApiRouter);
+
 
 
 
