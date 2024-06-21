@@ -9,14 +9,17 @@ import Report from '../../../views/Report/Report';
 
 import axios from 'axios';
 import AdminProfiles from '../AdminProfile/AdminProfiles';
+import { toast } from 'sonner';
+import LeaveStatus from '../LeaveStatus/LeaveStatus';
 
 
 
 function Admin() {
 
   const [activeBox, setActiveBox] = useState("");
-
   const [totalEmployee, setTotalEmployee] = useState(0);
+  const [leaveRequest, setLeaveRequest] = useState(0);
+  const [acceptLeave, setAcceptLeave] = useState(0);
   
   let count = 0;
 
@@ -34,49 +37,97 @@ function Admin() {
     };
     
       
-  try {
-    
-    const response = await axios("http://localhost:5200/api/v1/admin/getUsers", config);
+    try {
+      
+      const response = await axios("http://localhost:5200/api/v1/admin/getUsers", config);
 
-    const data = response.data;
+      const data = response.data;
 
-    // set the total emplyees 
-    setTotalEmployee(data.data.length);
+      // set the total emplyees 
+      setTotalEmployee(data.data.length);
 
-    console.log(data.data);
-
-
-    const info = data.data;
-
-    
-    
-    info.map((e) =>{
-
-      if(e.isActive) {
-        count++;
-      }
-
-    })
-
-    setActiveUsers(count);
+      console.log(data.data);
 
 
-    
+      const info = data.data;
+
+      
+      
+      info.map((e) =>{
+
+        if(e.isActive) {
+          count++;
+        }
+
+      })
+
+      setActiveUsers(count);
 
 
-  } 
-  catch (error) {
-    console.log(error);
+      
+
+
+    } 
+    catch (error) {
+      console.log(error);
+    }
+
   }
+
+  const getLeaveRequest = async () => {
+
+    const config = {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+      
+      withCredentials: true
+    };
+
+    try {
+    
+        const response = await axios.get("http://localhost:5200/api/v1/admin/getLeaveEmployee", config)
+        
+        console.log(response.data);
+
+        const data = response.data;
+
+        const length = data.data.length;
+
+        const check = data.data;
+        
+        setLeaveRequest(length);
+
+        let count = 0;
+        await check.map((e) => {
+
+          if(e.leaveStatus === "accepted") {
+            count++;
+          }
+        })
+
+        setAcceptLeave(count);
+
+
+      
+    } 
+    catch (error) {
+      console.log(error);
+      toast.error("Error");
+    }
 
   }
 
 
   useEffect(() => {
     getEmployee();
+  
 
   })
   
+  useEffect(() => {
+    getLeaveRequest();
+  }, [leaveRequest])
 
 
   return (
@@ -165,10 +216,12 @@ function Admin() {
               </div>
             </div>
 
-            { /* New Employees */ }
+            { /* Leave request Employees */ }
 
             <div className="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 shadow-md">
-              <div className="bg-clip-border mx-4 rounded-xl overflow-hidden bg-gradient-to-tr from-green-600 to-green-400 text-white shadow-green-500/40 shadow-lg absolute -mt-4 grid h-16 w-16 place-items-center">
+              <div className="bg-clip-border mx-4 rounded-xl overflow-hidden bg-gradient-to-tr from-green-600 to-green-400 text-white shadow-green-500/40 shadow-lg absolute -mt-4 grid h-16 w-16 place-items-center"
+              onClick={() => setActiveBox("leave")}
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
@@ -184,7 +237,7 @@ function Admin() {
                   Leave Requests 
                 </p>
                 <h4 className="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">
-                  25
+                  {leaveRequest}
                 </h4>
               </div>
               <div className="border-t border-blue-gray-50 p-4">
@@ -212,7 +265,7 @@ function Admin() {
                   Today Leave 
                 </p>
                 <h4 className="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">
-                  5
+                  {acceptLeave}
                 </h4>
               </div>
               <div className="border-t border-blue-gray-50 p-4">
@@ -233,6 +286,9 @@ function Admin() {
             {activeBox === "report" && <Report/>}
 
             {activeBox === "" && <Manage />}
+
+            {activeBox === "leave" && <LeaveStatus />}
+
           
           </div>
           
@@ -247,5 +303,6 @@ function Admin() {
    
   )
 }
+
 
 export default Admin

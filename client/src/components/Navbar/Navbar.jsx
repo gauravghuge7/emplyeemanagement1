@@ -1,5 +1,7 @@
 
+import axios from 'axios';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { toast } from 'sonner';
 
 function Navbar({ userType, setUserType }) {
   const location = useLocation();
@@ -7,16 +9,42 @@ function Navbar({ userType, setUserType }) {
 
   const isAdminUrl = location.pathname.includes('admin-dashboard');
 
-  const handleLogout = () => {
+  const handleLogout = async(e) => {
     // Clear user data
     setUserType(null);
     localStorage.removeItem('userType'); // If you're using localStorage or sessionStorage
     sessionStorage.removeItem('userType'); // Clear session storage if used
 
-    // Redirect to the home page and replace the history stack
-    navigate("/", { replace: true });
+    e.preventDefault();
 
-    console.log('User logged out');
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      withCredentials: true,
+    }
+
+
+    const response = await axios.post('http://localhost:5200/api/v1/user/logout', config);
+
+    console.log(response);
+
+    const data = response.data;
+
+    console.log(data);
+   
+
+
+    if(response.status === 200) {
+      alert(data.message);
+      toast.success(data.message);
+      navigate("/", { replace: true });
+
+    
+    }
+    
+
   };
 
   return (

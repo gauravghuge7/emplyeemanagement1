@@ -75,6 +75,7 @@ AdminRouter.route("/registerUser").post(
 AdminRouter.route("/deleteUser").delete(
 
   isAdminLoggedIn,
+  upload.none(),
   deleteUser
 )
 
