@@ -104,7 +104,7 @@ const loginAdmin = asyncHandler(async (req, res, next) => {
 
     // Handle If no user was
     if (!user) {
-      throw new ApiError(401, "Email Wrong");
+      throw new ApiError(401, "User has been not registered");
     }
 
     // compare password

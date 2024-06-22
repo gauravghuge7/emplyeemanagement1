@@ -56,10 +56,10 @@ function AdmLogin({loginType}) {
 
 
   return (
-    <div>
+    <div className='flex justify-center items-center'>
       {/* Admin Login Card */}
 
-      <div className="lg:w-[400px] max-w-sm p-6 bg-white rounded-lg shadow-2xl border border-gray-300">
+      <div className="lg:w-[400px] max-w-sm p-6 bg-white rounded-lg shadow-2xl border border-gray-300 ">
         <div className="w-full max-w-sm p-6 bg-white rounded-lg shadow-2xl border border-gray-300 ">
           <h2 className="text-2xl font-bold text-center mb-6">Admin Login</h2>
           <form onSubmit={submitAdmin} method="POST">
