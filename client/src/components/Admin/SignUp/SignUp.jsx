@@ -49,7 +49,7 @@ function SignUp({setLoginType}) {
     if (data.success === true) {
       alert("Admin Successfully registered! Please login to continue");
       setLoginType("admin");
-      navigate("/home")
+      navigate("/adminlogin")
 
     }
     

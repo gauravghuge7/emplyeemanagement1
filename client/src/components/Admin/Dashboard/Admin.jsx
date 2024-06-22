@@ -11,6 +11,7 @@ import axios from 'axios';
 import AdminProfiles from '../AdminProfile/AdminProfiles';
 import { toast } from 'sonner';
 import LeaveStatus from '../LeaveStatus/LeaveStatus';
+import Announcement from '../../../views/Announcement/Announcement';
 
 
 
@@ -53,7 +54,7 @@ function Admin() {
 
       
       
-      info.map((e) =>{
+       info.map((e) =>{
 
         if(e.isActive) {
           count++;
@@ -296,6 +297,8 @@ function Admin() {
             {activeBox === "" && <Manage />}
 
             {activeBox === "leave" && <LeaveStatus />}
+            {activeBox === "announcement" && <Announcement />}
+
 
           
           </div>

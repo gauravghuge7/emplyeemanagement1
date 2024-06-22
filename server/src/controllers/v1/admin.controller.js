@@ -1,4 +1,5 @@
 import { AdminModel, UserModel } from "../../models/index.js";
+
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import asyncHandler from "../../utils/asyncHandler.js";
@@ -46,8 +47,10 @@ const registerAdmin = asyncHandler(async (req, res, next) => {
     if (confirmPassword !== password) {
       throw new ApiError(400, "Password Doesn't Match");
     }
+    console.log("pass")
     // Check For Conflict
     const existingUser = await AdminModel.findOne({ email });
+    console.log("existing ")
     if (existingUser) {
       throw new ApiError("User already exists", 409);
     }
@@ -375,6 +378,9 @@ const getDailyReport = asyncHandler(async (req, res) => {
 
 
 
+
+
+
  
 export {
   getUsers,
@@ -389,7 +395,8 @@ export {
   updatePassword,
   AdminUpdate,
   AdminDelete,
-  getAdminDashboard,
+  getAdminDashboard
+ 
   
 
 
