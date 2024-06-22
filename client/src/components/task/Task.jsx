@@ -61,7 +61,7 @@ export const AddTask = ({ setTasks, tasks, dialogRef } ) => {
 
     if(data.success) {
       alert(data.message);
-      toast.success("Task added successfully");
+      await toast.success("Task added successfully");
     }
 
     

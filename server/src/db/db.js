@@ -10,7 +10,7 @@ const connectDB = async() => {
             );
         }
     } catch (error) {
-        console.log(`Error while connecting to monodb ${error.message}`);
+        console.log(`Error while connecting to mongoDB ${error.message}`);
         process.exit(1);
     }
 };

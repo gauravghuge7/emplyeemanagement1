@@ -23,6 +23,7 @@ function AdmLogin({loginType}) {
       headers: {
         "Content-Type": "application/json",
       },
+      withCredentials: true,
     };
 
       const body = {

@@ -50,7 +50,7 @@ const userSchema = new Schema (
 
         isActive:{
             type:Boolean,
-            default:true
+            default:false
         },
 
         role:{
