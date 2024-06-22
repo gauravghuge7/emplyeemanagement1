@@ -36,8 +36,8 @@ function EmpProfile() {
       console.log(data.data);
       if (data.success) {
 
-        await toast.success(data.message);
-        await toast.message("Profile fetched successfully");
+         toast.success(data.message);
+         toast.message("Profile fetched successfully");
 
         setEmployee(data.data);
         setAvatar(data.data.avatar.secure_url);
@@ -52,9 +52,11 @@ function EmpProfile() {
 
   };
 
-  const data = useEffect(() => {
-
+  useEffect(  () => {
+    
     fetchProfile();
+    toast.success("logged out");
+
 
   }, []);
 
