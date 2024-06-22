@@ -3,8 +3,12 @@ import { V1Controllers } from "../../controllers/index.js";
 import { upload } from "../../middlewares/multer.middleware.js";
 import { deleteUser, getAdminProfile, getDailyReport, getUsers, logoutAdmin, registerUser } from "../../controllers/v1/admin.controller.js";
 import { isAdminLoggedIn } from "../../middlewares/admin.auth.middlewares.js";
+
+import { adminLeaveStatus, giveLeavePermission } from "../../controllers/v1/user.leave.controller.js";
+
 import { leaveStatus } from "../../controllers/v1/user.leave.controller.js";
 import { createAnnouncement, getAnnouncements } from '../../controllers/v1/announcement.controller.js '
+
 
 ///  Admin Router 
 const AdminRouter = express.Router();
@@ -56,7 +60,7 @@ AdminRouter.route("/getAdminProfile").get(
 
 AdminRouter.route("/getLeaveEmployee").get(
   isAdminLoggedIn,
-  leaveStatus
+  adminLeaveStatus
 );
 
 
@@ -64,6 +68,20 @@ AdminRouter.route("/getDailyReport").get(
   isAdminLoggedIn,
   getDailyReport
 )
+
+
+AdminRouter.route("/approveLeave").post(
+  isAdminLoggedIn,
+  upload.none(),
+  giveLeavePermission
+)
+
+
+
+
+
+
+
 
 
 AdminRouter.route("/registerUser").post(

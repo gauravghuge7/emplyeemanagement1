@@ -67,6 +67,7 @@ export const AddTask = ({ setTasks, tasks, dialogRef } ) => {
     
     
   }
+
   return (
     <div className="md-flex md-flex-column md-align-items-center m-8 p-8 bg-gradient-to-r from-blue-400 to-purple-400 ">
 
@@ -108,10 +109,10 @@ export const AddTask = ({ setTasks, tasks, dialogRef } ) => {
         </div>
 
 
-        {/* department input field */}
+        {/* Position input field */}
         <div className="mt-4">
           <label className="block font-semibold" htmlFor="email">
-            Department
+            Position
           </label>
           <input
             className="w-full shadow-inner bg-gray-100 rounded-lg placeholder-black text-2xl p-4 border-none block mt-1 "

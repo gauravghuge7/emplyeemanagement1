@@ -37,8 +37,15 @@ function Navbar({ userType, setUserType }) {
 
 
     if(response.status === 200) {
+
+
+      // alert(data.message);
+
+      toast.success(data.message);
+
       alert(data.message);
       toast.success("logged out");
+
       navigate("/", { replace: true });
 
     

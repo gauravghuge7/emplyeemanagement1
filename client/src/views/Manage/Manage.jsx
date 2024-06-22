@@ -152,6 +152,7 @@ function ShowTable({ detail, handleDeleteClick }) {
         <h1>Email</h1>
         <h1>Modify / Delete</h1>
       </div>
+
       <div className="">
         <ShowTableData DataObject={detail} handleDeleteClick={handleDeleteClick} />
       </div>

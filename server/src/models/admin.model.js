@@ -105,6 +105,7 @@ adminSchema.methods = {
     return jwt.sign(
       {
         adminId: this._id,
+        adminEmail: this.email,
         role: this.role,
         adminEmail: this.email,
         firstName: this.firstName,
