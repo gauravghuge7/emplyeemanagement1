@@ -27,7 +27,6 @@ function Manage() {
       withCredentials: true,
     };
 
-
     const response = await axios.get(
       "http://localhost:5200/api/v1/admin/getUsers",
       config
@@ -36,18 +35,6 @@ function Manage() {
     const data = response.data.data;
     setDetail(data);
   };
-
-    const response = await axios.get("http://localhost:5200/api/v1/admin/getUsers", config);
-
-
-    const data = response.data.data;
-
-    console.log(data);
-
-    setDetail(data)
-
-  }
-
 
   useEffect(() => {
     getData();
@@ -165,15 +152,15 @@ function ShowTable({ detail, handleDeleteClick }) {
         <h1>Email</h1>
         <h1>Modify / Delete</h1>
       </div>
+
       <div className="">
-        <ShowTabeData DataObject={detail} handleDeleteClick={handleDeleteClick} />
+        <ShowTableData DataObject={detail} handleDeleteClick={handleDeleteClick} />
       </div>
     </div>
   );
 }
 
-
-function ShowTabeData({ DataObject, handleDeleteClick }) {
+function ShowTableData({ DataObject, handleDeleteClick }) {
   // Ensure DataObject is always an array
   if (!Array.isArray(DataObject)) {
     return null;
@@ -200,64 +187,6 @@ function ShowTabeData({ DataObject, handleDeleteClick }) {
       ))}
     </div>
   );
-
-function ShowTabeData({ DataObject }) {
-
-
-  const deleteEmployee = async( email) => {
-    
-    const config = {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-      withCredentials: true,
-    }
-
-    const body = {
-      email: email
-    }
-
-    const response = await axios.delete("http://localhost:5200/api/v1/admin/deleteUser", body, config);
-
-    console.log(response.data)
-    console.log(response.response);
-
-
-    if (response.data.success) {
-
-      toast.success("Employee Deleted Successfully")
-    }
-
-  }
-
-  console.log(DataObject);
-  
-  return (
-      <div>
-
-      {DataObject.map((data, i) => {
-        
-        return <div className="grid items-center justify-center grid-cols-5 gap-x-36 auto-cols-auto py-5 border border-r-0 border-l-0 border-b-0  my-0" key={i}>
-
-          <h2 className="mx-4">{data.firstName}</h2>
-          <h2>{data.lastName}</h2>
-          <h2 className="text-center w-20">{data._id}</h2>
-
-          <h2>{data.email}</h2>
-      
-          
-
-          <button
-            onClick={() => deleteEmployee( data.email)}
-            className="hover:bg-red-600 w-24 p-2  rounded-3xl"
-          >delete</button>
-        </div>
-
-    })}
-  </div>
-  )
-
-
 }
 
 export default Manage;

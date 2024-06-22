@@ -43,11 +43,11 @@ function Leave() {
 
   return (
     
-    <div className="md-flex md-flex-column rounded-lg md-align-items-center shadow-lg shadow-blue-100 m-8 p-8 bg-gradient-to-r from-blue-400 to-purple-400 max-h-screen overflow-auto ">
+    <div className="md-flex md-flex-column rounded-lg md-align-items-center shadow-lg shadow-blue-100 m-8 p-8 bg-gradient-to-r w-[50rem] h-[40rem] from-blue-400 to-purple-400 max-h-screen overflow-auto scroll-m-0">
       
-      <form className="space-y-12" onSubmit={handleLeave}>
+      <form className="space-y-12  w-[90%] m-0 p-0 flex flex-col justify-center" onSubmit={handleLeave}>
 
-        <p className="font-semibold tracking-wide"> Please provide all information to relate the leave</p>
+        <p className="font-semibold tracking-wide"><span> Tip :</span> Please provide all information to relate the leave application</p>
 
 
         {/* full name input field */ }
@@ -57,7 +57,7 @@ function Leave() {
           </label>
 
           <input
-            className="w-full border border-gray-500 outline-none shadow-inner bg-gray-100 rounded-lg placeholder-black text-2xl p-4  block mt-1"
+            className="w-full border border-gray-500 outline-none shadow-inner bg-gray-100 rounded-lg placeholder-black text-sm p-4  block mt-1"
             id="FirstName"
             type="text"
             name="fullName"
@@ -69,13 +69,13 @@ function Leave() {
 
         </div>
 
-        {/* task name input field */ }
+        {/* EMPLOYEE ID input field */ }
         <div>
           <label className="block font-semibold" htmlFor="lastName">
             Employee Id
           </label>
           <input
-            className="w-full border border-gray-500 outline-none shadow-inner bg-gray-100 rounded-lg placeholder-black text-2xl p-4  block mt-1"
+            className="w-full border border-gray-500 outline-none shadow-inner bg-gray-100 rounded-lg placeholder-black text-sm p-4  block mt-1"
             id="lastName"
             type="text"
             name="lastName"
@@ -86,13 +86,14 @@ function Leave() {
           />
         </div>
 
+
         {/* date of leave input field */ }
         <div>
           <label className="block font-semibold" htmlFor="lastName">
             Date
           </label>
           <input
-            className="w-full border border-gray-500 outline-none shadow-inner bg-gray-100 rounded-lg placeholder-black text-2xl p-4  block mt-1"
+            className="w-full border border-gray-500 outline-none shadow-inner bg-gray-100 rounded-lg placeholder-black text-sm p-4  block mt-1"
             id="lastName"
             type="date"
             name="lastName"
@@ -104,13 +105,13 @@ function Leave() {
         </div>
 
 
-        {/* department input field */ }
+        {/* Position input field */ }
         <div className="mt-4">
           <label className=" block font-semibold" htmlFor="email">
-            Department
+            Position
           </label>
           <input
-            className="w-full shadow-inner border border-gray-500 outline-none bg-gray-100 rounded-lg placeholder-black text-2xl p-4  block mt-1 "
+            className="w-full shadow-inner border border-gray-500 outline-none bg-gray-100 rounded-lg placeholder-black text-sm p-4  block mt-1 "
             id="email"
             type="text"
             name="email"
@@ -128,7 +129,7 @@ function Leave() {
             Reason of Leave
           </label>
           <input
-            className="w-full shadow-inner border border-gray-500 outline-none bg-gray-100 rounded-lg placeholder-black text-2xl p-4  block mt-1 "
+            className="w-full shadow-inner border border-gray-500 outline-none bg-gray-100 rounded-lg placeholder-black text-sm p-4  block mt-1 "
             id="email"
             type="text"
             name="email"
@@ -145,7 +146,7 @@ function Leave() {
             Explain About Leave Reason
           </label>
           <textarea cols="30" rows="5"
-            className="w-full border border-gray-500 outline-none shadow-inner bg-gray-100 rounded-lg placeholder-black text-2xl p-4  block mt-1 "
+            className="w-full border border-gray-500 outline-none shadow-inner bg-gray-100 rounded-lg placeholder-black text-sm p-4  block mt-1 "
             id="phoneNumber"
             type="text"
             name="Description"

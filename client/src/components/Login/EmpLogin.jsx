@@ -41,10 +41,17 @@ function EmpLogin({ setUserType }) {
 
       if (response.data.success) {
         setUserType = "employee";
-        
+        alert("Employee Login Successful");
         toast.success("Employee Login Successful");
         navigate("/emp-dashboard");
       } 
+
+      else if(response.data.success === false) {
+        setErrorMessage(
+          response.data.message ||
+            "email or password is incorrect. Please try again."
+        );
+      }
       else {
         setErrorMessage(
           response.data.message ||

@@ -120,12 +120,12 @@ const addTask = asyncHandler(async(req, res) =>{
 });
 
 
-const leaveStatus = asyncHandler(async (req,res,) => {
+const employeeLeaveStatus = asyncHandler(async (req,res) => {
 
-    const {adminEmail} = req.body;
+    const {email} = req.body;
 
     try {
-        const user = await LeaveModel.find({adminEmail})
+        const user = await LeaveModel.find({email})
 
         
         return res
@@ -149,8 +149,89 @@ const leaveStatus = asyncHandler(async (req,res,) => {
 })
 
 
+const adminLeaveStatus = asyncHandler(async (req,res) => {
+
+    const {adminEmail} = req.user;
+
+    if(!adminEmail) {
+        return res.status(400).json(new ApiResponse(401, "admin login is required"));
+    }
+
+    try {
+        const user = await LeaveModel.find({adminEmail})
+
+        if(!user) {
+            return res.status(400).json(new ApiResponse(404, "today's no leave request found"));
+        }
+        
+        return res
+        .status(200)
+        .json(new ApiResponse(
+            200,
+            "Leave status fetched successfully",
+            user
+        ));
+        
+    } 
+    catch (error) {
+        console.log(error);
+        return res
+        .status(500)
+        .json({
+            message: error.message
+        });
+    }
+
+})
+
+const giveLeavePermission = asyncHandler(async (req,res) => {
+
+    const {adminEmail} = req.user;
+
+    const {email, leaveStatus} = req.body;
+
+    try {
+        const user = await LeaveModel.findOne({email})
+
+        if(leaveStatus === "pending") {
+            user.leaveStatus = "pending";
+        }
+        else if(leaveStatus === "approved") {
+            user.leaveStatus = "approved";
+        }
+        else if(leaveStatus === "rejected") {
+            user.leaveStatus = "rejected";
+        }
+
+        await user.save();
+        
+        return res
+        .status(200)
+        .json(new ApiResponse(
+            200,
+            `Leave status for ${email} is updated to ${leaveStatus}`,
+            user
+        ));
+        
+    } 
+    catch (error) {
+        console.log(error);
+        return res
+        .status(500)
+        .json({
+            message: error.message
+        });
+    }
+
+})
+
+
+
+
 export {
     acceptLeaveApplication,
     addTask,
-    leaveStatus
+    adminLeaveStatus,
+    employeeLeaveStatus,
+    giveLeavePermission
 }

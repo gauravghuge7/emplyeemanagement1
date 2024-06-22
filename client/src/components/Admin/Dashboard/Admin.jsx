@@ -92,21 +92,29 @@ function Admin() {
 
         const data = response.data;
 
-        const length = data.data.length;
-
+    
         const check = data.data;
         
-        setLeaveRequest(length);
 
-        let count = 0;
+        let approved = 0;
+        let request = 0;
+
         await check.map((e) => {
 
-          if(e.leaveStatus === "accepted") {
-            count++;
+          if(e.leaveStatus === "approved") {
+            approved++;
+          }
+        })
+        await check.map((e) => {
+
+          if(e.leaveStatus === "pending") {
+            request++;
           }
         })
 
-        setAcceptLeave(count);
+        setLeaveRequest(request);
+
+        setAcceptLeave(approved);
 
 
       

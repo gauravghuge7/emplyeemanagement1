@@ -238,6 +238,8 @@ const registerUser = asyncHandler(async (req, res) => {
   const { firstName, lastName, email, password, phoneNumber } = req.body;
 
   const {adminEmail, adminId} = req.user;
+
+  console.log(req.user);
   
 
   if(!firstName || !lastName || !email || !password || !phoneNumber) {
