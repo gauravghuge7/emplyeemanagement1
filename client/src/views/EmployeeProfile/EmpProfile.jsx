@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-
+import { toast } from "sonner";
 
 
 function EmpProfile() {
@@ -34,10 +34,10 @@ function EmpProfile() {
 
 
       console.log(data.data);
-
       if (data.success) {
 
-        alert(data.message);
+        await toast.success(data.message);
+        await toast.message("Profile fetched successfully");
 
         setEmployee(data.data);
         setAvatar(data.data.avatar.secure_url);

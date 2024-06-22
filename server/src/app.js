@@ -13,21 +13,24 @@ app.use(express.urlencoded({ extended: true }));
 // enable cross origin requests
 app.use(cors(
   {
-    origin: 'http://localhost:5173' || '*',
+    origin: 'http://localhost:5173',
     credentials: true,
   }
 ));
 
+// app.use(cors());
+
+
+
 // for receiving cookies
 app.use(cookieParser());
 
-app.use("/", healthCheck);
 
 
 app.use("/api", ApiRouter);
 
 
-
+app.use("/", healthCheck);
 
 
 

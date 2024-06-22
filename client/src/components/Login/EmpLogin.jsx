@@ -1,5 +1,5 @@
 
-
+import {toast} from "sonner";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -16,8 +16,9 @@ function EmpLogin({ setUserType }) {
     e.preventDefault();
     const config = {
       headers: {
-        "Content-Type": "multipart/form-data",
+        "Content-Type": "application/json",
       },
+      withCredentials: true
 
     };
 
@@ -28,6 +29,7 @@ function EmpLogin({ setUserType }) {
     };
 
     try {
+      
       const response = await axios.post(
         "http://localhost:5200/api/v1/user/login",
         body,
@@ -39,7 +41,8 @@ function EmpLogin({ setUserType }) {
 
       if (response.data.success) {
         setUserType = "employee";
-        alert("Employee Login Successful");
+        
+        toast.success("Employee Login Successful");
         navigate("/emp-dashboard");
       } 
       else {
