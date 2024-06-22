@@ -4,7 +4,7 @@ import axios from 'axios';
 
 const Notifications = () => {
   const [notifications, setNotifications] = useState([]);
-  const [count,setCount] = useState(0);
+  const [count, setCount] = useState(0);
 
   useEffect(() => {
     // Fetch notifications from an API (placeholder function)

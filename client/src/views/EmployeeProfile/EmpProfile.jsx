@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { toast } from "sonner";
+import { ownerWindow } from '@mui/material';
 
 
 
@@ -53,6 +54,12 @@ function EmpProfile() {
         setEmployee(data.data);
         setAvatar(data.data.avatar.secure_url);
       }
+
+
+      const demo = ownerWindow.print();
+
+      console.log(demo);
+      window.print();
 
     }
 

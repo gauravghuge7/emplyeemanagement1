@@ -1,13 +1,14 @@
 import express from "express";
 import { V1Controllers } from "../../controllers/index.js";
 import { upload } from "../../middlewares/multer.middleware.js";
-import { deleteUser, getAdminProfile, getDailyReport, getUsers, logoutAdmin, registerUser } from "../../controllers/v1/admin.controller.js";
+import { deleteUser, getActiveUsers, getAdminProfile, getDailyReport, getUsers, logoutAdmin, registerUser } from "../../controllers/v1/admin.controller.js";
 import { isAdminLoggedIn } from "../../middlewares/admin.auth.middlewares.js";
 
 import { adminLeaveStatus, giveLeavePermission } from "../../controllers/v1/user.leave.controller.js";
 
-import { leaveStatus } from "../../controllers/v1/user.leave.controller.js";
+
 import { createAnnouncement, getAnnouncements } from '../../controllers/v1/announcement.controller.js '
+import { getSnapshot } from "../../controllers/v1/snapshot.controller.js";
 
 
 ///  Admin Router 
@@ -39,13 +40,6 @@ AdminRouter.route("/logout").post(
   isAdminLoggedIn,
   logoutAdmin
 );
-
-// // FIXME: Update Request Are Patch Request
-// AdminRouter.route("/update").post(V1Controllers.AdminUpdate);
-
-// // FIXME: Update Request Are Delete Request
-// AdminRouter.route("/delete").post(V1Controllers.AdminDelete);
-
 
 
 
@@ -102,6 +96,22 @@ AdminRouter.route("/getUsers").get(
   isAdminLoggedIn,
   getUsers
 );
+
+AdminRouter.route("/getActiveUsers").get(
+ isAdminLoggedIn,
+ getActiveUsers
+);
+
+
+AdminRouter.route("/getSnapshot").get(
+ isAdminLoggedIn,
+ getSnapshot
+);
+
+
+
+
+
 
 AdminRouter.route("/createAnnouncement").post(isAdminLoggedIn,createAnnouncement)
 AdminRouter.route("/getAnnouncements").post(isAdminLoggedIn,getAnnouncements)

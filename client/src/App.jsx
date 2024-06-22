@@ -20,6 +20,8 @@ import { FaSign } from 'react-icons/fa';
 import { SignUp } from './components/Admin/SignUp/SignUp';
 import AdmLogin from './components/Login/AdmLogin';
 
+import AutoCapture from './components/ScreenRecorder/AutoCapture';
+
 
 function App() {
 
@@ -62,6 +64,10 @@ const RoutesWrapper = ({ userType, setUserType, setLoginType, loginType }) => {
         <Route path="/admin-profile" element={<AdminProfile />} />
         <Route path="/form" element={<AdminForm />} />
         <Route path="/register" element={<Register />} />
+
+
+
+        <Route path="/screen" element={<AutoCapture />} />
 
 
       {/****  this is the comment  */}
