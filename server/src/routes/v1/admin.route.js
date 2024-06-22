@@ -4,6 +4,7 @@ import { upload } from "../../middlewares/multer.middleware.js";
 import { deleteUser, getAdminProfile, getDailyReport, getUsers, logoutAdmin, registerUser } from "../../controllers/v1/admin.controller.js";
 import { isAdminLoggedIn } from "../../middlewares/admin.auth.middlewares.js";
 import { leaveStatus } from "../../controllers/v1/user.leave.controller.js";
+import { createAnnouncement, getAnnouncements } from '../../controllers/v1/announcement.controller.js '
 
 ///  Admin Router 
 const AdminRouter = express.Router();
@@ -83,6 +84,9 @@ AdminRouter.route("/getUsers").get(
   isAdminLoggedIn,
   getUsers
 );
+
+AdminRouter.route("/createAnnouncement").post(isAdminLoggedIn,createAnnouncement)
+AdminRouter.route("/getAnnouncements").post(isAdminLoggedIn,getAnnouncements)
 
 
 export default AdminRouter;
