@@ -50,7 +50,9 @@ const userSchema = new Schema (
 
         isActive:{
             type:Boolean,
-            default:false
+            default:false,
+            expiresIn:"8h",
+            
         },
 
         role:{
@@ -80,6 +82,28 @@ const userSchema = new Schema (
             type: String,
             enum: ['Daily', 'Weekly', 'Monthly'],
             required: true
+        }],
+
+        snapshots: [{
+           
+            snaps: [{
+        
+                empPhoto: {
+                    type: String,
+                    required: true
+                },
+        
+        
+                screenShot: {
+                    type: String,
+                    required: true
+                },
+                
+                time: {
+                    type: Date,
+                    required: true
+                }
+            }]
         }],
 
         sessions: [{

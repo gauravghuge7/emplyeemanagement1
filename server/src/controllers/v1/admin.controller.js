@@ -4,7 +4,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import asyncHandler from "../../utils/asyncHandler.js";
 import ApiError from "../../utils/ApiError.js";
-import ApiResponse from "../../utils/ApiResponse.js";
+import ApiResponse from "../../utils/ApiResponse.js"
 import { SALT_ROUND, USER_ROLE } from "../../constant.js";
 import { compareRole } from "../../utils/roleHelper.js";
 import {
@@ -348,6 +348,43 @@ const getUsers = asyncHandler(async (req, res) => {
   }
 });
 
+
+const getActiveUsers = asyncHandler(async (req, res) => {
+
+  const {adminEmail} = req.user;
+
+
+  const active = true;
+
+  try {
+
+    const activeUsers = await UserModel.find({adminEmail, isActive: active});
+  
+    
+    
+
+    
+    return res
+      .status(200)
+      .json(new ApiResponse(200, "Active Users fetched successfully", activeUsers));
+    
+  } 
+  catch (error) {
+    
+    console.log(error);
+    return res
+      .status(400)
+      .json(new ApiResponse(400, "Error in getting active users", error));
+
+  }
+
+
+});
+
+
+
+
+
 const getDailyReport = asyncHandler(async (req, res) => {
   const {adminEmail} = req.user;
 
@@ -388,6 +425,8 @@ export {
   registerAdmin,
   deleteUser,
   getDailyReport,
+
+  getActiveUsers,
 
   loginAdmin,
   logoutAdmin,
