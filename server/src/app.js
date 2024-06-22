@@ -21,13 +21,13 @@ app.use(cors(
 // for receiving cookies
 app.use(cookieParser());
 
-app.use("/", healthCheck);
 
 
 app.use("/api", ApiRouter);
 
 
 
+app.use("/", healthCheck);
 
 
 

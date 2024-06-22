@@ -148,7 +148,7 @@ function SignUp({setLoginType}) {
 
           {/** Link to login page */}
           <div className="mt-4 text-center">
-            <p className="text-gray-700">Already have an account? <a href="/home" className="text-blue-500 hover:underline">Login here</a></p>
+            <p className="text-gray-700">Already have an account? <a href="/adminlogin" className="text-blue-500 hover:underline">Login here</a></p>
           </div>
           
         </form>
