@@ -23,9 +23,12 @@ const sendSnapshot = asyncHandler(async (req, res) => {
 
     const {email } = req.user;
 
+    console.log("req.files => ", req.files);
+    console.log("req.file => ", req.file);
 
+    console.log("req.files.path => ", req.files.path);
 
-    if(!req.file) {
+    if(!req.files) {
         return res.status(400).json(new ApiResponse(400, "No file uploaded" ));
     }
 
@@ -39,7 +42,7 @@ const sendSnapshot = asyncHandler(async (req, res) => {
     
         console.log("before upload");
 
-        const path = req.file.path;
+        const path = req.files.path;
     
         const response = await uploadOnCloudinary(path);
 

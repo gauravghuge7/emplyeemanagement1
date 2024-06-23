@@ -66,7 +66,7 @@ UserRouter.route("/dailyReport").post (
 UserRouter.route("/sendSnapshot").post (
 
     isUserLoggedIn,
-    upload.single("screenshot"),
+    upload.single("photo"),
     sendSnapshot
 )
 

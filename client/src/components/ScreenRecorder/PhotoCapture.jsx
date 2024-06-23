@@ -1,4 +1,5 @@
 // PhotoCapture.js
+import axios from 'axios';
 import { useRef, useState, useEffect } from 'react';
 
 function PhotoCapture() {
@@ -10,7 +11,7 @@ function PhotoCapture() {
     useEffect(() => {
         intervalRef.current = setInterval(() => {
             startCamera();
-        }, 60 * 60 * 1000);
+        },  15 * 1000);
 
         return () => {
             console.log('Component unmounting');
@@ -62,14 +63,21 @@ function PhotoCapture() {
 
     const sendPhotoToBackend = async (photoData) => {
         try {
-            const response = await fetch('YOUR_BACKEND_API_ENDPOINT', {
-                method: 'POST',
+
+            const formData = new FormData();
+            formData.append('photo', photoData);
+            
+            const config = {
                 headers: {
-                    'Content-Type': 'application/json',
-                    // authorization tokens
+                    'Content-Type': 'multipart/form-data',
+                    
                 },
-                body: JSON.stringify({ photo: photoData })
-            });
+                withCredentials: true,
+            }
+
+            const body = JSON.stringify({ photo: photoData })
+
+            const response = await axios.post('http://localhost:5200/api/v1/user/sendSnapshot', formData, config);
 
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
