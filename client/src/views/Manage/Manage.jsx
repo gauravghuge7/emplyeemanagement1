@@ -149,8 +149,8 @@ function ShowTabeData({ DataObject }) {
 
         return <div className="grid  grid-cols-5 gap-x-36 auto-cols-auto py-5 border border-r-0 border-l-0 border-b-0  my-0" key={i}>
 
-          <h2 className="mx-4">{data.id}</h2>
-          <h2>{data.name}</h2>
+          <h2 className="mx-4">{data._id}</h2>
+          <h2>{data.firstName} {data.lastName}</h2>
           <h2 className="text-center w-20">{data.email}</h2>
 
 
@@ -158,7 +158,7 @@ function ShowTabeData({ DataObject }) {
 
           <button
             onClick={() => deleteEmployee(data.email)}
-            className="hover:bg-red-600 w-24 p-2  rounded-3xl"
+            className="hover:bg-red-600 w-24 p-2 bg-red-300 rounded-3xl"
           >delete</button>
           <button onClick={() => employeeDataRef.current.showModal()} ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-ellipsis-vertical"><circle cx="12" cy="12" r="1" /><circle cx="12" cy="5" r="1" /><circle cx="12" cy="19" r="1" /></svg></button>
           <Suspense fallback={<div>Loading...</div>}>

@@ -43,11 +43,7 @@ const Notifications = () => {
 
 
 
-    // const data = [
-    //   { id: 1, title: 'New Employee Added', message: 'John Doe has been added.', date: '2024-06-01', isRead: false },
-    //   { id: 2, title: 'Policy Update', message: 'The leave policy has been updated.', date: '2024-05-25', isRead: false },
-    //   // Add more notifications as needed
-    // ];
+  
     setCount(data.length);
     setNotifications(data);
   };
@@ -120,6 +116,7 @@ const Notifications = () => {
   };
 
   return (
+    
     <div className="notification-container relative">
       <h2 className='font-bold text-2xl'>Admin Notifications</h2>
       <button className='absolute right-0 top-2' onClick={clearAllNotifications}>Clear All Notifications</button>

@@ -30,7 +30,7 @@ app.use(cookieParser());
 app.use("/api", ApiRouter);
 
 
-app.use("/", healthCheck);
+app.use("/health", healthCheck);
 
 
 
