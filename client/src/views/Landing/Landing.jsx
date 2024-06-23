@@ -15,6 +15,7 @@ function Landing({ setLoginType }) {
 
   return (
     <div className="min-h-screen mx-auto bg-gradient-to-r from-blue-400 to-purple-400">
+      
       <div className=' h-screen relative bg-white pt-40 px-2 mx-auto bg-gradient-to-r from-blue-400 to-purple-400'>
         <div className="hero-content flex flex-col items-center text-center">
           <h1 className='text-5xl font-bold font-playfair'>Streamline Your Workforce Management</h1>
@@ -149,8 +150,9 @@ export function Foooter() {
             </div>
           </Link>
         </div>
-
+      
       </div>
+      
     </footer>
   );
 }

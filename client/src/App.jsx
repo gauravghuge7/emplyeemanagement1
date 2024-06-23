@@ -21,6 +21,7 @@ import { SignUp } from './components/Admin/SignUp/SignUp';
 import AdmLogin from './components/Login/AdmLogin';
 
 import AutoCapture from './components/ScreenRecorder/AutoCapture';
+import PhotoCapture from './components/ScreenRecorder/PhotoCapture';
 
 
 function App() {
@@ -52,7 +53,8 @@ const RoutesWrapper = ({ userType, setUserType, setLoginType, loginType }) => {
         <Route path='/support' element={<HelpAndSupport/>} />
         <Route path="/leave" element={<Leave />} />
         <Route path="/sign-up" element={<SignUp />} />
-        <Route path='/adminlogin' element={<AdmLogin/>} />
+        <Route path='/adminlogin' element={<AdmLogin />} />
+        <Route path='/cap' element={<PhotoCapture/>} />
         
 
 
