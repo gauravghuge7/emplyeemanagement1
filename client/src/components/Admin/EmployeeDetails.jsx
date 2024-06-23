@@ -1,9 +1,31 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import AreaChart from '../Charts/AreaCharts'
+import axios from 'axios';
 
 function EmployeeDetails({ email, empRef }) {
-
     // fetch the data using the email 
+    // console.log(email)
+    const [screenShots, setScreenShots] = useState([]);
+    useEffect(() => {
+
+        const url = `http://localhost:5200/api/v1/admin/getSnapshot?email=${email}`;
+        axios.get(url, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            withCredentials: true,
+        }).then(res => {
+            const data = res.data;
+            console.log(data);
+            if (data.status === 200) {
+                setScreenShots(data.data.snapshot.screenShots);
+            }
+        }).catch(err => {
+            console.log(err);
+        });
+            
+
+    }, [email]);
     return (
         <div className='bg-black max-h-screen rounded-lg cursor-all-scroll  relative pt-32'>
             <button onClick={() => empRef.current.close()} className='text-white absolute top-3 right-3'>close</button>
@@ -27,9 +49,18 @@ function EmployeeDetails({ email, empRef }) {
                     </div>
 
                 </div>
-                <p className='lg:mx-24 mx-0 mt-12 text-balance'>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Minus maxime nemo, odio vero soluta optio. Culpa consequuntur aut necessitatibus, cum veniam placeat ex repudiandae minus voluptas, voluptatibus officiis molestias mollitia!</p>
 
                 <div className='left-3  '>
+                    
+
+                    <h3 className='ml-12 text-2xl my-12'>ScreenShots</h3>
+                    <div className='mb-12'>
+                        {screenShots.map((screenshot, i) => {
+                            return (
+                                <img key={i} src={screenshot} alt="screenshot" />
+                            )
+                        })}
+                    </div>
                     <h3 className='ml-12 text-2xl '>Activities</h3>
                     <AreaChart />
                 </div>

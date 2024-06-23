@@ -1,9 +1,12 @@
 import { toast, Toaster } from "sonner"
-import { useEffect, useRef, useState } from "react"
+import { lazy, Suspense, useEffect, useRef, useState } from "react"
 import Register from "../../components/Admin/Register/Register";
 import axios from "axios";
-import EmployeeDetails from "../../components/Admin/EmployeeDetails";
+// import EmployeeDetails from "../../components/Admin/EmployeeDetails";
 
+/// lazy load the EmplooyeeDetails component
+const EmployeeDetails = lazy(() => import('../../components/Admin/EmployeeDetails'))
+// import EmployeeDetails from "../../components/Admin/EmployeeDetails";
 
 let data = [{
   name: "sharad",
@@ -23,9 +26,9 @@ function Manage() {
 
   const [detail, setDetail] = useState([{
 
-    name: "gaurav",
-    email: "gauravghuge@microsoft.com",
-    id: "gaurav423",
+    name: "sharad",
+    email: "sharad@microsoft.com",
+    id: "sharad123",
     status: "active"
   }])
 
@@ -157,10 +160,12 @@ function ShowTabeData({ DataObject }) {
             onClick={() => deleteEmployee(data.email)}
             className="hover:bg-red-600 w-24 p-2  rounded-3xl"
           >delete</button>
-          <button onClick={() => employeeDataRef.current.showModal()} >:</button>
-          <dialog ref={employeeDataRef}>
-            <EmployeeDetails empRef={employeeDataRef} email={data.email} />
-          </dialog>
+          <button onClick={() => employeeDataRef.current.showModal()} ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-ellipsis-vertical"><circle cx="12" cy="12" r="1" /><circle cx="12" cy="5" r="1" /><circle cx="12" cy="19" r="1" /></svg></button>
+          <Suspense fallback={<div>Loading...</div>}>
+            <dialog ref={employeeDataRef}>
+              <EmployeeDetails empRef={employeeDataRef} email={data.email} />
+            </dialog>
+          </Suspense>
         </div>
 
 
