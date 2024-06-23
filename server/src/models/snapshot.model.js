@@ -4,27 +4,35 @@ const snapshotSchema = new mongoose.Schema({
  
     email: {
         type: String,
-        required: true
+    
     },
 
-    snaps: [{
+    
         
-        empPhoto: {
-            type: String,
-            required: true
-        },
+    empPhoto: {
+        type: String,
+
+    },
 
 
-        screenShot: {
+    screenShot: {
+        public_id: {
             type: String,
-            required: true
+            
+        },  
+       
+        secure_url: {
+            type: String,
+         
         },
-        
-        time: {
-            type: Date,
-            required: true
-        }
-    }]
+   
+    },
+    
+    time: {
+        type: Date,
+        default: Date.now,
+    }
+  
 
     
 }, {timestamps: true})

@@ -22,7 +22,7 @@ import { Snapshot } from "../../models/snapshot.model.js";
 const sendSnapshot = asyncHandler(async (req, res) => {
 
     const {email } = req.user;
-    const path = req.files.path;
+
 
 
     if(!req.file) {
@@ -30,37 +30,34 @@ const sendSnapshot = asyncHandler(async (req, res) => {
     }
 
    try {
-        const user = await UserModel.findOne({email});
+        const user = await Snapshot.findOne({email});
     
-    
+
         if (!user) {
             return res.status(401).json({ message: "User not found" });
         }    
- 
+    
+        console.log("before upload");
+
+        const path = req.file.path;
+    
         const response = await uploadOnCloudinary(path);
 
         if(!response) {
             return res.status(400).json({ message: "File upload failed" });
         }
 
-        user.snapshots.push(response.public_id) = response.public_id;
-        user.snapshots.push(response.public_url) = response.public_url;
+        console.log("after upload");
 
-        user.snapshots
-
+        user.screenShot.public_id = response.public_id;
+        user.screenShot.secure_url = response.secure_url;
+        
  
-        const snapshot = new UserModel({
-            email,
-            totalHours: req.body.totalHours,
-            remarks: req.body.remarks,
-            reason: req.body.reason,
-        });     
- 
-        await snapshot.save();
+       
  
         return res
         .status(200)
-        .json(new ApiResponse(200, "Snapshot created", user, snapshot));
+        .json(new ApiResponse(200, "Snapshot created", user));
  
  
     } 
@@ -72,6 +69,8 @@ const sendSnapshot = asyncHandler(async (req, res) => {
     }
 
 });
+
+
 
 
 
