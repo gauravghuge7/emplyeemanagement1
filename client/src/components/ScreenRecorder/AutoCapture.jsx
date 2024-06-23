@@ -1,20 +1,22 @@
-import { useEffect } from 'react';
 
+import React, { useEffect, useState } from 'react';
 import PhotoCapture from './PhotoCapture';
 
 function AutoCapture() {
-    useEffect(() => {
-        const interval = setInterval(() => {
-            // Call functions to capture screen and photo here
-        }, 1 * 60  * 1000); // 2 hours in milliseconds
+    const [capture, setCapture] = useState(false);
 
-        return () => clearInterval(interval);
+    useEffect(() => {
+        const captureInterval = setInterval(() => {
+            setCapture(true);
+            setTimeout(() => setCapture(false), 3000); 
+        }, 2 * 60 * 60 * 1000); // 2 hours in milliseconds
+
+        return () => clearInterval(captureInterval);
     }, []);
 
     return (
         <div>
-          
-            <PhotoCapture />
+            <PhotoCapture capture={capture} />
         </div>
     );
 }

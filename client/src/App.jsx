@@ -10,7 +10,7 @@ import {Landing} from './views/Landing/Landing';
 import Leave from './views/Leave/Leave';
 import Task, { AddTask } from './components/task/Task';
 
-import AdminContextProvider from './Context/AdminContextProvider';
+import { AuthProvider } from './Context/AdminContextProvider';
 
 import { HelpAndSupport } from './components/HelpAndSupport/HelpAndSupport';
 import AdminProfile from './components/Admin/AdminProfile/AdminProfile';
@@ -21,6 +21,7 @@ import { SignUp } from './components/Admin/SignUp/SignUp';
 import AdmLogin from './components/Login/AdmLogin';
 
 import AutoCapture from './components/ScreenRecorder/AutoCapture';
+import PhotoCapture from './components/ScreenRecorder/PhotoCapture';
 
 
 function App() {
@@ -38,7 +39,7 @@ function App() {
 
 const RoutesWrapper = ({ userType, setUserType, setLoginType, loginType }) => {
   return (
-    <AdminContextProvider>
+    <AuthProvider>
     
       <Navbar userType={userType} setUserType={setUserType} /> {/* Conditionally render Navbar */}
       <Routes>
@@ -52,7 +53,8 @@ const RoutesWrapper = ({ userType, setUserType, setLoginType, loginType }) => {
         <Route path='/support' element={<HelpAndSupport/>} />
         <Route path="/leave" element={<Leave />} />
         <Route path="/sign-up" element={<SignUp />} />
-        <Route path='/adminlogin' element={<AdmLogin/>} />
+        <Route path='/adminlogin' element={<AdmLogin />} />
+        <Route path='/cap' element={<PhotoCapture/>} />
         
 
 
@@ -73,7 +75,7 @@ const RoutesWrapper = ({ userType, setUserType, setLoginType, loginType }) => {
       {/****  this is the comment  */}
       
         </Routes>
-    </AdminContextProvider>
+    </AuthProvider>
   );
 };
 
