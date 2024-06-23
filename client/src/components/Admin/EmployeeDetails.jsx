@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react'
 import AreaChart from '../Charts/AreaCharts'
 import axios from 'axios';
 
-function EmployeeDetails({ email, empRef }) {
+function EmployeeDetails({ details, empRef }) {
     // fetch the data using the email 
     // console.log(email)
     const [screenShots, setScreenShots] = useState([]);
     useEffect(() => {
 
-        const url = `http://localhost:5200/api/v1/admin/getSnapshot?email=${email}`;
+        const url = `http://localhost:5200/api/v1/admin/getSnapshot?email=${details.email}`;
         axios.get(url, {
             headers: {
                 'Content-Type': 'application/json',
@@ -18,14 +18,14 @@ function EmployeeDetails({ email, empRef }) {
             const data = res.data;
             console.log(data);
             if (data.status === 200) {
-                setScreenShots(data.data.snapshot.screenShots);
+                setScreenShots(data.snapshot);
             }
         }).catch(err => {
             console.log(err);
         });
             
 
-    }, [email]);
+    }, [details.email]);
     return (
         <div className='bg-black max-h-screen rounded-lg cursor-all-scroll  relative pt-32'>
             <button onClick={() => empRef.current.close()} className='text-white absolute top-3 right-3'>close</button>
