@@ -56,11 +56,10 @@ const sendSnapshot = asyncHandler(async (req, res) => {
 });
 
 const getSnapshot = asyncHandler(async (req, res) => {
+  
   const { adminEmail } = req.user;
 
-  
-  const { email } = req.params;
-
+  const {email} = req.body;
   console.log("email => ", email);
   if (!email) {
     return res

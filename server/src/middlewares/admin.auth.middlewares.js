@@ -22,6 +22,7 @@ const isAdminLoggedIn = asyncHandler(async (req, res, next) => {
     req.user = decoded;
 
     console.log(req.user);
+    console.log("hello world")
     next();
   } 
   catch (error) {

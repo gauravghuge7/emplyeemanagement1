@@ -90,11 +90,8 @@ function PhotoCapture() {
     };
 
     return (
-        <div className='mt-44'>
-            
-         
+        <div className='mt-44'>       
             <video ref={videoRef} autoPlay style={{ display: 'none' }} />
-            {photo && <img src={photo} alt="User Photo" />}
         </div>
     );
 }
