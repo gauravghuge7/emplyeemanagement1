@@ -10,7 +10,7 @@ import {Landing} from './views/Landing/Landing';
 import Leave from './views/Leave/Leave';
 import Task, { AddTask } from './components/task/Task';
 
-import AdminContextProvider from './Context/AdminContextProvider';
+import { AuthProvider } from './Context/AdminContextProvider';
 
 import { HelpAndSupport } from './components/HelpAndSupport/HelpAndSupport';
 import AdminProfile from './components/Admin/AdminProfile/AdminProfile';
@@ -38,7 +38,7 @@ function App() {
 
 const RoutesWrapper = ({ userType, setUserType, setLoginType, loginType }) => {
   return (
-    <AdminContextProvider>
+    <AuthProvider>
     
       <Navbar userType={userType} setUserType={setUserType} /> {/* Conditionally render Navbar */}
       <Routes>
@@ -73,7 +73,7 @@ const RoutesWrapper = ({ userType, setUserType, setLoginType, loginType }) => {
       {/****  this is the comment  */}
       
         </Routes>
-    </AdminContextProvider>
+    </AuthProvider>
   );
 };
 
