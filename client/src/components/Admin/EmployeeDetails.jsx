@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import AreaChart from '../Charts/AreaCharts'
 import axios from 'axios';
 
@@ -9,17 +9,21 @@ function EmployeeDetails({ details, empRef }) {
     useEffect(() => {
 
         const url = `http://localhost:5200/api/v1/admin/getSnapshot?email=${details.email}`;
+
         axios.get(url, {
             headers: {
                 'Content-Type': 'application/json',
             },
             withCredentials: true,
-        }).then(res => {
-            const data = res.data;
+        })
+        .then(res => {
+            const data = res.data.data;
             console.log(data);
+
             if (data.status === 200) {
                 setScreenShots(data.snapshot);
             }
+
         }).catch(err => {
             console.log(err);
         });
@@ -55,7 +59,8 @@ function EmployeeDetails({ details, empRef }) {
 
                     <h3 className='ml-12 text-2xl my-12'>ScreenShots</h3>
                     <div className='mb-12'>
-                        {screenShots.map((screenshot, i) => {
+                        {screenShots.map((i, screenshot) => {
+
                             return (
                                 <img key={i} src={screenshot} alt="screenshot" />
                             )
@@ -64,6 +69,7 @@ function EmployeeDetails({ details, empRef }) {
                     <h3 className='ml-12 text-2xl '>Activities</h3>
                     <AreaChart />
                 </div>
+
             </div>
         </div>
     )
