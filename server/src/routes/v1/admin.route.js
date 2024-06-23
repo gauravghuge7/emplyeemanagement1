@@ -103,7 +103,7 @@ AdminRouter.route("/getActiveUsers").get(
 );
 
 
-AdminRouter.route("/getSnapshot/:email").get(
+AdminRouter.route("/getSnapshot").post(
  isAdminLoggedIn,
  upload.none(),
  getSnapshot
