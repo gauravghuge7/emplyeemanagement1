@@ -86,24 +86,9 @@ const userSchema = new Schema (
 
         snapshots: [{
            
-            snaps: [{
-        
-                empPhoto: {
-                    type: String,
-                    required: true
-                },
-        
-        
-                screenShot: {
-                    type: String,
-                    required: true
-                },
-                
-                time: {
-                    type: Date,
-                    required: true
-                }
-            }]
+            type: Schema.Types.ObjectId,
+            ref: 'Snapshot'
+            
         }],
 
         sessions: [{

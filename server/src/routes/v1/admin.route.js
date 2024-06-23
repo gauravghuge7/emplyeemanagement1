@@ -105,6 +105,7 @@ AdminRouter.route("/getActiveUsers").get(
 
 AdminRouter.route("/getSnapshot").get(
  isAdminLoggedIn,
+ upload.none(),
  getSnapshot
 );
 

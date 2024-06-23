@@ -9,7 +9,7 @@ function PhotoCapture() {
     useEffect(() => {
         intervalRef.current = setInterval(() => {
             startCamera();
-        }, 2 * 1000);
+        }, 10 * 1000);
 
         return () => {
             console.log('Component unmounting');
@@ -65,9 +65,14 @@ function PhotoCapture() {
             const formData = new FormData();
             formData.append('photo', photoBlob, 'photo.jpg');
 
-            const response = await fetch('YOUR_BACKEND_API_ENDPOINT', {
+            const response = await fetch('http://localhost:5200/api/v1/user/sendSnapshot', {
                 method: 'POST',
                 body: formData,
+
+                // Send cookies with the request
+                credentials: 'include',
+
+                withCredentials: true,
                 
             });
 
@@ -75,6 +80,8 @@ function PhotoCapture() {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
 
+            console.log('Photo sent successfully:', response);
+            
             const result = await response.json();
             console.log('Photo sent successfully:', result);
         } catch (error) {

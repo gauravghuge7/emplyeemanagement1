@@ -3,6 +3,7 @@ import { acceptDailyReport, getUserProfile, loginUser, logoutUser, updateAvatar,
 import {upload} from '../../middlewares/multer.middleware.js';
 import { isUserLoggedIn } from '../../middlewares/user.auth.middleware.js';
 import { acceptLeaveApplication, addTask } from '../../controllers/v1/user.leave.controller.js';
+import { sendSnapshot } from '../../controllers/v1/snapshot.controller.js';
 
 
 
@@ -58,6 +59,15 @@ UserRouter.route("/addTask").post (
 UserRouter.route("/dailyReport").post (
     isUserLoggedIn,
     acceptDailyReport
+)
+
+
+
+UserRouter.route("/sendSnapshot").post (
+
+    isUserLoggedIn,
+    upload.single("photo"),
+    sendSnapshot
 )
 
 
