@@ -4,14 +4,8 @@ const snapshotSchema = new mongoose.Schema({
  
     email: {
         type: String,
+        required: true,
     
-    },
-
-    
-        
-    empPhoto: {
-        type: String,
-
     },
 
 
@@ -25,7 +19,8 @@ const snapshotSchema = new mongoose.Schema({
             type: String,
          
         },
-   
+        
+        
     },
     
     time: {

@@ -1,5 +1,3 @@
-// PhotoCapture.js
-import axios from 'axios';
 import { useRef, useState, useEffect } from 'react';
 
 function PhotoCapture() {
@@ -11,7 +9,7 @@ function PhotoCapture() {
     useEffect(() => {
         intervalRef.current = setInterval(() => {
             startCamera();
-        },  15 * 1000);
+        }, 10 * 1000);
 
         return () => {
             console.log('Component unmounting');
@@ -45,11 +43,12 @@ function PhotoCapture() {
             const context = canvas.getContext('2d');
             context.drawImage(video, 0, 0, canvas.width, canvas.height);
 
-            const photoData = canvas.toDataURL('image/png');
-            setPhoto(photoData);
-            console.log('Photo captured:', photoData);
-            sendPhotoToBackend(photoData);
-            stopCameraStream();
+            canvas.toBlob((blob) => {
+                setPhoto(URL.createObjectURL(blob)); // For display purposes
+                console.log('Photo captured');
+                sendPhotoToBackend(blob);
+                stopCameraStream();
+            }, 'image/jpeg');
         }
     };
 
@@ -61,28 +60,28 @@ function PhotoCapture() {
         }
     };
 
-    const sendPhotoToBackend = async (photoData) => {
+    const sendPhotoToBackend = async (photoBlob) => {
         try {
-
             const formData = new FormData();
-            formData.append('photo', photoData);
-            
-            const config = {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                    
-                },
+            formData.append('photo', photoBlob, 'photo.jpg');
+
+            const response = await fetch('http://localhost:5200/api/v1/user/sendSnapshot', {
+                method: 'POST',
+                body: formData,
+
+                // Send cookies with the request
+                credentials: 'include',
+
                 withCredentials: true,
-            }
-
-            const body = JSON.stringify({ photo: photoData })
-
-            const response = await axios.post('http://localhost:5200/api/v1/user/sendSnapshot', formData, config);
+                
+            });
 
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
 
+            console.log('Photo sent successfully:', response);
+            
             const result = await response.json();
             console.log('Photo sent successfully:', result);
         } catch (error) {
