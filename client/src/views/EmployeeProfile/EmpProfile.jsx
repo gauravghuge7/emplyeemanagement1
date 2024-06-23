@@ -56,10 +56,10 @@ function EmpProfile() {
       }
 
 
-      const demo = ownerWindow.print();
+      // const demo = ownerWindow.print();
 
-      console.log(demo);
-      window.print();
+      // console.log(demo);
+      // window.print();
 
     }
 

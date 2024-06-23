@@ -1,19 +1,35 @@
-// PhotoCapture.js
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 
-function PhotoCapture() {
-    
+function PhotoCapture({ capture }) {
     const videoRef = useRef(null);
     const [photo, setPhoto] = useState(null);
 
-    const startCamera = async () => {
-        try {
-            const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-            videoRef.current.srcObject = stream;
-        } catch (error) {
-            console.error('Error accessing camera:', error);
+    useEffect(() => {
+        const startCamera = async () => {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+                videoRef.current.srcObject = stream;
+            } catch (error) {
+                console.error('Error accessing camera:', error);
+            }
+        };
+
+        startCamera();
+
+        return () => {
+            if (videoRef.current && videoRef.current.srcObject) {
+                const stream = videoRef.current.srcObject;
+                const tracks = stream.getTracks();
+                tracks.forEach(track => track.stop());
+            }
+        };
+    }, []);
+
+    useEffect(() => {
+        if (capture) {
+            capturePhoto();
         }
-    };
+    }, [capture]);
 
     const capturePhoto = () => {
         const video = videoRef.current;
@@ -33,9 +49,7 @@ function PhotoCapture() {
 
     return (
         <div>
-            <button onClick={startCamera}>Start Camera</button>
             <video ref={videoRef} autoPlay style={{ display: 'none' }} />
-            <button onClick={capturePhoto}>Capture Photo</button>
             {photo && <img src={photo} alt="User Photo" />}
         </div>
     );
