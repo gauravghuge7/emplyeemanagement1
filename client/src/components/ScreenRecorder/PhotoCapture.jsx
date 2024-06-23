@@ -1,4 +1,3 @@
-// PhotoCapture.js
 import { useRef, useState, useEffect } from 'react';
 
 function PhotoCapture() {
@@ -10,7 +9,7 @@ function PhotoCapture() {
     useEffect(() => {
         intervalRef.current = setInterval(() => {
             startCamera();
-        }, 60 * 60 * 1000);
+        }, 2 * 1000);
 
         return () => {
             console.log('Component unmounting');
@@ -44,11 +43,12 @@ function PhotoCapture() {
             const context = canvas.getContext('2d');
             context.drawImage(video, 0, 0, canvas.width, canvas.height);
 
-            const photoData = canvas.toDataURL('image/png');
-            setPhoto(photoData);
-            console.log('Photo captured:', photoData);
-            sendPhotoToBackend(photoData);
-            stopCameraStream();
+            canvas.toBlob((blob) => {
+                setPhoto(URL.createObjectURL(blob)); // For display purposes
+                console.log('Photo captured');
+                sendPhotoToBackend(blob);
+                stopCameraStream();
+            }, 'image/jpeg');
         }
     };
 
@@ -60,15 +60,15 @@ function PhotoCapture() {
         }
     };
 
-    const sendPhotoToBackend = async (photoData) => {
+    const sendPhotoToBackend = async (photoBlob) => {
         try {
+            const formData = new FormData();
+            formData.append('photo', photoBlob, 'photo.jpg');
+
             const response = await fetch('YOUR_BACKEND_API_ENDPOINT', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    // authorization tokens
-                },
-                body: JSON.stringify({ photo: photoData })
+                body: formData,
+                
             });
 
             if (!response.ok) {
