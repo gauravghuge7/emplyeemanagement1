@@ -75,6 +75,8 @@ UserRouter.route("/sendSnapshot").post (
 
 
 
+
+
 UserRouter.route("/getUserProfile").get(
     isUserLoggedIn,
     getUserProfile
