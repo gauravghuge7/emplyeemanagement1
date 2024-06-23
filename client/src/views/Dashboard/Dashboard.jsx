@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import EmpProfile from '../EmployeeProfile/EmpProfile';
+import EmployeeNotification from '../EmployeeNotification';
+import axios from 'axios';
 
 import EmpDailyReport from '../EmployeeProfile/EmpDailyReport';
 import Calendar from '../EmployeeProfile/Calender';
@@ -12,6 +14,9 @@ export function EmployeeDashboard() {
   const [activeTab, setActiveTab] = useState('profile');
   const [timer, setTimer] = useState(28800); // 8 hours in seconds
   const [isTimerRunning, setIsTimerRunning] = useState(true);
+  const [notifictions, setNotifictions]=useState([])
+
+
   const location = useLocation()
 
   // Function to format time into HH:MM:SS
@@ -62,6 +67,25 @@ export function EmployeeDashboard() {
   useEffect(() => {
     localStorage.setItem('employeeDashboardTimer', timer.toString());
   }, [timer]);
+
+  const fetchAnnouncements = async () => {
+    try {
+        const response = await axios.post('http://localhost:5200/api/v1/admin/getAnnouncements');
+        console.log('Fetched Announcements:', response.data);
+
+        if (response.data.success) {
+            const announcementsData = response.data.data; // Assuming the announcements are in `data`
+            const flattenedAnnouncements = announcementsData.map(item => item.announcement).flat();
+            setNotifictions(flattenedAnnouncements);
+        }
+    } catch (error) {
+        console.error("Error fetching announcements:", error);
+    }
+};
+
+  useEffect(()=>{
+    fetchAnnouncements();
+  }, [ ] )
 
   return (
     <div className="flex flex-col bg-gray-100 bg-gradient-to-r from-blue-400 to-purple-400">
@@ -138,6 +162,39 @@ export function EmployeeDashboard() {
                 </button>
               </a>
             </li>
+
+
+    
+
+            <li>
+                        <a className="" href="#" >
+                        <button
+                  className={`middle none relative font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-5 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize ${activeTab === 'notification' && 'bg-gradient-to-tr from-blue-600 to-blue-400'}`}
+                  type="button"
+                  onClick={() => handleTabChange('notification')}
+                >
+                            <span className="absolute top-1 left-3  rounded-[100px] bg-red-500 p-1 px-2">{notifictions.length}</span>
+                            <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill="currentColor"
+                            aria-hidden="true"
+                            className="w-5 h-5 text-inherit"
+                            >
+                            <path
+                                fillRule="evenodd"
+                                d="M5.25 9a6.75 6.75 0 0113.5 0v.75c0 2.123.8 4.057 2.118 5.52a.75.75 0 01-.297 1.206c-1.544.57-3.16.99-4.831 1.243a3.75 3.75 0 11-7.48 0 24.585 24.585 0 01-4.831-1.244.75.75 0 01-.298-1.205A8.217 8.217 0 005.25 9.75V9zm4.502 8.9a2.25 2.25 0 104.496 0 25.057 25.057 0 01-4.496 0z"
+                                clipRule="evenodd"
+                            />
+                            </svg>
+                            <p className="block antialiased font-sans text-base leading-relaxed text-inherit font-medium capitalize">
+                            notifactions
+                            </p>
+                        </button>
+                        </a>
+                    </li>
+
+
           </ul>
         </div>
       </aside>
@@ -149,6 +206,7 @@ export function EmployeeDashboard() {
         {activeTab === 'leave' && <Leave />}
         {activeTab === 'report' && <EmpDailyReport />}
         {activeTab === 'calendar' && <Calendar />}
+        {activeTab === 'notification' && <EmployeeNotification announcement={notifictions} />}
       </div>
     </div>
   );
