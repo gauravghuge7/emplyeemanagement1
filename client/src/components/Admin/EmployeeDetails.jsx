@@ -62,7 +62,7 @@ function EmployeeDetails({ details, empRef }) {
                         {screenShots.map((i, screenshot) => {
 
                             return (
-                                <img key={i} src={screenshot.secure_url} alt="screenshot" />
+                                <img key={i} src={screenshot} alt="screenshot" />
                             )
                         })}
                     </div>
