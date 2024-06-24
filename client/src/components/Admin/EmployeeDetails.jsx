@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react'
-import AreaChart from '../Charts/AreaCharts'
 import axios from 'axios';
 
 function EmployeeDetails({ details, empRef }) {
     const [screenShots, setScreenShots] = useState([]);
+    const [dailyReports, setDailyReports] = useState([]);
 
     console.log("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee", details)
 
     useEffect(() => {
+
         console.log("Employee details: ", details);
 
         const url = "http://localhost:5200/api/v1/admin/getSnapshot";
@@ -18,17 +19,28 @@ function EmployeeDetails({ details, empRef }) {
             },
             withCredentials: true,
         })
-            .then(res => {
-                const data = res.data.data;
+        .then(res => {
+            const data = res.data.data;
 
-                if (data) {
-                    setScreenShots(data);
-                }
-            })
-            .catch(err => {
-                console.log(err);
-            });
-    }, [details.email]);
+
+            setDailyReports(details.dailyReports);
+            console.log("daily reports => ", details.dailyReports);
+
+
+            if (data) {
+                setScreenShots(data);
+            }
+        })
+        .catch(err => {
+            console.log(err);
+        });
+
+
+
+
+    },[]);
+
+
 
     
 
@@ -48,11 +60,11 @@ function EmployeeDetails({ details, empRef }) {
                         <h2 className='capitalize'>{details.firstName} {details.lastName}</h2>
                         <div className='flex flex-col gap-4'>
                             <div className='flex gap-4'>
-                                <span>{details.email}</span>
+                                <span>{details.email} </span>
                                 <span>{details.phoneNumber}</span>
                             </div>
                             <div className='flex gap-4'>
-                                <span className='border border-white rounded-full p-1 px-4 bg-black '>{`${details.isActive ? "Active" : "UnActive"}`}</span>
+                                <span className='border border-white rounded-full p-1 px-4 bg-black '>{`${details.isActive ? "Active 🟩" : "UnActive 🟥"}`}</span>
                                 <span className='border border-white bg-black rounded-full p-1 px-4'>{details.role}</span>
                             </div>
                         </div>
@@ -70,8 +82,38 @@ function EmployeeDetails({ details, empRef }) {
                     </div>
 
                     <h3 className='ml-12 text-2xl my-12'>Activities</h3>
-                    <AreaChart />
+                    
                 </div>
+
+
+                <div className='left-3'>
+                    <h3 className='flex justify-center text-2xl my-12'>Daily Reports</h3>
+                    <div className='flex flex-col justify-center gap-4'>
+                        {dailyReports.map(report =>{
+                            return (
+
+                                <ul key={report} className=''>
+
+                                    {report == null ?
+
+                                        <div></div>
+                                        :
+
+                                        <li className='text-xl border flex flex-wrap p-3 rounded-lg'>{report}</li>  
+                                        
+                                    }
+                                    
+                                   
+                                </ul>
+                            )
+                        })}
+                    </div>
+
+                    <div className='h-5'></div>
+                    
+                </div>
+
+
             </div>
         </div>
     )

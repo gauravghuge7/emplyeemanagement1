@@ -311,20 +311,24 @@ const getLeaveHistory = asyncHandler(async(req, res) => {
 const acceptDailyReport = asyncHandler(async(req, res) => {
     const { email } = req.user;
 
-    const { dailyReport } = req.body;
+    const { report } = req.body;
 
     console.log("req.body => ", req.body);
+
+    console.log("dailyReport => ", report);
 
     try {
     
         const user = await UserModel.findOne({ email });
+
+        console.log("user => ", user);
 
         if(!user) {
             return res.status(400).json({ message: "User not found" });
         }
 
         
-       
+       user.dailyReports.push(report);
 
         
 
@@ -332,7 +336,7 @@ const acceptDailyReport = asyncHandler(async(req, res) => {
 
         await user.save();
 
-        return res.json(new ApiResponse(200, "Daily Report accepted", user.dailyReports));   
+        return res.json(new ApiResponse(200, "Daily Report accepted", user));   
         
     } 
     
