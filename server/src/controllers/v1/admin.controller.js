@@ -188,7 +188,7 @@ const logoutAdmin = asyncHandler(async (req, res) => {
     return res
       .status(200)
       .clearCookie("adminToken", adminToken, cookieOptions)
-      .json(new ApiResponse(200, "User logged out successfully"));
+      .json(new ApiResponse(200, "Admin logged out successfully"));
   } 
   catch (error) {
     console.log(error);
