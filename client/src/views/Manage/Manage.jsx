@@ -1,5 +1,5 @@
 import { toast, Toaster } from "sonner"
-import { lazy, Suspense, useEffect, useRef, useState } from "react"
+import { lazy, startTransition, useEffect, useRef, useState } from "react"
 import Register from "../../components/Admin/Register/Register";
 import axios from "axios";
 // import EmployeeDetails from "../../components/Admin/EmployeeDetails";
@@ -108,7 +108,7 @@ function ShowTable({ detail }) {
 function ShowTabeData({ DataObject }) {
 
 
-  const employeeDataRef = useRef();
+  const [selectedEmployee, setSelectedEmployee] = useState(null);
   const deleteEmployee = async (email) => {
 
 
@@ -158,13 +158,24 @@ function ShowTabeData({ DataObject }) {
 
           <button
             onClick={() => deleteEmployee(data.email)}
-            className="hover:bg-red-600 w-24 p-2  rounded-3xl"
+            className="hover:bg-red-600 w-24 p-2 rounded-3xl"
           >delete</button>
-          <button onClick={() => employeeDataRef.current.showModal()} ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-ellipsis-vertical"><circle cx="12" cy="12" r="1" /><circle cx="12" cy="5" r="1" /><circle cx="12" cy="19" r="1" /></svg></button>
+          <button onClick={() => {
+            startTransition(() => {
+              setSelectedEmployee(data);
+            });
+          }}><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-ellipsis-vertical"><circle cx="12" cy="12" r="1" /><circle cx="12" cy="5" r="1" /><circle cx="12" cy="19" r="1" /></svg></button>
 
-          <dialog ref={employeeDataRef}>
-            <EmployeeDetails details={data} />
-          </dialog>
+          {selectedEmployee && selectedEmployee._id === data._id && (
+            <dialog open={true} className="relative z-10 -translate-y-96 ">
+              <EmployeeDetails details={selectedEmployee} />
+              <button onClick={() => {
+                startTransition(() => {
+                  setSelectedEmployee(null);
+                });
+              }} className="text-white absolute top-3 right-6">Close</button>
+            </dialog>
+          )}
 
         </div>
 

@@ -3,48 +3,41 @@ import AreaChart from '../Charts/AreaCharts'
 import axios from 'axios';
 
 function EmployeeDetails({ details, empRef }) {
-    // fetch the data using the email 
-    // console.log(email)
     const [screenShots, setScreenShots] = useState([]);
+
+    console.log("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee", details)
+
     useEffect(() => {
+        console.log("Employee details: ", details);
 
-        const url = `http://localhost:5200/api/v1/admin/getSnapshot`;
+        const url = "http://localhost:5200/api/v1/admin/getSnapshot";
 
-        axios.post(url, {
+        axios.post(url, { email: details.email }, {
             headers: {
                 'Content-Type': 'application/json',
-            },
-            body: {
-                email:JSON.stringify( details.email)
             },
             withCredentials: true,
         })
             .then(res => {
                 const data = res.data.data;
-                // console.log(data);
 
                 if (data) {
                     setScreenShots(data);
                 }
-
-            }).catch(err => {
+            })
+            .catch(err => {
                 console.log(err);
             });
-
-
     }, [details.email]);
 
-
     return (
-        <div className='bg-black h-auto w-full rounded-lg  overflow-hidden pt-32'>
-            {/* <button onClick={() => empRef.current.close()} className='text-white absolute top-3 right-3'>close</button> */}
+        <div className='bg-black h-auto w-full rounded-lg overflow-hidden pt-32'>
             <div className='bg-black/80 min-h-screen relative text-white backdrop-blur-lg border border-black p-4 rounded-lg mx-auto w-full lg:w-[800px]'>
                 <div className='flex gap-4 justify-center items-center'>
                     <img className='rounded-lg' src='https://avatars.githubusercontent.com/u/61672294?v=4' width={96} />
                     <div className='flex flex-col gap-2'>
                         <h2 className='capitalize'>{details.firstName} {details.lastName}</h2>
-
-                        <div className='flex flex-col  gap-4'>
+                        <div className='flex flex-col gap-4'>
                             <div className='flex gap-4'>
                                 <span>{details.email}</span>
                                 <span>{details.phoneNumber}</span>
@@ -54,31 +47,22 @@ function EmployeeDetails({ details, empRef }) {
                                 <span className='border border-white bg-black rounded-full p-1 px-4'>{details.role}</span>
                             </div>
                         </div>
-
                     </div>
-
                 </div>
 
-                <div className='left-3  '>
-
-
+                <div className='left-3'>
                     <h3 className='ml-12 text-2xl my-12'>ScreenShots</h3>
-
-
-
-                    {/* <div className='flex gap-12 flex-wrap justify-center '>
+                    <div className='flex gap-12 flex-wrap justify-center'>
                         {screenShots.map((screenshot, i) => {
-                            console.log(screenshot)
                             return (
-                                <img width={300} className='' key={i} src={screenshot.screenShot.secure_url} alt="screenshot" />
+                                <img width={300} key={i} src={screenshot.screenShot.secure_url} alt="screenshot" />
                             )
                         })}
-                    </div> */}
+                    </div>
 
-                    <h3 className='ml-12 text-2xl my-12 '>Activities</h3>
+                    <h3 className='ml-12 text-2xl my-12'>Activities</h3>
                     <AreaChart />
                 </div>
-
             </div>
         </div>
     )
