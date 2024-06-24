@@ -5,7 +5,7 @@ import axios from 'axios';
 function EmployeeDetails({ details, empRef }) {
     const [screenShots, setScreenShots] = useState([]);
 
-    console.log("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee", details);
+    console.log("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee", details)
 
     useEffect(() => {
         console.log("Employee details: ", details);
@@ -18,16 +18,16 @@ function EmployeeDetails({ details, empRef }) {
             },
             withCredentials: true,
         })
-        .then(res => {
-            const data = res.data.data;
+            .then(res => {
+                const data = res.data.data;
 
-            if (data) {
-                setScreenShots(data);
-            }
-        })
-        .catch(err => {
-            console.log(err);
-        });
+                if (data) {
+                    setScreenShots(data);
+                }
+            })
+            .catch(err => {
+                console.log(err);
+            });
     }, [details.email]);
 
     return (

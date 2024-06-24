@@ -1,8 +1,5 @@
-
-
-
 import { toast, Toaster } from "sonner";
-import { lazy, Suspense, useEffect, useRef, useState } from "react";
+import { lazy, startTransition, useEffect, useRef, useState } from "react";
 import Register from "../../components/Admin/Register/Register";
 import axios from "axios";
 
@@ -82,13 +79,10 @@ function ShowTable({ detail }) {
 }
 
 function ShowTabeData({ DataObject }) {
-  const employeeDataRef = useRef();
-  const deleteEmployeeRef = useRef();
+  const [selectedEmployee, setSelectedEmployee] = useState(null);
   const [deleteEmail, setDeleteEmail] = useState("");
   const [currentEmail, setCurrentEmail] = useState("");
-
-
-  console.log("dddddddddddddddddddddddddddddddddddddddd",DataObject)
+  const deleteEmployeeRef = useRef();
 
   const deleteEmployee = async (email) => {
     const config = {
@@ -107,7 +101,6 @@ function ShowTabeData({ DataObject }) {
     if (response.data.success) {
       toast.success("Employee Deleted Successfully");
       getData(); // Refresh the page by fetching updated data
-
     }
   };
 
@@ -126,45 +119,35 @@ function ShowTabeData({ DataObject }) {
   };
 
   return (
-    <div>
+    <>
       {DataObject.map((data, i) => (
         <div className="grid  grid-cols-5 gap-x-36 auto-cols-auto py-5 border border-r-0 border-l-0 border-b-0  my-0" key={i}>
           <h2 className="mx-4">{data._id}</h2>
           <h2>{data.firstName} {data.lastName}</h2>
           <h2 className="text-center w-20">{data.email}</h2>
           <button
-            onClick={() => handleDelete(data.email)}
-            className="hover:bg-red-600 w-24 p-2  rounded-3xl"
-          >
-            delete
-          </button>
-          <button onClick={() => employeeDataRef.current.showModal()} >
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-ellipsis-vertical">
-              <circle cx="12" cy="12" r="1" /><circle cx="12" cy="5" r="1" /><circle cx="12" cy="19" r="1" />
-            </svg>
-          </button>
-          <Suspense fallback={<div>Loading...</div>}>
-            <dialog ref={employeeDataRef}>
-              <EmployeeDetails empRef={employeeDataRef} details={data} />
+            onClick={() => deleteEmployee(data.email)}
+            className="hover:bg-red-600 w-24 p-2 rounded-3xl"
+          >delete</button>
+          <button onClick={() => {
+            startTransition(() => {
+              setSelectedEmployee(data);
+            });
+          }}><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-ellipsis-vertical"><circle cx="12" cy="12" r="1" /><circle cx="12" cy="5" r="1" /><circle cx="12" cy="19" r="1" /></svg></button>
+
+          {selectedEmployee && selectedEmployee._id === data._id && (
+            <dialog open={true} className="relative z-10 -translate-y-96 ">
+              <EmployeeDetails details={selectedEmployee} empRef={deleteEmployeeRef} />
+              <button onClick={() => {
+                startTransition(() => {
+                  setSelectedEmployee(null);
+                });
+              }} className="text-white absolute top-3 right-6">Close</button>
             </dialog>
-          </Suspense>
+          )}
         </div>
       ))}
-      <dialog ref={deleteEmployeeRef} className="p-4 rounded-lg">
-        <h3 className="mb-4">Confirm Employee Deletion</h3>
-        <p>Please enter the employee's email to confirm:</p>
-        <input
-          type="email"
-          className="border p-2 mt-2 w-full"
-          value={deleteEmail}
-          onChange={(e) => setDeleteEmail(e.target.value)}
-        />
-        <div className="mt-4 flex justify-end">
-          <button onClick={() => deleteEmployeeRef.current.close()} className="mr-2 p-2 bg-gray-200 rounded">Cancel</button>
-          <button onClick={confirmDelete} className="p-2 bg-red-600 text-white rounded">Delete</button>
-        </div>
-      </dialog>
-    </div>
+    </>
   );
 }
 
