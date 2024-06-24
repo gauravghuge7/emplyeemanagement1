@@ -27,7 +27,7 @@ function AdminProfiles() {
 
         const data = response.data.data;
 
-        console.log(data);
+        console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", data);
 
         setAdmin(data);
 
