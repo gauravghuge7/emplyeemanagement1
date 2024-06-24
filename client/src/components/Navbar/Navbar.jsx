@@ -54,6 +54,51 @@ function Navbar({ userType, setUserType }) {
 
   };
 
+  const handleAdminLogout = async (e) => {
+    // Clear user data
+    setUserType(null);
+    localStorage.removeItem('token'); // If you're using localStorage or sessionStorage
+    sessionStorage.removeItem('userType'); // Clear session storage if used
+    e.preventDefault();
+    
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      withCredentials: true,
+    }
+    
+    
+    const response = await axios.post('http://localhost:5200/api/v1/admin/logout', config);
+    localStorage.removeItem('admin')
+    document.cookie = 'admintoken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    
+    console.log(response);
+
+    const data = response.data;
+
+    console.log(data);
+
+
+
+    if (response.status === 200) {
+
+
+      // alert(data.message);
+
+      toast.success(data.message);
+
+      alert(data.message);
+      toast.success("logged out");
+
+      navigate("/", { replace: true });
+
+
+    }
+
+
+  };
+
   return (
     <div className=''>
       <nav className="bg-violet-100/50 backdrop-blur-lg shadow-md fixed right-0 left-0 top-0 z-10 ">
@@ -89,7 +134,7 @@ function Navbar({ userType, setUserType }) {
                         About
                       </Link>
                       <button
-                        onClick={handleLogout}
+                        onClick={(location.pathname.includes('admin'))?handleAdminLogout:handleLogout}
                         to="/logout"
                         className={`px-3 py-2 rounded-md text-sm font-medium ${location.pathname === '/logout'
                           ? 'bg-blue-500 text-white'
