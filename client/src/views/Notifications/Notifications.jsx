@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import './Notification.css'; // Import CSS for styling
 import axios from 'axios';
-import {toast} from 'sonner';
 
 const Notifications = () => {
   const [notifications, setNotifications] = useState([]);
@@ -12,20 +11,19 @@ const Notifications = () => {
     fetchNotifications();
   }, []);
 
-    /// Fetch notifications from an API (placeholder function)
-  const fetchNotifications = async() => {
+  const fetchNotifications = async () => {
     // Placeholder data, replace with API call
 
     const config = {
       headers: {
-        'Content-Type': 'application/json', 
+        'Content-Type': 'application/json',
       },
       withCredentials: true,
     };
 
 
     const response = await axios.get("http://localhost:5200/api/v1/admin/getLeaveEmployee", config);
-    
+
     console.log(response);
 
     const info = response.data.data;
@@ -40,98 +38,71 @@ const Notifications = () => {
     const data = info;
 
 
-  
-    setCount(data.length);
+
+
+
+
+
+    // const data = [
+    //   { id: 1, title: 'New Employee Added', message: 'John Doe has been added.', date: '2024-06-01', isRead: false },
+    //   { id: 2, title: 'Policy Update', message: 'The leave policy has been updated.', date: '2024-05-25', isRead: false },
+    //   // Add more notifications as needed
+    // ];
+    const check = data.filter((item) => item.leaveStatus === 'pending');
+    console.log(check.length)
+    setCount(check.length);
     setNotifications(data);
   };
 
+  const setApproveLeave = async (email, reason) => {
 
-  const setApproveLeave = async(email) => {
-    
     const config = {
       headers: {
-        'Content-Type': 'application/json', 
+        'Content-Type': 'application/json',
       },
       withCredentials: true,
     };
 
     const body = {
       email: email,
-      leaveStatus: 'approved'
-    };
-
-    const response = await axios.post("http://localhost:5200/api/v1/admin/approveLeave", body, config);
-
-    // console.log(response);
-
-    const info = response.data;
-
-    console.log("info => ", info);
-
-    if(info.success){
-
-      toast.info(info.message);
-      toast.success(info.message);
-      alert(info.message);
-
-      console.log("id => ", info.data._id);
-
-      deleteNotification(info.data._id)
-      markAsRead(info.data._id)
-
-      fetchNotifications();
-
-    }
-
-
-
-
-    fetchNotifications();
-
-
-  };
-
-
-  const setRejectLeave = async(email) => {
-    
-    const config = {
-      headers: {
-        'Content-Type': 'application/json', 
-      },
-      withCredentials: true,
-    };
-
-    const body = {
-      email: email,
-      leaveStatus: 'rejected'
+      leaveStatus: 'approved',
+      reason: reason
     };
 
     const response = await axios.post("http://localhost:5200/api/v1/admin/approveLeave", body, config);
 
     console.log(response);
 
-    const info = response.data;
+    fetchNotifications();
 
-    console.log("info => ", info);
 
-    if(info.success){
+  };
 
-      toast.info(info.message);
-      toast.success(info.message);
-      alert(info.message);
 
-      console.log("id => ", info.data._id);
+  const setRejectLeave = async (email, reason) => {
 
-      deleteNotification(info.data._id)
-      markAsRead(info.data._id)
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      withCredentials: true,
+    };
 
-      fetchNotifications();
+    const body = {
+      email: email,
+      leaveStatus: 'rejected',
+      reason: reason
+    };
 
-    }
+    const response = await axios.post("http://localhost:5200/api/v1/admin/approveLeave", body, config);
+
+    console.log(response);
 
     fetchNotifications();
-    
+
   };
+
+
 
 
 
@@ -143,11 +114,14 @@ const Notifications = () => {
   const markAsRead = (id) => {
     setNotifications(notifications.map(notification =>
       notification.id === id ? { ...notification, isRead: true } : notification
+
     ));
   };
 
   const deleteNotification = (id) => {
+
     setNotifications(notifications.filter(notification => notification.id !== id));
+
   };
 
   const clearAllNotifications = () => {
@@ -155,24 +129,24 @@ const Notifications = () => {
   };
 
   return (
-    
     <div className="notification-container relative">
       <h2 className='font-bold text-2xl'>Admin Notifications</h2>
       <button className='absolute right-0 top-2' onClick={clearAllNotifications}>Clear All Notifications</button>
       <ul>
-        {notifications.map(notification => (
-          <li key={notification._id}  className={notification.isRead ? 'read' : 'unread'}>
-            <h3>{notification.email}</h3>
-            <p>{notification.reason}</p>
-            <span>{notification.date}</span>
-            <div>
-              {!notification.isRead && <button onClick={() => markAsRead(notification.id)}>Mark as Read</button>}
-              <button onClick={() => deleteNotification(notification.id)}>Delete</button>
-              <button onClick={() => setApproveLeave(notification.email)}>Approve</button>
-              <button onClick={() => setRejectLeave(notification.email)}>Reject</button>
-          
-            </div>
-          </li>
+        {notifications.map((notification, i) => (
+          notification.leaveStatus !== 'approved' && notification.leaveStatus !== 'rejected' && (
+            <li key={i}>
+              <h3>{notification.email}</h3>
+              <p>{notification.reason}</p>
+              <span>{notification.date}</span>
+              <div>
+                {!notification.isRead && <button onClick={() => markAsRead(notification.id)}>Mark as Read</button>}
+                <button onClick={() => deleteNotification(notification.id, notification.reason)}>Delete</button>
+                <button onClick={() => setApproveLeave(notification.email, notification.reason)}>Approve</button>
+                <button onClick={() => setRejectLeave(notification.email, notification.reason)}>Reject</button>
+              </div>
+            </li>
+          )
         ))}
       </ul>
     </div>
