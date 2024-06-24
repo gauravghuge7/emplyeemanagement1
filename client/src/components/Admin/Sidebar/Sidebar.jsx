@@ -229,6 +229,21 @@ import { useEffect, useState } from "react";
                         </a>
                     </li>
 
+                    <li>
+                        <a className="" href="#">
+                            <button
+                                className="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize"
+                                type="button"
+                                onClick={() => setActiveBox("history")}
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-history"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" /><path d="M3 3v5h5" /><path d="M12 7v5l4 2" /></svg>
+                                <p className="block antialiased font-sans text-base leading-relaxed text-inherit font-medium capitalize">
+                                    History
+                                </p>
+                            </button>
+                        </a>
+                    </li>
+
 
                 </ul>
 

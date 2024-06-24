@@ -12,6 +12,7 @@ import AdminProfiles from '../AdminProfile/AdminProfiles';
 import { toast } from 'sonner';
 import LeaveStatus from '../LeaveStatus/LeaveStatus';
 import Announcement from '../../../views/Announcement/Announcement';
+import History from '../../../views/History/History';
 
 
 
@@ -298,6 +299,7 @@ function Admin() {
 
             {activeBox === "leave" && <LeaveStatus />}
             {activeBox === "announcement" && <Announcement />}
+            {activeBox === "history" && <History />}
 
 
           

@@ -4,7 +4,7 @@ import { upload } from "../../middlewares/multer.middleware.js";
 import { deleteUser, getActiveUsers, getAdminProfile, getDailyReport, getUsers, logoutAdmin, registerUser } from "../../controllers/v1/admin.controller.js";
 import { isAdminLoggedIn } from "../../middlewares/admin.auth.middlewares.js";
 
-import { adminLeaveStatus, giveLeavePermission } from "../../controllers/v1/user.leave.controller.js";
+import { adminLeaveStatus,getAllLeaves, giveLeavePermission } from "../../controllers/v1/user.leave.controller.js";
 
 
 import { createAnnouncement, getAnnouncements } from '../../controllers/v1/announcement.controller.js '
@@ -56,6 +56,11 @@ AdminRouter.route("/getLeaveEmployee").get(
   isAdminLoggedIn,
   adminLeaveStatus
 );
+
+AdminRouter.route('/getAllLeaves').get(
+  isAdminLoggedIn,
+  getAllLeaves
+)
 
 
 AdminRouter.route("/getDailyReport").get(

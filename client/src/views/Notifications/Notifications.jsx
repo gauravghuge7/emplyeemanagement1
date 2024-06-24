@@ -11,19 +11,19 @@ const Notifications = () => {
     fetchNotifications();
   }, []);
 
-  const fetchNotifications = async() => {
+  const fetchNotifications = async () => {
     // Placeholder data, replace with API call
 
     const config = {
       headers: {
-        'Content-Type': 'application/json', 
+        'Content-Type': 'application/json',
       },
       withCredentials: true,
     };
 
 
     const response = await axios.get("http://localhost:5200/api/v1/admin/getLeaveEmployee", config);
-    
+
     console.log(response);
 
     const info = response.data.data;
@@ -52,18 +52,19 @@ const Notifications = () => {
     setNotifications(data);
   };
 
-  const setApproveLeave = async(email) => {
-    
+  const setApproveLeave = async (email, reason) => {
+
     const config = {
       headers: {
-        'Content-Type': 'application/json', 
+        'Content-Type': 'application/json',
       },
       withCredentials: true,
     };
 
     const body = {
       email: email,
-      leaveStatus: 'approved'
+      leaveStatus: 'approved',
+      reason: reason
     };
 
     const response = await axios.post("http://localhost:5200/api/v1/admin/approveLeave", body, config);
@@ -76,18 +77,19 @@ const Notifications = () => {
   };
 
 
-  const setRejectLeave = async(email) => {
-    
+  const setRejectLeave = async (email, reason) => {
+
     const config = {
       headers: {
-        'Content-Type': 'application/json', 
+        'Content-Type': 'application/json',
       },
       withCredentials: true,
     };
 
     const body = {
       email: email,
-      leaveStatus: 'rejected'
+      leaveStatus: 'rejected',
+      reason: reason
     };
 
     const response = await axios.post("http://localhost:5200/api/v1/admin/approveLeave", body, config);
@@ -95,8 +97,10 @@ const Notifications = () => {
     console.log(response);
 
     fetchNotifications();
-    
+
   };
+
+
 
 
 
@@ -108,11 +112,14 @@ const Notifications = () => {
   const markAsRead = (id) => {
     setNotifications(notifications.map(notification =>
       notification.id === id ? { ...notification, isRead: true } : notification
+
     ));
   };
 
   const deleteNotification = (id) => {
+
     setNotifications(notifications.filter(notification => notification.id !== id));
+
   };
 
   const clearAllNotifications = () => {
@@ -124,19 +131,20 @@ const Notifications = () => {
       <h2 className='font-bold text-2xl'>Admin Notifications</h2>
       <button className='absolute right-0 top-2' onClick={clearAllNotifications}>Clear All Notifications</button>
       <ul>
-        {notifications.map(notification => (
-          <li key={notification._id} className={notification.isRead ? 'read' : 'unread'}>
-            <h3>{notification.email}</h3>
-            <p>{notification.reason}</p>
-            <span>{notification.date}</span>
-            <div>
-              {!notification.isRead && <button onClick={() => markAsRead(notification.id)}>Mark as Read</button>}
-              <button onClick={() => deleteNotification(notification.id)}>Delete</button>
-              <button onClick={() => setApproveLeave(notification.email)}>Approve</button>
-              <button onClick={() => setRejectLeave(notification.email)}>Reject</button>
-          
-            </div>
-          </li>
+        {notifications.map((notification, i) => (
+          notification.leaveStatus !== 'approved' && notification.leaveStatus !== 'rejected' && (
+            <li key={i}>
+              <h3>{notification.email}</h3>
+              <p>{notification.reason}</p>
+              <span>{notification.date}</span>
+              <div>
+                {!notification.isRead && <button onClick={() => markAsRead(notification.id)}>Mark as Read</button>}
+                <button onClick={() => deleteNotification(notification.id, notification.reason)}>Delete</button>
+                <button onClick={() => setApproveLeave(notification.email, notification.reason)}>Approve</button>
+                <button onClick={() => setRejectLeave(notification.email, notification.reason)}>Reject</button>
+              </div>
+            </li>
+          )
         ))}
       </ul>
     </div>
