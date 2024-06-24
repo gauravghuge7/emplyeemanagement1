@@ -3,6 +3,7 @@ import asyncHandler from "../../utils/asyncHandler.js";
 import ApiResponse from "../../utils/ApiResponse.js";
 import bcrypt from "bcrypt";
 import { uploadOnCloudinary } from "../../utils/cloudinary.js";
+import { LeaveModel } from "../../models/Leave.model.js";
 
 const cookiesOptions = {
 
@@ -29,6 +30,10 @@ const loginUser = asyncHandler(async(req, res) => {
             email:email,
         
         });
+
+        user.isActive = true;
+
+        await user.save();
 
         if (!user) {
             return res.status(400).json({ message: "User not found" });
@@ -65,12 +70,21 @@ const loginUser = asyncHandler(async(req, res) => {
 
 const logoutUser = asyncHandler(async(req, res) => {
 
+    const { email } = req.user;
+
     try {
         const userToken = req.cookies.userToken;
+
+        const user = await UserModel.findOne({ email });
+
+        user.isActive = false;
+
+        await user.save();
 
         if(!userToken) {
             return res.status(400).json({ message: "User not logged in" });
         }
+
 
         
         return res
@@ -91,6 +105,8 @@ const updateAvatar = asyncHandler(async(req, res) => {
     const { email } = req.user;
 
     console.log(req.user);
+
+    console.log("req.file => ", req.file);
 
     try {
         const user = await UserModel.findOne({ email: email });
@@ -152,11 +168,12 @@ const updateProfile = asyncHandler(async(req, res) => {
             user.bio = bio;
         }
 
-        
             const path = req.file.path;
             console.log(path);
+            console.log("................................")
 
             const response = await uploadOnCloudinary(path);
+
 
             console.log(response);
             if(!response) {
@@ -265,6 +282,30 @@ const getUserProfile = asyncHandler(async(req, res) => {
 });
 
 
+const getLeaveHistory = asyncHandler(async(req, res) => {
+
+    const { email } = req.user;
+
+    try {
+        const user = await LeaveModel.find({ email });
+
+        if(!user) {
+            return res.status(400).json(new ApiResponse(400, "there is not leave applications for this user"));
+        }
+
+        
+        return res.json(new ApiResponse(200, "Leave History fetched successfully", user));
+        
+    } 
+    catch (error) {
+        
+        return res
+        .status(400)
+        .json(new ApiResponse(400, "Error fetching leave history", error));
+    }
+
+});
+
 
 
 
@@ -272,6 +313,8 @@ const acceptDailyReport = asyncHandler(async(req, res) => {
     const { email } = req.user;
 
     const { dailyReport } = req.body;
+
+    console.log("req.body => ", req.body);
 
     try {
     
@@ -281,11 +324,16 @@ const acceptDailyReport = asyncHandler(async(req, res) => {
             return res.status(400).json({ message: "User not found" });
         }
 
-        const report = user.dailyReports = dailyReport;
+        
+       
+
+        
+
+        console.log("user.dailyReports => ", user.dailyReports);
 
         await user.save();
 
-        return res.json(new ApiResponse(200, "Daily Report accepted", user, report));   
+        return res.json(new ApiResponse(200, "Daily Report accepted", user.dailyReports));   
         
     } 
     
@@ -307,5 +355,6 @@ export {
     getUserProfile,
     acceptDailyReport,
     updatePassword,
+    getLeaveHistory
     
 };

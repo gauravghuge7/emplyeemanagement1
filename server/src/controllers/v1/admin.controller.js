@@ -182,13 +182,17 @@ const updatePassword = asyncHandler(async (req, res, next) => {
  * Description : Log's out Admin
  */
 const logoutAdmin = asyncHandler(async (req, res) => {
-  const { adminToken } = req.cookies;
-
+ 
   try {
     return res
       .status(200)
+
+      .clearCookie("adminToken", null, cookieOptions)
+      .json(new ApiResponse(200, "User logged out successfully"));
+
       .clearCookie("adminToken", adminToken, cookieOptions)
       .json(new ApiResponse(200, "Admin logged out successfully"));
+
   } 
   catch (error) {
     console.log(error);
@@ -223,9 +227,11 @@ const getAdminProfile = asyncHandler(async (req, res) => {
       throw new ApiError("admin not registered", 404);
     }
 
+    const phone = user.phoneNumber
+
     return res
       .status(200)
-      .json(new ApiResponse(200, "Admin fetched successfully", user))
+      .json(new ApiResponse(200, "Admin fetched successfully", user, phone))
   }
 
   catch (error) {
@@ -237,29 +243,24 @@ const getAdminProfile = asyncHandler(async (req, res) => {
 
 
 const registerUser = asyncHandler(async (req, res) => {
-  
   const { firstName, lastName, email, password, phoneNumber } = req.body;
-
-  const {adminEmail, adminId} = req.user;
+  const { adminEmail, adminId } = req.user;
 
   console.log(req.user);
-  
 
-  if(!firstName || !lastName || !email || !password || !phoneNumber) {
+  if (!firstName || !lastName || !email || !password || !phoneNumber) {
     throw new ApiError("Missing required fields", 400);
   }
 
- 
   try {
     const exists = await UserModel.findOne({ email });
 
     if (exists) {
-      return res.status(400).send("User already exist");
+      return res.status(400).send("User already exists");
     }
 
     const encryptedPassword = await bcrypt.hash(password, 10);
 
-    
     const user = new UserModel({
       firstName,
       lastName,
@@ -267,32 +268,22 @@ const registerUser = asyncHandler(async (req, res) => {
       password: encryptedPassword,
       phoneNumber,
       adminId,
-      adminEmail
-      
-
-
+      adminEmail,
     });
 
     await user.save();
 
-
     if (!user) {
-      throw new ApiError("problem in registering user", 404);
+      throw new ApiError("Problem in registering user", 404);
     }
 
-    const send = {
-      user,
-      employeeId: user._id,
-      
-    }
+    // Destructure the user object to omit the password field
+    const { password: _, ...userWithoutPassword } = user.toObject();
 
     return res
       .status(200)
-      .json(new ApiResponse(200, "User created successfully", send));
-
-  } 
-  
-  catch (err) {
+      .json(new ApiResponse(200, "User created successfully", userWithoutPassword));
+  } catch (err) {
     console.log(err);
     return res.status(400).send(err.message);
   }
@@ -349,6 +340,39 @@ const getUsers = asyncHandler(async (req, res) => {
 });
 
 
+const getAllDailyReportsForAdmin = asyncHandler(async (req, res) => {
+
+  const {adminEmail} = req.user;
+
+  try {
+  
+    const user = await UserModel.findOne({adminEmail});
+
+    if(!user) {
+      throw new ApiError("User not found", 404);
+    }
+
+    const dailyReports = user.dailyReports;
+
+    return res
+    .status(200)
+    .json(new ApiResponse(200, "Daily Reports fetched successfully", dailyReports));
+
+
+
+    
+  } 
+  catch (error) {
+    
+  }
+
+})
+
+
+
+
+
+
 const getActiveUsers = asyncHandler(async (req, res) => {
 
   const {adminEmail} = req.user;
@@ -387,8 +411,6 @@ const getActiveUsers = asyncHandler(async (req, res) => {
 
 const getDailyReport = asyncHandler(async (req, res) => {
   const {adminEmail} = req.user;
-
-  const email = req.body.email;
 
   try {
     const user = await UserModel.find({adminEmail});
@@ -434,8 +456,10 @@ export {
   updatePassword,
   AdminUpdate,
   AdminDelete,
-  getAdminDashboard
+  getAdminDashboard,
  
+
+  getAllDailyReportsForAdmin
   
 
 

@@ -19,6 +19,9 @@ function EmpProfile() {
   const [avatar, setAvatar] = useState(null);
   const [avatarName, setAvatarName] = useState(null);
 
+
+
+         // fetch user profile data 
   const fetchProfile = async () => {
 
     const config = {
@@ -56,11 +59,7 @@ function EmpProfile() {
       }
 
 
-      // const demo = ownerWindow.print();
-
-      // console.log(demo);
-      // window.print();
-
+   
     }
 
     catch (error) {
@@ -106,19 +105,11 @@ function EmpProfile() {
     };
 
     const formData = new FormData();
+
     formData.append("avatar", avatar);
 
 
-
-    const body = {
-      phoneNumber: employee.phoneNumber,
-      bio: employee.bio,
-
-    }
-
-
-
-    const response = await axios.post("http://localhost:5200/api/v1/user/updateProfile", formData, config);
+    const response = await axios.post("http://localhost:5200/api/v1/user/updateProfile", formData,body, config);
 
 
     console.log(response);
@@ -141,7 +132,6 @@ function EmpProfile() {
 
     setAvatar(e.target.file);
 
-
   };
 
   return (
@@ -158,7 +148,7 @@ function EmpProfile() {
               <div className="flex-shrink-0">
                 <label >
                   Avatar:
-                  <input type="file" className='mx-2' name={"avatar"} accept="image/*" onChange={handleImageChange} />
+                  <input type="file" className='mx-2' capture="camera" name={"avatar"} accept="image/*" onChange={handleImageChange} />
                   {avatar && <img width={'120'} height={'120'} src={avatar} alt="Avatar" className="" />}
                 </label>
               </div>

@@ -44,6 +44,7 @@ function Leave() {
   return (
     
     <div className="md-flex md-flex-column rounded-lg md-align-items-center shadow-lg shadow-blue-100 m-8 p-8 bg-gradient-to-r w-[50rem] h-[40rem] from-blue-400 to-purple-400 max-h-screen overflow-auto scroll-m-0">
+
       
       <form className="space-y-12  w-[90%] m-0 p-0 flex flex-col justify-center" onSubmit={handleLeave}>
 
@@ -51,13 +52,13 @@ function Leave() {
 
 
         {/* full name input field */ }
-        <div>
+        <div> 
           <label className="block font-semibold" htmlFor="FirstName">
             your full Name
           </label>
 
           <input
-            className="w-full border border-gray-500 outline-none shadow-inner bg-gray-100 rounded-lg placeholder-black text-sm p-4  block mt-1"
+            className="w-full border border-gray-500 outline-none shadow-inner bg-gray-100 rounded-lg placeholder-black text-sm p-2  block mt-1"
             id="FirstName"
             type="text"
             name="fullName"
@@ -75,7 +76,7 @@ function Leave() {
             Employee Id
           </label>
           <input
-            className="w-full border border-gray-500 outline-none shadow-inner bg-gray-100 rounded-lg placeholder-black text-sm p-4  block mt-1"
+            className="w-full border border-gray-500 outline-none shadow-inner bg-gray-100 rounded-lg placeholder-black text-sm p-2  block mt-1"
             id="lastName"
             type="text"
             name="lastName"
@@ -93,7 +94,7 @@ function Leave() {
             Date
           </label>
           <input
-            className="w-full border border-gray-500 outline-none shadow-inner bg-gray-100 rounded-lg placeholder-black text-sm p-4  block mt-1"
+            className="w-full border border-gray-500 outline-none shadow-inner bg-gray-100 rounded-lg placeholder-black text-sm p-2  block mt-1"
             id="lastName"
             type="date"
             name="lastName"
@@ -111,7 +112,7 @@ function Leave() {
             Position
           </label>
           <input
-            className="w-full shadow-inner border border-gray-500 outline-none bg-gray-100 rounded-lg placeholder-black text-sm p-4  block mt-1 "
+            className="w-full shadow-inner border border-gray-500 outline-none bg-gray-100 rounded-lg placeholder-black text-sm p-2  block mt-1 "
             id="email"
             type="text"
             name="email"
@@ -129,7 +130,7 @@ function Leave() {
             Reason of Leave
           </label>
           <input
-            className="w-full shadow-inner border border-gray-500 outline-none bg-gray-100 rounded-lg placeholder-black text-sm p-4  block mt-1 "
+            className="w-full shadow-inner border border-gray-500 outline-none bg-gray-100 rounded-lg placeholder-black text-sm p-2  block mt-1 "
             id="email"
             type="text"
             name="email"
@@ -146,7 +147,7 @@ function Leave() {
             Explain About Leave Reason
           </label>
           <textarea cols="30" rows="5"
-            className="w-full border border-gray-500 outline-none shadow-inner bg-gray-100 rounded-lg placeholder-black text-sm p-4  block mt-1 "
+            className="w-full border border-gray-500 outline-none shadow-inner bg-gray-100 rounded-lg placeholder-black text-sm p-2  block mt-1 "
             id="phoneNumber"
             type="text"
             name="Description"
@@ -163,7 +164,7 @@ function Leave() {
         <div className="flex items-center justify-between mt-8">
           <button
             type="submit"
-            className="flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10"
+            className="flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-8"
 
           >
             Submit
@@ -173,6 +174,17 @@ function Leave() {
 
       </form>
 
+
+
+
+
+
+
+
+
+
+
+      
     </div> 
   )
 }

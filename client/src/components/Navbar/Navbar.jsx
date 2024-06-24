@@ -10,6 +10,7 @@ function Navbar({ userType, setUserType }) {
   const isAdminUrl = location.pathname.includes('admin-dashboard');
 
   const handleLogout = async(e) => {
+    console.log("lllllllllllllll", userType)
     // Clear user data
     setUserType(null);
     localStorage.removeItem('userType'); // If you're using localStorage or sessionStorage
@@ -24,8 +25,7 @@ function Navbar({ userType, setUserType }) {
       },
       withCredentials: true,
     }
-
-
+  
     const response = await axios.post('http://localhost:5200/api/v1/user/logout', config);
 
     console.log(response);
@@ -43,10 +43,11 @@ function Navbar({ userType, setUserType }) {
 
       toast.success(data.message);
 
-      alert(data.message);
-      toast.success("logged out");
+      
 
       navigate("/", { replace: true });
+      toast.success(" Logged Out Successfully");
+
 
     
     }
@@ -88,7 +89,7 @@ function Navbar({ userType, setUserType }) {
 
       toast.success(data.message);
 
-      alert(data.message);
+     
       toast.success("logged out");
 
       navigate("/", { replace: true });

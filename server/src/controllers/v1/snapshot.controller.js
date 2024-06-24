@@ -67,6 +67,7 @@ const getSnapshot = asyncHandler(async (req, res) => {
       .json(new ApiResponse(400, "No email recieved from client"));
   }
 
+
   try {
     const user = await UserModel.findOne({ adminEmail });
 

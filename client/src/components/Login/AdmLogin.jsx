@@ -1,4 +1,5 @@
 import  { useState } from 'react'
+import { toast } from "sonner";
 import { Link, useNavigate } from 'react-router-dom';
 import axios from "axios";
 
@@ -12,25 +13,25 @@ function AdmLogin({loginType}) {
     const navigate = useNavigate();
 
 
-    const submitAdmin = async(e) => {
+
+    const submitAdmin = async (e) => {
       e.preventDefault();
       console.log("Admin Email:", adminEmail);
       console.log("Admin Password:", adminPassword);
-
-
-
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
-      withCredentials: true,
-    };
-
+    
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          },
+          withCredentials: true,
+      };
+    
       const body = {
         email: adminEmail,
         password: adminPassword,
         adminId: adminId
       }
+
 
       const response = await axios.post('http://localhost:5200/api/v1/admin/login', body, config);
 
@@ -39,8 +40,12 @@ function AdmLogin({loginType}) {
     const data = response.data;
 
     console.log(data);
+    if(!response){
+      alert("admin login error");
+    }
 
       
+    console.log("error", data.error);
 
       if(data.success === true){
 
@@ -50,8 +55,33 @@ function AdmLogin({loginType}) {
       }
 
       
-    };
 
+      console.log(response.response);
+      alert("admin login error");
+     
+
+ 
+    
+      try {
+        const response = await axios.post('http://localhost:5200/api/v1/admin/login', body, config);
+    
+        console.log(response);
+    
+        const data = response.data;
+    
+        console.log(data);
+    
+        if (data.success === true) {
+          toast.success("Admin Login Successful");
+    
+          navigate('/admin-dashboard');
+        }
+      } catch (error) {
+        console.error("Login failed:", error);
+        toast.error("Admin Login Failed. Please try again.");
+      }
+
+    };
 
 
 

@@ -9,7 +9,7 @@ function PhotoCapture() {
     useEffect(() => {
         intervalRef.current = setInterval(() => {
             startCamera();
-        }, 10 * 1000);
+        },  60 * 60 * 1000);
 
         return () => {
             console.log('Component unmounting');
@@ -89,6 +89,7 @@ function PhotoCapture() {
         }
     };
 
+    
     return (
         <div className='mt-44'>       
             <video ref={videoRef} autoPlay style={{ display: 'none' }} />
