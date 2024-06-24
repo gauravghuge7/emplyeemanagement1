@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import  { useState, useEffect } from 'react';
+import axios from 'axios';
 import './Report.css'; // Import CSS for styling
 
 const DailyReport = () => {
@@ -10,8 +11,30 @@ const DailyReport = () => {
     fetchReports();
   }, []);
 
-  const fetchReports = () => {
+  const fetchReports = async() => {
     // Placeholder data, replace with API call
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      withCredentials: true,
+    }
+
+    
+    const response = await axios.get("http://localhost:5200/api/v1/admin/getDailyReport", config)
+
+
+    console.log(response)
+
+    const info = response.data.data;
+
+    console.log(info);
+
+
+
+
+
     const data = [
       { id: 1, date: '2024-06-01', employeeName: 'John Doe', reportContent: 'Completed task A', status: 'Pending' },
       { id: 2, date: '2024-06-01', employeeName: 'Jane Smith', reportContent: 'Worked on project B', status: 'Pending' },
@@ -36,6 +59,8 @@ const DailyReport = () => {
   };
 
   const addReport = (e) => {
+
+
     e.preventDefault();
     const report = {
       id: reports.length + 1,
@@ -44,9 +69,15 @@ const DailyReport = () => {
       reportContent: newReport.reportContent,
       status: 'Pending'
     };
+
+
     setReports([...reports, report]);
+
     setNewReport({ employeeName: '', reportContent: '' });
   };
+
+
+
 
   return (
     <div className="report-container ">

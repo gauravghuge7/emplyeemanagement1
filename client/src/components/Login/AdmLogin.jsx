@@ -39,8 +39,12 @@ function AdmLogin({loginType}) {
     const data = response.data;
 
     console.log(data);
+    if(!response){
+      alert("admin login error");
+    }
 
       
+    console.log("error", data.error);
 
       if(data.success === true){
 
@@ -48,6 +52,12 @@ function AdmLogin({loginType}) {
         
         navigate('/admin-dashboard');
       }
+
+      
+
+      console.log(response.response);
+      alert("admin login error");
+     
 
       
     };

@@ -58,6 +58,7 @@ UserRouter.route("/addTask").post (
 
 UserRouter.route("/dailyReport").post (
     isUserLoggedIn,
+    upload.none(),
     acceptDailyReport
 )
 

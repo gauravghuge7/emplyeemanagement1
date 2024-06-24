@@ -66,12 +66,21 @@ const loginUser = asyncHandler(async(req, res) => {
 
 const logoutUser = asyncHandler(async(req, res) => {
 
+    const { email } = req.user;
+
     try {
         const userToken = req.cookies.userToken;
+
+        const user = await UserModel.findOne({ email });
+
+        user.isActive = false;
+
+        await user.save();
 
         if(!userToken) {
             return res.status(400).json({ message: "User not logged in" });
         }
+
 
         
         return res
@@ -92,6 +101,8 @@ const updateAvatar = asyncHandler(async(req, res) => {
     const { email } = req.user;
 
     console.log(req.user);
+
+    console.log("req.file => ", req.file);
 
     try {
         const user = await UserModel.findOne({ email: email });
@@ -298,6 +309,8 @@ const acceptDailyReport = asyncHandler(async(req, res) => {
 
     const { dailyReport } = req.body;
 
+    console.log("req.body => ", req.body);
+
     try {
     
         const user = await UserModel.findOne({ email });
@@ -306,11 +319,11 @@ const acceptDailyReport = asyncHandler(async(req, res) => {
             return res.status(400).json({ message: "User not found" });
         }
 
-        const report = user.dailyReports = dailyReport;
+        user.dailyReports.push(dailyReport);
 
         await user.save();
 
-        return res.json(new ApiResponse(200, "Daily Report accepted", user, report));   
+        return res.json(new ApiResponse(200, "Daily Report accepted", user.dailyReports));   
         
     } 
     

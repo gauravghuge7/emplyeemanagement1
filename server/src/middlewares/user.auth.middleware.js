@@ -16,6 +16,9 @@ const isUserLoggedIn = asyncHandler(async (req, res, next) => {
   // const userToken = req.cookies?.userToken || req.headers.cookies.userToken;
   const userToken = req.cookies?.userToken || req.header("Authorization")?.replace("Bearer ", "")
 
+  console.log("req.file => ", req.file);
+  console.log("req.files => ", req.files);
+
 
   if (!userToken) {
     throw new ApiError(401, "User is Not logged in ");

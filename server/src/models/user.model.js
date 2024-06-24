@@ -51,7 +51,7 @@ const userSchema = new Schema (
         isActive:{
             type:Boolean,
             default:false,
-            expiresIn: "10s",
+            expiresIn: "2m",
             
             
         },
@@ -81,8 +81,7 @@ const userSchema = new Schema (
 
         dailyReports: [{
             type: String,
-            enum: ['Daily', 'Weekly', 'Monthly'],
-            required: true
+            
         }],
 
         snapshots: [{
