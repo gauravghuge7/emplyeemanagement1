@@ -237,29 +237,24 @@ const getAdminProfile = asyncHandler(async (req, res) => {
 
 
 const registerUser = asyncHandler(async (req, res) => {
-  
   const { firstName, lastName, email, password, phoneNumber } = req.body;
-
-  const {adminEmail, adminId} = req.user;
+  const { adminEmail, adminId } = req.user;
 
   console.log(req.user);
-  
 
-  if(!firstName || !lastName || !email || !password || !phoneNumber) {
+  if (!firstName || !lastName || !email || !password || !phoneNumber) {
     throw new ApiError("Missing required fields", 400);
   }
 
- 
   try {
     const exists = await UserModel.findOne({ email });
 
     if (exists) {
-      return res.status(400).send("User already exist");
+      return res.status(400).send("User already exists");
     }
 
     const encryptedPassword = await bcrypt.hash(password, 10);
 
-    
     const user = new UserModel({
       firstName,
       lastName,
@@ -267,32 +262,22 @@ const registerUser = asyncHandler(async (req, res) => {
       password: encryptedPassword,
       phoneNumber,
       adminId,
-      adminEmail
-      
-
-
+      adminEmail,
     });
 
     await user.save();
 
-
     if (!user) {
-      throw new ApiError("problem in registering user", 404);
+      throw new ApiError("Problem in registering user", 404);
     }
 
-    const send = {
-      user,
-      employeeId: user._id,
-      
-    }
+    // Destructure the user object to omit the password field
+    const { password: _, ...userWithoutPassword } = user.toObject();
 
     return res
       .status(200)
-      .json(new ApiResponse(200, "User created successfully", send));
-
-  } 
-  
-  catch (err) {
+      .json(new ApiResponse(200, "User created successfully", userWithoutPassword));
+  } catch (err) {
     console.log(err);
     return res.status(400).send(err.message);
   }

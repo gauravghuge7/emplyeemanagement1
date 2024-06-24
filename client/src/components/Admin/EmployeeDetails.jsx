@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react'
-import AreaChart from '../Charts/AreaCharts'
+import { useEffect, useState } from 'react';
+import AreaChart from '../Charts/AreaCharts';
 import axios from 'axios';
 
 function EmployeeDetails({ details, empRef }) {
@@ -10,7 +10,7 @@ function EmployeeDetails({ details, empRef }) {
     useEffect(() => {
         console.log("Employee details: ", details);
 
-        const url = "http://localhost:5200/api/v1/admin/getSnapshot";
+        const url = `http://localhost:5200/api/v1/admin/getSnapshot`;
 
         axios.post(url, { email: details.email }, {
             headers: {
@@ -33,6 +33,9 @@ function EmployeeDetails({ details, empRef }) {
     return (
         <div className='bg-black h-auto w-full rounded-lg overflow-hidden pt-32'>
             <div className='bg-black/80 min-h-screen relative text-white backdrop-blur-lg border border-black p-4 rounded-lg mx-auto w-full lg:w-[800px]'>
+                <button onClick={() => empRef.current.close()} className='text-white absolute top-3 right-3'>
+                    Close
+                </button>
                 <div className='flex gap-4 justify-center items-center'>
                     <img className='rounded-lg' src='https://avatars.githubusercontent.com/u/61672294?v=4' width={96} />
                     <div className='flex flex-col gap-2'>
@@ -65,7 +68,26 @@ function EmployeeDetails({ details, empRef }) {
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
-export default EmployeeDetails
+export default EmployeeDetails;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

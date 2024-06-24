@@ -118,7 +118,7 @@ function EmpProfile() {
 
 
 
-    const response = await axios.post("http://localhost:5200/api/v1/user/updateProfile", formData, config);
+    const response = await axios.post("http://localhost:5200/api/v1/user/updateProfile", formData,body, config);
 
 
     console.log(response);
