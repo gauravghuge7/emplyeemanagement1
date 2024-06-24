@@ -26,10 +26,6 @@ function Manage() {
 
   const [detail, setDetail] = useState([{
 
-    name: "sharad",
-    email: "sharad@microsoft.com",
-    id: "sharad123",
-    status: "active"
   }])
 
 
@@ -150,16 +146,12 @@ function ShowTabeData({ DataObject }) {
         return <div className="grid  grid-cols-5 gap-x-36 auto-cols-auto py-5 border border-r-0 border-l-0 border-b-0  my-0" key={i}>
 
           <h2 className=" overflow-y-hidden overflow-scroll">{data._id}</h2>
-          <h2>{`${data.firstName}  ${data.lastName}`}</h2>
+          <h2>{`${data.firstName || ""}  ${data.lastName ||""}`}</h2>
           <h2 className="text-center w-20">{data.email}</h2>
-
-
-
-
           <button
             onClick={() => deleteEmployee(data.email)}
             className="hover:bg-red-600 w-24 p-2 rounded-3xl"
-          >delete</button>
+          >delete </button>
           <button onClick={() => {
             startTransition(() => {
               setSelectedEmployee(data);
