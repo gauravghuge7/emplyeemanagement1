@@ -30,14 +30,25 @@ function EmployeeDetails({ details, empRef }) {
             });
     }, [details.email]);
 
+    
+
     return (
         <div className='bg-black h-auto w-full rounded-lg overflow-hidden pt-32'>
+
+
             <div className='bg-black/80 min-h-screen relative text-white backdrop-blur-lg border border-black p-4 rounded-lg mx-auto w-full lg:w-[800px]'>
+
+
+
                 <button onClick={() => empRef.current.close()} className='text-white absolute top-3 right-3'>
                     Close
                 </button>
+
                 <div className='flex gap-4 justify-center items-center'>
                     <img className='rounded-lg' src='https://avatars.githubusercontent.com/u/61672294?v=4' width={96} />
+
+
+
                     <div className='flex flex-col gap-2'>
                         <h2 className='capitalize'>{details.firstName} {details.lastName}</h2>
                         <div className='flex flex-col gap-4'>

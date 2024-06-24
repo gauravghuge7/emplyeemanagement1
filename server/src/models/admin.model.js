@@ -46,7 +46,7 @@ const adminSchema = new Schema(
       trim: true,
     },
 
-    PhoneNumber: {
+    phoneNumber: {
       type: Number,
       validate: {
         validator: function (value) {

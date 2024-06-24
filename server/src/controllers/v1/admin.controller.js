@@ -182,13 +182,17 @@ const updatePassword = asyncHandler(async (req, res, next) => {
  * Description : Log's out Admin
  */
 const logoutAdmin = asyncHandler(async (req, res) => {
-  const { adminToken } = req.cookies;
-
+ 
   try {
     return res
       .status(200)
+
+      .clearCookie("adminToken", null, cookieOptions)
+      .json(new ApiResponse(200, "User logged out successfully"));
+
       .clearCookie("adminToken", adminToken, cookieOptions)
       .json(new ApiResponse(200, "Admin logged out successfully"));
+
   } 
   catch (error) {
     console.log(error);
@@ -223,9 +227,11 @@ const getAdminProfile = asyncHandler(async (req, res) => {
       throw new ApiError("admin not registered", 404);
     }
 
+    const phone = user.phoneNumber
+
     return res
       .status(200)
-      .json(new ApiResponse(200, "Admin fetched successfully", user))
+      .json(new ApiResponse(200, "Admin fetched successfully", user, phone))
   }
 
   catch (error) {
@@ -334,6 +340,39 @@ const getUsers = asyncHandler(async (req, res) => {
 });
 
 
+const getAllDailyReportsForAdmin = asyncHandler(async (req, res) => {
+
+  const {adminEmail} = req.user;
+
+  try {
+  
+    const user = await UserModel.findOne({adminEmail});
+
+    if(!user) {
+      throw new ApiError("User not found", 404);
+    }
+
+    const dailyReports = user.dailyReports;
+
+    return res
+    .status(200)
+    .json(new ApiResponse(200, "Daily Reports fetched successfully", dailyReports));
+
+
+
+    
+  } 
+  catch (error) {
+    
+  }
+
+})
+
+
+
+
+
+
 const getActiveUsers = asyncHandler(async (req, res) => {
 
   const {adminEmail} = req.user;
@@ -372,8 +411,6 @@ const getActiveUsers = asyncHandler(async (req, res) => {
 
 const getDailyReport = asyncHandler(async (req, res) => {
   const {adminEmail} = req.user;
-
-  const email = req.body.email;
 
   try {
     const user = await UserModel.find({adminEmail});
@@ -419,8 +456,10 @@ export {
   updatePassword,
   AdminUpdate,
   AdminDelete,
-  getAdminDashboard
+  getAdminDashboard,
  
+
+  getAllDailyReportsForAdmin
   
 
 

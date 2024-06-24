@@ -125,10 +125,20 @@ function ShowTabeData({ DataObject }) {
 
   return (
     <div>
+
+
+      {DataObject.map((data, i) => {
+
+        return <div className="grid  grid-cols-5 gap-x-36 auto-cols-auto py-5 border border-r-0 border-l-0 border-b-0  my-0" key={i}>
+
+          <h2 className=" overflow-y-hidden overflow-scroll">{data._id}</h2>
+          <h2>{data.firstName || ""}{data.lastName ||""}</h2>
+
       {DataObject.map((data, i) => (
         <div className="grid grid-cols-5 gap-x-36 auto-cols-auto py-5 border border-r-0 border-l-0 border-b-0 my-0" key={i}>
           <h2 className="overflow-y-hidden overflow-scroll">{data._id}</h2>
           <h2>{`${data.firstName} ${data.lastName}`}</h2>
+
           <h2 className="text-center w-20">{data.email}</h2>
           <button
             onClick={() => handleDelete(data.email)}
@@ -182,4 +192,6 @@ function ShowTabeData({ DataObject }) {
 
 
 
-export default Manage;
+
+export default Manage
+

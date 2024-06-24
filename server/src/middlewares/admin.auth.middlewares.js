@@ -1,6 +1,6 @@
 import asyncHandler from "../utils/asyncHandler.js";
 import jwt from "jsonwebtoken";
-import ApiError from "../utils/ApiError.js";
+
 
 import { JWT_SECRET } from "../constant.js";
 
@@ -13,7 +13,11 @@ const isAdminLoggedIn = asyncHandler(async (req, res, next) => {
 
 
   if (!adminToken) {
-    throw new ApiError(401, "Not logged in");
+
+    return res
+    .status(200)
+    .redirect('http://localhost:5173/')
+    .json(new ApiResponse(400, "admin is not login in the server"))
   }
 
   try {

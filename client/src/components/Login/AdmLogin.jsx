@@ -31,6 +31,36 @@ function AdmLogin({loginType}) {
         password: adminPassword,
         adminId: adminId
       }
+
+
+      const response = await axios.post('http://localhost:5200/api/v1/admin/login', body, config);
+
+    console.log(response);
+
+    const data = response.data;
+
+    console.log(data);
+    if(!response){
+      alert("admin login error");
+    }
+
+      
+    console.log("error", data.error);
+
+      if(data.success === true){
+
+        alert("Admin Login Successful");
+        
+        navigate('/admin-dashboard');
+      }
+
+      
+
+      console.log(response.response);
+      alert("admin login error");
+     
+
+ 
     
       try {
         const response = await axios.post('http://localhost:5200/api/v1/admin/login', body, config);
@@ -50,6 +80,7 @@ function AdmLogin({loginType}) {
         console.error("Login failed:", error);
         toast.error("Admin Login Failed. Please try again.");
       }
+
     };
 
 
