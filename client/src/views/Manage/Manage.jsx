@@ -22,11 +22,10 @@ let data = [{
 function Manage() {
   const dialogRef = useRef();
   const [detail, setDetail] = useState([{
-    name: "sharad",
-    email: "sharad@microsoft.com",
-    id: "sharad123",
-    status: "active"
-  }]);
+
+  }])
+
+
 
   const getData = async () => {
     const config = {
@@ -78,6 +77,10 @@ function ShowTable({ detail }) {
   );
 }
 
+
+
+
+
 function ShowTabeData({ DataObject }) {
   const [selectedEmployee, setSelectedEmployee] = useState(null);
   const [deleteEmail, setDeleteEmail] = useState("");
@@ -87,20 +90,22 @@ function ShowTabeData({ DataObject }) {
   const deleteEmployee = async (email) => {
     const config = {
       headers: {
-        'Content-Type': 'multipart/form-data',
+        'Content-Type': 'application/json',
       },
       withCredentials: true,
     };
 
-    const body = {
-      email: email
-    };
+    const body = { email };
 
-    const response = await axios.delete("http://localhost:5200/api/v1/admin/deleteUser", { data: body }, config);
+    try {
+      const response = await axios.delete("http://localhost:5200/api/v1/admin/deleteUser", { data: body }, config);
 
-    if (response.data.success) {
-      toast.success("Employee Deleted Successfully");
-      getData(); // Refresh the page by fetching updated data
+      if (response.data.success) {
+        toast.success("Employee Deleted Successfully");
+        
+      }
+    } catch (error) {
+      toast.error("Error deleting employee");
     }
   };
 
@@ -119,24 +124,32 @@ function ShowTabeData({ DataObject }) {
   };
 
   return (
-    <>
+    <div>
       {DataObject.map((data, i) => (
-        <div className="grid  grid-cols-5 gap-x-36 auto-cols-auto py-5 border border-r-0 border-l-0 border-b-0  my-0" key={i}>
-          <h2 className="mx-4">{data._id}</h2>
-          <h2>{data.firstName} {data.lastName}</h2>
+        <div className="grid grid-cols-5 gap-x-36 auto-cols-auto py-5 border border-r-0 border-l-0 border-b-0 my-0" key={i}>
+          <h2 className="overflow-y-hidden overflow-scroll">{data._id}</h2>
+          <h2>{`${data.firstName} ${data.lastName}`}</h2>
           <h2 className="text-center w-20">{data.email}</h2>
           <button
-            onClick={() => deleteEmployee(data.email)}
+            onClick={() => handleDelete(data.email)}
             className="hover:bg-red-600 w-24 p-2 rounded-3xl"
-          >delete</button>
+          >
+            delete
+          </button>
           <button onClick={() => {
             startTransition(() => {
               setSelectedEmployee(data);
             });
-          }}><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-ellipsis-vertical"><circle cx="12" cy="12" r="1" /><circle cx="12" cy="5" r="1" /><circle cx="12" cy="19" r="1" /></svg></button>
+          }}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-ellipsis-vertical">
+              <circle cx="12" cy="12" r="1" />
+              <circle cx="12" cy="5" r="1" />
+              <circle cx="12" cy="19" r="1" />
+            </svg>
+          </button>
 
           {selectedEmployee && selectedEmployee._id === data._id && (
-            <dialog open={true} className="relative z-10 -translate-y-96 ">
+            <dialog open={true} className="relative z-10 -translate-y-96">
               <EmployeeDetails details={selectedEmployee} empRef={deleteEmployeeRef} />
               <button onClick={() => {
                 startTransition(() => {
@@ -147,8 +160,26 @@ function ShowTabeData({ DataObject }) {
           )}
         </div>
       ))}
-    </>
+
+      <dialog ref={deleteEmployeeRef} className="relative z-10 p-5 rounded-lg">
+        <h2 className="text-lg font-bold mb-4">Confirm Delete</h2>
+        <p>Enter the employee's email to confirm deletion:</p>
+        <input
+          type="email"
+          value={deleteEmail}
+          onChange={(e) => setDeleteEmail(e.target.value)}
+          className="border p-2 rounded w-full mb-4"
+        />
+        <div className="flex justify-end">
+          <button onClick={confirmDelete} className="bg-red-600 text-white px-4 py-2 rounded mr-2">Confirm</button>
+          <button onClick={() => deleteEmployeeRef.current.close()} className="bg-gray-300 px-4 py-2 rounded">Cancel</button>
+        </div>
+      </dialog>
+    </div>
   );
 }
+
+
+
 
 export default Manage;

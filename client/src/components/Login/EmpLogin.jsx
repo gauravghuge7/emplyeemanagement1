@@ -6,7 +6,7 @@ import axios from "axios";
 
 function EmpLogin({ setUserType }) {
   const [employeeEmail, setEmployeeEmail] = useState("");
-  const [employeeId, setEmployeeId] = useState("");
+  
   const [employeePassword, setEmployeePassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -24,7 +24,7 @@ function EmpLogin({ setUserType }) {
 
     const body = {
       email: employeeEmail,
-      employeeId: employeeId,
+      
       password: employeePassword,
     };
 
@@ -87,14 +87,7 @@ function EmpLogin({ setUserType }) {
               required
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 hover:ring-blue-700"
             />
-            <label className="block text-gray-700 mt-3">Employee Id:</label>
-            <input
-              type="text"
-              value={employeeId}
-              onChange={(e) => setEmployeeId(e.target.value)}
-              required
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 hover:ring-blue-700"
-            />
+  
           </div>
           <div className="mb-6">
             <label className="block text-gray-700">Password:</label>

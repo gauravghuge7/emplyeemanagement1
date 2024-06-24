@@ -25,14 +25,7 @@ function Navbar({ userType, setUserType }) {
       },
       withCredentials: true,
     }
-  if(isAdminUrl){
-    const adminLogout = await axios.post('http://localhost:5200/api/v1/admin/logout', config);
-    console.log("adminLogout",adminLogout)
-    if(adminLogout.data.success){
-      navigate('/');
-      }
-  }
-
+  
     const response = await axios.post('http://localhost:5200/api/v1/user/logout', config);
 
     console.log(response);
@@ -50,14 +43,60 @@ function Navbar({ userType, setUserType }) {
 
       toast.success(data.message);
 
-      alert(data.message);
-      toast.success("logged out");
+      
 
       navigate("/", { replace: true });
+      toast.success(" Logged Out Successfully");
+
 
     
     }
     
+
+  };
+
+  const handleAdminLogout = async (e) => {
+    // Clear user data
+    setUserType(null);
+    localStorage.removeItem('token'); // If you're using localStorage or sessionStorage
+    sessionStorage.removeItem('userType'); // Clear session storage if used
+    e.preventDefault();
+    
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      withCredentials: true,
+    }
+    
+    
+    const response = await axios.post('http://localhost:5200/api/v1/admin/logout', config);
+    localStorage.removeItem('admin')
+    document.cookie = 'admintoken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    
+    console.log(response);
+
+    const data = response.data;
+
+    console.log(data);
+
+
+
+    if (response.status === 200) {
+
+
+      // alert(data.message);
+
+      toast.success(data.message);
+
+     
+      toast.success("logged out");
+
+      navigate("/", { replace: true });
+
+
+    }
+
 
   };
 
@@ -96,7 +135,7 @@ function Navbar({ userType, setUserType }) {
                         About
                       </Link>
                       <button
-                        onClick={handleLogout}
+                        onClick={(location.pathname.includes('admin'))?handleAdminLogout:handleLogout}
                         to="/logout"
                         className={`px-3 py-2 rounded-md text-sm font-medium ${location.pathname === '/logout'
                           ? 'bg-blue-500 text-white'
