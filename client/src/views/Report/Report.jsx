@@ -82,6 +82,9 @@ const DailyReport = () => {
   return (
     <div className="report-container ">
       <h2>Daily Reports</h2>
+
+      {/******   this is the form to add a new report   *******/}
+
       <form onSubmit={addReport}>
         <input
           type="text"
@@ -100,7 +103,11 @@ const DailyReport = () => {
         ></textarea>
         <button type="submit">Add Report</button>
       </form>
+
+
+      {/******   this is the list of reports   *******/}
       <ul>
+
         {reports.map(report => (
           <li key={report.id} className={report.status.toLowerCase()}>
             <h3>{report.employeeName}</h3>
@@ -112,6 +119,7 @@ const DailyReport = () => {
             </div>
           </li>
         ))}
+        
       </ul>
     </div>
   );

@@ -31,6 +31,10 @@ const loginUser = asyncHandler(async(req, res) => {
         
         });
 
+        user.isActive = true;
+
+        await user.save();
+
         if (!user) {
             return res.status(400).json({ message: "User not found" });
         }
@@ -319,7 +323,12 @@ const acceptDailyReport = asyncHandler(async(req, res) => {
             return res.status(400).json({ message: "User not found" });
         }
 
-        user.dailyReports.push(dailyReport);
+        
+       
+
+        
+
+        console.log("user.dailyReports => ", user.dailyReports);
 
         await user.save();
 

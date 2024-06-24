@@ -3,6 +3,7 @@ import jwt from "jsonwebtoken";
 import ApiError from "../utils/ApiError.js";
 
 import { JWT_SECRET } from "../constant.js";
+import ApiResponse from "../utils/ApiResponse.js";
 
 const isUserLoggedIn = asyncHandler(async (req, res, next) => {
 
@@ -21,7 +22,13 @@ const isUserLoggedIn = asyncHandler(async (req, res, next) => {
 
 
   if (!userToken) {
-    throw new ApiError(401, "User is Not logged in ");
+    return 
+    
+    
+    // .status(400)
+    
+    // .json(new ApiResponse(400, "employee is not login "))
+    
   }
 
   try {
