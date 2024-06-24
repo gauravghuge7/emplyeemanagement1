@@ -18,11 +18,10 @@ import { useEffect, useState } from "react";
     }
     useEffect(() => {
         const res = fetchleave().then((res) => {
-            console.log(res);
-            setCount(res.data.length);
-        })
 
-        setCount(res.data);
+            const check = res.data.filter((item) => item.leaveStatus === 'pending')
+            setCount(check.length);
+        })
     },[])
    
 

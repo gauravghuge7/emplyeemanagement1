@@ -48,7 +48,9 @@ const Notifications = () => {
     //   { id: 2, title: 'Policy Update', message: 'The leave policy has been updated.', date: '2024-05-25', isRead: false },
     //   // Add more notifications as needed
     // ];
-    setCount(data.length);
+    const check = data.filter((item) => item.leaveStatus === 'pending');
+    console.log(check.length)
+    setCount(check.length);
     setNotifications(data);
   };
 
