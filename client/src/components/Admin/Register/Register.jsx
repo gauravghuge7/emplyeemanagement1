@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { toast, Toaster } from "sonner";
+
 import axios from "axios";
 
 function Register() {
@@ -8,18 +10,24 @@ function Register() {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("");
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     console.log(firstName, lastName, email, phoneNumber, password);
-
+  
     const config = {
       headers: {
         "Content-Type": "application/json",
       },
     };
-
+  
+    if (phoneNumber.length < 10) {
+      alert("Invalid Phone Number");
+      return;
+    }
+  
     const body = JSON.stringify({
       firstName: firstName,
       lastName: lastName,
@@ -28,27 +36,30 @@ function Register() {
       password: password,
       role: "role",
     });
-
-    const response = await axios.post(
-      "http://localhost:5200/api/v1/admin/registerUser",
-      body,
-      config
-    );
-
-    console.log(response);
-    const data = response.data;
-
-    const Id = response.Id;
-
-    if (data.success === true) {
-      alert(
-        `Employee Successfully registered! Please login to continue using Id ${Id}`
+  
+    try {
+      const response = await axios.post(
+        "http://localhost:5200/api/v1/admin/registerUser",
+        body,
+        config
       );
-      setLoginType("employee");
-      navigate("/home");
+  
+      console.log("respppppppp", response);
+      const data = response.data;
+      console.log("data of employee while registering emp received from backend", data);
+  
+    
+  
+      if (data.success === true) {
+        toast.success("Employee Successfully registered!");
+      }
+
+
+    } catch (error) {
+      console.error("Error registering user:", error);
+      toast.error("Failed to register employee. Please try again.");
     }
   };
-
   return (
     <div className="p-10">
       <h1 className="mb-8 font-extrabold text-4xl">Employee Registeration </h1>
@@ -88,7 +99,7 @@ function Register() {
 
           {/* Department input field */}
 
-          <div>
+          {/* <div>
             <label className="block font-semibold" htmlFor="department">
               Department
             </label>
@@ -100,7 +111,7 @@ function Register() {
               required="required"
               value={lastName}
             />
-          </div>
+          </div> */}
 
           {/* Email input field */}
           <div className="mt-4">

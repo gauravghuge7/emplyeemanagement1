@@ -168,11 +168,12 @@ const updateProfile = asyncHandler(async(req, res) => {
             user.bio = bio;
         }
 
-        
             const path = req.file.path;
             console.log(path);
+            console.log("................................")
 
             const response = await uploadOnCloudinary(path);
+
 
             console.log(response);
             if(!response) {
