@@ -182,12 +182,11 @@ const updatePassword = asyncHandler(async (req, res, next) => {
  * Description : Log's out Admin
  */
 const logoutAdmin = asyncHandler(async (req, res) => {
-  const { adminToken } = req.cookies;
-
+ 
   try {
     return res
       .status(200)
-      .clearCookie("adminToken", adminToken, cookieOptions)
+      .clearCookie("adminToken", null, cookieOptions)
       .json(new ApiResponse(200, "User logged out successfully"));
   } 
   catch (error) {
@@ -223,9 +222,11 @@ const getAdminProfile = asyncHandler(async (req, res) => {
       throw new ApiError("admin not registered", 404);
     }
 
+    const phone = user.phoneNumber
+
     return res
       .status(200)
-      .json(new ApiResponse(200, "Admin fetched successfully", user))
+      .json(new ApiResponse(200, "Admin fetched successfully", user, phone))
   }
 
   catch (error) {

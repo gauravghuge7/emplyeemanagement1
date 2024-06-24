@@ -3,6 +3,7 @@ import asyncHandler from "../../utils/asyncHandler.js";
 import ApiResponse from "../../utils/ApiResponse.js";
 import bcrypt from "bcrypt";
 import { uploadOnCloudinary } from "../../utils/cloudinary.js";
+import { LeaveModel } from "../../models/Leave.model.js";
 
 const cookiesOptions = {
 
@@ -265,6 +266,30 @@ const getUserProfile = asyncHandler(async(req, res) => {
 });
 
 
+const getLeaveHistory = asyncHandler(async(req, res) => {
+
+    const { email } = req.user;
+
+    try {
+        const user = await LeaveModel.find({ email });
+
+        if(!user) {
+            return res.status(400).json(new ApiResponse(400, "there is not leave applications for this user"));
+        }
+
+        
+        return res.json(new ApiResponse(200, "Leave History fetched successfully", user));
+        
+    } 
+    catch (error) {
+        
+        return res
+        .status(400)
+        .json(new ApiResponse(400, "Error fetching leave history", error));
+    }
+
+});
+
 
 
 
@@ -307,5 +332,6 @@ export {
     getUserProfile,
     acceptDailyReport,
     updatePassword,
+    getLeaveHistory
     
 };

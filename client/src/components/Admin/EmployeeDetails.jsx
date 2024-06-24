@@ -8,36 +8,41 @@ function EmployeeDetails({ details, empRef }) {
     const [screenShots, setScreenShots] = useState([]);
     useEffect(() => {
 
-        const url = `http://localhost:5200/api/v1/admin/getSnapshot?email=${details.email}`;
+        const url = `http://localhost:5200/api/v1/admin/getSnapshot`;
 
-        axios.get(url, {
+        axios.post(url, {
             headers: {
                 'Content-Type': 'application/json',
             },
+            body: {
+                email:JSON.stringify( details.email)
+            },
             withCredentials: true,
         })
-        .then(res => {
-            const data = res.data.data;
-            console.log(data);
+            .then(res => {
+                const data = res.data.data;
+                // console.log(data);
 
-            if (data.status === 200) {
-                setScreenShots(data.snapshot);
-            }
+                if (data) {
+                    setScreenShots(data);
+                }
 
-        }).catch(err => {
-            console.log(err);
-        });
-            
+            }).catch(err => {
+                console.log(err);
+            });
+
 
     }, [details.email]);
+
+
     return (
-        <div className='bg-black max-h-screen rounded-lg cursor-all-scroll  relative pt-32'>
-            <button onClick={() => empRef.current.close()} className='text-white absolute top-3 right-3'>close</button>
-            <div className='bg-black/80 min-h-screen relative text-white backdrop-blur-lg border border-black p-4 rounded-lg h-96 mx-auto w-full lg:w-[800px]'>
+        <div className='bg-black h-auto w-full rounded-lg  overflow-hidden pt-32'>
+            {/* <button onClick={() => empRef.current.close()} className='text-white absolute top-3 right-3'>close</button> */}
+            <div className='bg-black/80 min-h-screen relative text-white backdrop-blur-lg border border-black p-4 rounded-lg mx-auto w-full lg:w-[800px]'>
                 <div className='flex gap-4 justify-center items-center'>
                     <img className='rounded-lg' src='https://avatars.githubusercontent.com/u/61672294?v=4' width={96} />
                     <div className='flex flex-col gap-2'>
-                        <h2>Sharad Bhadait</h2>
+                        <h2 className='capitalize'>{details.firstName} {details.lastName}</h2>
 
                         <div className='flex flex-col  gap-4'>
                             <div className='flex gap-4'>
@@ -45,8 +50,8 @@ function EmployeeDetails({ details, empRef }) {
                                 <span>Phone No</span>
                             </div>
                             <div className='flex gap-4'>
-                                <span className='border border-white rounded-full p-1 px-4 bg-black '>isAvaiable</span>
-                                <span className='border border-white bg-black rounded-full p-1 px-4'>Role</span>
+                                <span className='border border-white rounded-full p-1 px-4 bg-black '>{`${details.isActive ? "Active" : "UnActive"}`}</span>
+                                <span className='border border-white bg-black rounded-full p-1 px-4'>{details.role}</span>
                             </div>
                         </div>
 
@@ -55,18 +60,22 @@ function EmployeeDetails({ details, empRef }) {
                 </div>
 
                 <div className='left-3  '>
-                    
+
 
                     <h3 className='ml-12 text-2xl my-12'>ScreenShots</h3>
-                    <div className='mb-12'>
-                        {screenShots.map((i, screenshot) => {
 
+
+
+                    {/* <div className='flex gap-12 flex-wrap justify-center '>
+                        {screenShots.map((screenshot, i) => {
+                            console.log(screenshot)
                             return (
-                                <img key={i} src={screenshot} alt="screenshot" />
+                                <img width={300} className='' key={i} src={screenshot.screenShot.secure_url} alt="screenshot" />
                             )
                         })}
-                    </div>
-                    <h3 className='ml-12 text-2xl '>Activities</h3>
+                    </div> */}
+
+                    <h3 className='ml-12 text-2xl my-12 '>Activities</h3>
                     <AreaChart />
                 </div>
 

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import './Notification.css'; // Import CSS for styling
 import axios from 'axios';
+import {toast} from 'sonner';
 
 const Notifications = () => {
   const [notifications, setNotifications] = useState([]);
@@ -11,6 +12,7 @@ const Notifications = () => {
     fetchNotifications();
   }, []);
 
+    /// Fetch notifications from an API (placeholder function)
   const fetchNotifications = async() => {
     // Placeholder data, replace with API call
 
@@ -38,15 +40,11 @@ const Notifications = () => {
     const data = info;
 
 
-
-
-
-
-
   
     setCount(data.length);
     setNotifications(data);
   };
+
 
   const setApproveLeave = async(email) => {
     
@@ -64,7 +62,29 @@ const Notifications = () => {
 
     const response = await axios.post("http://localhost:5200/api/v1/admin/approveLeave", body, config);
 
-    console.log(response);
+    // console.log(response);
+
+    const info = response.data;
+
+    console.log("info => ", info);
+
+    if(info.success){
+
+      toast.info(info.message);
+      toast.success(info.message);
+      alert(info.message);
+
+      console.log("id => ", info.data._id);
+
+      deleteNotification(info.data._id)
+      markAsRead(info.data._id)
+
+      fetchNotifications();
+
+    }
+
+
+
 
     fetchNotifications();
 
@@ -89,6 +109,25 @@ const Notifications = () => {
     const response = await axios.post("http://localhost:5200/api/v1/admin/approveLeave", body, config);
 
     console.log(response);
+
+    const info = response.data;
+
+    console.log("info => ", info);
+
+    if(info.success){
+
+      toast.info(info.message);
+      toast.success(info.message);
+      alert(info.message);
+
+      console.log("id => ", info.data._id);
+
+      deleteNotification(info.data._id)
+      markAsRead(info.data._id)
+
+      fetchNotifications();
+
+    }
 
     fetchNotifications();
     
@@ -122,7 +161,7 @@ const Notifications = () => {
       <button className='absolute right-0 top-2' onClick={clearAllNotifications}>Clear All Notifications</button>
       <ul>
         {notifications.map(notification => (
-          <li key={notification._id} className={notification.isRead ? 'read' : 'unread'}>
+          <li key={notification._id}  className={notification.isRead ? 'read' : 'unread'}>
             <h3>{notification.email}</h3>
             <p>{notification.reason}</p>
             <span>{notification.date}</span>

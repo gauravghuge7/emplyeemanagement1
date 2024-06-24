@@ -51,7 +51,8 @@ const userSchema = new Schema (
         isActive:{
             type:Boolean,
             default:false,
-            expiresIn:"8h",
+            expiresIn: "10s",
+            
             
         },
 

@@ -28,7 +28,6 @@ function Manage() {
     status: "active"
   }]);
 
-
   const getData = async () => {
     const config = {
       headers: {
@@ -42,7 +41,6 @@ function Manage() {
     setDetail(data);
   };
 
-  
   useEffect(() => {
     getData();
   }, []);
@@ -86,6 +84,9 @@ function ShowTabeData({ DataObject }) {
   const [deleteEmail, setDeleteEmail] = useState("");
   const [currentEmail, setCurrentEmail] = useState("");
 
+
+  console.log("dddddddddddddddddddddddddddddddddddddddd",DataObject)
+
   const deleteEmployee = async (email) => {
     const config = {
       headers: {
@@ -101,10 +102,9 @@ function ShowTabeData({ DataObject }) {
     const response = await axios.delete("http://localhost:5200/api/v1/admin/deleteUser", { data: body }, config);
 
     if (response.data.success) {
-      
       toast.success("Employee Deleted Successfully");
-       // Refresh the page by fetching updated data
-       await getData();
+      // Refresh the page by fetching updated data
+
     }
   };
 
@@ -122,19 +122,16 @@ function ShowTabeData({ DataObject }) {
     }
   };
 
-  const [email, setEmail] = useState("");
-
-
   return (
     <div>
       {DataObject.map((data, i) => (
         <div className="grid  grid-cols-5 gap-x-36 auto-cols-auto py-5 border border-r-0 border-l-0 border-b-0  my-0" key={i}>
           <h2 className="mx-4">{data._id}</h2>
           <h2>{data.firstName} {data.lastName}</h2>
-          <h2 className="text-center w-20"> `${data.email } ${setEmail(data.email)}` </h2>
+          <h2 className="text-center w-20">{data.email}</h2>
           <button
             onClick={() => handleDelete(data.email)}
-            className="hover:bg-red-600 w-24 p-2 bg-red-300 rounded-3xl"
+            className="hover:bg-red-600 w-24 p-2  rounded-3xl"
           >
             delete
           </button>
@@ -145,16 +142,14 @@ function ShowTabeData({ DataObject }) {
           </button>
           <Suspense fallback={<div>Loading...</div>}>
             <dialog ref={employeeDataRef}>
-              <EmployeeDetails empRef={employeeDataRef} email={data.email} details={data} />
+              <EmployeeDetails empRef={employeeDataRef} details={data} />
             </dialog>
           </Suspense>
         </div>
       ))}
-
-
       <dialog ref={deleteEmployeeRef} className="p-4 rounded-lg">
         <h3 className="mb-4">Confirm Employee Deletion</h3>
-        <p>Please enter the employees email to confirm:</p>
+        <p>Please enter the employee&apos;s email to confirm:</p>
         <input
           type="email"
           className="border p-2 mt-2 w-full"
