@@ -81,9 +81,8 @@ const userSchema = new Schema (
 
         dailyReports: [{
             type: String,
-            
             expires: "1d",
-            default: ["gaurav ghuge"]
+            default: []
         }],
 
         snapshots: [{

@@ -339,38 +339,6 @@ const getUsers = asyncHandler(async (req, res) => {
 });
 
 
-const getAllDailyReportsForAdmin = asyncHandler(async (req, res) => {
-
-  const {adminEmail} = req.user;
-
-  try {
-  
-    const user = await UserModel.findOne({adminEmail});
-
-    if(!user) {
-      throw new ApiError("User not found", 404);
-    }
-
-    const dailyReports = user.dailyReports;
-
-    return res
-    .status(200)
-    .json(new ApiResponse(200, "Daily Reports fetched successfully", dailyReports));
-
-
-
-    
-  } 
-  catch (error) {
-    
-  }
-
-})
-
-
-
-
-
 
 const getActiveUsers = asyncHandler(async (req, res) => {
 
@@ -407,32 +375,76 @@ const getActiveUsers = asyncHandler(async (req, res) => {
 
 
 
+const getAllDailyReportsForAdmin = asyncHandler(async (req, res) => {
 
-const getDailyReport = asyncHandler(async (req, res) => {
   const {adminEmail} = req.user;
 
   try {
+  
     const user = await UserModel.find({adminEmail});
 
-    if (!user) {
-      throw new ApiError("admin not registered", 404);
+   
+
+    if(!user) {
+      throw new ApiError("User not found", 404);
     }
 
-    
-
-    await user.save();
-
     return res
-      .status(200)
-      .json(new ApiResponse(200, "Daily Report fetched successfully", user))
+    .status(200)
+    .json(new ApiResponse(200, "Daily Reports fetched successfully", user));
 
+
+
+    
   } 
   catch (error) {
-      console.log(error);
-      return res.status(400).send(error.message);
+    
+    console.log("error => ", error);  
+    return res.status(400).json(new ApiResponse(400, error.message));
+
   }
 
 })
+
+
+
+
+
+
+
+const getDailyReportByEmail = asyncHandler(async (req, res) => {
+
+  const {adminEmail} = req.user;
+
+  const {email} = req.body;
+
+  try {
+    
+    const user = await UserModel.findOne({email});
+
+    if(!user) {
+      throw new ApiError("User not found", 404);
+    }
+
+    user.dailyReports
+  
+    console.log("dailyReports => ", user.dailyReports);
+
+    console.log("user => ", user);
+
+    return res
+    .status(200)
+    .json(new ApiResponse(200, "Daily Reports fetched successfully", user));
+      
+  } 
+  catch (error) {
+    console.log(error);
+    return res.status(400).json(new ApiResponse(400, error.message));
+  }
+
+})
+
+
 
 
 
@@ -445,7 +457,7 @@ export {
   getAdminProfile,
   registerAdmin,
   deleteUser,
-  getDailyReport,
+
 
   getActiveUsers,
 
@@ -457,7 +469,7 @@ export {
   AdminDelete,
   getAdminDashboard,
  
-
+  getDailyReportByEmail,
   getAllDailyReportsForAdmin
   
 
