@@ -32,7 +32,7 @@ function EmpDailyReport() {
     }
 
 
-    const response = await axios.post("http://localhost:5200/api/v1/user/dailyReport", config, body);
+    const response = await axios.post("http://localhost:5200/api/v1/user/dailyReport", body, config);
 
     console.log(response);
 
