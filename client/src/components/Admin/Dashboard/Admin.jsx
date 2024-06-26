@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import Footer from '../Footer/Footer';
 import Sidebar from '../Sidebar/Sidebar';
 
-import Manage from '../../../views/Manage/Manage';
+
 
 import Notifications from '../../../views/Notifications/Notifications';
 import Report from '../../../views/Report/Report';
@@ -13,6 +13,7 @@ import { toast } from 'sonner';
 import LeaveStatus from '../LeaveStatus/LeaveStatus';
 import Announcement from '../../../views/Announcement/Announcement';
 import History from '../../../views/History/History';
+import Manage from '../Manage/Manage';
 
 
 
@@ -291,7 +292,7 @@ function Admin() {
 
             { activeBox === "profile" && <AdminProfiles />}
 
-            {activeBox === "manage" && <Manage />}
+            {activeBox === "manage" && <Manage className="my-16" />}
             {activeBox === "notifications" && <Notifications/>}
             {activeBox === "report" && <Report/>}
 

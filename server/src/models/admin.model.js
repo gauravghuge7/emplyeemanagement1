@@ -48,12 +48,7 @@ const adminSchema = new Schema(
 
     phoneNumber: {
       type: Number,
-      validate: {
-        validator: function (value) {
-          return /^\d{10}$/.test(value);
-        },
-        message: "Please enter a valid 10-digit phone number",
-      },
+      
     },
 
     // Internal Fields

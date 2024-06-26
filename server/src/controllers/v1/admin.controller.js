@@ -34,7 +34,7 @@ const cookieOptions = {
 const registerAdmin = asyncHandler(async (req, res, next) => {
   try {
     // Get Data From Req Body
-    const { firstName, lastName, email, password, confirmPassword } = req.body;
+    const { firstName, lastName, email, password, confirmPassword, phoneNumber } = req.body;
     // Vailidate Data
     checkArgsIfExists(firstName, lastName, email, password, confirmPassword);
     checkIfStringArgsIsEmpty(
@@ -42,7 +42,8 @@ const registerAdmin = asyncHandler(async (req, res, next) => {
       lastName,
       email,
       password,
-      confirmPassword
+      confirmPassword,
+      phoneNumber
     );
     if (confirmPassword !== password) {
       throw new ApiError(400, "Password Doesn't Match");
@@ -82,13 +83,7 @@ const registerAdmin = asyncHandler(async (req, res, next) => {
   }
 });
 
-/**
- * Description: Sign in the User
- * Body:
- *  email:
- *  password:
- *  confirmPassword:
- */
+
 const loginAdmin = asyncHandler(async (req, res, next) => {
   try {
     // Data from Req Body
@@ -131,13 +126,7 @@ const loginAdmin = asyncHandler(async (req, res, next) => {
   }
 });
 
-/**
- * Description: Change Password For the Admin User.
- * Body:-
- *  currentPassword
- *  newPassword
- *  confirmPassword
- */
+
 
 const updatePassword = asyncHandler(async (req, res, next) => {
   try {
@@ -178,9 +167,7 @@ const updatePassword = asyncHandler(async (req, res, next) => {
   }
 });
 
-/**
- * Description : Log's out Admin
- */
+
 const logoutAdmin = asyncHandler(async (req, res) => {
  
   try {
@@ -199,10 +186,7 @@ const logoutAdmin = asyncHandler(async (req, res) => {
   }
 });
 
-/**
- * Description: Change Password For the Admin User.
- * Body:-
- */
+
 const AdminUpdate = asyncHandler(async (req, res) => {
   // TODO: Complete This Code
 });
