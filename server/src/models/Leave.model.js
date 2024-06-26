@@ -24,32 +24,29 @@ const leaveSchema = new Schema (
             required: true
         },
 
-        employeeId: {
-            type: String,
-            required: true
-        },
 
-        date:{
+        startDate:{
+            type: Date,
+            required:true
+        },
+        endDate:{
             type: Date,
             required:true
         },
 
-        department:{
+        position:{
             type:String,
             required:true
         },
 
-        explainAboutLeave:{
-            type:String,
-            required:true
-            
-        },
+       
         leaveStatus:{
             type:String,
             default:'pending'
         }
 
-    }
+    },
+    {timestamps:true}
 )
 
 export const LeaveModel = model('Leave',leaveSchema);
