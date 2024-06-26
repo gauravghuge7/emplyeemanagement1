@@ -26,7 +26,7 @@ function Navbar({ userType, setUserType }) {
 
   const handleLogout = async (e) => {
 
-    
+
 
     console.log("lllllllllllllll", userType)
     // Clear user data
@@ -117,18 +117,20 @@ function Navbar({ userType, setUserType }) {
 
 
 
-      
+
   };
 
-  const MobileNav =() => {
-    return <div className=' min-h-12  '>
-     <Link to={"/"} className=' text-2xl ml-4'>EMS</Link>
-      {isOpen ? <div className='absolute right-3 top-3 ' onClick={() => setIsOpen(!isOpen)}><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-align-right"><line x1="21" x2="3" y1="6" y2="6" /><line x1="21" x2="9" y1="12" y2="12" /><line x1="21" x2="7" y1="18" y2="18" /></svg></div> : <div className='h-full'><button className='absolute right-3 top-3' onClick={() => setIsOpen(!isOpen)}><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg></button><nav className='mt-8 ml-4 gap-3 flex flex-col  items-end mr-12 text-xl mb-4'>
-        <Link className='hover:underline ' to="/emplogin">Employee</Link>
-        <Link className='hover:underline ' to="/adminlogin">Admin</Link>
+  const MobileNav = () => {
+    return <nav>
+      {location.pathname === '/' ? <div className='min-h-12  '>
+        <Link to={"/"} className=' text-2xl ml-4'>EMS</Link>
+        {isOpen ? <div className='absolute right-3 top-3 ' onClick={() => setIsOpen(!isOpen)}><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-align-right"><line x1="21" x2="3" y1="6" y2="6" /><line x1="21" x2="9" y1="12" y2="12" /><line x1="21" x2="7" y1="18" y2="18" /></svg></div> : <div className='h-full'><button className='absolute right-3 top-3' onClick={() => setIsOpen(!isOpen)}><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg></button><nav className='mt-8 ml-4 gap-3 flex flex-col  items-end mr-12 text-xl mb-4'>
+          <Link className='hover:underline ' to="/emplogin">Employee</Link>
+          <Link className='hover:underline ' to="/adminlogin">Admin</Link>
 
-      </nav></div>
-      }</div>
+        </nav></div>
+        }</div> : ''}
+    </nav>
   }
 
 
