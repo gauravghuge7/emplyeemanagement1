@@ -79,6 +79,13 @@ const userSchema = new Schema (
         },
 
 
+        employeeNotices: [{
+            type: String,
+            expires: "50d",
+            default: []
+        }],
+
+
         dailyReports: [{
             type: String,
             expires: "1d",

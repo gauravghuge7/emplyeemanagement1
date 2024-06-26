@@ -265,6 +265,7 @@ const getUserProfile = asyncHandler(async(req, res) => {
             bio: user.bio,
             avatar: user.avatar,
             leaveApplication: user.leaveApplication,
+            notices: user.employeeNotices
       
 
         };
