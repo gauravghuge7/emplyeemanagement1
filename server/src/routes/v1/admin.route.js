@@ -1,7 +1,7 @@
 import express from "express";
 import { V1Controllers } from "../../controllers/index.js";
 import { upload } from "../../middlewares/multer.middleware.js";
-import { deleteUser, getActiveUsers, getAdminProfile, getAllDailyReportsForAdmin, getDailyReportByEmail, getUsers, logoutAdmin, registerUser } from "../../controllers/v1/admin.controller.js";
+import { deleteUser, getActiveUsers, getAdminProfile, getAllDailyReportsForAdmin, getDailyReportByEmail, getUsers, logoutAdmin, registerUser, sendNotices } from "../../controllers/v1/admin.controller.js";
 import { isAdminLoggedIn } from "../../middlewares/admin.auth.middlewares.js";
 
 import { adminLeaveStatus,getAllLeaves, giveLeavePermission } from "../../controllers/v1/user.leave.controller.js";
@@ -113,6 +113,15 @@ AdminRouter.route("/getSnapshot").post(
  upload.none(),
  getSnapshot
 );
+
+
+AdminRouter.route("/sendNotice").post(
+ isAdminLoggedIn,
+ upload.none(),
+ sendNotices
+);
+
+
 
 
 

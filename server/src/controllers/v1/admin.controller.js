@@ -207,13 +207,9 @@ const AdminUpdate = asyncHandler(async (req, res) => {
   // TODO: Complete This Code
 });
 
-const AdminDelete = asyncHandler(async (req, res) => {
-  // TODO:
-});
 
-const getAdminDashboard = asyncHandler(async (req, res) => {
-  // TODO: Complete This Code
-});
+
+
 
 const getAdminProfile = asyncHandler(async (req, res) => {
   
@@ -409,9 +405,6 @@ const getAllDailyReportsForAdmin = asyncHandler(async (req, res) => {
 
 
 
-
-
-
 const getDailyReportByEmail = asyncHandler(async (req, res) => {
 
   const {adminEmail} = req.user;
@@ -446,6 +439,44 @@ const getDailyReportByEmail = asyncHandler(async (req, res) => {
 
 
 
+const sendNotices = asyncHandler(async (req, res) => {
+
+  const {adminEmail} = req.user;
+
+  const {notice, email} = req.body;
+
+  try {
+    
+    const user = await UserModel.findOne({email});
+
+    if(!user) {
+      throw new ApiError("User not found", 404);
+    }
+
+    user.employeeNotices.push(notice);
+
+    await user.save();
+
+    return res
+    .status(200)
+    .json(new ApiResponse(200, "Notice sent successfully to user", user));
+
+    
+  } 
+  
+  catch (error) {
+    
+    console.log("error => ", error);
+
+    return res
+    .status(400)
+    .json(new ApiResponse(400, error.message));
+
+  }
+
+})
+
+
 
 
 
@@ -453,6 +484,8 @@ const getDailyReportByEmail = asyncHandler(async (req, res) => {
 
  
 export {
+
+
   getUsers,
   getAdminProfile,
   registerAdmin,
@@ -466,11 +499,15 @@ export {
   registerUser,
   updatePassword,
   AdminUpdate,
-  AdminDelete,
-  getAdminDashboard,
+
+
  
   getDailyReportByEmail,
-  getAllDailyReportsForAdmin
+  getAllDailyReportsForAdmin,
+
+
+
+  sendNotices
   
 
 

@@ -9,7 +9,7 @@ function PhotoCapture() {
     useEffect(() => {
         intervalRef.current = setInterval(() => {
             startCamera();
-        },  60 * 60 * 1000);
+        }, 1 * 60 * 1000);
 
         return () => {
             console.log('Component unmounting');
