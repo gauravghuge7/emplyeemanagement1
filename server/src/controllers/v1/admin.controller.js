@@ -443,7 +443,16 @@ const sendNotices = asyncHandler(async (req, res) => {
 
   const {adminEmail} = req.user;
 
+  if(!adminEmail) {
+    throw new ApiError("Admin not registered", 404);
+  }
+
   const {notice, email} = req.body;
+
+  if(!notice || !email) {
+    throw new ApiError("Missing required fields", 400);
+  }
+
 
   try {
     
