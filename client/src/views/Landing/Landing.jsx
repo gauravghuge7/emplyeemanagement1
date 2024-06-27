@@ -40,23 +40,32 @@ function Landing({ setLoginType }) {
 
   return (
     <div>
-      <div className="min-h-screen  mx-auto max-w-[1000px]">
+      <div className="min-h-screen overflow-hidden mx-auto max-w-screen">
 
-        <div className='relative z-10 min-h-screen w-full  flex items-center justify-center '>
-          <div className=''>
-            <motion.img initial={{ translateX: '-100px', scale: 0.6, translateY: '-100px', opacity: 0 }} transition={{ duration: '0.6', ease: 'backInOut' }} animate={{ translateX: 0, scale: 1, translateY: 0, opacity: 1, }} src={digitalbusiness} className='w-32 lg:w-44 absolute object-cover lg:top-24 lg:left-16 top-12 left-0 ' />
-            <motion.img initial={{ translateX: '-100px', scale: 0.6, translateY: '100px', opacity: 0 }} transition={{ duration: '0.6', ease: 'easeInOut' }} animate={{ translateX: 0, scale: 1, translateY: 0, opacity: 1, }} src={tastmanagement} className='w-36 lg:w-44 absolute object-cover lg:bottom-24 lg:left-24 bottom-16 left-0 ' />
-            <motion.img initial={{ translateX: '100px', translateY: '-100px', scale: 0.6, opacity: 0 }} transition={{ duration: '0.6', ease: 'backInOut' }} animate={{ translateX: 0, translateY: 0, scale: 1, opacity: 1, }} src={planner} className='w-32 lg:w-44 absolute object-cover lg:top-24 lg:right-24  top-12 right-0' />
-            <motion.img initial={{ translateX: '100px', translateY: '100px', scale: 0.6, opacity: 0 }} transition={{ duration: '0.6', ease: 'easeInOut' }} animate={{ translateX: 0, translateY: 0, scale: 1, opacity: 1, }} src={laptop} className='w-32 lg:w-44 absolute lg:bottom-24 lg:right-24 object-cover bottom-12 right-0' />
-          </div>
-          <div className='flex flex-col gap-8  items-center justify-center'>
-            <motion.h1 initial={{ opacity: 0, scale: 0.6 }} transition={{ duration: '0.3', ease: 'easeInOut' }} animate={{ opacity: 1, scale: 1 }} className='text-4xl lg:text-6xl text-center font-light'>Streamline Your Employee Management</motion.h1>
+        <div className='w-screen relative'>
+          <div className='relative z-10 min-h-screen mx-auto max-w-[1000px]  flex items-center justify-center '>
+            <div className=''>
+              <motion.img initial={{ translateX: '-100px', scale: 0.6, translateY: '-100px', opacity: 0 }} transition={{ duration: '0.6', ease: 'backInOut' }} animate={{ translateX: 0, scale: 1, translateY: 0, opacity: 1, }} src={digitalbusiness} className='w-32 lg:w-44 absolute object-cover lg:top-24 lg:left-16 top-12 left-0 ' />
+              <motion.img initial={{ translateX: '-100px', scale: 0.6, translateY: '100px', opacity: 0 }} transition={{ duration: '0.6', ease: 'easeInOut' }} animate={{ translateX: 0, scale: 1, translateY: 0, opacity: 1, }} src={tastmanagement} className='w-36 lg:w-44 absolute object-cover lg:bottom-24 lg:left-24 bottom-16 left-0 ' />
+              <motion.img initial={{ translateX: '100px', translateY: '-100px', scale: 0.6, opacity: 0 }} transition={{ duration: '0.6', ease: 'backInOut' }} animate={{ translateX: 0, translateY: 0, scale: 1, opacity: 1, }} src={planner} className='w-32 lg:w-44 absolute object-cover lg:top-24 lg:right-24  top-12 right-0' />
+              <motion.img initial={{ translateX: '100px', translateY: '100px', scale: 0.6, opacity: 0 }} transition={{ duration: '0.6', ease: 'easeInOut' }} animate={{ translateX: 0, translateY: 0, scale: 1, opacity: 1, }} src={laptop} className='w-32 lg:w-44 absolute lg:bottom-24 lg:right-24 object-cover bottom-12 right-0' />
+            </div>
+            <div className='flex flex-col gap-8  items-center justify-center'>
+              <motion.h1 initial={{ opacity: 0, scale: 0.6 }} transition={{ duration: '0.3', ease: 'easeInOut' }} animate={{ opacity: 1, scale: 1 }} className='text-[48px] font-serif lg:text-6xl text-center '>Streamline Your Employee Management</motion.h1>
 
-            <motion.p initial={{ opacity: 0, scale: 0.8 }} transition={{ delay: 0.3, duration: '0.3', ease: 'easeInOut' }} animate={{ opacity: 1, scale: 1 }} className='text-xl lg:text-2xl w-96 text-center'>Effortlessly manage your employees with our all-in-one platform.</motion.p>
+              <motion.p initial={{ opacity: 0, scale: 0.8 }} transition={{ delay: 0.3, duration: '0.3', ease: 'easeInOut' }} animate={{ opacity: 1, scale: 1 }} className='text-xl lg:text-2xl w-96 text-center'>Effortlessly manage your employees with our all-in-one platform.</motion.p>
+            </div>
           </div>
-          <div className='absolute  scale-150  bottom-32  -z-10'>
-            <Eclipse />
-          </div>
+          <div className='absolute overflow-hidden rounded-[100%]   blur-2xl flex w-screen  bottom-0  rotate-45 -translate-y-44  -z-10'>
+           <div>
+              <div className='-z-[2] animate-pulse  overflow-hidden h-[500px] w-[600px]  blur-[90px] rounded-[100%]     bg-gradient-to-bl from-violet-400 to-purple-200 '></div>
+              <div className='-z-[4] animate-pulse overflow-hidden h-[500px] w-[600px]  blur-[90px] rounded-[100%]     bg-gradient-to-bl from-orange-300 to-purple-200 '></div>
+            </div>
+           <div>
+              <div className='-z-[2] animate-pulse overflow-hidden h-[500px] w-[600px]  blur-[90px] rounded-[100%]     bg-gradient-to-bl from-violet-400 to-purple-200 '></div>
+              <div className='-z-[4] animate-pulse overflow-hidden h-[500px] w-[600px]  blur-[90px] rounded-[100%]     bg-gradient-to-bl from-orange-200 to-purple-200 '></div>
+            </div>
+            </div>
         </div>
 
 
@@ -78,7 +87,7 @@ function Landing({ setLoginType }) {
             <div className=' flex justify-center items-center flex-col '>
               <div className='flex items-center justify-center '>
                 <img className='w-[239px] z-10 relative' src={planner} />
-                <img src={rectangle} className='w-[210px] blur-lg -z-10 absolute' />
+                <img src={rectangle} className='w-[210px] animate-pulse blur-lg -z-10 absolute' />
               </div>
               <div>
                 <h3 className='text-2xl font-semibold'>Accurate Time Tracking</h3>
@@ -88,7 +97,7 @@ function Landing({ setLoginType }) {
             <div className=' flex justify-center items-center flex-col '>
               <div className='flex items-center justify-center '>
                 <img className='w-1/3 relative z-10' src={businessAnalytics} />
-                <img src={rectangle} className='w-[180px] blur-xl -z-10 absolute' />
+                <img src={rectangle} className='w-[180px] animate-pulse blur-xl -z-10 absolute' />
               </div>
               <div>
                 <h3 className='text-2xl font-semibold'>Insightful Performance Reviews</h3>
@@ -128,8 +137,8 @@ function Landing({ setLoginType }) {
           </motion.div>
         </div>
       </div>
-        <Footer />
-      </div>
+      <Footer />
+    </div>
   );
 }
 
