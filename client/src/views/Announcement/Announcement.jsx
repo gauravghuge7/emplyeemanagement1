@@ -85,10 +85,10 @@ function Announcement() {
 
     return (
 
-        <div className="flex flex-col items-center justify-center min-w-max max-w-full rounded-2xl bg-slate-100 min-h-screen">
+        <div className="flex dark dark:bg-black dark:text-white flex-col items-center justify-center min-w-max max-w-full rounded-2xl bg-slate-100 min-h-screen">
 
-            <div className="bg-gray-300 shadow-md p-4 min-w-[44rem] rounded-lg m-10  max-w-full">
-                <h2 className="text-2xl font-bold mb-4 text-gray-800">Declare A  Announcement</h2>
+            <div className="dark:bg-black dark:text-white bg-gray-300 shadow-md p-4 min-w-[44rem] rounded-lg m-10  max-w-full">
+                <h2 className=" dark:text-white  text-2xl font-bold mb-4 text-gray-800">Declare A  Announcement</h2>
 
                 {message && (
                     <div className={`mb-4 text-sm ${messageType === 'success' ? 'text-green-600' : 'text-red-600'}`}>
@@ -117,9 +117,9 @@ function Announcement() {
                 </form>
             </div>
 
-            <h2 className="text-2xl mt-32 font-bold border-b-2 border-black  mb-4 text-gray-800">Recent Announcements</h2>
+            <h2 className="text-2xl dark:bg-black dark:text-white mt-32 font-bold border-b-2 border-black  mb-4 text-gray-800">Recent Announcements</h2>
 
-            <div className="mb-32 shadow-lg shadow-gray-400 w-full max-w-[60rem] overflow-scroll h-[40rem] ">
+            <div className="mb-32  dark:bg-black dark:text-white shadow-lg shadow-gray-400 w-full max-w-[60rem] overflow-scroll h-[40rem] ">
 
                 
                 <ul className="space-y-4  ">
@@ -127,7 +127,7 @@ function Announcement() {
 
                         return (
 
-                            <ul key={index} className="p-4 m-2 bg-gray-200 rounded-xl shadow text-black ">
+                            <ul key={index} className="p-4 m-2 dark:bg-black dark:text-white bg-gray-200 rounded-xl shadow text-black ">
                                 <li className="p-4 bg-gray-200  text-black "> {announce.createdAt } </li>
                                 <li  className="p-4 bg-gray-100  text-black  "> {announce.announcement} </li>
                             

@@ -2,7 +2,7 @@ import React from 'react';
 
 const AboutPage = () => {
     return (
-        <div className="bg-gray-100 min-h-screen mt-24">
+        <div className="bg-gray-100 min-h-screen pt-24">
 
             <header className="bg-white shadow-sm">
                 <div className="max-w-7xl flex items-center justify-center mx-auto py-4 px-4 sm:px-6 lg:px-8">
