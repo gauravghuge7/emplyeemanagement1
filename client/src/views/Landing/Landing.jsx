@@ -97,12 +97,12 @@ function Landing() {
           </div>
           <div className='absolute overflow-hidden rounded-[100%] blur-2xl  flex w-screen bottom-0 rotate-45 -translate-y-44 '>
             <div>
-              <div className='-z-[2] animate-pulse overflow-hidden h-[500px] w-[600px] blur-[90px] rounded-[100%] bg-gradient-to-bl from-violet-300 to-purple-200 dark:from-violet-900 dark:to-purple-900'></div>
-              <div className='-z-[4] animate-pulse overflow-hidden h-[500px] w-[600px] blur-[90px] rounded-[100%] bg-gradient-to-bl from-orange-300 to-purple-200 dark:from-orange-900 dark:to-purple-900'></div>
+              <div className='-z-[2] animate-pulse overflow-hidden h-[500px] w-[600px] blur-[90px] rounded-[100%] bg-gradient-to-bl from-violet-300 to-purple-200 dark:from-violet-900 dark:to-purple-800 dark:blur-[240px] dark:animate-none'></div>
+              <div className='-z-[4] animate-pulse overflow-hidden h-[500px] w-[600px] blur-[90px] rounded-[100%] bg-gradient-to-bl from-orange-300 to-purple-200 dark:from-orange-900 dark:to-purple-900 dark:blur-[240px] dark:animate-none'></div>
             </div>
             <div>
-              <div className='-z-[2] animate-pulse overflow-hidden h-[500px] w-[600px] blur-[90px] rounded-[100%] bg-gradient-to-bl from-violet-400 to-purple-200 dark:from-violet-900 dark:to-purple-900'></div>
-              <div className='-z-[4] animate-pulse overflow-hidden h-[500px] w-[600px] blur-[90px] rounded-[100%] bg-gradient-to-bl from-orange-200 to-purple-200 dark:from-orange-900 dark:to-purple-900'></div>
+              <div className='-z-[2] animate-pulse overflow-hidden h-[500px] w-[600px] blur-[90px] rounded-[100%] bg-gradient-to-bl from-violet-400 to-purple-200 dark:from-violet-900 dark:to-purple-900 dark:blur-[230px] dark:animate-none'></div>
+              <div className='-z-[4] animate-pulse overflow-hidden h-[500px] w-[600px] blur-[90px] rounded-[100%] bg-gradient-to-bl from-orange-200 to-purple-200 dark:from-orange-900 dark:to-purple-900 dark:blur-[240px] dark:animate-none'></div>
             </div>
       
             
