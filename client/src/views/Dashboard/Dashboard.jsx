@@ -413,7 +413,7 @@ export function EmployeeDashboard() {
 
 export function AdminDashboard() {
   return (
-    <div className="p-6 bg-gradient-to-r from-blue-400 to-purple-400">
+    <div className="pt-12 bg-gradient-to-r from-gray-400 to-gray-100">
       <Admin />
     </div>
   );
