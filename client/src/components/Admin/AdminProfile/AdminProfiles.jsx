@@ -49,7 +49,7 @@ function AdminProfiles() {
 
 
 return (
-    <div className='lg:w-[70vw] md:w-[80vw] bg-slate-300  mx-auto shadow-lg shadow-gray-500 border p-4 rounded-3xl lg:p-9 py-16 m-8'>
+    <div className='lg:w-[70vw] dark dark:bg-gray-900 dark:text-white md:w-[80vw] bg-slate-300  mx-auto shadow-lg shadow-gray-500 dark:shadow-gray-800 border p-4 rounded-3xl lg:p-9 py-16 m-8'>
 
         {/*******  profile information section photo, email, phoneNumber  */}
         <div className="flex items-center gap-24 md:flex-row xsm:flex-col sm:flex-col mb-8">
@@ -62,7 +62,7 @@ return (
             </div>
 
             {/* profile information */}
-            <div className='flex flex-col gap-2'>
+            <div className='flex flex-col  gap-2'>
                 {/***  first name, last name  */}
                 <section className='flex font-mono'>
                     <h1 className="text-3xl font-bold">{admin.firstName.toUpperCase()}&nbsp;</h1>
@@ -83,13 +83,11 @@ return (
 
                     {/***  id  */}
                 <section className=''>
-                    <h1 className='text-xl text-black font-[400] '>Id : {admin._id}</h1>
+                    <h1 className='text-xl text-black font-[400] dark:text-white'>Id : {admin._id}</h1>
                 </section>
 
                 <section className=''>
-                    <h1 className='text-xl text-black font-[400] '>From : {convertToSimpleDate(admin.createdAt)
-                        
-                     }</h1>
+                    <h1 className='text-xl text-black font-[400] dark:text-white'>From : {admin.createdAt }</h1>
                 </section>
                 
             </div>

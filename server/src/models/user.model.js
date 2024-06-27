@@ -80,19 +80,50 @@ const userSchema = new Schema (
 
 
         employeeNotices: [{
-            type: String,
-            expires: "50d",
-            default: []
+            
+            
+            message: {
+                type: String,
+                expires: "50d",
+               
+            },
+
+            createdAt: {
+                type: Date,
+                expires: "5d",
+                default: Date.now,
+              
+            },
+
+            createdBy: {
+                type: Schema.Types.ObjectId,
+                ref: 'AdminModel',
+                expires: "5d",
+            
+            },
+            
+            
         }],
 
 
         dailyReports: [{
-            type: String,
-            projectName:String,
-            workUrl:String,
-            report:String,
-            expires: "1d",
-            default: []
+            
+            projectName: {
+                type: String,
+                
+            },
+
+            workUrl: {
+                type: String,
+                required: true
+            },
+            report: {
+                type: String,
+                required: true
+            }
+
+
+
         }],
 
         snapshots: [{

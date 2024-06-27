@@ -37,7 +37,7 @@ function Manage() {
   }, []);
 
   return (
-    <div className="bg-slate-200 p-8 from-slate-200 to-slate-400 shadow-md shadow-gray-400 rounded-xl">
+    <div className="bg-slate-200 dark dark:bg-black dark:text-white p-8 from-slate-200 to-slate-400 shadow-md dark:shadow-gray-800 shadow-gray-400 rounded-xl">
       <Toaster position="top-right" richColors closeButton expand={true} />
       <button onClick={() => dialogRef.current.showModal()} className="flex-1 rounded-full bg-blue-600 dark:bg-blue-800 text-white dark:text-white antialiased font-bold hover:bg-blue-800 dark:hover:bg-blue-900 px-4 py-2">
         Add Employee
@@ -55,8 +55,8 @@ function Manage() {
 
 function ShowTable({ detail }) {
   return (
-    <div className="w-full border p-6 text-lg rounded-lg">
-      <div className="responsive-grid">
+    <div className="w-full dark dark:text-white border p-6 text-lg rounded-lg">
+      <div className="responsive-grid dark:text-white">
         <h1>First Name</h1>
         <h1>Last Name</h1>
         <h1>Email</h1>
@@ -115,7 +115,7 @@ function ShowTabeData({ DataObject }) {
   };
 
   return (
-    <div className="">
+    <div className="dark dark:text-white">
       {DataObject.map((data, i) => (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-x-5 sm:gap-x-10 md:gap-x-16 lg:gap-x-24 xl:gap-x-36 auto-cols-auto py-5 border border-gray-600 p-8 my-4 border-r-0 border-l-0 border-b-0  shadow-sm shadow-gray-400 rounded-xl" key={i}>
 
@@ -126,7 +126,7 @@ function ShowTabeData({ DataObject }) {
           
           <button
             onClick={() => handleDelete(data.email)}
-            className="hover:bg-red-600 bg-red-200 w-24 p-2 rounded-2xl"
+            className="hover:bg-red-600 dark:text-black bg-red-200 w-24 p-2 rounded-2xl"
           >
             delete
           </button>
