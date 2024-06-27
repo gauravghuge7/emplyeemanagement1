@@ -96,9 +96,8 @@ const userSchema = new Schema (
             },
 
             createdBy: {
-                type: Schema.Types.ObjectId,
-                ref: 'AdminModel',
-                expires: "5d",
+                type: String,
+                required: true
             
             },
             

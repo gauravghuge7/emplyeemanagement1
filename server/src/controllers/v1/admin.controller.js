@@ -446,7 +446,11 @@ const sendNotices = asyncHandler(async (req, res) => {
       throw new ApiError("User not found", 404);
     }
 
-    user.employeeNotices.push(message);
+    user.employeeNotices.push({
+      message,
+      createdAt: new Date(),
+      createdBy: adminEmail
+    });
 
     await user.save();
 
