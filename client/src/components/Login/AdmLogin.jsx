@@ -59,10 +59,15 @@ function AdmLogin({loginType}) {
   return (
     <div className='grid shadow-2xl translate-y-24 border max-w-[900px] mx-auto grid-cols-1 lg:grid-cols-2'>
       {/* Admin Login Card */}
+
+      <img className="hidden lg:block md:col-span-1  object-cover" src="./adminlogin.png"/>
+      <div className="col-span-2 lg:col-span-1 p-6  ">
+
       <img className="hidden z-10 lg:block md:col-span-1  object-cover" src={"https://images.unsplash.com/photo-1644224076179-31d622e21511?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}/>
-      <div className="col-span-2 lg:col-span-1 p-6 relative  bg-white/80  backdrop-blur-3xl ">
+      <div className="col-span-2 lg:col-span-1 p-6 relative  bg-white/60  backdrop-blur-3xl ">
         <div className='-z-[2] right-0 absolute -bottom-10  overflow-hidden h-[500px] w-[600px] blur-[90px] rounded-[100%] bg-gradient-to-bl from-violet-100 to-purple-100 dark:from-violet-900 dark:to-purple-800 dark:blur-[240px] dark:animate-none'></div>
         <div className='-z-[4]  absolute right-0 bottom-0  overflow-hidden h-[500px] w-[600px] blur-[90px] rounded-[100%] bg-gradient-to-bl from-orange-100 to-purple-100 dark:from-orange-900 dark:to-purple-900 dark:blur-[240px] dark:animate-none'></div>
+
         <div className="w-full p-6   ">
           <h2 className="text-2xl font-light text-center mb-6">Admin Login</h2>
           <form onSubmit={submitAdmin} method="POST">
