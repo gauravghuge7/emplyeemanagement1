@@ -122,12 +122,16 @@ function ShowTabeData({ DataObject }) {
           <h2 className="overflow-y-hidden">{data.firstName} </h2>
           <h2> {data.lastName}</h2>
           <h2 className="text-center w-20">{data.email}</h2>
+
+          
           <button
             onClick={() => handleDelete(data.email)}
             className="hover:bg-red-600 dark:text-black bg-red-200 w-24 p-2 rounded-2xl"
           >
             delete
           </button>
+
+
           <button onClick={() => {
             startTransition(() => {
               setSelectedEmployee(data);
@@ -152,6 +156,7 @@ function ShowTabeData({ DataObject }) {
           )}
         </div>
       ))}
+
 
       <dialog ref={deleteEmployeeRef} className="relative z-10 p-5 rounded-lg">
         <h2 className="text-lg font-bold mb-4">Confirm Delete</h2>
