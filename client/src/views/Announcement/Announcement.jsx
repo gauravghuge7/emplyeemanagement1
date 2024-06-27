@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import convertToSimpleDate from '../../components/Admin/TimeSetting/SetDate';
 
 function Announcement() {
     const [announcement, setAnnouncement] = useState("");
@@ -128,7 +129,7 @@ function Announcement() {
                         return (
 
                             <ul key={index} className="p-4 m-2 bg-gray-200 rounded-xl shadow text-black ">
-                                <li className="p-4 bg-gray-200  text-black "> {announce.createdAt } </li>
+                                <li className="p-4 bg-gray-200  text-black "> {convertToSimpleDate(announce.createdAt) } </li>
                                 <li  className="p-4 bg-gray-100  text-black  "> {announce.announcement} </li>
                             
                             </ul>

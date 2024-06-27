@@ -1,5 +1,6 @@
 import axios from 'axios';
 import  { useEffect, useState } from 'react';
+import convertToSimpleDate from '../TimeSetting/SetDate';
 
 
 function AdminProfiles() {
@@ -86,7 +87,9 @@ return (
                 </section>
 
                 <section className=''>
-                    <h1 className='text-xl text-black font-[400] '>From : {admin.createdAt }</h1>
+                    <h1 className='text-xl text-black font-[400] '>From : {convertToSimpleDate(admin.createdAt)
+                        
+                     }</h1>
                 </section>
                 
             </div>

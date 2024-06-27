@@ -66,9 +66,9 @@ function History() {
                         <section className='m-4 ml-10'>
 
                                 
-                            <button className=' bg-pink-100 text-center py-2 px-4 font-semibold rounded-2xl '>{convertToSimpleDate(employeeRecord.date)}</button>
+                            <button className=' bg-pink-100 text-center py-2 px-4 font-semibold rounded-2xl '>{convertToSimpleDate(employeeRecord.startDate)}</button>
                                 
-                            <button className='m-4 bg-pink-200 text-center py-2 px-4 font-semibold rounded-2xl '>{convertToSimpleDate(employeeRecord.date)}</button>
+                            <button className='m-4 bg-pink-200 text-center py-2 px-4 font-semibold rounded-2xl '>{convertToSimpleDate(employeeRecord.endDate)}</button>
                         </section>
 
                         {/*****  leave status  *****/}

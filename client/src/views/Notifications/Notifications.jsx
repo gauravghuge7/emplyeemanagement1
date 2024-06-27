@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import './Notification.css'; // Import CSS for styling
 import axios from 'axios';
+import convertToSimpleDate from '../../components/Admin/TimeSetting/SetDate';
 
 const Notifications = () => {
   const [notifications, setNotifications] = useState([]);
@@ -39,15 +40,6 @@ const Notifications = () => {
 
 
 
-
-
-
-
-    // const data = [
-    //   { id: 1, title: 'New Employee Added', message: 'John Doe has been added.', date: '2024-06-01', isRead: false },
-    //   { id: 2, title: 'Policy Update', message: 'The leave policy has been updated.', date: '2024-05-25', isRead: false },
-    //   // Add more notifications as needed
-    // ];
     const check = data.filter((item) => item.leaveStatus === 'pending');
     console.log(check.length)
     setCount(check.length);
@@ -128,17 +120,25 @@ const Notifications = () => {
     setNotifications([]);
   };
 
+  console.log(notifications);
+
   return (
-    <div className="notification-container relative">
+    <div className="notification-container relative w-full shadow-lg my-8 shadow-gray-600 rounded-lg p-8  ">
       <h2 className='font-bold text-2xl'>Admin Notifications</h2>
-      <button className='absolute right-0 top-2' onClick={clearAllNotifications}>Clear All Notifications</button>
-      <ul>
+      <button className='absolute right-2 top-2' onClick={clearAllNotifications}>Clear All Notifications</button>
+      <ul className='mt-4'>
         {notifications.map((notification, i) => (
           notification.leaveStatus !== 'approved' && notification.leaveStatus !== 'rejected' && (
-            <li key={i}>
+            <li key={i} className='bg-slate-100 shadow-lg shadow-gray-400 rounded-xl p-8 my-8'>
+
+              <h3 className='font-bold text-xl'>{notification.fullName}</h3>
               <h3>{notification.email}</h3>
               <p>{notification.reason}</p>
-              <span>{notification.date}</span>
+              <span> Start Date: {convertToSimpleDate(notification.startDate)}</span>
+
+              <span> End Date: {convertToSimpleDate(notification.endDate)}</span>
+
+
               <div>
                 {!notification.isRead && <button onClick={() => markAsRead(notification.id)}>Mark as Read</button>}
                 <button onClick={() => deleteNotification(notification.id, notification.reason)}>Delete</button>
