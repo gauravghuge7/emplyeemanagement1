@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import './Notification.css'; // Import CSS for styling
 import axios from 'axios';
 import convertToSimpleDate from '../../components/Admin/TimeSetting/SetDate';
+import { toast } from 'sonner';
 
 const Notifications = () => {
   const [notifications, setNotifications] = useState([]);
@@ -47,7 +48,8 @@ const Notifications = () => {
   };
 
   const setApproveLeave = async (email, reason) => {
-
+    alert("Do you want to approve this leave?")
+    toast.success("Leave Approved")
     const config = {
       headers: {
         'Content-Type': 'application/json',
@@ -135,7 +137,6 @@ const Notifications = () => {
               <span>{notification.date}</span>
               <div className='dark:bg-black dark:text-white'>
                 {!notification.isRead && <button onClick={() => markAsRead(notification.id)}>Mark as Read</button>}
-                <button onClick={() => deleteNotification(notification.id, notification.reason)}>Delete</button>
                 <button onClick={() => setApproveLeave(notification.email, notification.reason)}>Approve</button>
                 <button onClick={() => setRejectLeave(notification.email, notification.reason)}>Reject</button>
               </div>
