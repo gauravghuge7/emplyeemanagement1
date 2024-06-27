@@ -143,7 +143,7 @@ function Admin() {
 
   return (
 
-    <div className={`${theme === 'dark' ? 'bg-gray-900 border-gray-700' : 'bg-gray-50 border-gray-200'} min-h-screen  dark:bg-black from-slate-200 to-slate-600 bg-gray-50/50`}>
+    <div className={`${theme === 'dark' ? 'bg-gray-900 border-gray-700' : 'bg-gray-50 border-gray-200'} min-h-screen  dark:bg-black from-slate-100 to-slate-600 bg-gray-50/50`}>
 
 
       <div className="p-4 xl:ml-80">
