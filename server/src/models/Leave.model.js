@@ -6,6 +6,7 @@ const leaveSchema = new Schema (
 
         fullName:{
             type:String,
+            trim: true
             // required:true
         },
 
