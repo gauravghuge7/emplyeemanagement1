@@ -1,23 +1,12 @@
 import { toast, Toaster } from "sonner";
 import { lazy, startTransition, useEffect, useRef, useState } from "react";
-import Register from "../../components/Admin/Register/Register";
+import Register from "../Register/Register";
+import "./manage.css";
 import axios from "axios";
 
 // Lazy load the EmployeeDetails component
-const EmployeeDetails = lazy(() => import('../../components/Admin/EmployeeDetails'));
+const EmployeeDetails = lazy(() => import('../EmployeeDetails'));
 
-// Sample data
-let data = [{
-  name: "sharad",
-  email: "sajdfk",
-  id: "ajd;f",
-  status: "active"
-}, {
-  name: "nikhil",
-  email: "nikhil@gmail.oc",
-  id: "32",
-  status: "active"
-}];
 
 function Manage() {
   const dialogRef = useRef();
@@ -28,6 +17,7 @@ function Manage() {
 
 
   const getData = async () => {
+
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -66,9 +56,9 @@ function Manage() {
 function ShowTable({ detail }) {
   return (
     <div className="w-full border p-6 text-lg rounded-lg">
-      <div className="grid font-bold text-gray-500 justify-center  grid-cols-5 gap-x-36 mb-3 items-center">
-        <h1>Employee Id</h1>
-        <h1>Name</h1>
+      <div className="responsive-grid">
+        <h1>First Name</h1>
+        <h1>Last Name</h1>
         <h1>Email</h1>
         <h1>Modify / Delete</h1>
       </div>
@@ -125,15 +115,16 @@ function ShowTabeData({ DataObject }) {
   };
 
   return (
-    <div>
+    <div className="">
       {DataObject.map((data, i) => (
-        <div className="grid grid-cols-5 gap-x-36 auto-cols-auto py-5 border border-r-0 border-l-0 border-b-0 my-0" key={i}>
-          <h2 className="overflow-y-hidden overflow-scroll">{data._id}</h2>
-          <h2>{data.firstName} {data.lastName}</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-x-5 sm:gap-x-10 md:gap-x-16 lg:gap-x-24 xl:gap-x-36 auto-cols-auto py-5 border border-gray-600 border-r-0 border-l-0 border-b-0 my-0" key={i}>
+
+          <h2 className="overflow-y-hidden">{data.firstName} </h2>
+          <h2> {data.lastName}</h2>
           <h2 className="text-center w-20">{data.email}</h2>
           <button
             onClick={() => handleDelete(data.email)}
-            className="hover:bg-red-600 w-24 p-2 rounded-3xl"
+            className="hover:bg-red-600 bg-red-200 w-24 p-2 rounded-2xl"
           >
             delete
           </button>
