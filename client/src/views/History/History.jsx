@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import  { useEffect, useState } from 'react'
 import axios from 'axios';
 
 
@@ -31,31 +31,75 @@ function History() {
         return `${year}-${month}-${day}`;
     }
   return (
+
+
     <div>
      
-          <h1 className='text-center my-12 text-3xl'>History</h1>
-          <div>
-              {allLeaves.map((employeeRecord, i) => {
-                  return (
-                      <div key={i} className='w-96 my-6  relative bg-white mx-auto p-4'>
-                          <div>
-                              <div className='mb-12'> 
-                                  <h3 className='text-xl capitalize'>{employeeRecord.fullName}</h3>
-                                  <h4 className='text-sm'>{employeeRecord.email}</h4>
-                                </div>
-                              <p className=''>{employeeRecord.reason}</p>
+        <h1 className='text-center border-b-2 border-black my-12 text-3xl'>History</h1>
+        <div>
+            {allLeaves.map((employeeRecord, i) => {
+                return (
 
+                    <div key={i} className='bg-white flex shadow-lg xsm:flex-col sm:flex-col rounded-2xl  align-center md:flex-row  shadow-gray-400 p-4 m-8 '>
+
+
+
+                        {/*****  leave details  *****/}
+                        <div>
+
+                            <div className='mb-6 '> 
+                                <h3 className='text-xl font-bold capitalize border-b-2 border-black'>{employeeRecord.fullName}</h3>
+                                <h4 className='text-sm my-2'>{employeeRecord.email}</h4>
+                                <p className='text-lg'>{employeeRecord.reason}</p>
                             </div>
-                          <span className={`absolute bg-orange-900 py-1 px-2 top-0 right-0 ${employeeRecord.leaveStatus === 'approved' ? 'bg-green-500' : employeeRecord.leaveStatus === 'pending' ? 'bg-yellow-300' : 'bg-red-600'}`}>{employeeRecord.leaveStatus}</span>
-                   
-                          <p className='absolute bg-black text-white bottom-0 right-0 px-1 rounded-l-lg'>{convertToSimpleDate(employeeRecord.date)}</p>
-                      </div>
-                  )
-              })}
-          </div>
+
+                            <section className=' p-4 w-full'>
+                                <p>{employeeRecord.description || 'no description provided'}</p>
+                            </section>
+
+                            
+
+                        </div>
+
+
+                        {/*****  leave dates  *****/}
+                        <section className='m-4 ml-10'>
+
+                                
+                            <button className=' bg-pink-100 text-center py-2 px-4 font-semibold rounded-2xl '>{convertToSimpleDate(employeeRecord.date)}</button>
+                                
+                            <button className='m-4 bg-pink-200 text-center py-2 px-4 font-semibold rounded-2xl '>{convertToSimpleDate(employeeRecord.date)}</button>
+                        </section>
+
+                        {/*****  leave status  *****/}
+                        <div className='m-8'>
+
+                            <button 
+                                className={`
+
+                                    text-center py-2 px-4 font-semibold rounded-2xl 
+                                    ${employeeRecord.leaveStatus === 'approved' ? 
+                                    'bg-green-500 ' : employeeRecord.leaveStatus === 'pending' ? 
+                                    'bg-yellow-300' : 'bg-red-500'}`}
+                                >
+
+                                {employeeRecord.leaveStatus}
+
+                            </button>
+
+                            
+
+                        </div>
+
+
+                    </div>
+                )
+            })}
+        </div>
 
     </div>
   )
 }
 
-export default History
+export default History 
+
