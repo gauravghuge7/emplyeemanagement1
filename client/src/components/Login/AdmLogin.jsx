@@ -57,7 +57,7 @@ function AdmLogin({loginType}) {
 
 
   return (
-    <div className='grid shadow-2xl border max-w-[900px] mx-auto mt-24 grid-cols-1 lg:grid-cols-2'>
+    <div className='grid shadow-2xl translate-y-24 border max-w-[900px] mx-auto grid-cols-1 lg:grid-cols-2'>
       {/* Admin Login Card */}
       <img className="hidden lg:block md:col-span-1  object-cover" src="./adminlogin.png"/>
       <div className="col-span-2 lg:col-span-1 p-6  ">

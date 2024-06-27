@@ -29,6 +29,11 @@ import NotFound from "../src/views/404"
 
 function App() {
 
+
+  if(localStorage.getItem('theme') === null){
+    localStorage.setItem('theme', 'light');
+  }
+
   const [userType, setUserType] = useState("employee"); // Track user type ('employee' or 'admin')
   
   const [loginType, setLoginType] = useState("employee"); // Track user type ('employee' or 'admin')
@@ -42,48 +47,48 @@ function App() {
 
 const RoutesWrapper = ({ userType, setUserType, setLoginType, loginType }) => {
   return (
-    <AuthProvider>
-    
-      <Navbar userType={userType} setUserType={setUserType} /> {/* Conditionally render Navbar */}
-      <Routes>
-      <Route path='/' element={<Landing setLoginType={setLoginType}/> } />
+      <AuthProvider>
 
-        <Route path="/home" element={<Home loginType={loginType} />} />
-        <Route path="/forgot-password" element={<ForgotPass />} />
-        <Route path="/emp-dashboard" element={<EmployeeDashboard />} />
-        <Route path="/admin-dashboard" element={<AdminDashboard/>} /> {/* Add Admin Dashboard route */}
-      
-        <Route path='/support' element={<HelpAndSupport/>} />
-        <Route path="/leave" element={<Leave />} />
-        <Route path="/sign-up" element={<SignUp />} />
-        <Route path='/adminlogin' element={<AdmLogin />} />
-        <Route path='/emplogin' element={<EmpLogin />} />
-        <Route path='/cap' element={<PhotoCapture />} />
-        <Route path='/about' element={<AboutPage />} />
-        <Route path='/*' element={<NotFound/>} />
+        <Navbar userType={userType} setUserType={setUserType} /> {/* Conditionally render Navbar */}
+        <Routes>
+          <Route path='/' element={<Landing setLoginType={setLoginType} />} />
 
+          <Route path="/home" element={<Home loginType={loginType} />} />
+          <Route path="/forgot-password" element={<ForgotPass />} />
+          <Route path="/emp-dashboard" element={<EmployeeDashboard />} />
+          <Route path="/admin-dashboard" element={<AdminDashboard />} /> {/* Add Admin Dashboard route */}
 
-        
+          <Route path='/support' element={<HelpAndSupport />} />
+          <Route path="/leave" element={<Leave />} />
+          <Route path="/sign-up" element={<SignUp />} />
+          <Route path='/adminlogin' element={<AdmLogin />} />
+          <Route path='/emplogin' element={<EmpLogin />} />
+          <Route path='/cap' element={<PhotoCapture />} />
+          <Route path='/about' element={<AboutPage />} />
+          <Route path='/*' element={<NotFound />} />
 
 
 
 
-        {/***  testing routes  */}
-        <Route path="/task" element={<Task />} />
-        <Route path="/addtask" element={<AddTask />} />
-        <Route path="/admin-profile" element={<AdminProfile />} />
-        <Route path="/form" element={<AdminForm />} />
-        <Route path="/register" element={<Register />} />
 
 
 
-        <Route path="/screen" element={<AutoCapture />} />
+          {/***  testing routes  */}
+          <Route path="/task" element={<Task />} />
+          <Route path="/addtask" element={<AddTask />} />
+          <Route path="/admin-profile" element={<AdminProfile />} />
+          <Route path="/form" element={<AdminForm />} />
+          <Route path="/register" element={<Register />} />
 
 
-      {/****  this is the comment  */}
-      
+
+          <Route path="/screen" element={<AutoCapture />} />
+
+
+          {/****  this is the comment  */}
+
         </Routes>
-    </AuthProvider>
+      </AuthProvider>
   );
 };
 

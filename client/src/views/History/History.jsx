@@ -35,25 +35,25 @@ function History() {
 
     <div>
      
-        <h1 className='text-center border-b-2 border-black my-12 text-3xl'>History</h1>
+          <h1 className='text-center dark dark:bg-black dark:text-white border-b-2 border-black my-12 text-3xl'>History</h1>
         <div>
             {allLeaves.map((employeeRecord, i) => {
                 return (
 
-                    <div key={i} className='bg-white flex shadow-lg xsm:flex-col sm:flex-col rounded-2xl  align-center md:flex-row  shadow-gray-400 p-4 m-8 '>
+                    <div key={i} className='bg-white dark:bg-black dark:text-white flex shadow-lg xsm:flex-col sm:flex-col rounded-2xl  align-center md:flex-row  shadow-gray-400 p-4 m-8 '>
 
 
 
                         {/*****  leave details  *****/}
                         <div>
 
-                            <div className='mb-6 '> 
+                            <div className='mb-6 dark:bg-black dark:text-white'> 
                                 <h3 className='text-xl font-bold capitalize border-b-2 border-black'>{employeeRecord.fullName}</h3>
                                 <h4 className='text-sm my-2'>{employeeRecord.email}</h4>
                                 <p className='text-lg'>{employeeRecord.reason}</p>
                             </div>
 
-                            <section className=' p-4 w-full'>
+                            <section className='dark:bg-black dark:text-white p-4 w-full'>
                                 <p>{employeeRecord.description || 'no description provided'}</p>
                             </section>
 
