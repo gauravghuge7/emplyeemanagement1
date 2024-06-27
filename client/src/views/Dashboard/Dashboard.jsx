@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation ,Link} from "react-router-dom";
 import EmpProfile from "../EmployeeProfile/EmpProfile";
 import EmployeeNotification from "../EmployeeNotification";
 import axios from "axios";
@@ -16,6 +16,8 @@ import EmployeeHistory from "../EmployeeHistory/EmployeeHistory";
 import Footer from "../../components/Admin/Footer/Footer";
 
 export function EmployeeDashboard() {
+  const [isOpen, setIsOpen] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
   const [activeTab, setActiveTab] = useState("profile");
   const [timer, setTimer] = useState(28800); // 8 hours in seconds
   const [isTimerRunning, setIsTimerRunning] = useState(true);
@@ -126,14 +128,38 @@ export function EmployeeDashboard() {
   };
 
   useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+
     fetchAnnouncements();
     fetchNotice();
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  const MobileNav = () => {
+    return <div className=' min-h-12 z-[100] bg-white/80 p-2 sticky top-0 backdrop-blur-lg  '>
+      <Link to={"/"} className=' text-2xl ml-4'>EMS</Link>
+      {isOpen ? <div className='absolute right-3 top-3 ' onClick={() => setIsOpen(!isOpen)}><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-align-right"><line x1="21" x2="3" y1="6" y2="6" /><line x1="21" x2="9" y1="12" y2="12" /><line x1="21" x2="7" y1="18" y2="18" /></svg></div> : <div className='h-full'><button className='absolute right-3 top-3' onClick={() => setIsOpen(!isOpen)}><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg></button><nav className='mt-8 ml-4 gap-3 flex flex-col  items-end mr-12 text-xl mb-4'>
+        <Link className={`${activeTab === 'profile' ? 'underline capitalize  underline-offset-2 font-semibold' : ''}  hover:underline`} onClick={() => { setActiveTab("profile"); setIsOpen(!isOpen) }} to="/emp-dashboard">Profile</Link>
+        <Link className={`${activeTab === 'leave' ? 'underline capitalize underline-offset-2 font-semibold' : ''} hover:underline`} onClick={() => { setActiveTab("leave"); setIsOpen(!isOpen) }} to="/emp-dashboard">Applica€on For Leve</Link>
+        <Link className={`${activeTab === 'report' ? 'underline capitalize underline-offset-2 font-semibold' : ''} hover:underline`} onClick={() => { setActiveTab("report"); setIsOpen(!isOpen) }} to="/emp-dashboard">Report</Link>
+        <Link className={`${activeTab === 'calendar' ? 'underline capitalize underline-offset-2 font-semibold' : ''} hover:underline`} onClick={() => { setActiveTab("calendar"); setIsOpen(!isOpen) }} to="/emp-dashboard">Calendar</Link>
+        <Link className={`${activeTab === 'notifications' ? 'underline capitalize underline-offset-2 font-semibold' : ''} hover:underline`} onClick={() => { setActiveTab("notification"); setIsOpen(!isOpen) }} to="/emp-dashboard">Notification</Link>
+        <Link className={`${activeTab === 'history' ? 'underline capitalize underline-offset-2 font-semibold' : ''} hover:underline`} onClick={() => { setActiveTab("history"); setIsOpen(!isOpen) }} to="/emp-dashboard">History</Link>
+        <Link className={`${activeTab === 'notice' ? 'underline capitalize underline-offset-2 font-semibold' : ''} hover:underline`} onClick={() => { setActiveTab("notice"); setIsOpen(!isOpen) }} to="/emp-dashboard">Notice</Link>
+
+      </nav></div>
+      }</div>
+  }
 
   return (
     <div className="flex flex-col bg-gray-100  ">
       {/* <PhotoCapture /> */}
-      <aside
+      {isMobile ? <MobileNav /> : <aside
         className="bg-gradient-to-br from-gray-800 to-gray-900 -translate-x-80 fixed inset-0 z-50  ml-4 h-[calc(95vh-32px)] w-72 rounded-xl transition-transform duration-300 xl:translate-x-0"
         style={{ marginTop: "4.5rem" }}
       >
@@ -169,10 +195,9 @@ export function EmployeeDashboard() {
             <li>
               <a className="active" href="#">
                 <button
-                  className={`middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-sm py-3 rounded-lg text-white hover:shadow-lg hover:shadow-blue-500/40 active:opacity-[0.85] w-full flex items-center px-4 capitalize ${
-                    activeTab === "profile" &&
+                  className={`middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-sm py-3 rounded-lg text-white hover:shadow-lg hover:shadow-blue-500/40 active:opacity-[0.85] w-full flex items-center px-4 capitalize ${activeTab === "profile" &&
                     "bg-gradient-to-tr from-blue-600 to-blue-400"
-                  }`}
+                    }`}
                   type="button"
                   onClick={() => handleTabChange("profile")}
                 >
@@ -193,10 +218,9 @@ export function EmployeeDashboard() {
             <li>
               <a className="" href="#">
                 <button
-                  className={`middle none font-sans text-sm font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full flex items-center px-4 capitalize ${
-                    activeTab === "leave" &&
+                  className={`middle none font-sans text-sm font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full flex items-center px-4 capitalize ${activeTab === "leave" &&
                     "bg-gradient-to-tr from-blue-600 to-blue-400"
-                  }`}
+                    }`}
                   type="button"
                   onClick={() => handleTabChange("leave")}
                 >
@@ -220,10 +244,9 @@ export function EmployeeDashboard() {
             <li>
               <a className="" href="#">
                 <button
-                  className={`middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-sm py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full flex items-center px-4 capitalize ${
-                    activeTab === "report" &&
+                  className={`middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-sm py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full flex items-center px-4 capitalize ${activeTab === "report" &&
                     "bg-gradient-to-tr from-blue-600 to-blue-400"
-                  }`}
+                    }`}
                   type="button"
                   onClick={() => handleTabChange("report")}
                 >
@@ -247,10 +270,9 @@ export function EmployeeDashboard() {
             <li>
               <a className="" href="#">
                 <button
-                  className={`middle none relative font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-sm py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full flex items-center px-4 capitalize ${
-                    activeTab === "calendar" &&
+                  className={`middle none relative font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-sm py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full flex items-center px-4 capitalize ${activeTab === "calendar" &&
                     "bg-gradient-to-tr from-blue-600 to-blue-400"
-                  }`}
+                    }`}
                   type="button"
                   onClick={() => handleTabChange("calendar")}
                 >
@@ -279,10 +301,9 @@ export function EmployeeDashboard() {
             <li>
               <a className="" href="#">
                 <button
-                  className={`middle none relative font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-5 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full flex items-center gap-2 px-4 capitalize ${
-                    activeTab === "notification" &&
+                  className={`middle none relative font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-5 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full flex items-center gap-2 px-4 capitalize ${activeTab === "notification" &&
                     "bg-gradient-to-tr from-blue-600 to-blue-400"
-                  }`}
+                    }`}
                   type="button"
                   onClick={() => handleTabChange("notification")}
                 >
@@ -311,10 +332,9 @@ export function EmployeeDashboard() {
             <li>
               <a className="" href="#">
                 <button
-                  className={`middle none relative font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-5 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full flex items-center gap-2 px-4 capitalize ${
-                    activeTab === "history" &&
+                  className={`middle none relative font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-5 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full flex items-center gap-2 px-4 capitalize ${activeTab === "history" &&
                     "bg-gradient-to-tr from-blue-600 to-blue-400"
-                  }`}
+                    }`}
                   type="button"
                   onClick={() => handleTabChange("history")}
                 >
@@ -344,10 +364,9 @@ export function EmployeeDashboard() {
             <li>
               <a className="" href="#">
                 <button
-                  className={`middle none relative font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-5 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full flex items-center gap-2 px-4 capitalize ${
-                    activeTab === "notice" &&
+                  className={`middle none relative font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-5 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full flex items-center gap-2 px-4 capitalize ${activeTab === "notice" &&
                     "bg-gradient-to-tr from-blue-600 to-blue-400"
-                  }`}
+                    }`}
                   type="button"
                   onClick={() => handleTabChange("notice")}
                 >
@@ -378,8 +397,11 @@ export function EmployeeDashboard() {
             </li>
           </ul>
         </div>
+
       </aside>
-      
+
+      </aside>}
+
       <div className="lg:w-[70vw] w-full mx-auto mt-16 absolute right-0 lg:right-20">
         <div className="flex items-center justify-end text-black text-2xl mb-4">
           Time Remaining: {formatTime(timer)}
