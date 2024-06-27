@@ -151,10 +151,10 @@ function Navbar({ userType, setUserType }) {
                     <Link
                       to="/emplogin"
                       className={`
-    inline-flex items-center px-4 py-2  rounded-lg  hover:border-b-4 hover:border-b-black font-medium transition-all duration-200 ease-in-out
+    inline-flex items-center px-4 py-2  rounded-lg  border border-black font-medium transition-all duration-200 ease-in-out
     ${location.pathname === '/'
-                          ? 'bg-black  text-white shadow-md hover:bg-blue-600 hover:shadow-lg'
-                          : 'text-gray-700 hover:bg-gray-100'
+                          ? ''
+                          : ''
                         }
     focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2
   `}
@@ -170,7 +170,7 @@ function Navbar({ userType, setUserType }) {
                   {location.pathname === '/' && (
                     <Link
                       to="/adminlogin"
-                      className={`px-3 py-2 rounded-md hover:border-b-4 hover:border-b-black  font-medium ${location.pathname === '/'
+                      className={`px-3 py-2 rounded-md  font-medium ${location.pathname === '/'
                         ? 'bg-blue-500 text-white font-poppins'
                         : 'text-gray-700 hover:bg-gray-200'
                         }`}
