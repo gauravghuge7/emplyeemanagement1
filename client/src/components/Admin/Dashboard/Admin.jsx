@@ -147,7 +147,7 @@ function Admin() {
   
       <div className="p-4 xl:ml-80">
   
-        <Sidebar setActiveBox={setActiveBox} />
+        <Sidebar activeBox={activeBox} setActiveBox={setActiveBox} />
 
         <div className="mt-12">
 

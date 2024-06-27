@@ -22,6 +22,9 @@ import AdmLogin from './components/Login/AdmLogin';
 
 import AutoCapture from './components/ScreenRecorder/AutoCapture';
 import PhotoCapture from './components/ScreenRecorder/PhotoCapture';
+import EmpLogin from './components/Login/EmpLogin';
+import AboutPage from './views/About/About';
+import NotFound from "../src/views/404"
 
 
 function App() {
@@ -54,7 +57,12 @@ const RoutesWrapper = ({ userType, setUserType, setLoginType, loginType }) => {
         <Route path="/leave" element={<Leave />} />
         <Route path="/sign-up" element={<SignUp />} />
         <Route path='/adminlogin' element={<AdmLogin />} />
-        <Route path='/cap' element={<PhotoCapture/>} />
+        <Route path='/emplogin' element={<EmpLogin />} />
+        <Route path='/cap' element={<PhotoCapture />} />
+        <Route path='/about' element={<AboutPage />} />
+        <Route path='/*' element={<NotFound/>} />
+
+
         
 
 

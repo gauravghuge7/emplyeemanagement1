@@ -2,6 +2,7 @@ import  { useState } from 'react'
 import { toast } from "sonner";
 import { Link, useNavigate } from 'react-router-dom';
 import axios from "axios";
+import adminloginImg from "../../../public/sigupadmin.png";
 
 
 function AdmLogin({loginType}) {
@@ -86,12 +87,12 @@ function AdmLogin({loginType}) {
 
 
   return (
-    <div className='flex justify-center items-center'>
+    <div className='grid shadow-2xl border max-w-[900px] mx-auto mt-24 grid-cols-1 lg:grid-cols-2'>
       {/* Admin Login Card */}
-
-      <div className="lg:w-[400px] max-w-sm p-6 bg-white rounded-lg shadow-2xl border border-gray-300 ">
-        <div className="w-full max-w-sm p-6 bg-white rounded-lg shadow-2xl border border-gray-300 ">
-          <h2 className="text-2xl font-bold text-center mb-6">Admin Login</h2>
+      <img className="hidden lg:block md:col-span-1  object-cover" src={"https://images.unsplash.com/photo-1644224076179-31d622e21511?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}/>
+      <div className="col-span-2 lg:col-span-1 p-6  ">
+        <div className="w-full p-6   ">
+          <h2 className="text-2xl font-light text-center mb-6">Admin Login</h2>
           <form onSubmit={submitAdmin} method="POST">
             <div className="mb-4">
               <label className="block text-gray-700">Email:</label>
@@ -100,15 +101,16 @@ function AdmLogin({loginType}) {
                 value={adminEmail}
                 onChange={(e) => setAdminEmail(e.target.value)}
                 required
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 hover:ring-blue-700"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:border-black "
               />
               <label className="block text-gray-700 mt-3">Admin Id:</label>
               <input
+              
                 type="text"
                 value={adminId}
                 onChange={(e) => setAdminId(e.target.value)}
                 
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 hover:ring-blue-700"
+                className="w-full decoration px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2  "
               />
             </div>
             <div className="mb-6">
@@ -118,7 +120,7 @@ function AdmLogin({loginType}) {
                 value={adminPassword}
                 onChange={(e) => setAdminPassword(e.target.value)}
                 required
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:border-black "
               />
             </div>
             <button
