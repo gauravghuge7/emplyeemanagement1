@@ -6,22 +6,22 @@ function PhotoCapture() {
     const intervalRef = useRef(null);
     const timeoutRef = useRef(null);
 
-    useEffect(() => {
-        intervalRef.current = setInterval(() => {
-            startCamera();
-        }, 1 * 60 * 1000);
+    // useEffect(() => {
+    //     intervalRef.current = setInterval(() => {
+    //         startCamera();
+    //     }, 1 * 60 * 1000);
 
-        return () => {
-            console.log('Component unmounting');
-            if (intervalRef.current) {
-                clearInterval(intervalRef.current);
-            }
-            if (timeoutRef.current) {
-                clearTimeout(timeoutRef.current);
-            }
-            stopCameraStream();
-        };
-    }, []);
+    //     return () => {
+    //         console.log('Component unmounting');
+    //         if (intervalRef.current) {
+    //             clearInterval(intervalRef.current);
+    //         }
+    //         if (timeoutRef.current) {
+    //             clearTimeout(timeoutRef.current);
+    //         }
+    //         stopCameraStream();
+    //     };
+    // }, []);
 
     const startCamera = async () => {
         try {
