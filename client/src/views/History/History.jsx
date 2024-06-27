@@ -49,7 +49,7 @@ function History() {
 
                             <div className='mb-6 '> 
                                 <h3 className='text-xl font-bold capitalize border-b-2 border-black'>{employeeRecord.fullName}</h3>
-                                <h4 className='text-sm '>{employeeRecord.email}</h4>
+                                <h4 className='text-sm my-2'>{employeeRecord.email}</h4>
                                 <p className='text-lg'>{employeeRecord.reason}</p>
                             </div>
 

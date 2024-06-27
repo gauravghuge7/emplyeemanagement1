@@ -143,7 +143,7 @@ function Admin() {
 
   return (
 
-    <div className="min-h-screen bg-gray-50/50">
+    <div className="min-h-screen from-slate-200 to-slate-600 bg-gray-50/50">
 
   
       <div className="p-4 xl:ml-80">

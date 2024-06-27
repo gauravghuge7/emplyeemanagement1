@@ -61,7 +61,7 @@ function Register() {
     }
   };
   return (
-    <div className="p-10">
+    <div className="p-10 bg-gray-100">
       <h1 className="mb-8 font-extrabold text-4xl">Employee Registeration </h1>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <form onSubmit={handleSubmit}>
@@ -71,7 +71,7 @@ function Register() {
               First Name
             </label>
             <input
-              className="w-full shadow-inner bg-gray-100 rounded-lg placeholder-black text-2xl p-4 border-none block mt-1"
+              className="w-full shadow-inner bg-white text-sm rounded-lg placeholder-black  p-4 border-none block mt-1"
               id="FirstName"
               type="text"
               name="FirstName"
@@ -87,7 +87,7 @@ function Register() {
               Last Name
             </label>
             <input
-              className="w-full shadow-inner bg-gray-100 rounded-lg placeholder-black text-2xl p-4 border-none block mt-1"
+              className="w-full shadow-inner bg-white text-sm rounded-lg placeholder-black p-4 border-none block mt-1"
               id="lastName"
               type="text"
               name="lastName"
@@ -119,7 +119,7 @@ function Register() {
               Email
             </label>
             <input
-              className="w-full shadow-inner bg-gray-100 rounded-lg placeholder-black text-2xl p-4 border-none block mt-1 "
+              className="w-full shadow-inner bg-white text-sm rounded-lg placeholder-black p-4 border-none block mt-1 "
               id="email"
               type="email"
               name="email"
@@ -135,7 +135,7 @@ function Register() {
               Phone Number
             </label>
             <input
-              className="w-full shadow-inner bg-gray-100 rounded-lg placeholder-black text-2xl p-4 border-none block mt-1 "
+              className="w-full shadow-inner bg-white text-sm rounded-lg placeholder-black  p-4 border-none block mt-1 "
               id="phoneNumber"
               type="tel"
               name="email"
@@ -151,7 +151,7 @@ function Register() {
               Password
             </label>
             <input
-              className="w-full shadow-inner bg-gray-100 rounded-lg placeholder-black text-2xl p-4 border-none block mt-1"
+              className="w-full shadow-inner bg-white text-sm rounded-lg placeholder-black p-4 border-none block mt-1"
               id="password"
               type="password"
               name="password"
@@ -162,26 +162,29 @@ function Register() {
             />
           </div>
 
-          {/* Role input field */}
-          <div>
-            <label className="block font-semibold" htmlFor="role">
-              Role
-            </label>
-            <input
-              className="w-full shadow-inner bg-gray-100 rounded-lg placeholder-black text-2xl p-4 border-none block mt-1"
-              id="role"
-              type="text"
-              name="role"
-              value={role}
-              onChange={(e) => setRole(e.target.value)}
-            />
-          </div>
+          {/***** 
+         
+            <div>
+              <label className="block font-semibold" htmlFor="role">
+                Role
+              </label>
+              <input
+                className="w-full shadow-inner bg-white text-sm rounded-lg placeholder-black p-4 border-none block mt-1"
+                id="role"
+                type="text"
+                name="role"
+                value={role}
+                onChange={(e) => setRole(e.target.value)}
+              />
+            </div>
+
+          */}
 
           {/* Submit button */}
           <div className="flex items-center justify-between mt-8">
             <button
               type="submit"
-              className="flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10"
+              className="flex items-center justify-center text-sm px-6 py-2 border border-transparent font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10"
             >
               Register
             </button>

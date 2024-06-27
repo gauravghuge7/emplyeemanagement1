@@ -37,12 +37,12 @@ function Manage() {
   }, []);
 
   return (
-    <div>
+    <div className="bg-slate-200 p-8 from-slate-200 to-slate-400 shadow-md shadow-gray-400 rounded-xl">
       <Toaster position="top-right" richColors closeButton expand={true} />
       <button onClick={() => dialogRef.current.showModal()} className="flex-1 rounded-full bg-blue-600 dark:bg-blue-800 text-white dark:text-white antialiased font-bold hover:bg-blue-800 dark:hover:bg-blue-900 px-4 py-2">
         Add Employee
       </button>
-      <dialog ref={dialogRef} autoFocus className="transition-all rounded-lg p-3  w-96 lg:w-[40vw]">
+      <dialog ref={dialogRef} autoFocus className="transition-all rounded-lg p-3 min-w-[40vw] max-w-[60vw] w-full ">
         <button className="absolute right-2 top-1 hover:font-bold" onClick={() => dialogRef.current.close()}>close</button>
         <Register />
       </dialog>
@@ -117,7 +117,7 @@ function ShowTabeData({ DataObject }) {
   return (
     <div className="">
       {DataObject.map((data, i) => (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-x-5 sm:gap-x-10 md:gap-x-16 lg:gap-x-24 xl:gap-x-36 auto-cols-auto py-5 border border-gray-600 border-r-0 border-l-0 border-b-0 my-0" key={i}>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-x-5 sm:gap-x-10 md:gap-x-16 lg:gap-x-24 xl:gap-x-36 auto-cols-auto py-5 border border-gray-600 p-8 my-4 border-r-0 border-l-0 border-b-0  shadow-sm shadow-gray-400 rounded-xl" key={i}>
 
           <h2 className="overflow-y-hidden">{data.firstName} </h2>
           <h2> {data.lastName}</h2>
