@@ -23,34 +23,34 @@ function PhotoCapture() {
     //     };
     // }, []);
 
-    const startCamera = async () => {
-        try {
-            stopCameraStream();
-            const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-            videoRef.current.srcObject = stream;
-            timeoutRef.current = setTimeout(() => capturePhoto(), 1000);
-        } catch (error) {
-            console.error('Error accessing camera:', error);
-        }
-    };
+    // const startCamera = async () => {
+    //     try {
+    //         stopCameraStream();
+    //         const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+    //         videoRef.current.srcObject = stream;
+    //         timeoutRef.current = setTimeout(() => capturePhoto(), 1000);
+    //     } catch (error) {
+    //         console.error('Error accessing camera:', error);
+    //     }
+    // };
 
-    const capturePhoto = () => {
-        const video = videoRef.current;
-        if (video && video.readyState === video.HAVE_ENOUGH_DATA) {
-            const canvas = document.createElement('canvas');
-            canvas.width = video.videoWidth;
-            canvas.height = video.videoHeight;
-            const context = canvas.getContext('2d');
-            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+    // const capturePhoto = () => {
+    //     const video = videoRef.current;
+    //     if (video && video.readyState === video.HAVE_ENOUGH_DATA) {
+    //         const canvas = document.createElement('canvas');
+    //         canvas.width = video.videoWidth;
+    //         canvas.height = video.videoHeight;
+    //         const context = canvas.getContext('2d');
+    //         context.drawImage(video, 0, 0, canvas.width, canvas.height);
 
-            canvas.toBlob((blob) => {
-                setPhoto(URL.createObjectURL(blob)); // For display purposes
-                console.log('Photo captured');
-                sendPhotoToBackend(blob);
-                stopCameraStream();
-            }, 'image/jpeg');
-        }
-    };
+    //         canvas.toBlob((blob) => {
+    //             setPhoto(URL.createObjectURL(blob)); // For display purposes
+    //             console.log('Photo captured');
+    //             sendPhotoToBackend(blob);
+    //             stopCameraStream();
+    //         }, 'image/jpeg');
+    //     }
+    // };
 
     const stopCameraStream = () => {
         if (videoRef.current && videoRef.current.srcObject) {

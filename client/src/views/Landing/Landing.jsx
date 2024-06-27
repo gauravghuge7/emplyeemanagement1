@@ -131,26 +131,26 @@ function Landing() {
               transition: "all 0.5s cubic-bezier(0.17, 0.55, 0.55, 1) "
             }}
             ref={cardRef}
-            className={`my-44 flex gap-8 items-center justify-center flex-wrap ${isDarkMode ? 'dark' : ''}`}
+            className={`my-44 flex gap-24 items-center   justify-center flex-wrap ${isDarkMode ? 'dark' : ''}`}
           >
-            <div className={`flex justify-center items-center flex-col ${isDarkMode ? 'dark' : ''}`}>
-              <div className='flex items-center justify-center'>
-                <img className={`w-[239px] z-10 relative ${isDarkMode ? 'dark' : ''}`} src={planner} />
-                <img src={rectangle} className={`w-[210px] animate-pulse blur-lg -z-10 absolute ${isDarkMode ? 'dark' : ''}`} />
+            <div className={`flex justify-center items-center  flex-col ${isDarkMode ? 'dark' : ''}`}>
+              <div className='flex items-start mt-6 justify-center'>
+                <img className={`w-[239px] mb-14  translate-y-8 z-10 relative ${isDarkMode ? 'dark' : ''}`} src={planner} />
+                <img src={rectangle} className={`w-[210px]  animate-pulse blur-lg -z-10 absolute ${isDarkMode ? 'dark' : ''}`} />
               </div>
               <div>
                 <h3 className={`text-2xl font-semibold ${isDarkMode ? 'dark' : ''} dark:text-white`}>Accurate Time Tracking</h3>
                 <p className={`text-lg my-4 w-56 ${isDarkMode ? 'dark' : ''} dark:text-gray-300`}>Track employee hours and attendance with precision and ease.</p>
               </div>
             </div>
-            <div className={`flex justify-center items-center flex-col ${isDarkMode ? 'dark' : ''}`}>
+            <div className={`flex justify-center items-center  flex-col ${isDarkMode ? 'dark' : ''}`}>
               <div className='flex items-center justify-center'>
-                <img className={`w-1/3 relative z-10 ${isDarkMode ? 'dark' : ''}`} src={businessAnalytics} />
+                <img className={`w-[239px] relative z-10 ${isDarkMode ? 'dark' : ''}`} src={businessAnalytics} />
                 <img src={rectangle} className={`w-[180px] animate-pulse blur-xl -z-10 absolute ${isDarkMode ? 'dark' : ''}`} />
               </div>
               <div>
                 <h3 className={`text-2xl font-semibold ${isDarkMode ? 'dark' : ''} dark:text-white`}>Insightful Performance Reviews</h3>
-                <p className={`text-lg my-4 w-56 ${isDarkMode ? 'dark' : ''} dark:text-gray-300`}>Track employee hours and attendance with precision and ease.</p>
+                <p className={`text-lg my-4 w-72 ${isDarkMode ? 'dark' : ''} dark:text-gray-300`}>Track employee hours and attendance with precision and ease.</p>
               </div>
             </div>
           </div>
@@ -168,8 +168,8 @@ function Landing() {
           <div className={`w-full max-w-[1200px] mx-auto ${isDarkMode ? 'dark' : ''}`}>
             <h2 className={`text-center text-4xl my-32 ${isDarkMode ? 'dark' : ''} dark:text-white`}>FEATURES</h2>
             <div className={`grid grid-cols-1 mx-6 gap-0 grid-rows-6 lg:grid-cols-6 lg:grid-rows-1 ${isDarkMode ? 'dark' : ''}`}>
-              <img className={`w-[300px] grid row-span-3 lg:col-span-3 ${isDarkMode ? 'dark' : ''}`} src={womentplanning} />
-              <div className={`flex flex-col gap-6 row-span-3 lg:col-span-3 ${isDarkMode ? 'dark' : ''}`}>
+              <img className={`w-[300px] grid row-span-3 lg:col-span-2 ${isDarkMode ? 'dark' : ''}`} src={womentplanning} />
+              <div className={`flex flex-col gap-6 row-span-3 lg:col-span-4 ${isDarkMode ? 'dark' : ''}`}>
                 <h2 className={`text-2xl font-semibold ${isDarkMode ? 'dark' : ''} dark:text-white`}>How We Track Employee Progress</h2>
                 <p className={`${isDarkMode ? 'dark' : ''} dark:text-gray-300`}>Our system provides detailed performance metrics and progress tracking tools to help employees stay on track with their goals. We utilize a variety of key performance indicators (KPIs) to measure productivity, task completion rates, and overall efficiency.</p>
               </div>
@@ -184,8 +184,8 @@ function Landing() {
             className={`w-full max-w-[1200px] mx-auto my-12 ${isDarkMode ? 'dark' : ''}`}
           >
             <div className={`grid grid-cols-1 mx-6 items-center justify-center gap-0 grid-rows-6 lg:grid-cols-6 lg:grid-rows-1 ${isDarkMode ? 'dark' : ''}`}>
-              <img className={`w-[300px] grid row-span-3 lg:col-span-3 ${isDarkMode ? 'dark' : ''}`} src={dashboard} />
-              <div className={`flex flex-col gap-6 row-span-3 lg:col-span-3 ${isDarkMode ? 'dark' : ''}`}>
+              <img className={`w-[300px] grid row-span-3 lg:col-span-2 ${isDarkMode ? 'dark' : ''}`} src={dashboard} />
+              <div className={`flex flex-col gap-6 row-span-3 lg:col-span-4 ${isDarkMode ? 'dark' : ''}`}>
                 <h2 className={`text-2xl font-semibold ${isDarkMode ? 'dark' : ''} dark:text-white`}>Admin Features</h2>
                 <p className={`${isDarkMode ? 'dark' : ''} dark:text-gray-300`}>Admins have access to comprehensive tools for managing employee data, generating reports, and configuring system settings. With real-time data and analytics, admins can make informed decisions to optimize workforce performance.</p>
               </div>
