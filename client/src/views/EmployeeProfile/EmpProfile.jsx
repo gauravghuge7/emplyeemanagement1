@@ -64,10 +64,12 @@ function EmpProfile() {
       withCredentials: true,
     };
 
+
     const formData = new FormData();
     formData.append("avatar", avatar);
     formData.append("phoneNumber", employee.phoneNumber);
     formData.append("bio", employee.bio);
+
 
     try {
       const response = await axios.post("http://localhost:5200/api/v1/user/updateProfile", formData, config);

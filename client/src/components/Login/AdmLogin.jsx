@@ -116,6 +116,7 @@ function AdmLogin({loginType}) {
         </div>
       </div>
     </div>
+    </div>
   );
 }
 
