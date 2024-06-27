@@ -447,9 +447,9 @@ const sendNotices = asyncHandler(async (req, res) => {
     throw new ApiError("Admin not registered", 404);
   }
 
-  const {notice, email} = req.body;
+  const {message, email} = req.body;
 
-  if(!notice || !email) {
+  if(!message || !email) {
     throw new ApiError("Missing required fields", 400);
   }
 
@@ -462,7 +462,7 @@ const sendNotices = asyncHandler(async (req, res) => {
       throw new ApiError("User not found", 404);
     }
 
-    user.employeeNotices.push(notice);
+    user.employeeNotices.push(message);
 
     await user.save();
 

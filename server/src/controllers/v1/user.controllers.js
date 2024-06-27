@@ -147,62 +147,48 @@ const updateAvatar = asyncHandler(async(req, res) => {
 
 
 
-const updateProfile = asyncHandler(async(req, res) => {
 
+
+
+const updateProfile = asyncHandler(async (req, res) => {
     const { email } = req.user;
-
+  
     try {
-        const { phoneNumber, bio } = req.body;
-
-        const user = await UserModel.findOne({ email });
-
-        if(!user) {
-            return res.status(400).json({ message: "User not found" });
+      const { phoneNumber, bio } = req.body;
+      const user = await UserModel.findOne({ email });
+  
+      if (!user) {
+        return res.status(400).json({ message: "User not found" });
+      }
+  
+      if (phoneNumber) {
+        user.phoneNumber = phoneNumber;
+      }
+  
+      if (bio) {
+        user.bio = bio;
+      }
+  
+      if (req.file && req.file.path) {
+        const path = req.file.path;
+        const response = await uploadOnCloudinary(path);
+  
+        if (!response) {
+          return res.status(400).json({ message: "Error uploading avatar" });
         }
-
-        if(phoneNumber) {
-            user.phoneNumber = phoneNumber;
-        }
-
-        if(bio) {
-            user.bio = bio;
-        }
-
-            const path = req.file.path;
-            console.log(path);
-            console.log("................................")
-
-            const response = await uploadOnCloudinary(path);
-
-
-            console.log(response);
-            if(!response) {
-                return res.status(400).json({ message: "Error uploading avatar" });
-            }
-            user.avatar.secure_url = response.secure_url;
-            user.avatar.public_id = response.public_id;
-
-            // await user.save();
-
-
-
-
-
-        await user.save();
-
-        return res
-        .status(200)
-        .json(new ApiResponse(200, "profile updated successfully", user));
-        
-    } 
-    catch (error) {
-        
-        return res.status(400).send(error.message);
-
+  
+        user.avatar.secure_url = response.secure_url;
+        user.avatar.public_id = response.public_id;
+      }
+  
+      await user.save();
+  
+      return res.status(200).json(new ApiResponse(200, "Profile updated successfully", user));
+    } catch (error) {
+      return res.status(400).send(error.message);
     }
-
-});
-
+  });
+  
 
 
 const updatePassword = asyncHandler(async(req, res) => {
@@ -313,7 +299,7 @@ const getLeaveHistory = asyncHandler(async(req, res) => {
 const acceptDailyReport = asyncHandler(async(req, res) => {
     const { email } = req.user;
 
-    const { report } = req.body;
+    const { workUrl, projectName ,report } = req.body;
 
     console.log("req.body => ", req.body);
 
@@ -330,7 +316,7 @@ const acceptDailyReport = asyncHandler(async(req, res) => {
         }
 
         
-       user.dailyReports.push(report);
+       user.dailyReports.push(projectName,workUrl,report);
 
         
 

@@ -18,10 +18,12 @@ const cookiesOptions = {
 
 const acceptLeaveApplication = asyncHandler(async(req, res) => {
 
+    console.log("testingggg")
+
     const {email, adminEmail} = req.user;
 
     try {
-        const {fullName, employeeId, department, date, reason,  explainAboutLeave} = req.body;
+        const {fullName,  position, startDate, reason,  endDate, } = req.body;
     
         const user = await UserModel.findOne({email});
     
@@ -40,13 +42,14 @@ const acceptLeaveApplication = asyncHandler(async(req, res) => {
     
         const leave = new LeaveModel({
             fullName,
-            employeeId,
+            
             email,
             reason,
             adminEmail,
-            date,
-            department,
-            explainAboutLeave,
+            startDate,
+            endDate,
+            position,
+            
             leaveStatus: "pending"
         });
     

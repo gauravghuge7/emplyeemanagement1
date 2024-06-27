@@ -88,6 +88,9 @@ const userSchema = new Schema (
 
         dailyReports: [{
             type: String,
+            projectName:String,
+            workUrl:String,
+            report:String,
             expires: "1d",
             default: []
         }],
