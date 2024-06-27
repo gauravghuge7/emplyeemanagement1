@@ -25,6 +25,8 @@ const acceptLeaveApplication = asyncHandler(async(req, res) => {
     try {
         const {fullName,  position, startDate, reason,  endDate, } = req.body;
     
+        console.log("req.body => ",req.body);
+
         const user = await UserModel.findOne({email});
     
         if (!user) {
@@ -40,7 +42,7 @@ const acceptLeaveApplication = asyncHandler(async(req, res) => {
         //     });
         // }
     
-        const leave = new LeaveModel({
+        const leave = await LeaveModel.create({
             fullName,
             
             email,
