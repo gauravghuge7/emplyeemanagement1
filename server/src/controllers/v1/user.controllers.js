@@ -316,7 +316,13 @@ const acceptDailyReport = asyncHandler(async(req, res) => {
         }
 
         
-       user.dailyReports.push(projectName,workUrl,report);
+        user.dailyReports.push({
+            projectName,
+            workUrl,
+            report,
+            createdAt:Date.now(),
+            createdBy:user.email
+        });
 
         
 

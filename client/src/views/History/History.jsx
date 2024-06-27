@@ -53,10 +53,11 @@ function History() {
                                 <p className='text-lg'>{employeeRecord.reason}</p>
                             </div>
 
-                            <section className='dark:bg-black dark:text-white p-4 w-full'>
-                                <p>{employeeRecord.description || 'no description provided'}</p>
-                            </section>
-
+                            {/*****    
+                                <section className='dark:bg-black dark:text-white p-4 w-full'>
+                                    <p>{employeeRecord.description || 'no description provided'}</p>
+                                </section>
+                            *****/}
                             
 
                         </div>
@@ -66,9 +67,9 @@ function History() {
                         <section className='m-4 ml-10'>
 
                                 
-                            <button className=' bg-pink-100 text-center py-2 px-4 font-semibold rounded-2xl '>{convertToSimpleDate(employeeRecord.date)}</button>
+                            <button className=' bg-pink-100 text-center py-2 px-4 font-semibold rounded-2xl '>{convertToSimpleDate(employeeRecord.startDate)}</button>
                                 
-                            <button className='m-4 bg-pink-200 text-center py-2 px-4 font-semibold rounded-2xl '>{convertToSimpleDate(employeeRecord.date)}</button>
+                            <button className='m-4 bg-pink-200 text-center py-2 px-4 font-semibold rounded-2xl '>{convertToSimpleDate(employeeRecord.endDate)}</button>
                         </section>
 
                         {/*****  leave status  *****/}
