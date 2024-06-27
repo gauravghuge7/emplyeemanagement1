@@ -71,7 +71,7 @@ function EmpLogin({ setUserType }) {
 
   return (
     <div className='grid shadow-2xl border max-w-[900px] mx-auto mt-24 grid-cols-1 lg:grid-cols-2'>
-      <img className="hidden lg:block md:col-span-1 object-cover" src="https://images.unsplash.com/photo-1644224076179-31d622e21511?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Login background" />
+      <img className="hidden lg:block md:col-span-1 object-cover" src="./istockphoto-1281150061-612x612.jpg" alt="Login background" />
       <div className="col-span-2 lg:col-span-1 p-6">
         <div className="w-full p-6">
           <h2 className="text-2xl font-light text-center mb-6">Employee Login</h2>

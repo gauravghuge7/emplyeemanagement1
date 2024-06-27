@@ -39,97 +39,152 @@ function Landing({ setLoginType }) {
 
 
   return (
-    <div>
-      <div className="min-h-screen  mx-auto max-w-[1000px]">
+<div>
+  <div className="min-h-screen mx-auto max-w-full overflow-hidden">
+    <div className='relative z-10 min-h-screen w-full flex items-center justify-center'>
+      <div>
+        <motion.img
+          initial={{ translateX: '-100px', scale: 0.6, translateY: '-100px', opacity: 0 }}
+          transition={{ duration: '0.6', ease: 'backInOut' }}
+          animate={{ translateX: 0, scale: 1, translateY: 0, opacity: 1 }}
+          src={digitalbusiness}
+          className='w-24 md:w-32 lg:w-44 absolute object-cover lg:top-24 lg:left-16 top-12 left-0'
+        />
+        <motion.img
+          initial={{ translateX: '-100px', scale: 0.6, translateY: '100px', opacity: 0 }}
+          transition={{ duration: '0.6', ease: 'easeInOut' }}
+          animate={{ translateX: 0, scale: 1, translateY: 0, opacity: 1 }}
+          src={tastmanagement}
+          className='w-28 md:w-36 lg:w-44 absolute object-cover lg:bottom-24 lg:left-24 bottom-16 left-0'
+        />
+        <motion.img
+          initial={{ translateX: '100px', translateY: '-100px', scale: 0.6, opacity: 0 }}
+          transition={{ duration: '0.6', ease: 'backInOut' }}
+          animate={{ translateX: 0, translateY: 0, scale: 1, opacity: 1 }}
+          src={planner}
+          className='w-24 md:w-32 lg:w-44 absolute object-cover lg:top-24 lg:right-24 top-12 right-0'
+        />
+        <motion.img
+          initial={{ translateX: '100px', translateY: '100px', scale: 0.6, opacity: 0 }}
+          transition={{ duration: '0.6', ease: 'easeInOut' }}
+          animate={{ translateX: 0, translateY: 0, scale: 1, opacity: 1 }}
+          src={laptop}
+          className='w-24 md:w-32 lg:w-44 absolute lg:bottom-24 lg:right-24 object-cover bottom-12 right-0'
+        />
+      </div>
+      <div className='flex flex-col gap-8 items-center justify-center'>
+        <motion.h1
+          initial={{ opacity: 0, scale: 0.6 }}
+          transition={{ duration: '0.3', ease: 'easeInOut' }}
+          animate={{ opacity: 1, scale: 1 }}
+          className='text-3xl md:text-4xl lg:text-6xl text-center font-light'
+        >
+          Streamline Your Employee Management
+        </motion.h1>
+        <motion.p
+          initial={{ opacity: 0, scale: 0.8 }}
+          transition={{ delay: 0.3, duration: '0.3', ease: 'easeInOut' }}
+          animate={{ opacity: 1, scale: 1 }}
+          className='text-lg md:text-xl lg:text-2xl w-72 md:w-96 text-center'
+        >
+          Effortlessly manage your employees with our all-in-one platform.
+        </motion.p>
+      </div>
+      <div className='absolute scale-150 bottom-32 -z-10'>
+        <Eclipse />
+      </div>
+    </div>
 
-        <div className='relative z-10 min-h-screen w-full  flex items-center justify-center '>
-          <div className=''>
-            <motion.img initial={{ translateX: '-100px', scale: 0.6, translateY: '-100px', opacity: 0 }} transition={{ duration: '0.6', ease: 'backInOut' }} animate={{ translateX: 0, scale: 1, translateY: 0, opacity: 1, }} src={digitalbusiness} className='w-32 lg:w-44 absolute object-cover lg:top-24 lg:left-16 top-12 left-0 ' />
-            <motion.img initial={{ translateX: '-100px', scale: 0.6, translateY: '100px', opacity: 0 }} transition={{ duration: '0.6', ease: 'easeInOut' }} animate={{ translateX: 0, scale: 1, translateY: 0, opacity: 1, }} src={tastmanagement} className='w-36 lg:w-44 absolute object-cover lg:bottom-24 lg:left-24 bottom-16 left-0 ' />
-            <motion.img initial={{ translateX: '100px', translateY: '-100px', scale: 0.6, opacity: 0 }} transition={{ duration: '0.6', ease: 'backInOut' }} animate={{ translateX: 0, translateY: 0, scale: 1, opacity: 1, }} src={planner} className='w-32 lg:w-44 absolute object-cover lg:top-24 lg:right-24  top-12 right-0' />
-            <motion.img initial={{ translateX: '100px', translateY: '100px', scale: 0.6, opacity: 0 }} transition={{ duration: '0.6', ease: 'easeInOut' }} animate={{ translateX: 0, translateY: 0, scale: 1, opacity: 1, }} src={laptop} className='w-32 lg:w-44 absolute lg:bottom-24 lg:right-24 object-cover bottom-12 right-0' />
-          </div>
-          <div className='flex flex-col gap-8  items-center justify-center'>
-            <motion.h1 initial={{ opacity: 0, scale: 0.6 }} transition={{ duration: '0.3', ease: 'easeInOut' }} animate={{ opacity: 1, scale: 1 }} className='text-4xl lg:text-6xl text-center font-light'>Streamline Your Employee Management</motion.h1>
+    <div className='w-full mt-32 max-w-[1200px] mx-auto my-12'>
+      <motion.div
+        style={{
+          transform: isTaginView ? "none" : "translateY(200px)",
+          opacity: isTaginView ? 1 : 0,
+          transition: "all 0.5s cubic-bezier(0.17, 0.55, 0.55, 1)"
+        }}
+        id='tag'
+        ref={tagRef}
+        className='grid grid-rows-2 lg:grid-rows-1 grid-cols-1 lg:grid-cols-6 gap-12'
+      >
+        <h2 className='row-span-1 lg:row-span-3 mx-4 md:mx-8 lg:mx-12 z-[100] lg:col-span-3 font-bold text-3xl md:text-4xl'>
+          Streamline your employee management with ease
+        </h2>
+        <p className='row-span-1 lg:row-span-3 mx-4 md:mx-8 lg:mx-12 z-[100] lg:col-span-3'>
+          Our employee management platform offers a range of powerful features designed to simplify your HR processes. From seamless onboarding to efficient time tracking and insightful performance reviews, we've got you covered.
+        </p>
+      </motion.div>
 
-            <motion.p initial={{ opacity: 0, scale: 0.8 }} transition={{ delay: 0.3, duration: '0.3', ease: 'easeInOut' }} animate={{ opacity: 1, scale: 1 }} className='text-xl lg:text-2xl w-96 text-center'>Effortlessly manage your employees with our all-in-one platform.</motion.p>
+      <div
+        style={{
+          transform: isCardinView ? "none" : "translateY(200px)",
+          opacity: isCardinView ? 1 : 0,
+          transition: "all 0.5s cubic-bezier(0.17, 0.55, 0.55, 1)"
+        }}
+        ref={cardRef}
+        className='my-44 flex gap-8 items-center justify-center flex-wrap'
+      >
+        <div className='flex justify-center items-center flex-col'>
+          <div className='flex items-center justify-center'>
+            <img className='w-[200px] md:w-[239px] z-10 relative' src={planner} />
+            <img src={rectangle} className='w-[180px] md:w-[210px] blur-lg -z-10 absolute' />
           </div>
-          <div className='absolute  scale-150  bottom-32  -z-10'>
-            <Eclipse />
+          <div>
+            <h3 className='text-xl md:text-2xl font-semibold'>Accurate Time Tracking</h3>
+            <p className='text-md md:text-lg my-4 w-48 md:w-56'>Track employee hours and attendance with precision and ease.</p>
           </div>
         </div>
-
-
-        <div className='w-full mt-32 max-w-[1200px] mx-auto my-12' >
-          <motion.div style={{
-            transform: isTaginView ? "none" : "translateY(200px)",
-            opacity: isTaginView ? 1 : 0,
-            transition: "all 0.5s cubic-bezier(0.17, 0.55, 0.55, 1) "
-          }} id='tag' ref={tagRef} className='grid  grid-rows-2 lg:grid-rows-1 grid-cols-1 lg:grid-cols-6 gap-12'>
-            <h2 className='grid row-span-3 mx-12 z-[100] lg:col-span-3 font-bold text-4xl'>Streamline your employee management with ease</h2>
-            <p className='grid row-span-3 z-[100] mx-12 lg:col-span-3 '>Our employee management platform offers a range of powerful features designed to simplify your HR processes. From seamless onboarding to efficient time tracking and insightful performance reviews, we've got you covered.</p>
-          </motion.div>
-
-          <div style={{
-            transform: isCardinView ? "none" : "translateY(200px)",
-            opacity: isCardinView ? 1 : 0,
-            transition: "all 0.5s cubic-bezier(0.17, 0.55, 0.55, 1) "
-          }} ref={cardRef} className='my-44 flex gap-8 items-center justify-center flex-wrap'>
-            <div className=' flex justify-center items-center flex-col '>
-              <div className='flex items-center justify-center '>
-                <img className='w-[239px] z-10 relative' src={planner} />
-                <img src={rectangle} className='w-[210px] blur-lg -z-10 absolute' />
-              </div>
-              <div>
-                <h3 className='text-2xl font-semibold'>Accurate Time Tracking</h3>
-                <p className='text-lg my-4 w-56'>Track employee hours and attendance with precision and ease.</p>
-              </div>
-            </div>
-            <div className=' flex justify-center items-center flex-col '>
-              <div className='flex items-center justify-center '>
-                <img className='w-1/3 relative z-10' src={businessAnalytics} />
-                <img src={rectangle} className='w-[180px] blur-xl -z-10 absolute' />
-              </div>
-              <div>
-                <h3 className='text-2xl font-semibold'>Insightful Performance Reviews</h3>
-                <p className='text-lg my-4 w-56'>Track employee hours and attendance with precision and ease.</p>
-              </div>
-            </div>
+        <div className='flex justify-center items-center flex-col'>
+          <div className='flex items-center justify-center'>
+            <img className='w-1/3 relative z-10' src={businessAnalytics} />
+            <img src={rectangle} className='w-[150px] md:w-[180px] blur-xl -z-10 absolute' />
+          </div>
+          <div>
+            <h3 className='text-xl md:text-2xl font-semibold'>Insightful Performance Reviews</h3>
+            <p className='text-md md:text-lg my-4 w-48 md:w-56'>Track employee hours and attendance with precision and ease.</p>
           </div>
         </div>
+      </div>
+    </div>
 
-        <div style={{
+    <div
+      style={{
+        transform: isfeautreinView ? "none" : "translateY(200px)",
+        opacity: isfeautreinView ? 1 : 0,
+        transition: "all 0.5s cubic-bezier(0.17, 0.55, 0.55, 1)"
+      }}
+      ref={featureRef}
+    >
+      <div className='w-full max-w-[1200px] mx-auto'>
+        <h2 className='text-center text-3xl md:text-4xl my-16 md:my-32'>FEATURES</h2>
+        <div className='grid grid-cols-1 mx-4 md:mx-6 gap-6 grid-rows-6 lg:grid-cols-6 lg:grid-rows-1'>
+          <img className='w-full lg:w-[300px] row-span-3 lg:col-span-3' src={womentplanning} />
+          <div className='flex flex-col gap-6 row-span-3 lg:col-span-3'>
+            <h2 className='text-xl md:text-2xl font-semibold'>How We Track Employee Progress</h2>
+            <p>Our system provides detailed performance metrics and progress tracking tools to help employees stay on track with their goals. We utilize a variety of key performance indicators (KPIs) to measure productivity, task completion rates, and overall efficiency.</p>
+          </div>
+        </div>
+      </div>
+      <motion.div
+        style={{
           transform: isfeautreinView ? "none" : "translateY(200px)",
           opacity: isfeautreinView ? 1 : 0,
-          transition: "all 0.5s cubic-bezier(0.17, 0.55, 0.55, 1) "
-        }} ref={featureRef}>
-          <div className='w-full max-w-[1200px] mx-auto  '>
-            <h2 className='text-center text-4xl my-32'>FEATURES</h2>
-            <div className='grid grid-cols-1  mx-6 gap-0 grid-rows-6 lg:grid-cols-6 lg:grid-rows-1'>
-              <img className='w-[300px]  grid row-span-3  lg:col-span-3' src={womentplanning} />
-              <div className='flex flex-col gap-6 row-span-3 lg:col-span-3'>
-                <h2 className='text-2xl font-semibold'>How We Track Employee Progress</h2>
-                <p>Our system provides detailed performance metrics and progress tracking tools to help employees stay on track with their goals. We utilize a variety of key performance indicators (KPIs) to measure productivity, task completion rates, and overall efficiency.</p>
-              </div>
-            </div>
+          transition: "all 0.5s cubic-bezier(0.17, 0.55, 0.55, 1)"
+        }}
+        className='w-full max-w-[1200px] mx-auto my-12'
+      >
+        <div className='grid grid-cols-1 mx-4 md:mx-6 gap-6 grid-rows-6 lg:grid-cols-6 lg:grid-rows-1'>
+          <img className='w-full lg:w-[300px] row-span-3 lg:col-span-3' src={dashboard} />
+          <div className='flex flex-col gap-6 row-span-3 lg:col-span-3'>
+            <h2 className='text-xl md:text-2xl font-semibold'>Admin Features</h2>
+            <p>Admins have access to comprehensive tools for managing employee data, generating reports, and configuring system settings. With real-time data and analytics, admins can make informed decisions to optimize workforce performance.</p>
           </div>
-          <motion.div style={{
-            transform: isfeautreinView ? "none" : "translateY(200px)",
-            opacity: isfeautreinView ? 1 : 0,
-            transition: "all 0.5s cubic-bezier(0.17, 0.55, 0.55, 1) "
-          }} className='w-full max-w-[1200px] mx-auto my-12'>
-            <div className='grid grid-cols-1 mx-6 items-center justify-center  gap-0 grid-rows-6 lg:grid-cols-6 lg:grid-rows-1'>
-              <img className='w-[300px]  grid row-span-3 lg:col-span-3' src={dashboard} />
-              <div className='flex flex-col gap-6 row-span-3  lg:col-span-3'>
-                <h2 className='text-2xl font-semibold'>Admin Features</h2>
-                <p>Admins have access to comprehensive tools for managing employee data, generating reports, and configuring system settings. With real-time data and analytics, admins can make informed decisions to optimize workforce performance.</p>
-              </div>
-            </div>
-          </motion.div>
         </div>
-      </div>
-        <Footer />
-      </div>
+      </motion.div>
+    </div>
+  </div>
+  <Footer />
+</div>
+
   );
 }
 
