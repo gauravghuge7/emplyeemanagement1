@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import './Notification.css'; // Import CSS for styling
 import axios from 'axios';
 import convertToSimpleDate from '../../components/Admin/TimeSetting/SetDate';
-import { toast } from 'sonner';
+import { Toaster, toast } from 'sonner';
 
 const Notifications = () => {
   const [notifications, setNotifications] = useState([]);
@@ -126,6 +126,7 @@ const Notifications = () => {
 
   return (
     <div className="dark dark:bg-black dark:text-white notification-container  relative">
+      <Toaster/>
       <div className='flex flex-col lg:flex-row justify-between'>
         <h2 className='font-bold text-2xl'>Admin Notifications</h2>
         <button className=' right-2 top-2' onClick={clearAllNotifications}>Clear All Notifications</button>

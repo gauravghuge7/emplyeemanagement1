@@ -71,14 +71,14 @@ return (
                 </section>
 
                 {/***  email, id  */}
-                <section className=''>
-                    <h1 className='text-xl text-gray-900 font-[400] '>{admin.email}</h1>
+                <section className='text-black dark:text-white'>
+                    <h1 className='text-xl dark:text-white text-gray-900 font-[400] '>{admin.email}</h1>
                     
                 </section>
 
                     {/***  phone number  */}
-                <section className=''>
-                    <h1 className='text-xl text-gray-900 font-[400] '>{admin.phoneNumber ? admin.phoneNumber : "8767482793"}</h1>
+                <section className='dark:text-gray-400'>
+                    <h1 className='text-xl dark:text-white text-gray-900 font-[400] '>{admin.phoneNumber ? admin.phoneNumber : "8767482793"}</h1>
                 </section>
 
                     {/***  id  */}

@@ -13,7 +13,6 @@ import Admin from "../../components/Admin/Dashboard/Admin";
 import Leave from "../Leave/Leave";
 import PhotoCapture from "../../components/ScreenRecorder/PhotoCapture";
 import EmployeeHistory from "../EmployeeHistory/EmployeeHistory";
-import Footer from "../../components/Admin/Footer/Footer";
 
 export function EmployeeDashboard() {
   const [isOpen, setIsOpen] = useState(true);
@@ -23,8 +22,6 @@ export function EmployeeDashboard() {
   const [isTimerRunning, setIsTimerRunning] = useState(true);
   const [notifictions, setNotifictions] = useState([]);
   const [notices, setNotices] = useState([]);
-  const [announcements, setAnnouncements]=useState([])
-  const [noticeData, setNoticeData] = useState();
 
   const location = useLocation();
 
@@ -85,10 +82,9 @@ export function EmployeeDashboard() {
         "http://localhost:5200/api/v1/admin/getAnnouncements"
       );
       console.log("Fetched Announcements", response.data);
-      
+
       if (response.data.success) {
         const announcementsData = response.data.data; // Assuming the announcements are in `data`
-        setAnnouncements(announcementsData)
         const flattenedAnnouncements = announcementsData
           .map((item) => item.announcement)
           .flat();
@@ -116,7 +112,6 @@ export function EmployeeDashboard() {
       const data = response.data;
       console.log("noticeeeeeeee", data);
       if (data.success) {
-        setNoticeData(data)
         setNotices(data.data.notices);
         console.log("notiiices", data.data.notices);
         console.log("notice length", data.data.notices.length);
@@ -398,12 +393,14 @@ export function EmployeeDashboard() {
           </ul>
         </div>
 
-      </aside>
+      </aside>}
+
+
 
      }
 
       <div className="lg:w-[70vw] w-full mx-auto mt-16 absolute right-0 lg:right-20">
-        <div className="flex items-center justify-end text-black text-2xl mb-4">
+        <div className="flex items-center justify-center text-white text-2xl mb-4">
           Time Remaining: {formatTime(timer)}
         </div>
         {activeTab === "profile" && <EmpProfile />}
@@ -411,22 +408,18 @@ export function EmployeeDashboard() {
         {activeTab === "report" && <EmpDailyReport />}
         {activeTab === "calendar" && <Calendar />}
         {activeTab === "notification" && (
-          <EmployeeNotification announcement={announcements} />
+          <EmployeeNotification announcement={notifictions} />
         )}
         {activeTab === "history" && <EmployeeHistory />}
         {activeTab === "notice" && <EmployeeNotice notice={notices} />}
-        
-
       </div>
-
-
     </div>
   );
 }
 
 export function AdminDashboard() {
   return (
-    <div className="p-6 ">
+    <div className="pt-12 bg-gradient-to-r from-gray-400 to-gray-100">
       <Admin />
     </div>
   );
