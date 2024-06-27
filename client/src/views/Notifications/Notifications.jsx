@@ -129,17 +129,17 @@ const Notifications = () => {
   };
 
   return (
-    <div className="notification-container relative">
+    <div className="dark dark:bg-black dark:text-white notification-container relative">
       <h2 className='font-bold text-2xl'>Admin Notifications</h2>
       <button className='absolute right-0 top-2' onClick={clearAllNotifications}>Clear All Notifications</button>
       <ul>
         {notifications.map((notification, i) => (
           notification.leaveStatus !== 'approved' && notification.leaveStatus !== 'rejected' && (
-            <li key={i}>
+            <li className='dark:bg-black dark:text-white' key={i}>
               <h3>{notification.email}</h3>
               <p>{notification.reason}</p>
               <span>{notification.date}</span>
-              <div>
+              <div className='dark:bg-black dark:text-white'>
                 {!notification.isRead && <button onClick={() => markAsRead(notification.id)}>Mark as Read</button>}
                 <button onClick={() => deleteNotification(notification.id, notification.reason)}>Delete</button>
                 <button onClick={() => setApproveLeave(notification.email, notification.reason)}>Approve</button>
