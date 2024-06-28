@@ -107,10 +107,10 @@ function EmployeeDetails({ details, empRef }) {
       <div className='bg-black/80 min-h-screen relative text-white rounded-3xl backdrop-blur-lg border border-black p-4  mx-auto w-full lg:w-[800px]'>
 
 
-
+{/* 
         <button onClick={() => empRef.current.close()} className='text-white absolute top-3 right-3'>
           Close
-        </button>
+        </button> */}
 
         <div className='flex gap-20 justify-center items-center'>
 
