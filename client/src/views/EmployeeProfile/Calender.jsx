@@ -1,4 +1,4 @@
-import {useEffect,useState} from 'react';
+import { useEffect, useState } from 'react';
 import React from 'react'
 import dayjs from 'dayjs';
 import isBetweenPlugin from 'dayjs/plugin/isBetween';
@@ -75,15 +75,15 @@ export default function Calendar() {
   const [employeeHistory, setEmployeeHistory] = useState();
   const [startDate, setStartDate] = React.useState(dayjs(employeeHistory?.startDate));
   const [endDate, setEndDate] = React.useState(dayjs(employeeHistory?.endDate));
-  const [dailyReport,setDailyReport] = useState("Nikhil");
-  const [openOnClick,setOpenOnClick] = useState(false);
+  const [dailyReport, setDailyReport] = useState("Nikhil");
+  const [openOnClick, setOpenOnClick] = useState(false);
   const handleDailyClick = (date) => {
     console.log(date)
     setOpenOnClick(true)
     // fetch the data from api
     setDailyReport(date)
 
-    
+
   }
 
   const getEmployeeHistory = async () => {
@@ -126,10 +126,20 @@ export default function Calendar() {
         />
       </LocalizationProvider>
 
-      <dialog open={openOnClick} className='rounded-[12px] absolute z-50 text-center   w-[500px] min-h-[300px] top-0 mt-44 bg-black text-white'>
-          <h2 className='mt-2'>Daily Report</h2>
-          <h3 className=' '>{dailyReport}</h3>
-          <button className='absolute top-2  right-4' onClick={() => setOpenOnClick(false)}>x</button>
+      <dialog open={openOnClick} className='rounded-[12px] absolute z-50    w-[500px] min-h-[300px] top-0 mt-44 bg-black text-white'>
+        <h2 className='mt-2 text-center'>Daily Report</h2>
+        <h3 className=' text-center'>{dailyReport}</h3>
+
+        <h3 className='mt-8 text-center'>Todays Report </h3>
+        <div className='flex flex-col gap-8 p-2 rounded-lg  w-[21rem] mx-auto border '>
+          <div className=' '>
+            <h2>Done the Frontend</h2>
+            <a target='_blank' href={`https://github.com/ArohiSoftware/emplyeemanagement/compare/main...code-sharad:emplyeemanagement:main`} className='text-[12px] font-light hover:underline'>Github Commits</a>
+          </div>
+
+          <p className='text-sm'>Improved the UI of EMS</p>
+        </div>
+        <button className='absolute top-2  right-4' onClick={() => setOpenOnClick(false)}>x</button>
       </dialog>
     </div>
   );
