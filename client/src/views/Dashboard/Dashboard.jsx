@@ -399,7 +399,7 @@ export function EmployeeDashboard() {
 
      }
 
-      <div className="lg:w-[70vw] w-full mx-auto mt-16 absolute right-0 lg:right-20">
+      <div className="lg:w-[70vw] w-full h-full overflow-x-hidden mx-auto mt-16 absolute right-0 lg:right-20">
         <div className="flex items-center justify-center text-white text-2xl mb-4">
           Time Remaining: {formatTime(timer)}
         </div>
