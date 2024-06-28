@@ -126,7 +126,7 @@ export default function Calendar() {
         />
       </LocalizationProvider>
 
-      <dialog open={openOnClick} className='absolute z-50 text-center   w-[500px] min-h-[300px] top-0 mt-44 bg-black text-white'>
+      <dialog open={openOnClick} className='rounded-[12px] absolute z-50 text-center   w-[500px] min-h-[300px] top-0 mt-44 bg-black text-white'>
           <h2 className='mt-2'>Daily Report</h2>
           <h3 className=' '>{dailyReport}</h3>
           <button className='absolute top-2  right-4' onClick={() => setOpenOnClick(false)}>x</button>
