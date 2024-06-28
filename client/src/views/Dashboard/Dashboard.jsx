@@ -414,7 +414,7 @@ export function EmployeeDashboard() {
         {activeTab === "notice" && <EmployeeNotice notice={notices} />}
       </div>
     </div>
-  );
+  )
 }
 
 export function AdminDashboard() {
