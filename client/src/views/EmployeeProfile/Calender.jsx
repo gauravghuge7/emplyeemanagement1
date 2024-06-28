@@ -9,6 +9,15 @@ import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
 import { PickersDay } from '@mui/x-date-pickers/PickersDay';
 import axios from 'axios'
 
+import { Calendar as ReactCalendar, dateFnsLocalizer } from 'react-big-calendar';
+import format from 'date-fns/format';
+import parse from 'date-fns/parse';
+import startOfWeek from 'date-fns/startOfWeek';
+import getDay from 'date-fns/getDay';
+import enUS from 'date-fns/locale/en-US';
+import 'react-big-calendar/lib/css/react-big-calendar.css';
+// import "./Calendar.css"; // Custom CSS file for additional styling
+
 dayjs.extend(isBetweenPlugin);
 
 const CustomPickersDay = styled(PickersDay, {
@@ -55,15 +64,7 @@ function Day(props) {
 
 
 
-import React from 'react';
-import { Calendar as ReactCalendar, dateFnsLocalizer } from 'react-big-calendar';
-import format from 'date-fns/format';
-import parse from 'date-fns/parse';
-import startOfWeek from 'date-fns/startOfWeek';
-import getDay from 'date-fns/getDay';
-import enUS from 'date-fns/locale/en-US';
-import 'react-big-calendar/lib/css/react-big-calendar.css';
-// import "./Calendar.css"; // Custom CSS file for additional styling
+
 
 const locales = {
   'en-US': enUS,

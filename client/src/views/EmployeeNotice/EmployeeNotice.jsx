@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import convertToSimpleDate from '../../components/Admin/TimeSetting/SetDate';
 
 function EmployeeNotice(props) {
     const [notice, setNotice] = useState([]);
@@ -15,8 +16,8 @@ function EmployeeNotice(props) {
                     {notice.map((n, index) => (
                         <div key={index} className="bg-gray-200 rounded-lg shadow p-6 text-black">
                             <div className="flex justify-between items-center mb-4">
-                                <p className="text-sm text-gray-600">{n.date}</p>
-                                <p className="text-sm text-gray-600">Notice by: {n.noticeBy}</p>
+                                <p className="text-sm text-gray-600">{convertToSimpleDate(n.createdAt)}</p>
+                                <p className="text-sm text-gray-600">Notice by: {n.createdBy}</p>
                             </div>
                             <h3 className="text-xl font-bold mb-2">{n.title}</h3>
                             <p className="text-base">{n.message}</p>
