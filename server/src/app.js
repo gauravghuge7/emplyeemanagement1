@@ -16,7 +16,7 @@ app.use(express.urlencoded({ extended: true }));
 // enable cross origin requests
 app.use(cors(
   {
-    origin: 'http://localhost:5174',
+    origin: 'http://localhost:5173',
     credentials: true,
   }
 ));
