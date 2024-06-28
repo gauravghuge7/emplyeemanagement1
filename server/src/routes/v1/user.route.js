@@ -30,7 +30,7 @@ UserRouter.route("/uploadAvatar").post (
 
 
 
-UserRouter.route("/updateProfile").post (
+UserRouter.route("/updateProfile").post(
 
     isUserLoggedIn,
     upload.single("avatar"),

@@ -213,15 +213,15 @@ function EmployeeDetails({ details, empRef }) {
 
                       <div key={i} className='shadow-sm p-20 shadow-gray-400 rounded-lg'>
 
-                        <h1>{report}</h1>
-                        <h2>{report}</h2>
+                        <h1>{report.projectName}</h1>
+                        <h2>{report.workUrl}</h2>
 
                         {report == null ?
 
                             "<div></div>"
                             :
 
-                            <li className='text-xl  flex flex-wrap p-3 rounded-lg'>{report}</li>  
+                            <li className='text-xl  flex flex-wrap p-3 rounded-lg'>{report.report}</li>  
                             
                         }
                             

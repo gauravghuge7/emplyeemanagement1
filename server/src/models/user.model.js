@@ -96,9 +96,8 @@ const userSchema = new Schema (
             },
 
             createdBy: {
-                type: Schema.Types.ObjectId,
-                ref: 'AdminModel',
-                expires: "5d",
+                type: String,
+                required: true
             
             },
             
@@ -107,7 +106,7 @@ const userSchema = new Schema (
 
 
         dailyReports: [{
-            
+
             projectName: {
                 type: String,
                 
@@ -117,6 +116,7 @@ const userSchema = new Schema (
                 type: String,
                 required: true
             },
+            
             report: {
                 type: String,
                 required: true

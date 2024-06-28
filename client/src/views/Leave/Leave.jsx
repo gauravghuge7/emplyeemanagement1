@@ -25,8 +25,8 @@ function Leave() {
       withCredentials: true,
     }
 
-     setFullName(firstName+lastName)
-     console.log(fullName)
+     setFullName(firstName+ " "+lastName)
+     console.log("fullllll",fullName)
 
     const data = {
       fullName: fullName,
