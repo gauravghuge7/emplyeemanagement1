@@ -50,6 +50,8 @@ function Day(props) {
     // eslint-disable-next-line react/prop-types
     const isSelected = day.isSame(startDate, 'day') || day.isSame(endDate, 'day');
 
+    
+
     return (
         <CustomPickersDay
             {...other}
