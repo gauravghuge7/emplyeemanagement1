@@ -9,3 +9,21 @@
       @apply gap-x-5 sm:gap-x-10 md:gap-x-16 lg:gap-x-24 xl:gap-x-36;
     }
   }
+
+  .dialog-style {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    margin: 0;
+    border: none;
+    max-width: 90vw;
+    background: #1f2937;
+    color: white;
+    border-radius: 0.5rem;
+  }
+  
+  .dialog-style::backdrop {
+    background: rgba(0, 0, 0, 0.8);
+  }
+  

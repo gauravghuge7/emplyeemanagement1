@@ -52,6 +52,49 @@ function Day(props) {
   // eslint-disable-next-line react/prop-types
   const isSelected = day.isSame(startDate, 'day') || day.isSame(endDate, 'day');
 
+
+
+
+import React from 'react';
+import { Calendar as ReactCalendar, dateFnsLocalizer } from 'react-big-calendar';
+import format from 'date-fns/format';
+import parse from 'date-fns/parse';
+import startOfWeek from 'date-fns/startOfWeek';
+import getDay from 'date-fns/getDay';
+import enUS from 'date-fns/locale/en-US';
+import 'react-big-calendar/lib/css/react-big-calendar.css';
+// import "./Calendar.css"; // Custom CSS file for additional styling
+
+const locales = {
+  'en-US': enUS,
+};
+
+const localizer = dateFnsLocalizer({
+  format,
+  parse,
+  startOfWeek,
+  getDay,
+  locales,
+});
+
+const events = [
+  {
+    title: 'Government Holiday',
+    start: new Date(2024, 4, 24),
+    end: new Date(2024, 4, 25),
+    allDay: true,
+    resource: 'holiday'
+  },
+  {
+    title: 'Annual Leave',
+    start: new Date(2024, 0, 15),
+    end: new Date(2024, 0, 15),
+    allDay: true,
+    resource: 'leave'
+  },
+  // Add more events as needed
+];
+
   return (
     <CustomPickersDay
       {...other}
@@ -65,6 +108,7 @@ function Day(props) {
     />
   );
 }
+
 
 export default function Calendar() {
 

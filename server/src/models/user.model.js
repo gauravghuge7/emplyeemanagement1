@@ -14,6 +14,12 @@ const userSchema = new Schema (
             type: String,
 
         },
+        phoneNumber:{
+            type:Number
+        },
+        bio:{
+            type:String
+        },
 
 
         firstName:{
@@ -114,12 +120,12 @@ const userSchema = new Schema (
 
             workUrl: {
                 type: String,
-                required: true
+                
             },
             
             report: {
                 type: String,
-                required: true
+                
             }
 
 
@@ -141,7 +147,7 @@ const userSchema = new Schema (
         hasClockedToday: {
             type: Boolean,
             default: false,
-            required:true
+            
         },
 
 
