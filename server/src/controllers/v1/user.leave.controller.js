@@ -153,6 +153,7 @@ const employeeLeaveStatus = asyncHandler(async (req,res) => {
 
 })
 
+
 const getAllLeaves = asyncHandler(async (req,res) => {
     
         try {
@@ -180,6 +181,9 @@ const getAllLeaves = asyncHandler(async (req,res) => {
             });
         }
 })
+
+
+
 const adminLeaveStatus = asyncHandler(async (req,res) => {
 
     const {adminEmail} = req.user;
@@ -222,16 +226,19 @@ const giveLeavePermission = asyncHandler(async (req,res) => {
     const {email, leaveStatus,reason} = req.body;
 
     try {
-        const user = await LeaveModel.findOne({email,reason})
+        const user = await LeaveModel.findOne({email, reason})
 
         if(leaveStatus === "pending") {
             user.leaveStatus = "pending";
+            await user.save();
         }
         else if(leaveStatus === "approved") {
             user.leaveStatus = "approved";
+            await user.save();
         }
         else if(leaveStatus === "rejected") {
             user.leaveStatus = "rejected";
+            await user.save();
         }
 
         await user.save();

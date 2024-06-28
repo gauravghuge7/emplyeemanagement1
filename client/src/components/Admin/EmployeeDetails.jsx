@@ -216,6 +216,7 @@ function EmployeeDetails({ details, empRef }) {
                         <div key={i} className="shadow-sm p-6 shadow-gray-400 rounded-lg bg-gray-900 w-full lg:w-[700px]">
                           <h1>{report.projectName}</h1>
                           <h2>{report.workUrl}</h2>
+                          <h2>{convertToSimpleDate(report.time)}</h2>
                           <li className="text-xl flex flex-wrap p-3 rounded-lg">
                             {report.report}
                           </li>

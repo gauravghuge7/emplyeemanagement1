@@ -131,6 +131,10 @@ const userSchema = new Schema (
             report: {
                 type: String,
                 
+            },
+            time: {
+                type: Date,
+                default: Date.now,
             }
 
 
