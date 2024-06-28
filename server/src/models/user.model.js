@@ -22,6 +22,11 @@ const userSchema = new Schema (
             minlength: 3 
         },
 
+        bio:{
+            type:String,
+            required:true
+        },
+
         lastName:{
             type:String,
             required:true

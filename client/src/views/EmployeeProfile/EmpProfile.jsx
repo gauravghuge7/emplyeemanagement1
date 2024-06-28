@@ -29,7 +29,7 @@ function EmpProfile() {
     try {
       const response = await axios.get("http://localhost:5200/api/v1/user/getUserProfile", config);
       const data = response.data;
-
+      console.log("BIO data",data.data)
       if (data.success) {
         toast.success(data.message);
         setEmployee(data.data);
@@ -146,6 +146,7 @@ function EmpProfile() {
     <button className="bg-blue-600 p-3 rounded-xl w-24 text-white font-medium hover:bg-blue-700 transition duration-300" type="submit">Save</button>
     <button type="button" onClick={toggleEditMode} className="bg-red-600 p-3 w-24 rounded-xl text-white font-medium hover:bg-red-700 transition duration-300">Cancel</button>
   </div>
+
 </form>
 
     ) : (
@@ -175,7 +176,7 @@ function EmpProfile() {
             </div>
 
             <div className="my-4">
-              <p className="text-2xl"> {empBio}</p>
+              <p className="text-2xl"> {employee.bio}</p>
             </div>
           </div>
         </div>

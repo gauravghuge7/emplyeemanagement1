@@ -167,7 +167,12 @@ const updateProfile = asyncHandler(async (req, res) => {
   
       if (bio) {
         user.bio = bio;
+
+        console.log("bio => ", bio);
+        await user.save();
       }
+
+      console.log("after update bio user => ", user);
   
       if (req.file && req.file.path) {
         const path = req.file.path;
@@ -187,7 +192,7 @@ const updateProfile = asyncHandler(async (req, res) => {
     } catch (error) {
       return res.status(400).send(error.message);
     }
-  });
+});
   
 
 
