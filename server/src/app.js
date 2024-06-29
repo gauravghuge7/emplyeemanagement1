@@ -18,7 +18,7 @@ const ClientUrl = 'https://emplyeemanagement1.vercel.app/' || 'http://localhost:
 // enable cross origin requests
 app.use(cors(
   {
-    origin: ClientUrl,
+    origin: 'https://emplyeemanagement1.vercel.app/',
     credentials: true,
   }
 ));
