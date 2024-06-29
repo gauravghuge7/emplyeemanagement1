@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
-import Footer from '../Footer/Footer';
 import Sidebar from '../Sidebar/Sidebar';
-
+import {serverUrl} from "../../../Url/url.backend.js";
 
 
 import Notifications from '../../../views/Notifications/Notifications';
@@ -42,7 +41,7 @@ function Admin() {
 
     try {
 
-      const response = await axios("http://localhost:5200/api/v1/admin/getUsers", config);
+      const response = await axios(`${serverUrl || "http://localhost:5200" }/api/v1/admin/getUsers`, config);
 
       const data = response.data;
 
@@ -89,7 +88,7 @@ function Admin() {
 
     try {
 
-      const response = await axios.get("http://localhost:5200/api/v1/admin/getLeaveEmployee", config)
+      const response = await axios.get(`${serverUrl || "http://localhost:5200" }/api/v1/admin/getLeaveEmployee`, config)
 
       console.log(response.data);
 

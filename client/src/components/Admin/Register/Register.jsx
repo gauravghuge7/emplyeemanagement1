@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { toast, Toaster } from "sonner";
-
+import { toast } from "sonner";
+import {serverUrl} from "../../../Url/url.backend.js";
 import axios from "axios";
 
 function Register() {
@@ -9,7 +9,7 @@ function Register() {
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
-  const [role, setRole] = useState("");
+ 
   
 
   const handleSubmit = async (e) => {
@@ -39,7 +39,7 @@ function Register() {
   
     try {
       const response = await axios.post(
-        "http://localhost:5200/api/v1/admin/registerUser",
+        `${serverUrl || "http://localhost:5200" }/api/v1/admin/registerUser`,
         body,
         config
       );

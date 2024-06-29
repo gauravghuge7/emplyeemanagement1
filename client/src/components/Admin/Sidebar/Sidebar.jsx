@@ -1,5 +1,5 @@
 
-
+import {serverUrl} from "../../../Url/url.backend.js";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -30,7 +30,7 @@ function Sidebar({ activeBox, setActiveBox, notifactionCount }) {
      };
 
     const fetchleave = async () => {
-        const response = await axios.get("http://localhost:5200/api/v1/admin/getLeaveEmployee", config);
+        const response = await axios.get(`${serverUrl || "http://localhost:5200" }/api/v1/admin/getLeaveEmployee`, config);
         return response.data;
     }
     useEffect(() => {

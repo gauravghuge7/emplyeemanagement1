@@ -4,6 +4,7 @@ import { lazy, startTransition, useEffect, useRef, useState } from "react";
 import Register from "../Register/Register";
 import "./manage.css";
 import axios from "axios";
+import {serverUrl} from "../../../Url/url.backend.js";
 
 // Lazy load the EmployeeDetails component
 const EmployeeDetails = lazy(() => import('../EmployeeDetails'));
@@ -20,7 +21,7 @@ function Manage() {
       withCredentials: true,
     };
 
-    const response = await axios.get("http://localhost:5200/api/v1/admin/getUsers", config);
+    const response = await axios.get(`${serverUrl || "http://localhost:5200" }/api/v1/admin/getUsers`, config);
     const data = response.data.data;
     setDetail(data);
   };
@@ -82,11 +83,11 @@ function ShowTableData({ DataObject }) {
     const body = { email };
 
     try {
-      const response = await axios.delete("http://localhost:5200/api/v1/admin/deleteUser", { data: body }, config);
+      const response = await axios.delete(`${serverUrl || "http://localhost:5200" }/api/v1/admin/deleteUser`, { data: body }, config);
 
       if (response.data.success) {
         toast.success("Employee Deleted Successfully");
-        getData();
+        
       }
     } catch (error) {
       toast.error("Error deleting employee");
@@ -155,7 +156,7 @@ function ShowTableData({ DataObject }) {
       ))}
       <dialog ref={deleteEmployeeRef} className="relative z-10 p-5 rounded-lg bg-gray-800 text-white">
         <h2 className="text-lg font-bold mb-4">Confirm Delete</h2>
-        <p>Enter the employee's email to confirm deletion:</p>
+        <p>Enter the employee email to confirm deletion:</p>
         <input
           type="email"
           value={deleteEmail}

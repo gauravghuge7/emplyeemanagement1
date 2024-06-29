@@ -1,5 +1,6 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
+import {serverUrl} from "../../../Url/url.backend.js";
 
 function LeaveStatus() {
 
@@ -16,7 +17,7 @@ function LeaveStatus() {
             withCredentials: true
         }
 
-        const response = await axios.get("http://localhost:5200/api/v1/admin/getLeaveEmployee", config)
+        const response = await axios.get(`${serverUrl || "http://localhost:5200" }/api/v1/admin/getLeaveEmployee`, config)
         
         
         console.log(response.data)

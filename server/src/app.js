@@ -16,7 +16,7 @@ app.use(express.urlencoded({ extended: true }));
 // enable cross origin requests
 app.use(cors(
   {
-    origin: 'http://localhost:5173',
+    origin: 'http://localhost:5173' || 'https://emplyeemanagement1.vercel.app/',
     // origin: 'https://emplyeemanagement1.vercel.app/',
     credentials: true,
   }
@@ -38,12 +38,6 @@ app.use("/health", healthCheck);
 
 
 
-app.use((err, req, res, next) => {
-  res.status(err.status || 400).json({
-    error: {
-      message: err.message,
-    },
-  });
-});
+
 
 export { app };

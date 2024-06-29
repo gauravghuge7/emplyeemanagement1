@@ -1,7 +1,7 @@
 import axios from 'axios';
 import  { useEffect, useState } from 'react';
 import {convertToSimpleDate} from '../TimeSetting/SetDate';
-
+import {serverUrl} from "../../../Url/url.backend.js";
 
 function AdminProfiles() {
 
@@ -26,7 +26,7 @@ function AdminProfiles() {
 
         }
 
-        const response = await axios.get("http://localhost:5200/api/v1/admin/getAdminProfile", config);
+        const response = await axios.get(`${serverUrl || "http://localhost:5200" }/api/v1/admin/getAdminProfile`, config);
 
         const data = response.data.data;
 
@@ -87,7 +87,7 @@ return (
                 </section>
 
                 <section className=''>
-                    <h1 className='text-xl text-black font-[400] dark:text-white'>From : {admin.createdAt }</h1>
+                    <h1 className='text-xl text-black font-[400] dark:text-white'>From : {convertToSimpleDate(admin.createdAt) }</h1>
                 </section>
                 
             </div>
