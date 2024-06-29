@@ -8,6 +8,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
 import { PickersDay } from '@mui/x-date-pickers/PickersDay';
 import axios from 'axios'
+import { convertToSimpleDate } from '../../components/Admin/TimeSetting/SetDate';
 
 dayjs.extend(isBetweenPlugin);
 
@@ -44,12 +45,10 @@ const CustomPickersDay = styled(PickersDay, {
     borderBottomRightRadius: '50%',
   }),
 }));
+
 function Day(props) {
   const { day, selectedDay, startDate, endDate, hoveredDay, ...other } = props;
-
-  // eslint-disable-next-line react/prop-types
   const isInRange = day.isBetween(startDate, endDate, null, '[]');
-  // eslint-disable-next-line react/prop-types
   const isSelected = day.isSame(startDate, 'day') || day.isSame(endDate, 'day');
 
   return (
@@ -67,23 +66,37 @@ function Day(props) {
 }
 
 export default function Calendar() {
-
+  const [date, setDate] = useState(dayjs());
   useEffect(() => {
     getEmployeeHistory();
   }, []);
 
   const [employeeHistory, setEmployeeHistory] = useState();
-  const [startDate, setStartDate] = React.useState(dayjs(employeeHistory?.startDate));
-  const [endDate, setEndDate] = React.useState(dayjs(employeeHistory?.endDate));
-  const [dailyReport, setDailyReport] = useState("Nikhil");
+  const [startDate, setStartDate] = useState(dayjs(employeeHistory?.startDate));
+  const [endDate, setEndDate] = useState(dayjs(employeeHistory?.endDate));
+  const [dailyReport, setDailyReport] = useState([]);
   const [openOnClick, setOpenOnClick] = useState(false);
-  const handleDailyClick = (date) => {
+
+  const handleDailyClick = async(date) => {
     console.log(date)
     setOpenOnClick(true)
-    // fetch the data from api
-    setDailyReport(date)
-
-
+    try {
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        withCredentials: true,
+      };
+      const body = {
+        date: date,
+      };
+      const response = await axios.post("http://localhost:5200/api/v1/user/getDailyReport", body, config);
+      console.log(response.data.data);
+      setDailyReport(response.data.data);
+    } 
+    catch (error) {
+      console.error('Error fetching employee history:', error);
+    }
   }
 
   const getEmployeeHistory = async () => {
@@ -103,10 +116,8 @@ export default function Calendar() {
     }
   };
 
-
-
   return (
-    <div className='pt-32 z-10  scale-[2] '>
+    <div className='pt-32 z-10 lg:scale-150 md:scale-125 sm:scale-100'>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <DateCalendar
           value={startDate}
@@ -119,28 +130,32 @@ export default function Calendar() {
               selectedDay: startDate,
               startDate: startDate,
               endDate: endDate,
-
-
             }),
           }}
         />
       </LocalizationProvider>
 
-      <dialog open={openOnClick} className='rounded-[12px] absolute z-50    w-[500px] min-h-[300px] top-0 mt-44 bg-black text-white'>
-        <h2 className='mt-2 text-center'>Daily Report</h2>
-        <h3 className=' text-center'>{dailyReport}</h3>
-
-        <h3 className='mt-8 text-center'>Todays Report </h3>
-        <div className='flex flex-col gap-8 p-2 rounded-lg  w-[21rem] mx-auto border '>
-          <div className=' '>
-            <h2>Done the Frontend</h2>
-            <a target='_blank' href={`https://github.com/ArohiSoftware/emplyeemanagement/compare/main...code-sharad:emplyeemanagement:main`} className='text-[12px] font-light hover:underline'>Github Commits</a>
+      <dialog open={openOnClick} className='rounded-lg absolute z-50 w-11/12 md:w-3/4 lg:w-1/2 min-h-[300px] top-0 mt-44 bg-black text-white'>
+        {dailyReport.length !== 0 ? (
+          dailyReport.map((report, i) => (
+            <div key={i} className='bg-black h-auto w-full rounded-lg overflow-hidden pt-8'>
+              <h3 className='mt-8 text-center text-lg'>Todays Report</h3>
+              <h1 className='text-center text-xl'>{report.projectName}</h1>
+              <h2 className='text-center'>{report.workUrl}</h2>
+              <h2 className='text-center'>{convertToSimpleDate(report.time)}</h2>
+              <li className="text-lg flex flex-wrap p-3 rounded-lg">
+                {report.report}
+              </li>
+              <button className='absolute top-2 right-4' onClick={() => setOpenOnClick(false)}>x</button>
+            </div>
+          ))
+        ) : (
+          <div className='bg-black h-auto w-full rounded-lg overflow-hidden pt-8'>
+            <h1 className='text-center text-lg'>No Daily Reports</h1>
+            <button className='absolute top-2 right-4' onClick={() => setOpenOnClick(false)}>x</button>
           </div>
-
-          <p className='text-sm'>Improved the UI of EMS</p>
-        </div>
-        <button className='absolute top-2  right-4' onClick={() => setOpenOnClick(false)}>x</button>
+        )}
       </dialog>
     </div>
   );
-}   
+}

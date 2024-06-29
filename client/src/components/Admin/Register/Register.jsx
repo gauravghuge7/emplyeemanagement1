@@ -51,6 +51,7 @@ function Register() {
     
   
       if (data.success === true) {
+        alert("Employee Successfully registered!");
         toast.success("Employee Successfully registered!");
       }
 

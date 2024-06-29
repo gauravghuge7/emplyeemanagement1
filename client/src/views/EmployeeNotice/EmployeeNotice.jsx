@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import convertToSimpleDate from '../../components/Admin/TimeSetting/SetDate';
+import {convertToSimpleDate} from '../../components/Admin/TimeSetting/SetDate';
 
 function EmployeeNotice(props) {
     const [notice, setNotice] = useState([]);

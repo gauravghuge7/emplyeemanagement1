@@ -27,6 +27,7 @@ const loginUser = asyncHandler(async(req, res) => {
     }
 
     try {
+
         const user = await UserModel.findOne({ 
             email:email,
         
@@ -34,13 +35,19 @@ const loginUser = asyncHandler(async(req, res) => {
 
         user.isActive = true;
 
-        await user.save();
-
+        try {
+            
+            await user.save();
+    
+        } catch (error) {
+            console.log("error user error => ", error);
+        }
         if (!user) {
             return res.status(400).json({ message: "User not found" });
         }
 
         const comparePassword = await bcrypt.compare(password, user.password);
+
         if (!comparePassword) {
             return res.status(400).json({ message: "Invalid password" });
         }
@@ -61,6 +68,7 @@ const loginUser = asyncHandler(async(req, res) => {
     } 
     
     catch (error) {
+        console.log("error => ", error);
         return res.status(400).send(error.message);
     }
 
@@ -368,6 +376,7 @@ const getDailyReportByDate = asyncHandler(async(req, res) => {
 
         const data = await UserModel.findOne({ email });
 
+        console.log(" data => ", data);
 
         if(!data) {
             return res.status(400).json(new ApiResponse(400, "no data provided for this date", null));
@@ -376,6 +385,7 @@ const getDailyReportByDate = asyncHandler(async(req, res) => {
         const reports = data.dailyReports;
 
 
+        console.log("reports => ", reports);
 
 
         const dateReport = reports.filter((report) => {

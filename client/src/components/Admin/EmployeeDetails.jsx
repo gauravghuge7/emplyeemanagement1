@@ -5,7 +5,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { toast, Toaster } from "sonner";
-import convertToSimpleDate from "./TimeSetting/SetDate";
+import {convertToSimpleDate} from "./TimeSetting/SetDate";
 
 function EmployeeDetails({ details, empRef }) {
   const [screenShots, setScreenShots] = useState([]);

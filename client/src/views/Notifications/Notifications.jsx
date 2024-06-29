@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import './Notification.css'; // Import CSS for styling
 import axios from 'axios';
-import convertToSimpleDate from '../../components/Admin/TimeSetting/SetDate';
+import {convertToSimpleDate} from '../../components/Admin/TimeSetting/SetDate';
 import { Toaster, toast } from 'sonner';
 
 const Notifications = () => {

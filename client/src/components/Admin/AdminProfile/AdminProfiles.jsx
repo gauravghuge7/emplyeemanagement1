@@ -1,6 +1,6 @@
 import axios from 'axios';
 import  { useEffect, useState } from 'react';
-import convertToSimpleDate from '../TimeSetting/SetDate';
+import {convertToSimpleDate} from '../TimeSetting/SetDate';
 
 
 function AdminProfiles() {

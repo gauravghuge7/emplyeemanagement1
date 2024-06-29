@@ -18,7 +18,7 @@ const userSchema = new Schema (
         phoneNumber:{
             type:Number
         },
-        
+
         bio:{
             type:String
         },
@@ -51,7 +51,7 @@ const userSchema = new Schema (
         password:{
             type:String,
             required:true,
-            select: false
+          
         },
 
         avatar:{

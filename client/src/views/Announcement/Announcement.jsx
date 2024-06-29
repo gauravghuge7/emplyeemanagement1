@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import convertToSimpleDate from '../../components/Admin/TimeSetting/SetDate';
+import {convertToSimpleDate} from '../../components/Admin/TimeSetting/SetDate';
 
 function Announcement() {
     const [announcement, setAnnouncement] = useState("");
