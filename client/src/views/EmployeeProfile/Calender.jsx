@@ -1,4 +1,4 @@
-import {useEffect,useState} from 'react';
+import { useEffect, useState } from 'react';
 import React from 'react'
 import dayjs from 'dayjs';
 import isBetweenPlugin from 'dayjs/plugin/isBetween';
@@ -8,15 +8,6 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
 import { PickersDay } from '@mui/x-date-pickers/PickersDay';
 import axios from 'axios'
-
-import { Calendar as ReactCalendar, dateFnsLocalizer } from 'react-big-calendar';
-import format from 'date-fns/format';
-import parse from 'date-fns/parse';
-import startOfWeek from 'date-fns/startOfWeek';
-import getDay from 'date-fns/getDay';
-import enUS from 'date-fns/locale/en-US';
-import 'react-big-calendar/lib/css/react-big-calendar.css';
-// import "./Calendar.css"; // Custom CSS file for additional styling
 
 dayjs.extend(isBetweenPlugin);
 
@@ -61,41 +52,6 @@ function Day(props) {
   // eslint-disable-next-line react/prop-types
   const isSelected = day.isSame(startDate, 'day') || day.isSame(endDate, 'day');
 
-
-
-
-
-
-const locales = {
-  'en-US': enUS,
-};
-
-const localizer = dateFnsLocalizer({
-  format,
-  parse,
-  startOfWeek,
-  getDay,
-  locales,
-});
-
-const events = [
-  {
-    title: 'Government Holiday',
-    start: new Date(2024, 4, 24),
-    end: new Date(2024, 4, 25),
-    allDay: true,
-    resource: 'holiday'
-  },
-  {
-    title: 'Annual Leave',
-    start: new Date(2024, 0, 15),
-    end: new Date(2024, 0, 15),
-    allDay: true,
-    resource: 'leave'
-  },
-  // Add more events as needed
-];
-
   return (
     <CustomPickersDay
       {...other}
@@ -110,7 +66,6 @@ const events = [
   );
 }
 
-
 export default function Calendar() {
 
   useEffect(() => {
@@ -120,9 +75,16 @@ export default function Calendar() {
   const [employeeHistory, setEmployeeHistory] = useState();
   const [startDate, setStartDate] = React.useState(dayjs(employeeHistory?.startDate));
   const [endDate, setEndDate] = React.useState(dayjs(employeeHistory?.endDate));
+  const [dailyReport, setDailyReport] = useState("Nikhil");
+  const [openOnClick, setOpenOnClick] = useState(false);
+  const handleDailyClick = (date) => {
+    console.log(date)
+    setOpenOnClick(true)
+    // fetch the data from api
+    setDailyReport(date)
 
 
- 
+  }
 
   const getEmployeeHistory = async () => {
     try {
@@ -144,11 +106,11 @@ export default function Calendar() {
 
 
   return (
-    <div className='pt-32  scale-[2] '>
+    <div className='pt-32 z-10  scale-[2] '>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <DateCalendar
           value={startDate}
-          // onChange={handleDateChange}
+          onChange={(e) => handleDailyClick(`${e.$y}-${e.$M + 1}-${e.$D}`)}
           showDaysOutsideCurrentMonth
           displayWeekNumber
           slots={{ day: Day }}
@@ -163,6 +125,22 @@ export default function Calendar() {
           }}
         />
       </LocalizationProvider>
+
+      <dialog open={openOnClick} className='rounded-[12px] absolute z-50    w-[500px] min-h-[300px] top-0 mt-44 bg-black text-white'>
+        <h2 className='mt-2 text-center'>Daily Report</h2>
+        <h3 className=' text-center'>{dailyReport}</h3>
+
+        <h3 className='mt-8 text-center'>Todays Report </h3>
+        <div className='flex flex-col gap-8 p-2 rounded-lg  w-[21rem] mx-auto border '>
+          <div className=' '>
+            <h2>Done the Frontend</h2>
+            <a target='_blank' href={`https://github.com/ArohiSoftware/emplyeemanagement/compare/main...code-sharad:emplyeemanagement:main`} className='text-[12px] font-light hover:underline'>Github Commits</a>
+          </div>
+
+          <p className='text-sm'>Improved the UI of EMS</p>
+        </div>
+        <button className='absolute top-2  right-4' onClick={() => setOpenOnClick(false)}>x</button>
+      </dialog>
     </div>
   );
 }   

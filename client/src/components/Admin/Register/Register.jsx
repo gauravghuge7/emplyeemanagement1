@@ -61,7 +61,7 @@ function Register() {
     }
   };
   return (
-    <div className="p-10 bg-gray-100">
+    <div className="p-10 text-black bg-gray-100">
       <h1 className="mb-8 font-extrabold text-4xl">Employee Registeration </h1>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <form onSubmit={handleSubmit}>
