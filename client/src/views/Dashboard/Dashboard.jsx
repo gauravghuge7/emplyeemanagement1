@@ -14,6 +14,7 @@ import Leave from "../Leave/Leave";
 import PhotoCapture from "../../components/ScreenRecorder/PhotoCapture";
 import EmployeeHistory from "../EmployeeHistory/EmployeeHistory";
 
+
 export function EmployeeDashboard() {
   const [isOpen, setIsOpen] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
@@ -22,6 +23,8 @@ export function EmployeeDashboard() {
   const [isTimerRunning, setIsTimerRunning] = useState(true);
   const [notifictions, setNotifictions] = useState([]);
   const [notices, setNotices] = useState([]);
+
+  const [take, setTake] = useState([]);
 
   const location = useLocation();
 
@@ -84,12 +87,21 @@ export function EmployeeDashboard() {
       console.log("Fetched Announcements", response.data);
 
       if (response.data.success) {
+        
+        setTake(response.data.data);
+        console.log(response.data.data);
+        
         const announcementsData = response.data.data; // Assuming the announcements are in `data`
         const flattenedAnnouncements = announcementsData
           .map((item) => item.announcement)
           .flat();
         setNotifictions(flattenedAnnouncements);
+      
+      
+
       }
+
+
     } catch (error) {
       console.error("Error fetching announcements:", error);
     }
@@ -146,6 +158,9 @@ export function EmployeeDashboard() {
         <Link className={`${activeTab === 'notifications' ? 'underline capitalize underline-offset-2 font-semibold' : ''} hover:underline`} onClick={() => { setActiveTab("notification"); setIsOpen(!isOpen) }} to="/emp-dashboard">Notification</Link>
         <Link className={`${activeTab === 'history' ? 'underline capitalize underline-offset-2 font-semibold' : ''} hover:underline`} onClick={() => { setActiveTab("history"); setIsOpen(!isOpen) }} to="/emp-dashboard">History</Link>
         <Link className={`${activeTab === 'notice' ? 'underline capitalize underline-offset-2 font-semibold' : ''} hover:underline`} onClick={() => { setActiveTab("notice"); setIsOpen(!isOpen) }} to="/emp-dashboard">Notice</Link>
+        
+
+        
 
       </nav></div>
       }</div>
@@ -378,7 +393,7 @@ export function EmployeeDashboard() {
                     stroke-width="2"
                     stroke-linecap="round"
                     stroke-linejoin="round"
-                    class="lucide lucide-history"
+                    className="lucide lucide-history"
                   >
                     <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
                     <path d="M3 3v5h5" />
@@ -408,7 +423,7 @@ export function EmployeeDashboard() {
         {activeTab === "report" && <EmpDailyReport />}
         {activeTab === "calendar" && <Calendar />}
         {activeTab === "notification" && (
-          <EmployeeNotification announcement={notifictions} />
+          <EmployeeNotification announcement={take}  />
         )}
         {activeTab === "history" && <EmployeeHistory />}
         {activeTab === "notice" && <EmployeeNotice notice={notices} />}
