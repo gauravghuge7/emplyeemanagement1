@@ -89,26 +89,26 @@ function EmployeeDetails({ details, empRef }) {
   return (
 
     <div className="bg-black min-h-screen rounded-lg overflow-hidden relative ">
-      <div className="bg-gray-800 min-h-screen  text-white rounded-3xl backdrop-blur-lg border border-black p-4 mx-auto w-full lg:w-[800px] ">
+      <div className="bg-gray-800 min-h-screen  text-white rounded-3xl backdrop-blur-lg border border-black p-4 mx-auto w-full lg:w-[900px] ">
         <Toaster position="top-right" richColors closeButton expand={true} />
    
 
         <div className="flex flex-col lg:flex-row gap-4 justify-center items-center relative">
-          <img
+          {/* <img
             className="rounded-lg"
             src="https://avatars.githubusercontent.com/u/61672294?v=4"
             width={96}
-          />
+          /> */}
 
           <div className="flex flex-col gap-2">
             <h2 className="capitalize">
-              {details.firstName} {details.lastName}
+              {/* {details.firstName} {details.lastName} */}
             </h2>
 
             <div className="flex flex-col gap-4">
               <div className="flex flex-col gap-2">
-                <span>{details.email}</span>
-                <span>{details.phoneNumber}</span>
+                {/* <span>{details.email}</span>
+                <span>{details.phoneNumber}</span> */}
 
               <div className='bg-black h-auto w-full rounded-lg overflow-hidden pt-32  '>
               
@@ -123,9 +123,9 @@ function EmployeeDetails({ details, empRef }) {
 
                   <div className='flex gap-20 justify-center items-center'>
 
-                    <img className='rounded-lg' src='https://avatars.githubusercontent.com/u/61672294?v=4' width={96} />
+                    {/* <img className='rounded-lg' src='https://avatars.githubusercontent.com/u/61672294?v=4' width={96} /> */}
 
-
+                      <div className=" w-44 h-44 bg-gray-200 text-black pt-16 rounded-lg text-center border"><span className="capitalize text-5xl">{details.firstName[0]}</span><span className="capitalize text-5xl">{details.lastName[0]}</span></div>
 
                     <div className='flex flex-col gap-2'>
 
@@ -191,19 +191,19 @@ function EmployeeDetails({ details, empRef }) {
 
                   <div className="mt-12">
                     <h3 className="text-2xl my-6 text-center">ScreenShots</h3>
-                    <div className="flex flex-wrap gap-4 justify-center border rounded-xl p-4">
-                      {screenShots.map((screenshot, i) => (
-                        <div key={i} className="shadow-lg p-4 w-[18rem] flex flex-col items-center shadow-gray-400 rounded-xl bg-gray-900">
-                          <h1>{screenshot.email}</h1>
-                          <h2>{convertToSimpleDate(screenshot.time)}</h2>
-                          <img
-                            width={250}
-                            src={screenshot.screenShot.secure_url}
-                            alt="screenshot"
-                            className="rounded-lg mt-2"
-                          />
-                        </div>
-                      ))}
+                      <div className="flex flex-wrap gap-4 min-h-[300px] justify-center border border-gray-800 rounded-xl p-4">
+                        {screenShots.length !== 0 ? screenShots.map((screenshot, i) => (
+                          <div key={i} className="shadow-lg  p-4 w-[18rem] flex flex-col items-center shadow-gray-400 rounded-xl bg-gray-900">
+                            <h1>{screenshot.email}</h1>
+                            <h2>{convertToSimpleDate(screenshot.time)}</h2>
+                            <img
+                              width={250}
+                              src={screenshot.screenShot.secure_url}
+                              alt="screenshot"
+                              className="rounded-lg mt-2"
+                            />
+                          </div>
+                        )) : <h1 className="text-xl mt-12">No ScreenShots</h1>}
                     </div>
 
                     <h3 className="text-2xl my-12 text-center">Activities</h3>
