@@ -1,5 +1,5 @@
 import Router from 'express';
-import { acceptDailyReport, getLeaveHistory, getUserProfile, loginUser, logoutUser, updateAvatar, updateProfile } from '../../controllers/v1/user.controllers.js';
+import { acceptDailyReport, getDailyReportByDate, getLeaveHistory, getUserProfile, loginUser, logoutUser, updateAvatar, updateProfile } from '../../controllers/v1/user.controllers.js';
 import {upload} from '../../middlewares/multer.middleware.js';
 import { isUserLoggedIn } from '../../middlewares/user.auth.middleware.js';
 import { acceptLeaveApplication, addTask } from '../../controllers/v1/user.leave.controller.js';
@@ -70,6 +70,16 @@ UserRouter.route("/sendSnapshot").post (
     upload.single("photo"),
     sendSnapshot
 )
+
+
+
+UserRouter.route("/getDailyReport").post(
+
+    isUserLoggedIn,
+    upload.none(),
+    getDailyReportByDate
+)
+
 
 
 

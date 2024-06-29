@@ -19,16 +19,15 @@ const isUserLoggedIn = asyncHandler(async (req, res, next) => {
 
   console.log("req.file => ", req.file);
   console.log("req.files => ", req.files);
+  console.log("req.body => ",req.body)
 
 
   if (!userToken) {
-    return 
-    
-    
-    // .status(400)
-    
-    // .json(new ApiResponse(400, "employee is not login "))
-    
+
+    return res
+    .status(400)
+    .json(new ApiResponse(400, "employee is not login "))
+      
   }
 
   try {

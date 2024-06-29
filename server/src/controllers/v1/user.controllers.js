@@ -4,6 +4,7 @@ import ApiResponse from "../../utils/ApiResponse.js";
 import bcrypt from "bcrypt";
 import { uploadOnCloudinary } from "../../utils/cloudinary.js";
 import { LeaveModel } from "../../models/Leave.model.js";
+import { convertToOnlyDate } from "../../../../client/src/components/Admin/TimeSetting/SetDate.js";
 
 const cookiesOptions = {
 
@@ -347,6 +348,68 @@ const acceptDailyReport = asyncHandler(async(req, res) => {
 
 
 
+const getDailyReportByDate = asyncHandler(async(req, res) => {
+
+    const { email } = req.user;
+
+    const {date} = req.body;
+
+    console.log(" req.body => ", req.body);
+
+    if(!date) {
+        return res.status(400).json(new ApiResponse(400, "Date is required", null));
+    }
+
+    console.log("date => ", date);
+
+    try {
+
+
+
+        const data = await UserModel.findOne({ email });
+
+
+        if(!data) {
+            return res.status(400).json(new ApiResponse(400, "no data provided for this date", null));
+        }
+
+        const reports = data.dailyReports;
+
+
+
+
+        const dateReport = reports.filter((report) => {
+        
+            const onlyDate = convertToOnlyDate(report.time) === convertToOnlyDate(date)
+            
+            console.log(convertToOnlyDate(report.time) + " ======  " + convertToOnlyDate(date));
+
+
+            console.log("onlyDate => ", onlyDate);
+            return onlyDate;
+        });
+
+        console.log("dateReport => ", dateReport);
+
+
+        
+
+
+
+
+        return res
+        .status(200)
+        .json(new ApiResponse(200, "Daily Report fetched successfully", dateReport));
+
+    } 
+    catch (error) {
+        console.log(error);
+        return res.status(400).json(new ApiResponse(400, "Error fetching daily report", error));
+    }
+
+});
+
+
 
 
 export { 
@@ -357,6 +420,7 @@ export {
     getUserProfile,
     acceptDailyReport,
     updatePassword,
-    getLeaveHistory
+    getLeaveHistory,
+    getDailyReportByDate
     
 };
