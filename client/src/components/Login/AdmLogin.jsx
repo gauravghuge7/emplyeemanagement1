@@ -2,8 +2,7 @@ import  { useState } from 'react'
 import { toast } from "sonner";
 import { Link, useNavigate } from 'react-router-dom';
 import axios from "axios";
-import adminloginImg from "../../../public/sigupadmin.png";
-
+import { serverUrl } from '../../Url/url.backend'; 
 
 function AdmLogin({loginType}) {
 
@@ -34,7 +33,7 @@ function AdmLogin({loginType}) {
       }
 
       try {
-        const response = await axios.post('http://localhost:5200/api/v1/admin/login', body, config);
+        const response = await axios.post(`${serverUrl || "http://localhost:5200" }/api/v1/admin/login`, body, config);
     
         console.log(response);
     

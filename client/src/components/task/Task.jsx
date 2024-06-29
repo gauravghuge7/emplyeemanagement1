@@ -2,6 +2,7 @@ import { useState } from "react"
 import { Link } from "react-router-dom"
 import axios from "axios";
 import { toast } from "sonner";
+import { serverUrl } from "../../Url/url.backend";
 
 function Task() {
   return (
@@ -53,7 +54,7 @@ export const AddTask = ({ setTasks, tasks, dialogRef } ) => {
       
     }
 
-    const response = await axios.post("http://localhost:5200/api/v1/user/addTask", body, config);
+    const response = await axios.post(`${serverUrl || "http://localhost:5200" }/api/v1/user/addTask`, body, config);
 
     console.log(response);
     const data = response.data;

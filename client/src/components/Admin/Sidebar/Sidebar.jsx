@@ -2,13 +2,12 @@
 import {serverUrl} from "../../../Url/url.backend.js";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link} from "react-router-dom";
 
 // eslint-disable-next-line react/prop-types
 function Sidebar({ activeBox, setActiveBox, notifactionCount }) {
     const [count,setCount] = useState(0);
-     const location = useLocation();
-     const navigate = useNavigate();
+
      const [isOpen, setIsOpen] = useState(true);
      const [isMobile, setIsMobile] = useState(false);
 

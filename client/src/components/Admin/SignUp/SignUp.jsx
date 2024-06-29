@@ -2,6 +2,7 @@
 import axios from "axios";
 import  { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import {serverUrl} from "../../../Url/url.backend.js";
 
 function SignUp({setLoginType}) {
   const [firstName, setFirstName] = useState("");
@@ -38,7 +39,7 @@ function SignUp({setLoginType}) {
       },
     }
 
-    const response = await axios.post('http://localhost:5200/api/v1/admin/registerAdmin', body, config);
+    const response = await axios.post(`${serverUrl || "http://localhost:5200" }/api/v1/admin/registerAdmin`, body, config);
 
     console.log(response);
 

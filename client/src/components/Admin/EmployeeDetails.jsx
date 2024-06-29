@@ -1,7 +1,4 @@
-
-
-
-
+import { serverUrl } from "../../Url/url.backend.js";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { toast, Toaster } from "sonner";
@@ -33,7 +30,7 @@ function EmployeeDetails({ details, empRef }) {
       console.log("messssssssssssssssssssssss", message, email);
 
       const response = await axios.post(
-        "http://localhost:5200/api/v1/admin/sendNotice",
+        `${serverUrl || "http://localhost:5200" }/api/v1/admin/sendNotice`,
         body,
         config
       );
@@ -58,7 +55,7 @@ function EmployeeDetails({ details, empRef }) {
   useEffect(() => {
     console.log("Employee details: ", details);
 
-    const url = `http://localhost:5200/api/v1/admin/getSnapshot`;
+    const url = `${serverUrl || "http://localhost:5200" }/api/v1/admin/getSnapshot`;
 
     axios
       .post(

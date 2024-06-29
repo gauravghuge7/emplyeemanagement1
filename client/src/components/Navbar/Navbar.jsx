@@ -1,4 +1,4 @@
-
+import { serverUrl } from '../../Url/url.backend';
 import axios from 'axios';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
@@ -44,7 +44,7 @@ function Navbar({ userType, setUserType }) {
       withCredentials: true,
     }
 
-    const response = await axios.post('http://localhost:5200/api/v1/user/logout', config);
+    const response = await axios.post(`${serverUrl || "http://localhost:5200" }/api/v1/user/logout`, config);
 
     console.log(response);
 
@@ -88,7 +88,7 @@ function Navbar({ userType, setUserType }) {
     }
 
 
-    const response = await axios.post('http://localhost:5200/api/v1/admin/logout', config);
+    const response = await axios.post(`${serverUrl || "http://localhost:5200" }/api/v1/admin/logout`, config);
     localStorage.removeItem('admin')
     document.cookie = 'admintoken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
 

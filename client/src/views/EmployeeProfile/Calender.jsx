@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import React from 'react'
 import dayjs from 'dayjs';
 import isBetweenPlugin from 'dayjs/plugin/isBetween';
 import { styled } from '@mui/material/styles';
@@ -9,6 +8,7 @@ import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
 import { PickersDay } from '@mui/x-date-pickers/PickersDay';
 import axios from 'axios'
 import { convertToSimpleDate } from '../../components/Admin/TimeSetting/SetDate';
+import { serverUrl } from '../../Url/url.backend.js';
 
 dayjs.extend(isBetweenPlugin);
 
@@ -90,7 +90,7 @@ export default function Calendar() {
       const body = {
         date: date,
       };
-      const response = await axios.post("http://localhost:5200/api/v1/user/getDailyReport", body, config);
+      const response = await axios.post(`${serverUrl || "http://localhost:5200" }/api/v1/user/getDailyReport`, body, config);
       console.log(response.data.data);
       setDailyReport(response.data.data);
     } 
@@ -107,7 +107,7 @@ export default function Calendar() {
         },
         withCredentials: true,
       };
-      const response = await axios.get("http://localhost:5200/api/v1/admin/getLeaveEmployee", config);
+      const response = await axios.get(`${serverUrl || "http://localhost:5200" }/api/v1/admin/getLeaveEmployee`, config);
       console.log(response.data.data.at(-1));
       setStartDate(dayjs(response.data.data.at(-1).startDate))
       setEndDate(dayjs(response.data.data.at(-1).endDate))

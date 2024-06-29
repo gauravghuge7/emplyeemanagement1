@@ -1,6 +1,6 @@
 import { useState } from "react"
 import axios from "axios"
-import { Toaster,toast } from "sonner"
+import { serverUrl } from "../../Url/url.backend"
 
 function Leave() {
   const [firstName , setFirstName]=useState('')
@@ -37,7 +37,7 @@ function Leave() {
       reason: reason,
     }
 
-    const response = await axios.post('http://localhost:5200/api/v1/user/leaveApplication', data, config);
+    const response = await axios.post(`${serverUrl || "http://localhost:5200" }/api/v1/user/leaveApplication`, data, config);
 
     console.log(response);
     

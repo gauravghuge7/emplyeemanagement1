@@ -4,14 +4,14 @@ import EmpProfile from "../EmployeeProfile/EmpProfile";
 import EmployeeNotification from "../EmployeeNotification";
 import axios from "axios";
 import EmployeeNotice from "../EmployeeNotice/EmployeeNotice";
-import { Toaster, toast } from "sonner";
+
+import { serverUrl } from "../../Url/url.backend";
 
 import EmpDailyReport from "../EmployeeProfile/EmpDailyReport";
 import Calendar from "../EmployeeProfile/Calender";
 
 import Admin from "../../components/Admin/Dashboard/Admin";
 import Leave from "../Leave/Leave";
-import PhotoCapture from "../../components/ScreenRecorder/PhotoCapture";
 import EmployeeHistory from "../EmployeeHistory/EmployeeHistory";
 
 
@@ -82,7 +82,7 @@ export function EmployeeDashboard() {
   const fetchAnnouncements = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:5200/api/v1/admin/getAnnouncements"
+       `${serverUrl || "http://localhost:5200" }/api/v1/admin/getAnnouncements`
       );
       console.log("Fetched Announcements", response.data);
 
@@ -118,7 +118,7 @@ export function EmployeeDashboard() {
 
     try {
       const response = await axios.get(
-        "http://localhost:5200/api/v1/user/getUserProfile",
+        `${serverUrl || "http://localhost:5200" }/api/v1/user/getUserProfile`,
         config
       );
       const data = response.data;

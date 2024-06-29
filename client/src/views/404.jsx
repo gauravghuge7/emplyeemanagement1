@@ -1,4 +1,4 @@
-import React from 'react';
+
 import NotFoundImg from "../../public/404.png"
 import { Link } from 'react-router-dom';
 
@@ -14,7 +14,7 @@ const NotFound = () => {
                 </div>
                 <div className="text-center md:text-left">
                     <h1 className="text-4xl font-bold mb-4">Oops!</h1>
-                    <p className="text-xl text-gray-600 mb-6">We couldn't find the page<br />you were looking for</p>
+                    <p className="text-xl text-gray-600 mb-6">We couldnt find the page<br />you were looking for</p>
                     <Link to={"/"} className="bg-black text-white px-6 py-3 rounded-full hover:bg-gray-800 transition duration-300">
                         ← Go home
                     </Link>

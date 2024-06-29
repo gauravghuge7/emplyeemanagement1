@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+
 import Footer from '../../components/Admin/Footer/Footer';
 import digitalbusiness from '../../../public/digital-business-organizer-for-time-management1@2x.png';
 import planner from '../../../public/planner-calendar-for-time-management@2x.png';
@@ -8,14 +8,11 @@ import rectangle from '../../../public/rectangle-29.svg';
 import businessAnalytics from '../../../public/business-analytics-on-tablet-screen@2x.png';
 import womentplanning from '../../../public/woman-planning-on-a-calendar@2x.png';
 import dashboard from '../../../public/dashboard@2x.png';
-import Eclipse from '../../components/Eclipse'
-import { motion } from 'framer-motion'
-import { useInView } from "framer-motion"
 
-import { Link } from 'react-router-dom';
-import { duration } from '@mui/material';
+import { motion } from 'framer-motion'
+
 import { useEffect, useState, useRef } from 'react';
-import { useTheme } from '../../Context/Theme';
+
 function Landing() {
   const theme = localStorage.getItem('theme');
   const [isDarkMode, setIsDarkMode] = useState(theme === 'dark' ? true : false);

@@ -13,11 +13,12 @@ app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+const ClientUrl = 'https://emplyeemanagement1.vercel.app/' || 'http://localhost:5173';
+
 // enable cross origin requests
 app.use(cors(
   {
-    origin: 'http://localhost:5173' || 'https://emplyeemanagement1.vercel.app/',
-    // origin: 'https://emplyeemanagement1.vercel.app/',
+    origin: ClientUrl,
     credentials: true,
   }
 ));

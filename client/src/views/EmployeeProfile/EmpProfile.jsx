@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { toast } from "sonner";
-
+import {serverUrl} from '../../Url/url.backend.js'
 
 
 function EmpProfile() {
@@ -72,7 +72,7 @@ function EmpProfile() {
 
 
     try {
-      const response = await axios.post("http://localhost:5200/api/v1/user/updateProfile", formData, config);
+      const response = await axios.post(`${serverUrl || "http://localhost:5200" }/api/v1/user/updateProfile`, formData, config);
       const data = response.data;
 
       if (data.success) {

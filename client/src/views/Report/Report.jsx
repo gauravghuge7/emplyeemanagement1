@@ -1,6 +1,7 @@
 import  { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Report.css'; // Import CSS for styling
+import { serverUrl } from '../../Url/url.backend.js';
 
 const DailyReport = () => {
   const [reports, setReports] = useState([]);
@@ -23,7 +24,7 @@ const DailyReport = () => {
     }
 
     
-    const response = await axios.get("http://localhost:5200/api/v1/admin/getDailyReport", config)
+    const response = await axios.get(`${serverUrl || "http://localhost:5200" }/api/v1/admin/getDailyReport`, config)
 
 
     console.log(response)

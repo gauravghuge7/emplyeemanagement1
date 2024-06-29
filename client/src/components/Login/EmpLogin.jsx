@@ -3,6 +3,7 @@ import {toast} from "sonner";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { serverUrl } from "../../Url/url.backend";
 
 function EmpLogin({ setUserType }) {
   const [employeeEmail, setEmployeeEmail] = useState("");
@@ -32,7 +33,7 @@ function EmpLogin({ setUserType }) {
     try {
       
       const response = await axios.post(
-        "http://localhost:5200/api/v1/user/login",
+        `${serverUrl || "http://localhost:5200" }/api/v1/user/login`,
         body,
         config
       );

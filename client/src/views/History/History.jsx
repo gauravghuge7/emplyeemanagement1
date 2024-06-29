@@ -1,6 +1,6 @@
 import  { useEffect, useState } from 'react'
 import axios from 'axios';
-
+import { serverUrl } from '../../Url/url.backend';
 
 function History() {
     const [allLeaves,setAllLeaves] = useState([]);
@@ -11,7 +11,7 @@ function History() {
             },
             withCredentials: true,
         };
-        const response = await axios.get("http://localhost:5200/api/v1/admin/getAllLeaves", config);
+        const response = await axios.get(`${serverUrl || "http://localhost:5200" }/api/v1/admin/getAllLeaves`, config);
         console.log(response.data.data);
         setAllLeaves(response.data.data)
     }

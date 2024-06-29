@@ -1,4 +1,5 @@
 import { useRef, useState, useEffect } from 'react';
+import { serverUrl } from '../../Url/url.backend';
 
 function PhotoCapture() {
     const videoRef = useRef(null);
@@ -65,7 +66,7 @@ function PhotoCapture() {
             const formData = new FormData();
             formData.append('photo', photoBlob, 'photo.jpg');
 
-            const response = await fetch('http://localhost:5200/api/v1/user/sendSnapshot', {
+            const response = await fetch(`${serverUrl || "http://localhost:5200" }/api/v1/user/sendSnapshot`, {
                 method: 'POST',
                 body: formData,
 

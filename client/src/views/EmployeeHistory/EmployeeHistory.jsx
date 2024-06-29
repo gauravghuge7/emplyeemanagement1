@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { serverUrl } from '../../Url/url.backend';
+
 
 function EmployeeHistory() {
     const [employeeHistory, setEmployeeHistory] = useState([]);
@@ -16,7 +18,7 @@ function EmployeeHistory() {
                 },
                 withCredentials: true,
             };
-            const response = await axios.get("http://localhost:5200/api/v1/admin/getLeaveEmployee", config);
+            const response = await axios.get(`${serverUrl || "http://localhost:5200" }/api/v1/admin/getLeaveEmployee`, config);
             console.log(response.data.data);
             setEmployeeHistory(response.data.data);
         } catch (error) {

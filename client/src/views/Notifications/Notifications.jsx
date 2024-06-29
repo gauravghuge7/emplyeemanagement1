@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import './Notification.css'; // Import CSS for styling
 import axios from 'axios';
-import {convertToSimpleDate} from '../../components/Admin/TimeSetting/SetDate';
+import { serverUrl } from '../../Url/url.backend';
 import { Toaster, toast } from 'sonner';
 
 const Notifications = () => {
@@ -24,7 +24,7 @@ const Notifications = () => {
     };
 
 
-    const response = await axios.get("http://localhost:5200/api/v1/admin/getLeaveEmployee", config);
+    const response = await axios.get(`${serverUrl || "http://localhost:5200" }/api/v1/admin/getLeaveEmployee`, config);
 
     console.log(response);
 
@@ -63,7 +63,7 @@ const Notifications = () => {
       reason: reason
     };
 
-    const response = await axios.post("http://localhost:5200/api/v1/admin/approveLeave", body, config);
+    const response = await axios.post(`${serverUrl || "http://localhost:5200" }/api/v1/admin/approveLeave`, body, config);
 
     console.log(response);
 
