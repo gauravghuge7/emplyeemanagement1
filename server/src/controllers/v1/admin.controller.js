@@ -305,7 +305,7 @@ const getUsers = asyncHandler(async (req, res) => {
 
   try {
 
-    const users = await UserModel.find({adminEmail});
+    const users = await UserModel.find({adminEmail}).populate("dailyReports");
 
 
     return res

@@ -64,7 +64,7 @@ const adminSchema = new Schema(
     users: [
       {
         type: Schema.Types.ObjectId,
-        ref: "User",
+        ref: "UserModel",
       },
     ],
 
