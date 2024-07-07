@@ -83,21 +83,18 @@ function Announcement() {
         fetchAnnouncements();
     }, []);
 
-
     return (
-
-        <div className="flex dark dark:bg-black dark:text-white flex-col items-center justify-center min-w-max max-w-full rounded-2xl bg-slate-100 min-h-screen">
-
-            <div className="dark:bg-black dark:text-white bg-gray-300 shadow-md p-4 min-w-[44rem] rounded-lg m-10  max-w-full">
-                <h2 className=" dark:text-white  text-2xl font-bold mb-4 text-gray-800">Declare A  Announcement</h2>
-
+        <div className="flex dark:bg-black dark:text-white flex-col items-center justify-center min-w-max max-w-full rounded-2xl bg-slate-100 min-h-screen">
+    
+            <div className="dark:bg-black dark:text-white bg-gray-300 shadow-md p-4 min-w-[20rem] md:min-w-[30rem] lg:min-w-[44rem] rounded-lg m-4 md:m-10 max-w-full">
+                <h2 className="dark:text-white text-2xl font-bold mb-4 text-gray-800">Declare An Announcement</h2>
+    
                 {message && (
                     <div className={`mb-4 text-sm ${messageType === 'success' ? 'text-green-600' : 'text-red-600'}`}>
                         {message}
                     </div>
                 )}
-
-                
+    
                 <form onSubmit={handleAnnouncementSubmit} className="space-y-4">
                     <textarea
                         value={announcement}
@@ -106,45 +103,34 @@ function Announcement() {
                         rows="4"
                         className="w-full p-2 border rounded bg-gray-100 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-400"
                     ></textarea>
-
+    
                     <button
                         type="submit"
                         className="w-full py-2 px-4 bg-blue-600 text-white rounded shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
                     >
                         Create Announcement
                     </button>
-
-
                 </form>
             </div>
-
-            <h2 className="text-2xl dark:bg-black dark:text-white mt-32 font-bold border-b-2 border-black  mb-4 text-gray-800">Recent Announcements</h2>
-
-            <div className="mb-32  dark:bg-black dark:text-white shadow-lg shadow-gray-400 w-full max-w-[60rem] overflow-scroll h-[40rem] ">
-
-                
-                <ul className="space-y-4  ">
+    
+            <h2 className="text-2xl dark:bg-black dark:text-white mt-16 md:mt-32 font-bold border-b-2 border-black mb-4 text-gray-800">Recent Announcements</h2>
+    
+            <div className="mb-16 md:mb-32 dark:bg-black dark:text-white shadow-lg shadow-gray-400 w-full max-w-[20rem] sm:max-w-[40rem] lg:max-w-[60rem] overflow-auto max-h-[30rem] md:max-h-[40rem]">
+    
+                <ul className="space-y-4">
                     {announcements.map((announce, index) => {
-
                         return (
-
-                            <ul key={index} className="p-4 m-2 dark:bg-black dark:text-white bg-gray-200 rounded-xl shadow text-black ">
-                                <li className="p-4 bg-gray-200  text-black "> {announce.createdAt } </li>
-                                <li  className="p-4 bg-gray-100  text-black  "> {announce.announcement} </li>
-                            
-                            </ul>
-                            
+                            <li key={index} className="p-4 m-2 dark:bg-black dark:text-white bg-gray-200 rounded-xl shadow text-black">
+                                <div className="p-2 bg-gray-200 text-black">{announce.createdAt}</div>
+                                <div className="p-2 bg-gray-100 text-black">{announce.announcement}</div>
+                            </li>
                         );
-                
                     })}
                 </ul>
             </div>
-
-
-
-
         </div>
     );
+    
 }
 
 export default Announcement;
