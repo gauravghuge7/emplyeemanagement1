@@ -6,7 +6,7 @@ import axios from "axios";
 import EmployeeNotice from "../EmployeeNotice/EmployeeNotice";
 
 import { serverUrl } from "../../Url/url.backend";
-
+import { toast } from "sonner";
 import EmpDailyReport from "../EmployeeProfile/EmpDailyReport";
 import Calendar from "../EmployeeProfile/Calender";
 
@@ -415,7 +415,7 @@ export function EmployeeDashboard() {
     
 
       <div className="lg:w-[70vw] w-full h-full overflow-x-hidden mx-auto mt-16 absolute right-0 lg:right-20">
-        <div className="flex items-center justify-center text-white text-2xl mb-4">
+        <div className="flex items-center justify-center text-gray-900 text-2xl mb-4">
           Time Remaining: {formatTime(timer)}
         </div>
         {activeTab === "profile" && <EmpProfile />}
