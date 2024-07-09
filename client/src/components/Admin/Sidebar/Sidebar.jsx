@@ -11,6 +11,41 @@ function Sidebar({ activeBox, setActiveBox, notifactionCount }) {
      const [isOpen, setIsOpen] = useState(true);
      const [isMobile, setIsMobile] = useState(false);
 
+
+
+
+     const handleLogout = async (e) => {
+
+        e.preventDefault();
+    
+        const config = {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true,
+        };
+    
+        const response = await axios.post(
+          `${serverUrl || "http://localhost:5200"}/api/v1/admin/logout`,
+          config
+        );
+    
+        console.log(response);
+    
+        const data = response.data;
+    
+        console.log(data);
+    
+        if (response.status === 200) {
+          // alert(data.message);
+    
+          toast.success(data.message);
+    
+          navigate("/", { replace: true });
+          toast.success(" Logged Out Successfully");
+        }
+      };
+
      useEffect(() => {
          const handleResize = () => {
              setIsMobile(window.innerWidth < 768);
@@ -44,7 +79,7 @@ function Sidebar({ activeBox, setActiveBox, notifactionCount }) {
      const MobileNav = () => {
          return <div className=' min-h-12 z-[100] bg-white/80 p-2 sticky top-0 backdrop-blur-lg  '>
              <Link to={"/"} className=' text-2xl ml-4'>EMS</Link>
-             {isOpen ? <div className='absolute right-3 top-3 ' onClick={() => setIsOpen(!isOpen)}><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-align-right"><line x1="21" x2="3" y1="6" y2="6" /><line x1="21" x2="9" y1="12" y2="12" /><line x1="21" x2="7" y1="18" y2="18" /></svg></div> : <div className='h-full'><button className='absolute right-3 top-3' onClick={() => setIsOpen(!isOpen)}><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg></button><nav className='mt-8 ml-4 gap-3 flex flex-col  items-end mr-12 text-xl mb-4'>
+             {isOpen ? <div className='absolute right-3 top-3 ' onClick={() => setIsOpen(!isOpen)}><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-align-right"><line x1="21" x2="3" y1="6" y2="6" /><line x1="21" x2="9" y1="12" y2="12" /><line x1="21" x2="7" y1="18" y2="18" /></svg></div> : <div className='h-full'><button className='absolute right-3 top-3' onClick={() => setIsOpen(!isOpen)}><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg></button><nav className='mt-8 ml-4 gap-3 flex flex-col  items-start mr-12 text-xl mb-4'>
                  <Link className={`${activeBox === 'dashboard' ? 'underline  underline-offset-2 font-semibold' :''}  hover:underline`} onClick={() =>{ setActiveBox("dashboard") ; setIsOpen(!isOpen)}}  to="/admin-dashboard">Dashboard</Link>
                  <Link className={`${activeBox === 'profile' ? 'underline underline-offset-2 font-semibold' : ''} hover:underline`} onClick={() =>{ setActiveBox("profile") ; setIsOpen(!isOpen)}} to="/admin-dashboard">Profile</Link>
                  <Link className={`${activeBox === 'manage' ? 'underline underline-offset-2 font-semibold' : ''} hover:underline`} onClick={() =>{ setActiveBox("manage") ; setIsOpen(!isOpen)}} to="/admin-dashboard">Manage</Link>
@@ -52,7 +87,7 @@ function Sidebar({ activeBox, setActiveBox, notifactionCount }) {
                  <Link className={`${activeBox === 'report' ? 'underline underline-offset-2 font-semibold' : ''} hover:underline`}onClick={() =>{ setActiveBox("report") ; setIsOpen(!isOpen)}} to="/admin-dashboard">Report</Link>
                  <Link className={`${activeBox === 'announcement' ? 'underline underline-offset-2 font-semibold' : ''} hover:underline`} onClick={() =>{ setActiveBox("announcement") ; setIsOpen(!isOpen)}}  to="/admin-dashboard">Announcement</Link>
                  <Link className={`${activeBox === 'history' ? 'underline underline-offset-2 font-semibold' : ''} hover:underline`}  onClick={() =>{ setActiveBox("history") ; setIsOpen(!isOpen)}} to="/admin-dashboard">History</Link>
-
+                 <Link onClick={handleLogout} to='/' >logout</Link>
              </nav></div>
              }</div>
      }

@@ -107,6 +107,39 @@ export function EmployeeDashboard() {
     }
   };
 
+  //logout
+  const handleLogout = async (e) => {
+
+    e.preventDefault();
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      withCredentials: true,
+    };
+
+    const response = await axios.post(
+      `${serverUrl || "http://localhost:5200"}/api/v1/user/logout`,
+      config
+    );
+
+    console.log(response);
+
+    const data = response.data;
+
+    console.log(data);
+
+    if (response.status === 200) {
+      // alert(data.message);
+
+      toast.success(data.message);
+
+      navigate("/", { replace: true });
+      toast.success(" Logged Out Successfully");
+    }
+  };
+
   // getnotice
   const fetchNotice = async () => {
     const config = {
@@ -150,7 +183,7 @@ export function EmployeeDashboard() {
   const MobileNav = () => {
     return <div className=' min-h-12 z-[100] bg-white/80 p-2 sticky top-0 backdrop-blur-lg  '>
       <Link to={"/"} className=' text-2xl ml-4'>EMS</Link>
-      {isOpen ? <div className='absolute right-3 top-3 ' onClick={() => setIsOpen(!isOpen)}><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-align-right"><line x1="21" x2="3" y1="6" y2="6" /><line x1="21" x2="9" y1="12" y2="12" /><line x1="21" x2="7" y1="18" y2="18" /></svg></div> : <div className='h-full'><button className='absolute right-3 top-3' onClick={() => setIsOpen(!isOpen)}><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg></button><nav className='mt-8 ml-4 gap-3 flex flex-col  items-end mr-12 text-xl mb-4'>
+      {isOpen ? <div className='absolute right-3 top-3 ' onClick={() => setIsOpen(!isOpen)}><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-align-right"><line x1="21" x2="3" y1="6" y2="6" /><line x1="21" x2="9" y1="12" y2="12" /><line x1="21" x2="7" y1="18" y2="18" /></svg></div> : <div className='h-full'><button className='absolute right-3 top-3' onClick={() => setIsOpen(!isOpen)}><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg></button><nav className='mt-8 ml-4 gap-3 flex flex-col  items-start mr-12 text-xl mb-4'>
         <Link className={`${activeTab === 'profile' ? 'underline capitalize  underline-offset-2 font-semibold' : ''}  hover:underline`} onClick={() => { setActiveTab("profile"); setIsOpen(!isOpen) }} to="/emp-dashboard">Profile</Link>
         <Link className={`${activeTab === 'leave' ? 'underline capitalize underline-offset-2 font-semibold' : ''} hover:underline`} onClick={() => { setActiveTab("leave"); setIsOpen(!isOpen) }} to="/emp-dashboard">Applica€on For Leve</Link>
         <Link className={`${activeTab === 'report' ? 'underline capitalize underline-offset-2 font-semibold' : ''} hover:underline`} onClick={() => { setActiveTab("report"); setIsOpen(!isOpen) }} to="/emp-dashboard">Report</Link>
@@ -158,7 +191,7 @@ export function EmployeeDashboard() {
         <Link className={`${activeTab === 'notifications' ? 'underline capitalize underline-offset-2 font-semibold' : ''} hover:underline`} onClick={() => { setActiveTab("notification"); setIsOpen(!isOpen) }} to="/emp-dashboard">Notification</Link>
         <Link className={`${activeTab === 'history' ? 'underline capitalize underline-offset-2 font-semibold' : ''} hover:underline`} onClick={() => { setActiveTab("history"); setIsOpen(!isOpen) }} to="/emp-dashboard">History</Link>
         <Link className={`${activeTab === 'notice' ? 'underline capitalize underline-offset-2 font-semibold' : ''} hover:underline`} onClick={() => { setActiveTab("notice"); setIsOpen(!isOpen) }} to="/emp-dashboard">Notice</Link>
-        
+        <Link onClick={handleLogout} to='/' >logout</Link>
 
         
 
